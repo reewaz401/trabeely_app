@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>226020384757-12c10n4o94dnhj2hddcim3oatou46rud.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.226020384757-12c10n4o94dnhj2hddcim3oatou46rud</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDl8KwOM8nm6Z58Bq8tZInm4p3MwwjyBS0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>226020384757</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.travel</string>
+	<key>PROJECT_ID</key>
+	<string>travel-2f94d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>travel-2f94d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:226020384757:ios:453269901180ec05214abc</string>
+</dict>
+</plist>
