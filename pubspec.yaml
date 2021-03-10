@@ -61,11 +61,14 @@ flutter:
   assets:
      - assets/images/authBackground.svg
      - assets/images/logo.svg
-     - assets/images/trek.svg
-     - assets/images/restaurant.svg
-     - assets/images/hotel.svg
+     - assets/images/Treks.svg
+     - assets/images/Restaurants.svg
+     - assets/images/Hotels.svg
      - assets/images/airlogo.svg
-     - assets/images/logo.jpg
+     - assets/images/Tours.svg
+     - assets/images/Weekends.svg
+     - assets/images/All.svg
+     - assets/images/Clubs.svg
      - assets/images/profile.jpeg
      - assets/images/covidNepal.jpeg
      - assets/images/anna.jpg

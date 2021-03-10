@@ -7,11 +7,11 @@ import 'package:travel/screens/search_screen.dart';
 import 'package:travel/services/tours_services.dart';
 import './services/authentication.dart';
 import './widget/isAuth.dart';
-import './screens/authForm_widget.dart';
-import './widget/search_widget.dart';
-import './screens/homePage.dart';
+import './screens/auth_screen.dart';
+
+import './screens/homePage//homePage_screen.dart';
 import 'screens/user_profile_screen.dart';
-import './screens/tabs_screen.dart';
+import './screens/tabsScreen/tabs_screen.dart';
 import './screens/tourPackDetails_screen.dart';
 import './screens/storyFeed_screen.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
                 ? TabsScreen()
                 : auth.isAuth
                     ? TabsScreen()
-                    : AuthFormWidget(),
+                    : TabsScreen(),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               PacakagesScreen.routeName: (ctx) => PacakagesScreen(),

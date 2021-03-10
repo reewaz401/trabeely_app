@@ -19,7 +19,13 @@ class PacakagesScreen extends StatefulWidget {
 }
 
 class _PacakagesScreenState extends State<PacakagesScreen> {
-  var _typePacakage = ['Tours', 'Hotels', 'Restaurant'];
+  String firstType;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  var _typePacakage = ['ALL', 'Tours', 'Hotels', 'Restaurant'];
   var _currentTypePacakage = "Tours";
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var _currentnumOfCustomer = 1;
