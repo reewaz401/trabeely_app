@@ -3,14 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:travel/screens/tabsScreen/components/drawerList_widget.dart';
 import 'package:travel/screens/tabsScreen/components/endDrawer_widget.dart';
 import '../../screens/homePage/homePage_screen.dart';
-import 'package:travel/screens/storyFeed_screen.dart';
+import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
 import 'components/drawerList_widget.dart';
 import '../search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-enum FilterOption { AcceptedRequest, AllRequest, AddRequest }
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -23,11 +21,9 @@ class _TabsScreenState extends State<TabsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
-  bool _showAllReq = true;
-  FilterOption _popTypeReq = FilterOption.AllRequest;
+
   @override
   void initState() {
-    print(_showAllReq);
     _pages = [
       {'pages': HomePage(), 'title': 'Home'},
       {'pages': StoryFeedScreen(), 'title': 'Story'},
@@ -54,12 +50,13 @@ class _TabsScreenState extends State<TabsScreen> {
         elevation: 0.0,
         backgroundColor: Colors.white,
         title: Container(
-          margin: EdgeInsets.only(left: 20),
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.only(left: 20, top: 20),
           width: MediaQuery.of(context).size.width,
           child: _pages[_selectedPageIndex]['title'] == 'Home'
               ? SvgPicture.asset(
-                  'assets/images/logo.svg',
-                  height: 70,
+                  'assets/images/appLogo.svg',
+                  height: 50,
                 )
               : Text(_pages[_selectedPageIndex]['title'],
                   textAlign: TextAlign.left,
@@ -86,7 +83,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ],
       ),
 
-      body: _pages[_selectedPageIndex]['pages'],
+      body: SingleChildScrollView(child: _pages[_selectedPageIndex]['pages']),
 
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,

@@ -69,6 +69,7 @@ flutter:
      - assets/images/Weekends.svg
      - assets/images/All.svg
      - assets/images/Clubs.svg
+     - assets/images/appLogo.svg
      - assets/images/profile.jpeg
      - assets/images/covidNepal.jpeg
      - assets/images/anna.jpg

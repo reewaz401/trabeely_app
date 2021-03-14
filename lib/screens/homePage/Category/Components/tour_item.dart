@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import '../screens/tourPackDetails_screen.dart';
+import 'DetailsScreen/tourPackDetails_screen.dart';
 
 class TourItem extends StatelessWidget {
   final String agencyName;

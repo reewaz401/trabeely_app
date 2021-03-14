@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/homePage/Category/category_screen.dart';
+import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import 'package:travel/screens/search_screen.dart';
 import 'package:travel/services/tours_services.dart';
 import './services/authentication.dart';
@@ -12,8 +14,8 @@ import './screens/auth_screen.dart';
 import './screens/homePage//homePage_screen.dart';
 import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
-import './screens/tourPackDetails_screen.dart';
-import './screens/storyFeed_screen.dart';
+//import '../screens/tourPackDetails_screen.dart';
+import './screens/storyFeedScreen/storyFeed_screen.dart';
 import 'package:provider/provider.dart';
 import './services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -70,6 +72,8 @@ class _MyAppState extends State<MyApp> {
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
+              CategoryScreen.routeName: (ctx) => CategoryScreen(),
+              StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
             },
           ),
         ));

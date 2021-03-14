@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:travel/components/searchBox.dart';
+
+import './components/categoryType_widget.dart';
+
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
 //import '../search_screen.dart';
@@ -13,8 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _typePacakge = ['All', 'Tours', 'Trek', 'Hotels', 'Restaurant', 'Clubs'];
-  var _currentSelectType = 'All';
   @override
   void initState() {
     final fbm = FirebaseMessaging();
@@ -85,22 +83,22 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  type('All'),
-                  type('Tours'),
+                  CategoryTypeWidget('All'),
+                  CategoryTypeWidget('Tours'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  type('Hotels'),
-                  type('Treks'),
+                  CategoryTypeWidget('Treks'),
+                  CategoryTypeWidget('Hotels'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  type('Restaurants'),
-                  type('Clubs'),
+                  CategoryTypeWidget('Restaurants'),
+                  CategoryTypeWidget('Clubs'),
                 ],
               ),
               SizedBox(
@@ -113,46 +111,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 5,
               ),
-              /* Container(
-                width: MediaQuery.of(context).size.width,
-                height: 220,
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white),
-                child: Column(
-                  children: [
-                    Text(
-                      HomeData[0].headlines,
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      style: TextStyle(fontSize: 17),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                        height: 100,
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/covidNepal.jpeg',
-                          fit: BoxFit.fill,
-                        )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FlatButton(
-                      onPressed: () {},
-                      child: Text(
-                        HomeData[0].buttonText,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.green,
-                    )
-                  ],
-                ),
-              ),*/
               Container(
                 height: 170,
                 width: double.infinity,
@@ -172,48 +130,4 @@ class _HomePageState extends State<HomePage> {
           ),
         ));
   }
-
-  Widget type(String name) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentSelectType = name;
-        });
-        print(_currentSelectType);
-        Navigator.pushNamed(
-          context,
-          '/pacakagesScreen',
-        );
-      },
-      child: Container(
-          margin: EdgeInsets.all(5),
-          padding: EdgeInsets.all(5),
-          width: 0.45 * MediaQuery.of(context).size.width,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(width: 1),
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                'assets/images/$name.svg',
-                height: 55,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(name)
-            ],
-          )
-          //  fit: BoxFit.fitWidth,
-
-          ),
-    );
-  }
 }
-/*     Text(
-          name,
-          maxLines: 1,
-          textAlign: TextAlign.center,
-        ), */
