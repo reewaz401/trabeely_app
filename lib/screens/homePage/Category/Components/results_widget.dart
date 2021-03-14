@@ -8,25 +8,27 @@ class ResultsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ToursServices().fetchPacakgeList(destination),
+      future: ToursServices().fetchPacakgeList(),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
             ? Center(
                 child: CircularProgressIndicator(),
               )
             : snapshot.hasData
-                ? ListView.builder(
-                    itemCount: 3,
-                    itemBuilder: (ctx, index) {
-                      var extData = snapshot.data['packages'][index];
-                      return TourItem(
-                        agencyName: extData['destination'],
-                        date: '2021-08-02 15:30',
-                        time: '23',
-                        location: 'sdsdsds',
-                        price: 78,
-                      );
-                    })
+                ? Expanded(
+                    child: ListView.builder(
+                        itemCount: 2,
+                        itemBuilder: (ctx, index) {
+                          var extData = snapshot.data['packages'][index];
+                          return TourItem(
+                            agencyName: extData['destination'],
+                            date: '2021-08-02 15:30',
+                            title: extData['title'],
+                            destination: extData['destination'],
+                            price: 1500,
+                          );
+                        }),
+                  )
                 : Center(
                     child: Text('No data found',
                         style: TextStyle(color: Colors.grey)));

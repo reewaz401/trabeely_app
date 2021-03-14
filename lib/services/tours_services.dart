@@ -8,25 +8,19 @@ import '../model/httpExecption.dart' as exp;
 
 class ToursServices with ChangeNotifier {
   List<ToursForm> tourList = [];
-  http.Response response;
 
   Future<void> fetchPacakgeList([String destination]) async {
     try {
-      print('StartFetch');
-      if (destination.isEmpty) {
-        print('destination null');
-        response = await http.get(viewToursApi);
-      } else {
-        print(destination);
-        response = await http.get('$viewToursApi/destination/$destination');
-      }
+      final response = await http.get(viewToursApi);
       final extractedInfo = json.decode(response.body);
+
       if (extractedInfo['packages'] == null) {
         print('No data');
         return;
       }
+      //tourList = extractedInfo['packages'];
       print(extractedInfo);
-      return extractedInfo;
+      return extractedInfo; //tourList;
     } catch (error) {
       print(error);
       throw error;

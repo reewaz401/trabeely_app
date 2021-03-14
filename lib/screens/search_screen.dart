@@ -184,8 +184,7 @@ class _PacakagesScreenState extends State<PacakagesScreen> {
                       return TourItem(
                         agencyName: extData['destination'],
                         date: '2021-08-02 15:30',
-                        time: '23',
-                        location: 'sdsdsds',
+                        destination: 'sdsdsds',
                         price: 78,
                       );
                     })
