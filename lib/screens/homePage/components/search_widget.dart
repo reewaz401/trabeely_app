@@ -9,8 +9,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   //destination
   final _formKey = GlobalKey<FormState>();
   //type
-  var _typePacakge = ['All', 'Tours', 'Trek', 'Hotels', 'Restaurant', 'Clubs'];
-  var _currentSelectType = 'All';
+
   final FocusNode _destinationFocusnode = FocusNode();
   @override
   void didChangeDependencies() {
@@ -59,39 +58,6 @@ class _SearchWidgetState extends State<SearchWidget> {
               height: 5,
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget type(String name) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentSelectType = name;
-        });
-        print(_currentSelectType);
-        Navigator.pushNamed(
-          context,
-          '/pacakagesScreen',
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(20),
-        width: 0.31 * MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          border: Border(
-              left: BorderSide(width: 0.5),
-              right: BorderSide(width: 0.5),
-              bottom: BorderSide(
-                  width: name == _currentSelectType ? 3 : 0.5,
-                  color: name == _currentSelectType
-                      ? Colors.orange[900]
-                      : Colors.black)),
-        ),
-        child: Text(
-          name,
-          textAlign: TextAlign.center,
         ),
       ),
     );

@@ -61,7 +61,8 @@ class Filter {
       ],
     );
   }
-
+  //HotelFilter
+  
   Widget datePicker([String type]) {
     return DateTimePicker(
       cursorColor: Colors.grey,

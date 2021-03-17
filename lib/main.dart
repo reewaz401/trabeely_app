@@ -18,7 +18,6 @@ import './screens/tabsScreen/tabs_screen.dart';
 import './screens/storyFeedScreen/storyFeed_screen.dart';
 import 'package:provider/provider.dart';
 import './services/authentication.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -65,10 +64,10 @@ class _MyAppState extends State<MyApp> {
               fontFamily: 'Rubik',
             ),
             home: isAuto
-                ? TabsScreen()
+                ? AuthScreen(false)
                 : auth.isAuth
-                    ? TabsScreen()
-                    : TabsScreen(),
+                    ? TabsScreen
+                    : AuthScreen(false),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               PacakagesScreen.routeName: (ctx) => PacakagesScreen(),

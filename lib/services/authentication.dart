@@ -26,6 +26,8 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> signIn(String email, String password) async {
+    print(email);
+    print(password);
     final url = signinApi;
     try {
       final response = await http.post(url, body: {

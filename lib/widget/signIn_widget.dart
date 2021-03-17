@@ -15,7 +15,6 @@ class _SignInWidgetState extends State<SignInWidget> {
   final FocusNode _emailFocusNode = FocusNode();
 
   final FocusNode _passwordFocusNode = FocusNode();
-
   Map<String, String> _authData = {'email': '', 'password': ''};
 
   @override

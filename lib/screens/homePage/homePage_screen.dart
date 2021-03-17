@@ -5,7 +5,6 @@ import './components/categoryType_widget.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
 //import '../search_screen.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,30 +13,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    final fbm = FirebaseMessaging();
-    fbm.requestNotificationPermissions();
-    fbm.configure(
-      onMessage: (msg) {
-        print(msg);
-        return;
-      },
-      onLaunch: (msg) {
-        print(msg);
-        return;
-      },
-      onResume: (msg) {
-        print(msg);
-        return;
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     //destinattion
-    String destination;
-    String finaldestination;
+    String typedDestination;
+
     var deviceSize = MediaQuery.of(context).size;
     var paddingSize = MediaQuery.of(context).padding.top;
     return Container(
@@ -53,17 +32,11 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                   onTap: () async {
-                    print(MediaQuery.of(context).size.width);
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SearchWidget()))
-                        .then((result) {
-                      setState(() {
-                        finaldestination = result;
-                      });
-                      print(finaldestination);
-                    });
+                    typedDestination = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchWidget()));
+                    setState(() {});
                   },
                   child: Container(
                     width: 0.9 * deviceSize.width,
@@ -73,7 +46,9 @@ class _HomePageState extends State<HomePage> {
                         border: Border.all(width: 0.5),
                         borderRadius: BorderRadius.circular(12)),
                     child: Text(
-                      'Search Destinaiton',
+                      typedDestination == null
+                          ? 'Search Destinaiton'
+                          : typedDestination,
                       textAlign: TextAlign.left,
                     ),
                   )),
