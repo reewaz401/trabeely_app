@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'DetailsScreen/tourPackDetails_screen.dart';
 
@@ -9,30 +9,46 @@ class TourItem extends StatelessWidget {
   final String title;
   final String destination;
   final double price;
+  final List includes;
   final String date;
+  final List mainList;
+  final String overview;
+  final int index;
 
-  TourItem({
-    this.agencyName,
-    this.title,
-    this.destination,
-    this.price,
-    this.date,
-  });
+  TourItem(
+      {this.includes,
+      this.index,
+      this.agencyName,
+      this.title,
+      this.destination,
+      this.price,
+      this.date,
+      this.overview,
+      this.mainList});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TourDetails()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => TourDetails(
+              mainListIndex: index,
+              mainList: mainList,
+            ),
+          ),
+        );
       },
-      child: Container(
-        color: Colors.white,
-        margin: EdgeInsets.all(5),
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [imageTile(), detailsTile()],
+      child: Card(
+        child: Container(
+          margin: EdgeInsets.all(5),
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [imageTile(), detailsTile()],
+          ),
         ),
+        elevation: 2,
       ),
     );
   }
@@ -56,15 +72,27 @@ class TourItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 150,
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Container(
+                  color: Colors.blue,
+                  child: Text('Weekend'),
+                )
+              ],
             ),
             SizedBox(
               height: 15,
             ),
             Text(
-              'A whole week of glorious mountain view with beatiful scenery under ',
+              'overview',
               maxLines: 4,
             ),
             SizedBox(
@@ -100,10 +128,13 @@ class TourItem extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
+            SizedBox(
+              height: 15,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Seller : '),
+                Text('Seller : $agencyName'),
                 IconButton(
                   icon: Icon(Icons.arrow_forward_outlined),
                 )

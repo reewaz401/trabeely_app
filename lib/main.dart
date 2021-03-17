@@ -63,11 +63,12 @@ class _MyAppState extends State<MyApp> {
               visualDensity: VisualDensity.adaptivePlatformDensity,
               fontFamily: 'Rubik',
             ),
-            home: isAuto
-                ? AuthScreen(false)
-                : auth.isAuth
-                    ? TabsScreen
-                    : AuthScreen(false),
+            home: TabsScreen(),
+            //  isAuto
+            // ? AuthScreen(false)
+            // : auth.isAuth
+            //     ? TabsScreen
+            //     : AuthScreen(false),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               PacakagesScreen.routeName: (ctx) => PacakagesScreen(),

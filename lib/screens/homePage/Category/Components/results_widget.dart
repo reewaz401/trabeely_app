@@ -14,13 +14,13 @@ class ResultsWidget extends StatefulWidget {
 }
 
 class _ResultsWidgetState extends State<ResultsWidget> {
+  List dataList;
   String url = 'https://api.trabeely.com/api/packages';
+  String url1 = 'api.trabeely.com/uploads/package/itinerary/';
   getData() async {
-    print('Hello i am yamna');
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String _token = preferences.getString('autoSignIn');
     try {
-      print('Hello');
       http.Response response = await http.get(
         url,
         headers: {
@@ -28,8 +28,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
         },
       );
       var jsonResponse = jsonDecode(response.body);
-      print(jsonResponse);
-      print('Hello');
+
       return jsonResponse;
     } catch (e) {
       print(e);
@@ -45,7 +44,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ToursServices().fetchPacakgeList(),
+      future: getData(),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
             ? Center(
@@ -54,21 +53,23 @@ class _ResultsWidgetState extends State<ResultsWidget> {
             : snapshot.hasData
                 ? Expanded(
                     child: ListView.builder(
-                        itemCount: 2,
-                        itemBuilder: (ctx, index) {
-                          var extData = snapshot.data['packages'][index];
-                          return TourItem(
-                            agencyName: extData['destination'],
-                            date: '2021-08-02 15:30',
-                            title: extData['title'],
-                            destination: extData['destination'],
-                            price: 1500,
-                          );
-                        }),
+                      itemCount: snapshot.data['packages'].length,
+                      itemBuilder: (context, index) {
+                        dataList = snapshot.data['packages'];
+                        return TourItem(
+                          agencyName: 'Hello',
+                          date: '2021-08-02 15:30',
+                          destination: 'asd',
+                          price: dataList[index]['price'].toDouble(),
+                          title: dataList[index]['title'],
+                          mainList: dataList,
+                          overview: dataList[index]['overview'],
+                          index: index,
+                        );
+                      },
+                    ),
                   )
-                : Center(
-                    child: Text('No data found',
-                        style: TextStyle(color: Colors.grey)));
+                : Text('No data found');
       },
     );
   }

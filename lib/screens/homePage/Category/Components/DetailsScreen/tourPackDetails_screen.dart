@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class TourDetails extends StatefulWidget {
-  @override
-  _TourDetailsState createState() => _TourDetailsState();
-}
+class TourDetails extends StatelessWidget {
+  final List mainList;
+  int mainListIndex;
+  List detail;
+  TourDetails({this.mainListIndex, this.mainList});
 
-class _TourDetailsState extends State<TourDetails> {
   @override
   Widget build(BuildContext context) {
+    detail = this.mainList;
+    mainListIndex = this.mainListIndex;
+    print(mainListIndex);
+
+    final splitTime = DateFormat.yMMMd('en_US')
+        .format(
+          DateTime.parse(detail[mainListIndex]['startDate']),
+        )
+        .split(' ');
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
@@ -68,7 +79,7 @@ class _TourDetailsState extends State<TourDetails> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Text(
-                  'Annapurna Base Camp',
+                  detail[mainListIndex]['title'],
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -102,16 +113,13 @@ class _TourDetailsState extends State<TourDetails> {
                           ),
                         ),
                         Text(
-                          '2',
+                          splitTime[1],
                           style: TextStyle(fontSize: 20),
                         ),
                         SizedBox(
                           height: 8,
                         ),
-                        Text(
-                          'Feb, 2021',
-                          style: TextStyle(fontSize: 16),
-                        )
+                        Text(splitTime[0] + ' ' + splitTime[2])
                       ],
                     ),
                   ),
@@ -203,12 +211,13 @@ class _TourDetailsState extends State<TourDetails> {
               Container(
                 margin: EdgeInsets.only(left: 15, bottom: 10),
                 child: Text(
-                  'Travel Mountain',
+                  'Type : ' + detail[mainListIndex]['packageType'],
                   style: TextStyle(
                     fontSize: 23,
                   ),
                 ),
               ),
+
               Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Column(
@@ -219,12 +228,47 @@ class _TourDetailsState extends State<TourDetails> {
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      'Rs 25000 /-',
+                      'Rs ' + detail[mainListIndex]['price'].toString() + '/-',
                       style: TextStyle(color: Colors.green, fontSize: 20),
                     )
                   ],
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(left: 15),
+                child: Text(
+                  'Includes',
+                  style: TextStyle(
+                    fontSize: 23,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+                child: Container(
+                  height: 30,
+                  margin: EdgeInsets.all(5),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: detail[mainListIndex]['includes'].length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.all(8.0),
+                                color: Colors.blue.shade200,
+                                child: Text(
+                                    detail[mainListIndex]['includes'][index])),
+                            SizedBox(
+                              width: 2,
+                            ),
+                          ],
+                        );
+                      }),
+                ),
+              ),
+
               Container(
                 margin: EdgeInsets.only(left: 10, top: 5),
                 child: Text(
@@ -235,22 +279,18 @@ class _TourDetailsState extends State<TourDetails> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
-                //height: 200,
-
-                margin: EdgeInsets.all(5),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text(
-                          'Day 1: Drive to Syauli, trek to Ghandruk - Komrong Danda (2100m), 4-5 hrs walk.'),
-                      Text(
-                          'Day 2 : Drive to Syauli, trek to Ghandruk - Komrong Danda ](2100m), 4-5 hrs walk.'),
-                    ],
-                  ),
-                ),
-              ),
+              // Container(
+              //   height: 200,
+              //   margin: EdgeInsets.all(5),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: ListView.builder(
+              //         itemCount: detail[mainListIndex]['itinerary'].length,
+              //         itemBuilder: (context, index) {
+              //           return Text(detail[index]['itinerary']);
+              //         }),
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.only(left: 10, top: 20),
                 child: Text(
@@ -291,8 +331,7 @@ class _TourDetailsState extends State<TourDetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                        'In case of cancellation , it must be done before 3 days of destination time '),
+                    Text(detail[mainListIndex]['cancelPolicy']),
                   ],
                 ),
               ),
@@ -322,7 +361,9 @@ class _TourDetailsState extends State<TourDetails> {
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       color: Colors.blue[900],
-                      onPressed: () {},
+                      onPressed: () {
+                        print(splitTime[1]);
+                      },
                     ),
                   ),
                 ],
@@ -333,4 +374,12 @@ class _TourDetailsState extends State<TourDetails> {
       ),
     );
   }
+
+  // Widget itenary() {
+  //   return ListView.builder(
+  //       itemCount: detail[mainListIndex]['itinerary'].length,
+  //       itemBuilder: (context, index) {
+  //         return Text(detail[index]['itinerary']);
+  //       });
+  // }
 }

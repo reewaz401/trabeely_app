@@ -1,16 +1,8 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:travel/dummyData/hotelData.dart';
-import 'package:travel/model/toursForm.dart';
 import 'package:travel/services/tours_services.dart';
 import '../filterWidget/filter.dart';
 import './homePage/Category/Components/tour_item.dart';
-import '../widget/hotels_item.dart';
-import '../dummyData/trekData.dart';
-import './homePage/Category/Components/DetailsScreen/tourPackDetails_screen.dart';
-import 'package:provider/provider.dart';
-import '../animation/animationButton.dart';
 
 class PacakagesScreen extends StatefulWidget {
   static const routeName = '/pacakagesScreen';

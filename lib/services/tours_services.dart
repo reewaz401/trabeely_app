@@ -20,7 +20,6 @@ class ToursServices with ChangeNotifier {
             utf8.encode(_token),
           );
       try {
-        print('Hello');
         http.Response response = await http.get(
           url,
           headers: {
@@ -28,8 +27,6 @@ class ToursServices with ChangeNotifier {
           },
         );
         var jsonResponse = jsonDecode(response.body);
-        print(jsonResponse);
-        print('Hello');
         return jsonResponse;
       } catch (e) {
         print(e);
