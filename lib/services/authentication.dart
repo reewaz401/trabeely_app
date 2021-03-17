@@ -32,11 +32,12 @@ class Auth with ChangeNotifier {
         'email': email,
         'password': password,
       });
+      print(response.body);
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }
       _token = json.decode(response.body)["user"]["token"];
-      _userId = json.decode(response.body)["user"]["username"];
+      _userId = json.decode(response.body)["user"]["name"];
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('autoSignIn', _token);

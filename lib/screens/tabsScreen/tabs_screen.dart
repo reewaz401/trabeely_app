@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/tabsScreen/components/drawerList_widget.dart';
 import 'package:travel/screens/tabsScreen/components/endDrawer_widget.dart';
+import 'package:travel/services/tours_services.dart';
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
@@ -71,7 +73,7 @@ class _TabsScreenState extends State<TabsScreen> {
               Icons.notification_important_outlined,
               color: Color(0xFF245AA0),
             ),
-            onPressed: null,
+            onPressed: () async {},
           ),
           IconButton(
             icon: Icon(
