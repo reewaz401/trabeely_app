@@ -154,7 +154,7 @@ class _SignInWidgetState extends State<SignInWidget> {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          Auth().signIn('test@gmail.com', '12345678');
+          Auth().signIn('yaman@trabeely.com', 'trabeely@');
         },
       ),
     );
