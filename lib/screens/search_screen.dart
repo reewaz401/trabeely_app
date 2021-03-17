@@ -5,9 +5,10 @@ import 'package:travel/dummyData/hotelData.dart';
 import 'package:travel/model/toursForm.dart';
 import 'package:travel/services/tours_services.dart';
 import '../filterWidget/filter.dart';
+import './homePage/Category/Components/tour_item.dart';
 import '../widget/hotels_item.dart';
 import '../dummyData/trekData.dart';
-import '../widget/tour_item.dart';
+import './homePage/Category/Components/DetailsScreen/tourPackDetails_screen.dart';
 import 'package:provider/provider.dart';
 import '../animation/animationButton.dart';
 
@@ -19,7 +20,20 @@ class PacakagesScreen extends StatefulWidget {
 }
 
 class _PacakagesScreenState extends State<PacakagesScreen> {
-  var _typePacakage = ['Tours', 'Hotels', 'Restaurant'];
+  String firstType;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  var _typePacakage = [
+    'ALL',
+    'Tours',
+    'Hotels',
+    'Treks',
+    'Restaurant',
+    'Clubs'
+  ];
   var _currentTypePacakage = "Tours";
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var _currentnumOfCustomer = 1;
@@ -170,8 +184,7 @@ class _PacakagesScreenState extends State<PacakagesScreen> {
                       return TourItem(
                         agencyName: extData['destination'],
                         date: '2021-08-02 15:30',
-                        time: '23',
-                        location: 'sdsdsds',
+                        destination: 'sdsdsds',
                         price: 78,
                       );
                     })
@@ -553,7 +566,7 @@ class _PacakagesScreenState extends State<PacakagesScreen> {
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
+                  disabledBorder: InWputBorder.none,
                   contentPadding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   hintText: "Enter Destination",

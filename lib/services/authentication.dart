@@ -26,12 +26,15 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> signIn(String email, String password) async {
+    print(email);
+    print(password);
     final url = signinApi;
     try {
       final response = await http.post(url, body: {
         'email': email,
         'password': password,
       });
+      print(response.body);
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }

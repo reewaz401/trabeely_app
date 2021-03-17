@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TrekDetailsScreen extends StatefulWidget {
+class TourDetails extends StatefulWidget {
   @override
-  _TrekDetailsScreenState createState() => _TrekDetailsScreenState();
+  _TourDetailsState createState() => _TourDetailsState();
 }
 
-class _TrekDetailsScreenState extends State<TrekDetailsScreen> {
+class _TourDetailsState extends State<TourDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
