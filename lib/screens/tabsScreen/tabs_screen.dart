@@ -24,7 +24,7 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     _pages = [
-      {'pages': HomePage(), 'title': 'Home'},
+      {'pages': HomePageScreen(), 'title': 'Home'},
       {'pages': StoryFeedScreen(), 'title': 'Story'},
       {'pages': UserProfileScreen(), 'title': 'Profile'}
     ];

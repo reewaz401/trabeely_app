@@ -33,7 +33,7 @@ class _SignInWidgetState extends State<SignInWidget> {
               key: _formKeyLogIn,
               child: Column(
                 children: [
-                  inputBox('username', context),
+                  inputBox('email', context),
                   SizedBox(
                     height: 15,
                   ),
@@ -80,7 +80,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
-      child: type == 'username'
+      child: type == 'email'
           ? TextFormField(
               focusNode: _emailFocusNode,
               decoration: new InputDecoration(
@@ -153,7 +153,9 @@ class _SignInWidgetState extends State<SignInWidget> {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          Auth().signIn("test@gmail.com", "12345678");
+          _formKeyLogIn.currentState.save();
+
+          Auth().signIn(_authData['email'], _authData['password']);
         },
       ),
     );

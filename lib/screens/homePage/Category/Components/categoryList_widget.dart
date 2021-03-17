@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../components/categoryType_widget.dart';
 
 class CategoryListWidget extends StatefulWidget {
-  final _currentselectedType;
+  var _currentselectedType;
   CategoryListWidget(this._currentselectedType);
   @override
   _CategoryListWidgetState createState() => _CategoryListWidgetState();
@@ -38,7 +38,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
       child: MaterialButton(
         onPressed: () {
           setState(() {
-            print(widget._currentselectedType);
+            widget._currentselectedType = type;
           });
         },
         child: Text(type),

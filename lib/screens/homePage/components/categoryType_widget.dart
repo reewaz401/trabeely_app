@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../Category/category_screen.dart';
 
-class CategoryTypeWidget extends StatelessWidget with ChangeNotifier {
-  final type;
+class CategoryTypeWidget extends StatefulWidget with ChangeNotifier {
+  final String type;
   CategoryTypeWidget([this.type]);
+
+  @override
+  _CategoryTypeWidgetState createState() => _CategoryTypeWidgetState();
+}
+
+class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Wt $type');
+        print('Wt ${widget.type}');
         Navigator.pushNamed(context, CategoryScreen.routeName,
-            arguments: CategoryScreen(type));
+            arguments: CategoryTypeWidget(widget.type));
       },
       child: Container(
           margin: EdgeInsets.all(5),
@@ -25,13 +31,13 @@ class CategoryTypeWidget extends StatelessWidget with ChangeNotifier {
           child: Row(
             children: [
               SvgPicture.asset(
-                'assets/images/$type.svg',
+                'assets/images/${widget.type}.svg',
                 height: 55,
               ),
               SizedBox(
                 width: 5,
               ),
-              Text(type)
+              Text(widget.type)
             ],
           )
           //  fit: BoxFit.fitWidth,

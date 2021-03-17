@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import './Components/categoryList_widget.dart';
 import './Components/filter_widget.dart';
 import './Components/results_widget.dart';
 
 class CategoryScreen extends StatefulWidget {
-  final currentslectedType;
-  CategoryScreen([this.currentslectedType]);
-  static const routeName = '/category-screen';
+  static const routeName = '/category-scren';
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -15,6 +14,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
+    final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(),
@@ -24,8 +24,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           width: deviceSize.width,
           child: Column(
             children: [
-              Text('${widget.currentslectedType}'),
-              CategoryListWidget(widget.currentslectedType),
+              CategoryListWidget(args.type),
               Filter().tourFilter(context),
               ResultsWidget('pe'),
             ],

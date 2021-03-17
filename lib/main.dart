@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
+import 'package:travel/screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/search_screen.dart';
 import 'package:travel/services/tours_services.dart';
 import './services/authentication.dart';
 import './widget/isAuth.dart';
 import './screens/auth_screen.dart';
 
-import './screens/homePage//homePage_screen.dart';
 import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
 //import '../screens/tourPackDetails_screen.dart';
@@ -64,12 +64,13 @@ class _MyAppState extends State<MyApp> {
               fontFamily: 'Rubik',
             ),
             home: isAuto
-                ? AuthScreen(false)
+                ? TabsScreen()
                 : auth.isAuth
                     ? TabsScreen
-                    : AuthScreen(false),
+                    : TabsScreen(),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
+              HomePageScreen.routeName: (ctx) => HomePageScreen(),
               PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
               CategoryScreen.routeName: (ctx) => CategoryScreen(),
               StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),

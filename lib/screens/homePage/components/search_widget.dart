@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/tabsScreen/tabs_screen.dart';
+import '../homePage_screen.dart';
 
 class SearchWidget extends StatefulWidget {
+  final String destination;
+  SearchWidget(this.destination);
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
 }
@@ -49,7 +53,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                       hintStyle: TextStyle(color: Colors.grey[900])),
                   onFieldSubmitted: (value) {
                     _formKey.currentState.save();
-                    Navigator.pop(context, value);
+                    Navigator.pushReplacementNamed(
+                        context, TabsScreen.routeName,
+                        arguments: SearchWidget(value));
                   },
                 ),
               ),
