@@ -8,7 +8,6 @@ import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
 import 'components/drawerList_widget.dart';
 import '../search_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';

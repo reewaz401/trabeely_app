@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
+import '../../components/uploadPhoto.dart';
 
 class StoryFeedScreen extends StatelessWidget {
   static const routeName = '/storyScreen';
@@ -30,26 +33,29 @@ class StoryFeedScreen extends StatelessWidget {
 
   Widget addStoryBox(BuildContext context) {
     return GestureDetector(
-      onTap: null,
+      onTap: () async {
+        final image = await UploadPhoto().imagePickerDialog(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
+      },
       child: Container(
           width: MediaQuery.of(context).size.width,
           height: 70,
-          child: Card(
-              margin: EdgeInsets.only(left: 35, top: 25),
-              child: Row(
-                children: [
-                  Text(
-                    'Add your story',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: null,
-                    ),
-                  )
-                ],
-              )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Add your story',
+                style: TextStyle(fontSize: 18),
+              ),
+              Container(
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: null,
+                ),
+              )
+            ],
+          ),
           color: Colors.white),
     );
   }
