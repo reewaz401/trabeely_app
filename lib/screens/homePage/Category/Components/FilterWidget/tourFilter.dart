@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:date_time_picker/date_time_picker.dart';
+import '../../../../../components/datePicker_widget.dart';
 
 class Filter {
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -41,7 +41,7 @@ class Filter {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: datePicker(),
+                child: DatePickerWidget(),
                 width: 0.5 * MediaQuery.of(context).size.width,
               ),
               Spacer(
@@ -62,26 +62,6 @@ class Filter {
     );
   }
   //HotelFilter
-  
-  Widget datePicker([String type]) {
-    return DateTimePicker(
-      cursorColor: Colors.grey,
-      type: DateTimePickerType.date,
-      dateMask: 'yyyy, MMM d',
-      initialValue: DateTime.now().toString(),
-      firstDate: DateTime(DateTime.now().year),
-      lastDate: DateTime(DateTime.now().year + 2),
-      icon: Icon(
-        Icons.event,
-        color: Colors.green,
-      ),
-      dateLabelText: type == 'from'
-          ? 'From'
-          : type == 'to'
-              ? 'To'
-              : 'Date',
-    );
-  }
 
   Widget numberOfPeople() {
     return DropdownButton(
