@@ -29,7 +29,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
       );
       var jsonResponse = jsonDecode(response.body);
       print(
-        jsonResponse['packages'][1]['itinerary'][0],
+        jsonResponse,
       );
       return jsonResponse;
     } catch (e) {
@@ -49,8 +49,10 @@ class _ResultsWidgetState extends State<ResultsWidget> {
       future: getData(),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               )
             : snapshot.hasData
                 ? Expanded(

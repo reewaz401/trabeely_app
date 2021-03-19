@@ -27,11 +27,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
           width: deviceSize.width,
           child: Column(
             children: [
-              Text('${widget.currentslectedType}'),
-              Text('asd'),
               CategoryListWidget(widget.currentslectedType),
               Filter().tourFilter(context),
-              ResultsWidget('pe'),
+              Expanded(
+                  child: Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 70),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
+                    ),
+                  ),
+                  ResultsWidget('pe'),
+                ],
+              )),
             ],
           ),
         ),

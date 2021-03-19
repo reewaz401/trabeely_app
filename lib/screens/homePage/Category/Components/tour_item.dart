@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel/services/constants.dart';
 import 'package:flutter/material.dart';
 import 'DetailsScreen/tourPackDetails_screen.dart';
 
@@ -30,42 +31,117 @@ class TourItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TourDetails(
-              mainListIndex: index,
-              mainList: mainList,
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: kDefaultPadding,
+        vertical: kDefaultPadding / 2,
+      ),
+      // color: Colors.blueAccent,
+      height: 160,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return TourDetails(
+                mainListIndex: index,
+                mainList: mainList,
+              );
+            },
+          ));
+        },
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: <Widget>[
+            // Those are our background
+            Container(
+              height: 136,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                color: index.isEven ? kBlueColor : kSecondaryColor,
+                boxShadow: [kDefaultShadow],
+              ),
+              child: Container(
+                margin: EdgeInsets.only(right: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
             ),
-          ),
-        );
-      },
-      child: Card(
-        child: Container(
-          margin: EdgeInsets.all(5),
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: [imageTile(), detailsTile()],
-          ),
+            // our product image
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Hero(
+                tag: index,
+                child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                    height: 160,
+                    // image is square but we add extra 20 + 20 padding thats why width is 200
+                    width: 200,
+                    child: imageTile()),
+              ),
+            ),
+            // Product title and price
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: SizedBox(
+                height: 136,
+                // our image take 200 width, thats why we set out total width - 200
+                width: size.width - 200,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding),
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                    ),
+                    // it use the available space
+                    Spacer(),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: kDefaultPadding * 1.5, // 30 padding
+                        vertical: kDefaultPadding / 4, // 5 top and bottom
+                      ),
+                      decoration: BoxDecoration(
+                        color: kSecondaryColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(22),
+                          topRight: Radius.circular(22),
+                        ),
+                      ),
+                      child: Text(
+                        price.toString(),
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        elevation: 2,
       ),
     );
   }
 
   Widget imageTile() {
-    return Flexible(
-      flex: 2,
-      child: Container(
-        margin: EdgeInsets.all(10),
-        height: 170,
-        child: Card(
-          child: Image.network(
-              'https://api.trabeely.com/uploads/package/${image[0]}'),
-        ),
-      ),
+    return Card(
+      elevation: 5,
+      child: image[0] != null
+          ? Image.network(
+              'https://api.trabeely.com/uploads/package/${image[0]}')
+          : SvgPicture.asset(
+              'assets/images/logo.svg',
+              alignment: Alignment.center,
+            ),
     );
   }
 
