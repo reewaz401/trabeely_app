@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import './Components/categoryList_widget.dart';
 import './Components/filter_widget.dart';
 import './Components/results_widget.dart';

@@ -28,7 +28,9 @@ class _ResultsWidgetState extends State<ResultsWidget> {
         },
       );
       var jsonResponse = jsonDecode(response.body);
-
+      print(
+        jsonResponse['packages'][1]['itinerary'][0],
+      );
       return jsonResponse;
     } catch (e) {
       print(e);
@@ -64,6 +66,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                           title: dataList[index]['title'],
                           mainList: dataList,
                           overview: dataList[index]['overview'],
+                          image: dataList[index]['packageImg'],
                           index: index,
                         );
                       },

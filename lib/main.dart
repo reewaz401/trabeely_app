@@ -16,8 +16,7 @@ import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
 //import '../screens/tourPackDetails_screen.dart';
 import './screens/storyFeedScreen/storyFeed_screen.dart';
-import 'package:provider/provider.dart';
-import './services/authentication.dart';
+import 'package:travel/screens/TestScreen/testpage.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,7 +63,6 @@ class _MyAppState extends State<MyApp> {
               fontFamily: 'Rubik',
             ),
             home: TabsScreen(),
-            //  isAuto
             // ? AuthScreen(false)
             // : auth.isAuth
             //     ? TabsScreen

@@ -32,46 +32,54 @@ class TourDetails extends StatelessWidget {
                 height: 300,
                 width: double.infinity,
                 color: Colors.white,
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: Row(
+                child: detail[0]['packageImg'].length == '2'
+                    ? Column(
                         children: [
                           Flexible(
                             flex: 1,
-                            child: Container(
-                              height: double.infinity,
-                              margin: EdgeInsets.all(5),
-                              child: Image.asset(
-                                'assets/images/anna1.jpeg',
-                              ),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    height: double.infinity,
+                                    margin: EdgeInsets.all(5),
+                                    child: Image.network(
+                                        'https://api.trabeely.com/uploads/package/temp%20(12)_1615989790943.jpg'),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  child: Container(
+                                    margin: EdgeInsets.all(5),
+                                    height: double.infinity,
+                                    child: Image.network(
+                                      'https://api.trabeely.com/uploads/package/temp%20(12)_1615989790943.jpg',
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                           Flexible(
                             flex: 1,
                             child: Container(
-                              margin: EdgeInsets.all(5),
+                              width: double.infinity,
                               height: double.infinity,
-                              child: Image.asset(
-                                'assets/images/anna2.jpeg',
-                                fit: BoxFit.fitHeight,
-                              ),
+                              child: Image.asset('assets/images/anna3.jpeg'),
                             ),
                           )
                         ],
+                      )
+                    : Column(
+                        children: [
+                          Flexible(
+                            child: Image.network(
+                                'https://api.trabeely.com/uploads/package/${detail[mainListIndex]['packageImg'][0]}'),
+                          )
+                        ],
                       ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: Image.asset('assets/images/anna3.jpeg'),
-                      ),
-                    )
-                  ],
-                ),
               ),
               SizedBox(
                 height: 5,
@@ -217,7 +225,6 @@ class TourDetails extends StatelessWidget {
                   ),
                 ),
               ),
-
               Container(
                 margin: EdgeInsets.only(left: 20, bottom: 10),
                 child: Column(
@@ -243,54 +250,64 @@ class TourDetails extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50,
-                child: Container(
-                  height: 30,
-                  margin: EdgeInsets.all(5),
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: detail[mainListIndex]['includes'].length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Container(
-                                padding: EdgeInsets.all(8.0),
-                                color: Colors.blue.shade200,
-                                child: Text(
-                                    detail[mainListIndex]['includes'][index])),
-                            SizedBox(
-                              width: 2,
-                            ),
-                          ],
-                        );
-                      }),
-                ),
-              ),
-
-              Container(
-                margin: EdgeInsets.only(left: 10, top: 5),
-                child: Text(
-                  'Itinerary',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              // Container(
-              //   height: 200,
-              //   margin: EdgeInsets.all(5),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(8.0),
+              // SizedBox(
+              //   height: 50,
+              //   child: Container(
+              //     height: 30,
+              //     margin: EdgeInsets.all(5),
               //     child: ListView.builder(
-              //         itemCount: detail[mainListIndex]['itinerary'].length,
+              //         scrollDirection: Axis.horizontal,
+              //         shrinkWrap: true,
+              //         itemCount: detail[mainListIndex]['includes'].length,
               //         itemBuilder: (context, index) {
-              //           return Text(detail[index]['itinerary']);
+              //           return Row(
+              //             children: [
+              //               Container(
+              //                   padding: EdgeInsets.all(8.0),
+              //                   color: Colors.blue.shade200,
+              //                   child: Text(
+              //                       detail[mainListIndex]['includes'][index])),
+              //               SizedBox(
+              //                 width: 2,
+              //               ),
+              //             ],
+              //           );
               //         }),
               //   ),
               // ),
+              detail[mainListIndex]['itinerary'].length != 0
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 10, top: 5),
+                          child: Text(
+                            'Itinerary',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        // Container(
+                        //   height: 200,
+                        //   margin: EdgeInsets.all(5),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: ListView.builder(
+                        //         itemCount:
+                        //             detail[mainListIndex]['itinerary'].length,
+                        //         itemBuilder: (context, index) {
+                        //           final info =
+                        //               detail[mainListIndex]['itinerary'];
+                        //           return Text(
+                        //               'Day ${info[index]['day']} ${info[index]['routeDesc']}');
+                        //         }),
+                        //   ),
+                        // )
+                      ],
+                    )
+                  : Container(),
               Container(
                 margin: EdgeInsets.only(left: 10, top: 20),
                 child: Text(
@@ -335,6 +352,18 @@ class TourDetails extends StatelessWidget {
                   ],
                 ),
               ),
+              // Container(
+              //   margin: EdgeInsets.all(5),
+              //   padding: EdgeInsets.all(5),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Row(
+              //         children: [Text('Review : '), Text('5')],
+              //       )
+              //     ],
+              //   ),
+              // ),
               Divider(
                 color: Colors.grey,
               ),
@@ -362,7 +391,7 @@ class TourDetails extends StatelessWidget {
                       ),
                       color: Colors.blue[900],
                       onPressed: () {
-                        print(splitTime[1]);
+                        print(detail);
                       },
                     ),
                   ),

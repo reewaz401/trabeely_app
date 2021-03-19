@@ -13,11 +13,13 @@ class TourItem extends StatelessWidget {
   final String date;
   final List mainList;
   final String overview;
+  final List image;
   final int index;
 
   TourItem(
       {this.includes,
       this.index,
+      this.image,
       this.agencyName,
       this.title,
       this.destination,
@@ -58,8 +60,11 @@ class TourItem extends StatelessWidget {
       flex: 2,
       child: Container(
         margin: EdgeInsets.all(10),
-        color: Colors.red,
         height: 170,
+        child: Card(
+          child: Image.network(
+              'https://api.trabeely.com/uploads/package/${image[0]}'),
+        ),
       ),
     );
   }
