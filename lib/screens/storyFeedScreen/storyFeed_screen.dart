@@ -11,22 +11,23 @@ class StoryFeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[300],
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height - 130,
       width: MediaQuery.of(context).size.height,
       child: Column(
         children: [
           addStoryBox(context),
-          ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: StoryFeedData.length,
-              itemBuilder: (context, index) => Container(
-                      child: StoryFeedItem(
-                    userName: StoryFeedData[index].userName,
-                    description: StoryFeedData[index].description,
-                    imageUrl: StoryFeedData[index].imageUrl,
-                    location: StoryFeedData[index].location,
-                  )))
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: StoryFeedData.length,
+                itemBuilder: (context, index) => Container(
+                        child: StoryFeedItem(
+                      userName: StoryFeedData[index].userName,
+                      description: StoryFeedData[index].description,
+                      imageUrl: StoryFeedData[index].imageUrl,
+                      location: StoryFeedData[index].location,
+                    ))),
+          )
         ],
       ),
     );
