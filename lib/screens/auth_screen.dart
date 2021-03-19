@@ -32,40 +32,34 @@ class _AuthScreenState extends State<AuthScreen> {
     final deviceSize = MediaQuery.of(context).size;
     //final statusBarSize = MediaQuery.of(context).padding.top;
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-                height: deviceSize.height,
-                child: Column(children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      height: widget._isLogin
-                          ? 0.50 * deviceSize.height
-                          : 0.40 * deviceSize.height,
-                      child: SvgPicture.asset(
-                        'assets/images/logo.svg',
-                        alignment: Alignment.center,
-                        height:
-                            widget._isLogin ? null : 0.2 * deviceSize.height,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                        width: double.infinity,
-                        height: widget._isLogin
-                            ? 0.50 * deviceSize.height
-                            : 0.60 * deviceSize.height,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF0F367C),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30)),
-                        ),
-                        child:
-                            widget._isLogin ? SignInWidget() : SignUpWidget()),
-                  )
-                ]))));
+        body: Stack(children: [
+      Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          height: widget._isLogin
+              ? 0.50 * deviceSize.height
+              : 0.40 * deviceSize.height,
+          child: SvgPicture.asset(
+            'assets/images/logo.svg',
+            alignment: Alignment.center,
+            height: widget._isLogin ? null : 0.2 * deviceSize.height,
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+            width: double.infinity,
+            height: widget._isLogin
+                ? 0.50 * deviceSize.height
+                : 0.60 * deviceSize.height,
+            decoration: BoxDecoration(
+              color: Color(0xFF0F367C),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+            ),
+            child: widget._isLogin ? SignInWidget() : SignUpWidget()),
+      )
+    ]));
   }
 }

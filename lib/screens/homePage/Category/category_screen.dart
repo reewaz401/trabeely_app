@@ -34,7 +34,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
               SizedBox(
                 height: 10,
               ),
-              CategoryListWidget(args.type),
+              //CategoryListWidget(args.type),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    categoryButton('All', args.type),
+                    categoryButton('Tours', args.type),
+                    categoryButton('Treks', args.type),
+                    categoryButton('Hotels', args.type),
+                    categoryButton('Restaurant', args.type),
+                    categoryButton('Clubs', args.type),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -46,6 +59,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget categoryButton(String type, String _currentselectedType) {
+    return Container(
+      decoration: _currentselectedType == type
+          ? BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(width: 2, color: Colors.orange)),
+            )
+          : null,
+      child: MaterialButton(
+        onPressed: () {
+          setState(() {
+            _currentselectedType = type;
+          });
+        },
+        child: Text(type),
       ),
     );
   }

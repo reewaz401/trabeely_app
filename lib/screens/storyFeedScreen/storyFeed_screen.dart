@@ -18,6 +18,7 @@ class StoryFeedScreen extends StatelessWidget {
           addStoryBox(context),
           ListView.builder(
               shrinkWrap: true,
+              scrollDirection: Axis.vertical,
               itemCount: StoryFeedData.length,
               itemBuilder: (context, index) => Container(
                       child: StoryFeedItem(
@@ -35,8 +36,6 @@ class StoryFeedScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final image = await UploadPhoto().imagePickerDialog(context);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
       },
       child: Container(
           width: MediaQuery.of(context).size.width,

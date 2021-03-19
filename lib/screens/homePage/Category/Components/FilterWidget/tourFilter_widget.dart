@@ -5,6 +5,7 @@ import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterI
 class TourFilter extends StatelessWidget {
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var _currentnumOfCustomer = 1;
+  var selectedRange = RangeValues(0.2, 0.8);
   @override
   Widget build(BuildContext context) {
     var destination = '';

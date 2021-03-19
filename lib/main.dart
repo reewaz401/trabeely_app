@@ -8,6 +8,7 @@ import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import 'package:travel/screens/homePage/homePage_screen.dart';
 
 import 'package:travel/services/tours_services.dart';
+import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
 import './widget/isAuth.dart';
 import './screens/auth_screen.dart';
@@ -47,27 +48,23 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (e) => Auth()),
+          ChangeNotifierProvider(
+            create: (a) => ThemeNotifier(),
+          )
         ],
-        child: Consumer<Auth>(
-          builder: (ctx, auth, _) => MaterialApp(
+        child:
+            // ignore: missing_required_param
+            Consumer(builder: (context, ThemeNotifier value, _) {
+          return MaterialApp(
             //supportedLocales: [Locale('pt', 'BR')],
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: 'Rubik',
-            ),
-            home: isAuto
-                ? TabsScreen()
-                : auth.isAuth
-                    ? TabsScreen
-                    : TabsScreen(),
+            theme: value.darkTheme ? dark : light,
+            home: isAuto ? TabsScreen() : AuthScreen(true),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               HomePageScreen.routeName: (ctx) => HomePageScreen(),
@@ -75,7 +72,8 @@ class _MyAppState extends State<MyApp> {
               CategoryScreen.routeName: (ctx) => CategoryScreen(),
               StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
             },
-          ),
-        ));
+          );
+        }));
   }
-} //main dart
+}
+//main dart

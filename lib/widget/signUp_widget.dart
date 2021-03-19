@@ -11,6 +11,7 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
+  bool _isloading = false;
   final _formKeySignUp = GlobalKey<FormState>();
   final FocusNode _emailFocusNode = FocusNode();
 
@@ -37,56 +38,63 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              inputBox('full name', context),
-              SizedBox(
-                height: 8,
-              ),
-              inputBox('contact number', context),
-              SizedBox(
-                height: 8,
-              ),
-              inputBox('email', context),
-              SizedBox(
-                height: 8,
-              ),
-              inputBox('password', context),
-              SizedBox(
-                height: 8,
-              ),
-              inputBox('confirm password', context),
-              SizedBox(
-                height: 23,
-              ),
-              signUpButton(),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.all(15),
-          child: FlatButton(
-              onPressed: () => Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => AuthScreen(true))),
-              child: Column(children: [
-                Text(
-                  'Sign In',
-                  style: TextStyle(color: Colors.white),
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 50,
                 ),
-                Text(
-                  'Have account ?',
-                  style: TextStyle(color: Colors.white),
-                )
-              ])),
-        ),
-      ],
+                inputBox('full name', context),
+                SizedBox(
+                  height: 8,
+                ),
+                inputBox('contact number', context),
+                SizedBox(
+                  height: 8,
+                ),
+                inputBox('email', context),
+                SizedBox(
+                  height: 8,
+                ),
+                inputBox('password', context),
+                SizedBox(
+                  height: 8,
+                ),
+                inputBox('confirm password', context),
+                SizedBox(
+                  height: 23,
+                ),
+                _isloading
+                    ? CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      )
+                    : signUpButton(),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(15),
+            child: FlatButton(
+                onPressed: () => Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => AuthScreen(true))),
+                child: Column(children: [
+                  Text(
+                    'Sign In',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    'Have account ?',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ])),
+          ),
+        ],
+      ),
     );
   }
 
@@ -243,7 +251,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           'SignUp',
           style: TextStyle(color: Colors.white),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          setState(() {
+            _isloading = true;
+          });
+          setState(() {
+            _isloading = false;
+          });
+        },
       ),
     );
   }

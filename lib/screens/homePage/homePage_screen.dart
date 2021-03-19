@@ -23,7 +23,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
     return Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
