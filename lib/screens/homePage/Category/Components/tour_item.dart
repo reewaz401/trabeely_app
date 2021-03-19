@@ -22,16 +22,16 @@ class TourItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TourDetails()));
-      },
+      onTap: () {},
       child: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Colors.white),
+
         margin: EdgeInsets.all(5),
-        width: MediaQuery.of(context).size.width,
+
+        //width: MediaQuery.of(context).size.width,
         child: Row(
-          children: [imageTile(), detailsTile()],
+          children: [imageTile(), detailsTile(context)],
         ),
       ),
     );
@@ -48,7 +48,7 @@ class TourItem extends StatelessWidget {
     );
   }
 
-  Widget detailsTile() {
+  Widget detailsTile(BuildContext context) {
     return Flexible(
       flex: 3,
       child: Padding(
@@ -105,8 +105,10 @@ class TourItem extends StatelessWidget {
               children: [
                 Text('Seller : '),
                 IconButton(
-                  icon: Icon(Icons.arrow_forward_outlined),
-                )
+                  icon: Icon(Icons.arrow_forward_rounded),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TourDetails())),
+                ),
               ],
             )
           ],

@@ -32,7 +32,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
       decoration: widget._currentselectedType == type
           ? BoxDecoration(
               border:
-                  Border(bottom: BorderSide(width: 2, color: Colors.blue[900])),
+                  Border(bottom: BorderSide(width: 2, color: Colors.orange)),
             )
           : null,
       child: MaterialButton(

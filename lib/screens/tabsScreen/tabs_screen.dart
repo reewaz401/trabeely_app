@@ -7,7 +7,6 @@ import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
 import 'components/drawerList_widget.dart';
-import '../search_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';

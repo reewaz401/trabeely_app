@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import 'package:travel/screens/homePage/homePage_screen.dart';
-import 'package:travel/screens/search_screen.dart';
+
 import 'package:travel/services/tours_services.dart';
 import './services/authentication.dart';
 import './widget/isAuth.dart';
@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               HomePageScreen.routeName: (ctx) => HomePageScreen(),
-              PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
+              //PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
               CategoryScreen.routeName: (ctx) => CategoryScreen(),
               StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
             },
