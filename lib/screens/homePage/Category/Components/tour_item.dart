@@ -141,7 +141,7 @@ class TourItem extends StatelessWidget {
           );
   }
 
-  Widget detailsTile() {
+  Widget detailsTile(BuildContext context) {
     return Flexible(
       flex: 3,
       child: Padding(
@@ -209,8 +209,10 @@ class TourItem extends StatelessWidget {
               children: [
                 Text('Seller : $agencyName'),
                 IconButton(
-                  icon: Icon(Icons.arrow_forward_outlined),
-                )
+                  icon: Icon(Icons.arrow_forward_rounded),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TourDetails())),
+                ),
               ],
             )
           ],

@@ -6,23 +6,23 @@ import 'package:travel/screens/homePage/components/search_widget.dart';
 
 //import '../search_screen.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageScreen extends StatefulWidget {
+  static const routeName = '/homepage';
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageScreenState createState() => _HomePageScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     //destinattion
     String typedDestination;
-
+    SearchWidget args;
     var deviceSize = MediaQuery.of(context).size;
     var paddingSize = MediaQuery.of(context).padding.top;
     return Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,11 +32,15 @@ class _HomePageState extends State<HomePage> {
               ),
               GestureDetector(
                   onTap: () async {
-                    typedDestination = await Navigator.push(
+                    await Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SearchWidget()));
-                    setState(() {});
+                            builder: (context) => SearchWidget('')));
+                    final SearchWidget args =
+                        ModalRoute.of(context).settings.arguments;
+                    setState(() {
+                      typedDestination = args.destination;
+                    });
                   },
                   child: Container(
                     width: 0.9 * deviceSize.width,

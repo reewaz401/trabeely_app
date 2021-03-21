@@ -1,7 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/services/tours_services.dart';
-import '../filterWidget/filter.dart';
+
 import './homePage/Category/Components/tour_item.dart';
 
 class PacakagesScreen extends StatefulWidget {
@@ -18,14 +18,6 @@ class _PacakagesScreenState extends State<PacakagesScreen> {
     super.initState();
   }
 
-  var _typePacakage = [
-    'ALL',
-    'Tours',
-    'Hotels',
-    'Treks',
-    'Restaurant',
-    'Clubs'
-  ];
   var _currentTypePacakage = "Tours";
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   var _currentnumOfCustomer = 1;
@@ -133,10 +125,8 @@ class _PacakagesScreenState extends State<PacakagesScreen> {
             child: Column(
               children: [
                 _currentTypePacakage == 'Restaurant'
-                    ? restaurantFilter()
-                    : _currentTypePacakage == 'Tours'
-                        ? FilterBox().tourFilter(context, _tourDestination)
-                        : hotelFilter(),
+                    ? hotelFilter()
+                    : restaurantFilter(),
                 SizedBox(
                   height: 30,
                 ),

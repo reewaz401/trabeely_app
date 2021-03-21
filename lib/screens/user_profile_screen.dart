@@ -1,6 +1,33 @@
 import 'package:flutter/material.dart';
+import '../services/authentication.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
+  final String userName;
+  UserProfileScreen(this.userName);
+
+  @override
+  _UserProfileScreenState createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  String userName;
+  Future<String> getUserName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final String userName = preferences.getString('username');
+    return userName;
+  }
+
+  @override
+  void initState() {
+    getUserName().then((value) {
+      setState(() {
+        userName = value;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,7 +39,7 @@ class UserProfileScreen extends StatelessWidget {
             children: [
               Container(
                 height: 0.35 * MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(color: Colors.white),
+                //  decoration: BoxDecoration(color: Colors.white),
               ),
               Positioned(
                 top: 0,
@@ -57,7 +84,7 @@ class UserProfileScreen extends StatelessWidget {
               margin: EdgeInsets.all(15),
               child: Column(children: [
                 Text(
-                  'Victoria Robertson',
+                  userName == null ? '' : userName,
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -66,7 +93,7 @@ class UserProfileScreen extends StatelessWidget {
                 Text(
                   'A mantra goes here',
                   style: TextStyle(fontWeight: FontWeight.w500),
-                )
+                ),
               ])),
         ]));
   }

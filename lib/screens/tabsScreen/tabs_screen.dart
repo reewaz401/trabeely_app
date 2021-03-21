@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel/screens/tabsScreen/components/drawerList_widget.dart';
-import 'package:travel/screens/tabsScreen/components/endDrawer_widget.dart';
-import 'package:travel/services/tours_services.dart';
+
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
-import 'components/drawerList_widget.dart';
-import '../search_screen.dart';
+import '../../services/authentication.dart';
+import 'package:provider/provider.dart';
+import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -22,15 +21,23 @@ class _TabsScreenState extends State<TabsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
-
+  String userName;
   @override
   void initState() {
     _pages = [
-      {'pages': HomePage(), 'title': 'Home'},
+      {'pages': HomePageScreen(), 'title': 'Home'},
       {'pages': StoryFeedScreen(), 'title': 'Story'},
-      {'pages': UserProfileScreen(), 'title': 'Profile'}
+      {'pages': UserProfileScreen(userName), 'title': 'Profile'}
     ];
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    // TODO: implement didChangeDependencies
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userName = prefs.getString('username');
+    super.didChangeDependencies();
   }
 
   void _selectPage(int index) {
@@ -49,7 +56,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        //backgroundColor: Colors.blue.shade900,
         title: Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(left: 20, top: 20),
@@ -61,23 +68,20 @@ class _TabsScreenState extends State<TabsScreen> {
                 )
               : Text(_pages[_selectedPageIndex]['title'],
                   textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Color(0xFF245AA0),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30)),
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30)),
         ),
         actions: [
           IconButton(
             icon: Icon(
               Icons.notification_important_outlined,
-              color: Color(0xFF245AA0),
+              color: Colors.white,
             ),
             onPressed: () async {},
           ),
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: Color(0xFF245AA0),
+              color: Colors.white,
             ),
             onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
           ),
@@ -92,7 +96,8 @@ class _TabsScreenState extends State<TabsScreen> {
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedPageIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.surround_sound), label: 'Story'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
@@ -105,15 +110,29 @@ class _TabsScreenState extends State<TabsScreen> {
     return ListView(
       children: [
         DrawerHeader(
-          child: Text('Settings'),
+          child: Text(
+            'Settings',
+            style: TextStyle(fontSize: 25),
+          ),
         ),
         ListTile(
-          title: Text('Item 1'),
-          onTap: () {},
+          title: Text('Dark Mode'),
+          trailing: Consumer<ThemeNotifier>(
+            builder: (context, ThemeNotifier value, child) {
+              return Switch(
+                value: value.darkTheme,
+                onChanged: (theme) {
+                  value.toggleTheme();
+                },
+              );
+            },
+          ),
         ),
         ListTile(
-          title: Text('Item 2'),
-          onTap: () {},
+          title: Text('Log out'),
+          onTap: () {
+            Provider.of<Auth>(context, listen: false).logOut();
+          },
         ),
         ListTile(
           title: Text('Item 3'),
