@@ -8,6 +8,8 @@ import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
+import '../../services/themeData.dart';
+import 'package:provider/provider.dart';
 import 'components/drawerList_widget.dart';
 import '../search_screen.dart';
 
@@ -108,8 +110,17 @@ class _TabsScreenState extends State<TabsScreen> {
           child: Text('Settings'),
         ),
         ListTile(
-          title: Text('Item 1'),
-          onTap: () {},
+          title: Text('Dark Mode'),
+          trailing: Consumer<ThemeNotifier>(
+            builder: (context, ThemeNotifier value, child) {
+              return Switch(
+                value: value.darkTheme,
+                onChanged: (theme) {
+                  value.toggleTheme();
+                },
+              );
+            },
+          ),
         ),
         ListTile(
           title: Text('Item 2'),

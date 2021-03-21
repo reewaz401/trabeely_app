@@ -10,7 +10,7 @@ import 'package:travel/services/tours_services.dart';
 import './services/authentication.dart';
 import './widget/isAuth.dart';
 import './screens/auth_screen.dart';
-
+import './services/themeData.dart';
 import './screens/homePage//homePage_screen.dart';
 import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
@@ -51,30 +51,30 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (e) => Auth()),
+          ChangeNotifierProvider(
+            create: (a) => ThemeNotifier(),
+          )
         ],
         child: Consumer<Auth>(
-          builder: (ctx, auth, _) => MaterialApp(
-            //supportedLocales: [Locale('pt', 'BR')],
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              appBarTheme: AppBarTheme(color: Colors.blue[900]),
-              primarySwatch: Colors.blue,
-              visualDensity: VisualDensity.adaptivePlatformDensity,
-              fontFamily: 'Rubik',
-            ),
-            home: TabsScreen(),
-            // ? AuthScreen(false)
-            // : auth.isAuth
-            //     ? TabsScreen
-            //     : AuthScreen(false),
-            routes: {
-              TabsScreen.routeName: (ctx) => TabsScreen(),
-              PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
-              CategoryScreen.routeName: (ctx) => CategoryScreen(),
-              StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
-            },
-          ),
+          builder: (ctx, auth, _) =>
+              Consumer(builder: (context, ThemeNotifier value, _) {
+            return MaterialApp(
+                //supportedLocales: [Locale('pt', 'BR')],
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: value.darkTheme ? dark : light,
+                home: TabsScreen(),
+                // ? AuthScreen(false)
+                // : auth.isAuth
+                //     ? TabsScreen
+                //     : AuthScreen(false),
+                routes: {
+                  TabsScreen.routeName: (ctx) => TabsScreen(),
+                  PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
+                  CategoryScreen.routeName: (ctx) => CategoryScreen(),
+                  StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
+                });
+          }),
         ));
   }
 } //main dart
