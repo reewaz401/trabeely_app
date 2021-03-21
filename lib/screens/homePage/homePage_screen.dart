@@ -88,7 +88,11 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 'Discover',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
               ),
               SizedBox(
                 height: 5,
@@ -102,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       'Best Deals',
                       style: TextStyle(
                         fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         letterSpacing: 1.5,
                       ),
                     ),
@@ -122,7 +126,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                width: deviceSize.width,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -130,6 +133,27 @@ class _HomePageState extends State<HomePage> {
                       DestinationCarousel(
                         activites: 'Trek',
                         cityName: 'Annapurna',
+                        country: 'Nepal',
+                        image: 'anna1',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Everest',
+                        country: 'Nepal',
+                        image: 'anna2',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Mardi',
+                        country: 'Nepal',
+                        image: 'anna3',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Mardi',
                         country: 'Nepal',
                         image: 'anna1',
                         des: 'We an go all out',
