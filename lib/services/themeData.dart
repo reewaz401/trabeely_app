@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
+    appBarTheme: AppBarTheme(color: Colors.blue[900]),
     brightness: Brightness.light,
     primarySwatch: Colors.blue,
     accentColor: Colors.orange,
