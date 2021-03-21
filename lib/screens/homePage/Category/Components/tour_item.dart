@@ -133,16 +133,12 @@ class TourItem extends StatelessWidget {
   }
 
   Widget imageTile() {
-    return Card(
-      elevation: 5,
-      child: image[0] != null
-          ? Image.network(
-              'https://api.trabeely.com/uploads/package/${image[0]}')
-          : SvgPicture.asset(
-              'assets/images/logo.svg',
-              alignment: Alignment.center,
-            ),
-    );
+    return image[0] != null
+        ? Image.network('https://api.trabeely.com/uploads/package/${image[0]}')
+        : SvgPicture.asset(
+            'assets/images/logo.svg',
+            alignment: Alignment.center,
+          );
   }
 
   Widget detailsTile() {
@@ -163,10 +159,6 @@ class TourItem extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                 ),
-                Container(
-                  color: Colors.blue,
-                  child: Text('Weekend'),
-                )
               ],
             ),
             SizedBox(

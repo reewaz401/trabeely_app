@@ -45,11 +45,17 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         border: Border.all(width: 0.5),
                         borderRadius: BorderRadius.circular(12)),
-                    child: Text(
-                      typedDestination == null
-                          ? 'Search Destinaiton'
-                          : typedDestination,
-                      textAlign: TextAlign.left,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          typedDestination == null
+                              ? 'Search Destinaiton'
+                              : typedDestination,
+                          textAlign: TextAlign.left,
+                        ),
+                        Icon(Icons.search)
+                      ],
                     ),
                   )),
               SizedBox(
