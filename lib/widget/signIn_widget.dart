@@ -178,9 +178,4 @@ class _SignInWidgetState extends State<SignInWidget> {
       ),
     );
   }
-
-  void dispose() {
-    _emailFocusNode.dispose();
-    _passwordFocusNode.dispose();
-  }
 }
