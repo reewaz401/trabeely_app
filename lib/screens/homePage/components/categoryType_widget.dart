@@ -19,9 +19,13 @@ class CategoryTypeWidget extends StatelessWidget with ChangeNotifier {
           width: 0.45 * MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(width: 1),
-          ),
+              borderRadius: BorderRadius.circular(15),
+              //border: Border.all(width: 1),
+              color: Color(type == "All" || type == "Hotels"
+                  ? 0xFFFCF0FC
+                  : type == "Tours" || type == "Restaurants"
+                      ? 0xFFFDF2E3
+                      : 0xFFC7DEDC)),
           child: Row(
             children: [
               SvgPicture.asset(
