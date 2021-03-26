@@ -29,37 +29,6 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                  onTap: () async {
-                    typedDestination = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchWidget()));
-                    setState(() {});
-                  },
-                  child: Container(
-                    width: 0.9 * deviceSize.width,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.5),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          typedDestination == null
-                              ? 'Search Destinaiton'
-                              : typedDestination,
-                          textAlign: TextAlign.left,
-                        ),
-                        Icon(Icons.search)
-                      ],
-                    ),
-                  )),
-              SizedBox(
                 height: 20,
               ),
               Row(
@@ -129,6 +98,7 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       DestinationCarousel(
                         activites: 'Trek',
@@ -161,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ));

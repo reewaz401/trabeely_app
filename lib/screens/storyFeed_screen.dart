@@ -16,10 +16,11 @@ class StoryFeedScreen extends StatelessWidget {
             itemCount: StoryFeedData.length,
             itemBuilder: (context, index) => Container(
               child: StoryFeedItem(
-                userName: StoryFeedData[index].userName,
-                description: StoryFeedData[index].description,
+                //  userName: StoryFeedData[index].userName,
+                //description: StoryFeedData[index].description,
                 imageUrl: StoryFeedData[index].imageUrl,
-                location: StoryFeedData[index].location,
+
+                //location: StoryFeedData[index].location,
               ),
             ),
           )

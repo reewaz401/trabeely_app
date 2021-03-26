@@ -8,7 +8,7 @@ import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
-import '../../services/themeData.dart';
+import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
 import 'components/drawerList_widget.dart';
 import '../search_screen.dart';
@@ -46,47 +46,73 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
-
+      appBar: _pages[_selectedPageIndex]['title'] == 'Home'
+          ? null
+          : AppBar(
+              centerTitle: false,
+              title: Text((_pages[_selectedPageIndex]['title'])),
+            ),
       // drawer: AppDrawer(),
 
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        title: Container(
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(left: 20, top: 20),
-          width: MediaQuery.of(context).size.width,
-          child: _pages[_selectedPageIndex]['title'] == 'Home'
-              ? SvgPicture.asset(
-                  'assets/images/appLogo.svg',
-                  height: 50,
-                )
-              : Text(_pages[_selectedPageIndex]['title'],
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      color: Color(0xFF245AA0),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30)),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.notification_important_outlined,
-              color: Color(0xFF245AA0),
-            ),
-            onPressed: () async {},
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Color(0xFF245AA0),
-            ),
-            onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-          ),
-        ],
-      ),
-
-      body: SingleChildScrollView(child: _pages[_selectedPageIndex]['pages']),
+      body: _pages[_selectedPageIndex]['title'] == 'Home'
+          ? NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScroll) {
+                return [
+                  SliverAppBar(
+                    // Add this code
+                    bottom: PreferredSize(
+                      // Add this code
+                      preferredSize: Size.fromHeight(20.0),
+                      child: Text(''),
+                    ),
+                    expandedHeight: 200.0,
+                    floating: false,
+                    pinned: true,
+                    flexibleSpace: FlexibleSpaceBarSettings(
+                      currentExtent: 0.0,
+                      minExtent: 0,
+                      maxExtent: 230,
+                      toolbarOpacity: 1,
+                      child: FlexibleSpaceBar(
+                        titlePadding:
+                            EdgeInsetsDirectional.only(start: 30, bottom: 15),
+                        title: GestureDetector(
+                          onTap: () async {},
+                          child: Container(
+                            margin: EdgeInsets.only(right: 50),
+                            width: 0.75 * MediaQuery.of(context).size.width,
+                            height: 50,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: Color(0xFF4579B2),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Search Destinaiton',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                  textAlign: TextAlign.left,
+                                ),
+                                Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ];
+              },
+              body: _pages[_selectedPageIndex]['pages'],
+            )
+          : _pages[_selectedPageIndex]['pages'],
 
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -111,8 +137,8 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         ListTile(
           title: Text('Dark Mode'),
-          trailing: Consumer<ThemeNotifier>(
-            builder: (context, ThemeNotifier value, child) {
+          trailing: Consumer<colors.ThemeNotifier>(
+            builder: (context, colors.ThemeNotifier value, child) {
               return Switch(
                 value: value.darkTheme,
                 onChanged: (theme) {
@@ -134,3 +160,40 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 }
+
+/* child: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.blue[900],
+          title: Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.only(left: 20, top: 20),
+            width: MediaQuery.of(context).size.width,
+            child: _pages[_selectedPageIndex]['title'] == 'Home'
+                ? SvgPicture.asset(
+                    'assets/images/appLogo.svg',
+                    height: 50,
+                  )
+                : Text(_pages[_selectedPageIndex]['title'],
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        color: Color(0xFF245AA0),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 30)),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.notification_important_outlined,
+                color: Colors.white,
+              ),
+              onPressed: () async {},
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+            ),
+          ],
+        ),*/

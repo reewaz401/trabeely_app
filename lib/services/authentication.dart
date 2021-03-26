@@ -43,6 +43,7 @@ class Auth with ChangeNotifier {
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('autoSignIn', _token);
+        preferences.setString('username', _userId);
       }
       notifyListeners();
     } catch (error) {
