@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/homePage/components/card.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -91,25 +92,79 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ),
               Text(
                 'Discover',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
               ),
               SizedBox(
                 height: 5,
               ),
-              Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Best Deals',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.normal,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => print('See All'),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
-              ),
-              Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Annapurna',
+                        country: 'Nepal',
+                        image: 'anna1',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Everest',
+                        country: 'Nepal',
+                        image: 'anna2',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Mardi',
+                        country: 'Nepal',
+                        image: 'anna3',
+                        des: 'We an go all out',
+                      ),
+                      DestinationCarousel(
+                        activites: 'Trek',
+                        cityName: 'Mardi',
+                        country: 'Nepal',
+                        image: 'anna1',
+                        des: 'We an go all out',
+                      ),
+                    ],
+                  ),
+                ),
               )
             ],
           ),

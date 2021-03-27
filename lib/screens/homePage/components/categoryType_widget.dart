@@ -24,9 +24,13 @@ class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
           width: 0.45 * MediaQuery.of(context).size.width,
           height: 60,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(width: 1),
-          ),
+              borderRadius: BorderRadius.circular(15),
+              // border: Border.all(width: 1),
+              color: Color(widget.type == "All" || widget.type == "Hotels"
+                  ? 0xFFFCF0FC
+                  : widget.type == "Tours" || widget.type == "Restaurants"
+                      ? 0xFFFDF2E3
+                      : 0xFFC7DEDC)),
           child: Row(
             children: [
               SvgPicture.asset(

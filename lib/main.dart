@@ -13,7 +13,9 @@ import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
 
 import './screens/auth_screen.dart';
-
+import './services/themeData.dart';
+import './screens/homePage//homePage_screen.dart';
+import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
 
 import './screens/storyFeedScreen/storyFeed_screen.dart';
@@ -54,31 +56,27 @@ class _MyAppState extends State<MyApp> {
             create: (a) => ThemeNotifier(),
           )
         ],
-        child:
-            // ignore: missing_required_param
-            Consumer(builder: (context, ThemeNotifier value, _) {
-          return MaterialApp(
-            //supportedLocales: [Locale('pt', 'BR')],
-            debugShowCheckedModeBanner: false,
-
-            title: 'Flutter Demo',
-            theme: value.darkTheme ? light : dark,
-            home: DoubleBack(
-              message: "Press back again to close",
-              child: SplashScreen(),
-              //  isAuto ? TabsScreen() : AuthScreen(true),
-            ),
-            routes: {
-              TabsScreen.routeName: (ctx) => TabsScreen(),
-              HomePageScreen.routeName: (ctx) => HomePageScreen(),
-              //PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
-              CategoryScreen.routeName: (ctx) => CategoryScreen(),
-              StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
-              '/bookinginfo': (BuildContext context) => BookingInfo(),
-              '/bookingconfirm': (BuildContext context) => BookingConfirm(),
-            },
-          );
-        }));
+        child: Consumer<Auth>(
+          builder: (ctx, auth, _) =>
+              Consumer(builder: (context, ThemeNotifier value, _) {
+            return MaterialApp(
+                //supportedLocales: [Locale('pt', 'BR')],
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: value.darkTheme ? dark : light,
+                home: SplashScreen(),
+                // ? AuthScreen(false)
+                // : auth.isAuth
+                //     ? TabsScreen
+                //     : AuthScreen(false),
+                routes: {
+                  TabsScreen.routeName: (ctx) => TabsScreen(),
+                  CategoryScreen.routeName: (ctx) => CategoryScreen(),
+                  StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
+                  '/bookinginfo': (BuildContext context) => BookingInfo(),
+                });
+          }),
+        ));
   }
 }
 //main dart
