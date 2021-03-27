@@ -14,12 +14,13 @@ class StoryFeedItem extends StatefulWidget {
 class _StoryFeedItemState extends State<StoryFeedItem> {
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(10),
-      width: MediaQuery.of(context).size.width,
-      height: 430,
+      width: deviceSize.width,
+      height: 0.6 * deviceSize.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -29,41 +29,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                  onTap: () async {
-                    await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchWidget('')));
-                    final SearchWidget args =
-                        ModalRoute.of(context).settings.arguments;
-                    setState(() {
-                      typedDestination = args.destination;
-                    });
-                  },
-                  child: Container(
-                    width: 0.9 * deviceSize.width,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.5),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          typedDestination == null
-                              ? 'Search Destinaiton'
-                              : typedDestination,
-                          textAlign: TextAlign.left,
-                        ),
-                        Icon(Icons.search)
-                      ],
-                    ),
-                  )),
-              SizedBox(
                 height: 20,
               ),
               Row(
@@ -99,7 +64,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 20,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -109,8 +74,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     Text(
                       'Best Deals',
                       style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.normal,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
                         letterSpacing: 1.5,
                       ),
                     ),
@@ -133,6 +98,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       DestinationCarousel(
                         activites: 'Trek',
@@ -165,7 +131,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ));
