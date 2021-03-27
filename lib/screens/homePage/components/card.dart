@@ -160,7 +160,7 @@ class DestinationCarousel extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        'We have tthe variety of the mountains within and the we go',
+                        'We have the variety of the mountains within and the we go',
                         maxLines: null,
                       )
                     ],

@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 20,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -74,8 +74,8 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       'Best Deals',
                       style: TextStyle(
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.normal,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
                         letterSpacing: 1.5,
                       ),
                     ),

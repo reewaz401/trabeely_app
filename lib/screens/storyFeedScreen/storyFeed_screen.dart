@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
@@ -35,6 +35,9 @@ class StoryFeedScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final image = await UploadPhoto().imagePickerDialog(context);
+        if (image == null) {
+          return;
+        }
         Navigator.push(context,
             MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
       },

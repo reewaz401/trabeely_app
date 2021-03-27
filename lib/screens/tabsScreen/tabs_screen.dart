@@ -69,43 +69,54 @@ class _TabsScreenState extends State<TabsScreen> {
                     expandedHeight: 200.0,
                     floating: false,
                     pinned: true,
-                    flexibleSpace: FlexibleSpaceBarSettings(
-                      currentExtent: 0.0,
-                      minExtent: 0,
-                      maxExtent: 230,
-                      toolbarOpacity: 1,
-                      child: FlexibleSpaceBar(
-                        titlePadding:
-                            EdgeInsetsDirectional.only(start: 30, bottom: 15),
-                        title: GestureDetector(
-                          onTap: () async {},
-                          child: Container(
-                            margin: EdgeInsets.only(right: 50),
-                            width: 0.75 * MediaQuery.of(context).size.width,
-                            height: 50,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 5),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF4579B2),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Search Destinaiton',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
-                                  textAlign: TextAlign.left,
+                    flexibleSpace: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Image.asset(
+                            'assets/images/anna2.jpeg',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        FlexibleSpaceBarSettings(
+                          currentExtent: 0.0,
+                          minExtent: 0,
+                          maxExtent: 230,
+                          toolbarOpacity: 1,
+                          child: FlexibleSpaceBar(
+                            titlePadding: EdgeInsetsDirectional.only(
+                                start: 30, bottom: 15),
+                            title: GestureDetector(
+                              onTap: () async {},
+                              child: Container(
+                                margin: EdgeInsets.only(right: 50),
+                                width: 0.75 * MediaQuery.of(context).size.width,
+                                height: 50,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: Color(0xFF4579B2).withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Search Destinaiton',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    )
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.search,
-                                  color: Colors.white,
-                                )
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ];
@@ -160,40 +171,3 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 }
-
-/* child: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.blue[900],
-          title: Container(
-            alignment: Alignment.centerLeft,
-            margin: EdgeInsets.only(left: 20, top: 20),
-            width: MediaQuery.of(context).size.width,
-            child: _pages[_selectedPageIndex]['title'] == 'Home'
-                ? SvgPicture.asset(
-                    'assets/images/appLogo.svg',
-                    height: 50,
-                  )
-                : Text(_pages[_selectedPageIndex]['title'],
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        color: Color(0xFF245AA0),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30)),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.notification_important_outlined,
-                color: Colors.white,
-              ),
-              onPressed: () async {},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
-              onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-            ),
-          ],
-        ),*/
