@@ -50,8 +50,7 @@ class _TabsScreenState extends State<TabsScreen> {
       // drawer: AppDrawer(),
 
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.white,
+        elevation: 0,
         title: Container(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(left: 20, top: 20),

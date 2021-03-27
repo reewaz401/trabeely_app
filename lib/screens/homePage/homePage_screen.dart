@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
     return Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
