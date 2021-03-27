@@ -65,21 +65,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget categoryButton(String type, String _currentselectedType) {
     return Container(
-      decoration: _currentselectedType == type
-          ? BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(width: 2, color: Colors.orange)),
-            )
-          : null,
-      child: MaterialButton(
-        onPressed: () {
-          setState(() {
-            _currentselectedType = type;
-          });
-        },
-        child: Text(type),
-      ),
-    );
+        decoration: _currentselectedType == type
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue[900],
+              )
+            : null,
+        child: MaterialButton(
+          onPressed: () {
+            setState(() {
+              _currentselectedType = type;
+            });
+          },
+          child: _currentselectedType == type
+              ? Icon(
+                  Icons.flight,
+                  color: Colors.white,
+                )
+              : Opacity(
+                  opacity: 0.5,
+                  child: Icon(
+                    Icons.flight,
+                  ),
+                ),
+        ));
   }
 
   Widget filtering(String type) {
@@ -114,6 +123,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget button(String name) {
     return Container(
       child: FlatButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
         child: Text(
           name,
           style: TextStyle(color: Colors.white),

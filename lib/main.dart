@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
+import 'package:travel/screens/Booking/bookingSucess.dart';
+import 'package:travel/screens/SplashScreen/splashscreen.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
-
+import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:travel/screens/homePage/homePage_screen.dart';
 
 import 'package:travel/services/themeData.dart';
@@ -59,14 +62,20 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
 
             title: 'Flutter Demo',
-            theme: value.darkTheme ? dark : light,
-            home: isAuto ? TabsScreen() : AuthScreen(true),
+            theme: value.darkTheme ? light : dark,
+            home: DoubleBack(
+              message: "Press back again to close",
+              child: SplashScreen(),
+              //  isAuto ? TabsScreen() : AuthScreen(true),
+            ),
             routes: {
               TabsScreen.routeName: (ctx) => TabsScreen(),
               HomePageScreen.routeName: (ctx) => HomePageScreen(),
               //PacakagesScreen.routeName: (ctx) => PacakagesScreen(),
               CategoryScreen.routeName: (ctx) => CategoryScreen(),
               StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
+              '/bookinginfo': (BuildContext context) => BookingInfo(),
+              '/bookingconfirm': (BuildContext context) => BookingConfirm(),
             },
           );
         }));

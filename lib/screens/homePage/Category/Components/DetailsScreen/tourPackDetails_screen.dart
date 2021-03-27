@@ -391,7 +391,7 @@ class TourDetails extends StatelessWidget {
                       ),
                       color: Colors.blue[900],
                       onPressed: () {
-                        print(detail);
+                        Navigator.pushNamed(context, '/bookinginfo');
                       },
                     ),
                   ),

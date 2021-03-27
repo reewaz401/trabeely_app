@@ -15,7 +15,6 @@ class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Wt ${widget.type}');
         Navigator.pushNamed(context, CategoryScreen.routeName,
             arguments: CategoryTypeWidget(widget.type));
       },

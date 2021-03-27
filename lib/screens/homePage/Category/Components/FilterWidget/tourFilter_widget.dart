@@ -38,33 +38,33 @@ class TourFilter extends StatelessWidget {
             FilterIcon()
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 13,
-            right: 13,
-            top: 5,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                child: DatePickerWidget(),
-                width: 0.5 * MediaQuery.of(context).size.width,
-              ),
-              Spacer(
-                flex: 2,
-              ),
-              SizedBox(
-                child: Text('Number of People'),
-                width: 65,
-              ),
-              Spacer(
-                flex: 1,
-              ),
-              numberOfPeople(),
-            ],
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(
+        //     left: 13,
+        //     right: 13,
+        //     top: 5,
+        //   ),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.start,
+        //     children: [
+        //       Container(
+        //         child: DatePickerWidget(),
+        //         width: 0.5 * MediaQuery.of(context).size.width,
+        //       ),
+        //       Spacer(
+        //         flex: 2,
+        //       ),
+        //       SizedBox(
+        //         child: Text('Number of People'),
+        //         width: 65,
+        //       ),
+        //       Spacer(
+        //         flex: 1,
+        //       ),
+        //       numberOfPeople(),
+        //     ],
+        //   ),
+        // ),
         SizedBox(
           height: 10,
         ),

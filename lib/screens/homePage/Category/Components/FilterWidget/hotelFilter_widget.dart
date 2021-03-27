@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel/components/datePicker_widget.dart';
-import 'package:travel/components/addPeopleRoom_widget.dart';
+
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class HotelFilter extends StatelessWidget {
@@ -36,51 +35,6 @@ class HotelFilter extends StatelessWidget {
             FilterIcon()
           ],
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.only(
-            left: 13,
-            right: 13,
-            top: 5,
-          ),
-          child: Row(
-            children: [
-              Flexible(flex: 1, child: DatePickerWidget('from')),
-              VerticalDivider(),
-              Flexible(flex: 1, child: DatePickerWidget('to')),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (bctx) {
-                  return AddRoomPeople();
-                });
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                border: Border.all(width: 0.5),
-                borderRadius: BorderRadius.circular(5)),
-            padding: EdgeInsets.only(left: 10, right: 10),
-            height: 50,
-            width: 0.9 * MediaQuery.of(context).size.width,
-            child: Row(
-              children: [
-                Text('Adults  '),
-                Text(adultsNum.toString() + " ,"),
-                Text(' Child '),
-                Text(childNum.toString() + ' ,'),
-                Text(' Rooms '),
-                Text(roomsNum.toString())
-              ],
-            ),
-          ),
-        )
       ],
     );
   }
