@@ -41,22 +41,31 @@ class _BookingInfoState extends State<BookingInfo> {
       child: Scaffold(
         bottomSheet: Container(
           width: double.infinity,
-          child: RaisedButton(
-            color: Colors.blue[900],
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookingConfirm(
-                    adult: adultsNum,
-                    child: childNum,
-                    room: roomsNum,
-                    payment: _paymentMethod,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              color: Colors.blue[900],
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookingConfirm(
+                      adult: adultsNum,
+                      child: childNum,
+                      room: roomsNum,
+                      payment: _paymentMethod,
+                    ),
                   ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Book Now',
+                  style: TextStyle(color: Colors.white),
                 ),
-              );
-            },
-            child: Text('Book Now'),
+              ),
+            ),
           ),
         ),
         appBar: AppBar(
@@ -78,51 +87,78 @@ class _BookingInfoState extends State<BookingInfo> {
                       ),
                     )),
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
-                Text('Enter the number of people'),
-                Container(
-                  width: double.infinity,
-                  child: RaisedButton(
-                    color: Colors.transparent,
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (bctx) {
-                            return addRoomPeople();
-                          });
-                    },
-                    child: Text(
-                        'Adult : $adultsNum Children : $childNum Room : $roomsNum'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'Enter the number of people',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (bctx) {
+                                    return addRoomPeople();
+                                  });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueAccent)),
+                              width: double.infinity,
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                    'Adult : $adultsNum Children : $childNum Room : $roomsNum'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: const Text('Cash On Hand'),
+                              leading: Radio(
+                                value: "Cash",
+                                groupValue: _paymentMethod,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _paymentMethod = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            ListTile(
+                              title: const Text('E-Cash'),
+                              leading: Radio(
+                                value: "E-Cash",
+                                groupValue: _paymentMethod,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _paymentMethod = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: const Text('Cash On Hand'),
-                      leading: Radio(
-                        value: "Cash",
-                        groupValue: _paymentMethod,
-                        onChanged: (value) {
-                          setState(() {
-                            _paymentMethod = value;
-                          });
-                        },
-                      ),
-                    ),
-                    ListTile(
-                      title: const Text('E-Cash'),
-                      leading: Radio(
-                        value: "E-Cash",
-                        groupValue: _paymentMethod,
-                        onChanged: (value) {
-                          setState(() {
-                            _paymentMethod = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
                 )
               ],
             ),
