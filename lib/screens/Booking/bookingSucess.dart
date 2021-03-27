@@ -4,7 +4,6 @@ import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 
 class BookingConfirm extends StatefulWidget {
   final int child;
-
   final int adult;
   final int room;
   final String payment;
@@ -15,6 +14,7 @@ class BookingConfirm extends StatefulWidget {
 }
 
 class _BookingConfirmState extends State<BookingConfirm> {
+  bool _success = false;
   @override
   Widget build(BuildContext context) {
     print(widget.adult);
@@ -51,26 +51,31 @@ class _BookingConfirmState extends State<BookingConfirm> {
                       SizedBox(
                         height: 50,
                       ),
-                      RaisedButton(
-                        onPressed: () {
-                          CoolAlert.show(
-                            onConfirmBtnTap: () {
-                              print('Pushed');
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(
-                                builder: (context) {
-                                  return TabsScreen();
-                                },
-                              ));
-                            },
-                            context: context,
-                            barrierDismissible: false,
-                            type: CoolAlertType.success,
-                            text: "Transaction completed successfully!",
-                          );
-                        },
-                        child: Text('Submit'),
-                      )
+                      _success
+                          ? Text('Booking Successful')
+                          : RaisedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _success = true;
+                                });
+                                CoolAlert.show(
+                                  onConfirmBtnTap: () {
+                                    print('Pushed');
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(
+                                      builder: (context) {
+                                        return TabsScreen();
+                                      },
+                                    ));
+                                  },
+                                  context: context,
+                                  barrierDismissible: false,
+                                  type: CoolAlertType.success,
+                                  text: "Transaction completed successfully!",
+                                );
+                              },
+                              child: Text('Submit'),
+                            )
                     ],
                   ),
                 ),

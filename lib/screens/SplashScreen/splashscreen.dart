@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return isAuto ? TabsScreen() : AuthScreen(true);
+            return isAuto ? TabsScreen() : AuthScreen(isAuto);
           },
         ),
       ),
