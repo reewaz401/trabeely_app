@@ -161,7 +161,7 @@ class _TabsScreenState extends State<TabsScreen> {
           trailing: Consumer<colors.ThemeNotifier>(
             builder: (context, colors.ThemeNotifier value, child) {
               return Switch(
-                value: value.darkTheme,
+                value: !value.darkTheme,
                 onChanged: (theme) {
                   value.toggleTheme();
                 },
