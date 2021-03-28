@@ -16,7 +16,6 @@ class ThemeNotifier extends ChangeNotifier {
   final String key = "theme";
   SharedPreferences _prefs;
   bool _darkTheme;
-
   bool get darkTheme => _darkTheme;
 
   ThemeNotifier() {

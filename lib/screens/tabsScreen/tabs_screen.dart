@@ -74,7 +74,7 @@ class _TabsScreenState extends State<TabsScreen> {
                         Positioned.fill(
                           child: Image.asset(
                             'assets/images/anna2.jpeg',
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         FlexibleSpaceBarSettings(
@@ -94,7 +94,7 @@ class _TabsScreenState extends State<TabsScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xFF4579B2).withOpacity(0.5),
+                                    color: Color(0xFF4579B2).withOpacity(0.7),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Row(
                                   mainAxisAlignment:
