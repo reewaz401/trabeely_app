@@ -6,8 +6,7 @@ import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
 import 'package:travel/screens/Booking/bookingSucess.dart';
 import 'package:travel/screens/SplashScreen/splashscreen.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
-import 'package:double_back_to_close/double_back_to_close.dart';
-import 'package:travel/screens/homePage/homePage_screen.dart';
+import 'package:travel/screens/Onboarding/Slider.dart';
 
 import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
@@ -63,8 +62,8 @@ class _MyAppState extends State<MyApp> {
                 //supportedLocales: [Locale('pt', 'BR')],
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
-                theme: value.darkTheme ? dark : light,
-                home: SplashScreen(),
+                theme: light,
+                home: SliderHome(),
                 // ? AuthScreen(false)
                 // : auth.isAuth
                 //     ? TabsScreen

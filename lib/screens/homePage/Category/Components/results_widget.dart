@@ -15,16 +15,17 @@ class ResultsWidget extends StatefulWidget {
 
 class _ResultsWidgetState extends State<ResultsWidget> {
   List dataList;
-  String url = 'https://api.trabeely.com/api/packages';
-  String url1 = 'api.trabeely.com/uploads/package/itinerary/';
+  String url = 'https://api.trabeely.com/api/packages/package-tour';
+
   getData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String _token = preferences.getString('autoSignIn');
+    print("THis is a tokens $_token");
     try {
       http.Response response = await http.get(
         url,
         headers: {
-          'Authorization': 'Bearer $_token',
+          'Permission': _token,
         },
       );
       var jsonResponse = jsonDecode(response.body);

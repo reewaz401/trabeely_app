@@ -170,7 +170,7 @@ class _SignInWidgetState extends State<SignInWidget> {
           _formKeyLogIn.currentState.save();
 
           FocusScope.of(context).unfocus();
-          await Auth().signIn(context, 'test@gmail.com', '12345678');
+          await Auth().signIn(context, 'yaman@trabeely.com', 'trabeely@');
           setState(() {
             _isloading = false;
           });
