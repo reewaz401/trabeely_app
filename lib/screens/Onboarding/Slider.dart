@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import './data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SliderHome extends StatefulWidget {
+class OnboardinPage extends StatefulWidget {
   @override
-  _SliderHomeState createState() => _SliderHomeState();
+  _OnboardinPageState createState() => _OnboardinPageState();
 }
 
-class _SliderHomeState extends State<SliderHome> {
+class _OnboardinPageState extends State<OnboardinPage> {
   List<SliderModel> mySLides = new List<SliderModel>();
   int slideIndex = 0;
   PageController controller;
@@ -117,7 +118,10 @@ class _SliderHomeState extends State<SliderHome> {
                 ),
               )
             : InkWell(
-                onTap: () {
+                onTap: () async {
+                  SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                  preferences.setBool('onboardingpageDisplay', true);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
