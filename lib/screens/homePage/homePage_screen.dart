@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/homePage/components/card.dart';
+import 'package:travel/screens/homePage/components/homepagecard.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -6,58 +8,27 @@ import 'package:travel/screens/homePage/components/search_widget.dart';
 
 //import '../search_screen.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageScreen extends StatefulWidget {
+  static const routeName = '/homepage';
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageScreenState createState() => _HomePageScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     //destinattion
     String typedDestination;
-
+    SearchWidget args;
     var deviceSize = MediaQuery.of(context).size;
     var paddingSize = MediaQuery.of(context).padding.top;
     return Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                  onTap: () async {
-                    typedDestination = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchWidget()));
-                    setState(() {});
-                  },
-                  child: Container(
-                    width: 0.9 * deviceSize.width,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 0.5),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          typedDestination == null
-                              ? 'Search Destinaiton'
-                              : typedDestination,
-                          textAlign: TextAlign.left,
-                        ),
-                        Icon(Icons.search)
-                      ],
-                    ),
-                  )),
               SizedBox(
                 height: 20,
               ),
@@ -87,26 +58,44 @@ class _HomePageState extends State<HomePage> {
               ),
               Text(
                 'Discover',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
               ),
               SizedBox(
-                height: 5,
+                height: 20,
               ),
-              Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Best Deals',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => print('See All'),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
-              ),
-              Container(
-                height: 170,
-                width: double.infinity,
-                color: Colors.white,
-              )
+              HomepageCard()
             ],
           ),
         ));
