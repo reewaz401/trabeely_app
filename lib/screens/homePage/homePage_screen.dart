@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/card.dart';
+import 'package:travel/screens/homePage/components/homepagecard.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -94,44 +95,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ],
                 ),
               ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Annapurna',
-                        country: 'Nepal',
-                        image: 'anna1',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Everest',
-                        country: 'Nepal',
-                        image: 'anna2',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Mardi',
-                        country: 'Nepal',
-                        image: 'anna3',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Mardi',
-                        country: 'Nepal',
-                        image: 'anna1',
-                        des: 'We an go all out',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              HomepageCard()
             ],
           ),
         ));

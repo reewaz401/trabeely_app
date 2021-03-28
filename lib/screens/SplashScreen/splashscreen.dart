@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     autoSignIn();
     Timer(
-      Duration(milliseconds: 5000),
+      Duration(milliseconds: 100),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(

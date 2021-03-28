@@ -19,7 +19,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
   String url1 = 'api.trabeely.com/uploads/package/itinerary/';
   getData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String _token = preferences.getString('autoSignIn');
+    String _token = preferences.getString('userToken');
     try {
       http.Response response = await http.get(
         url,
@@ -28,9 +28,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
         },
       );
       var jsonResponse = jsonDecode(response.body);
-      print(
-        jsonResponse,
-      );
+
       return jsonResponse;
     } catch (e) {
       print(e);

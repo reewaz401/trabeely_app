@@ -46,7 +46,8 @@ class Auth with ChangeNotifier {
       _userId = json.decode(response.body)["user"]["name"];
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString('autoSignIn', _token);
+        preferences.setString('userToken', _token);
+        preferences.setString('itemDisplayToken', '21f@do8GP3RMISI0N-D@T@');
         preferences.setString('username', _userId);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (ctx) => TabsScreen()));

@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel/services/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'DetailsScreen/tourPackDetails_screen.dart';
 
