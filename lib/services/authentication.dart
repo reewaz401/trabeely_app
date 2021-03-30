@@ -1,8 +1,10 @@
 import 'dart:convert';
 //import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './Api/authApi.dart';
+import 'package:travel/screens/tabsScreen/tabs_screen.dart';
+import './Api/apiAll.dart';
 import '../model/SignupForm.dart';
 import 'package:http/http.dart' as http;
 import '../model/httpExecption.dart' as exp;
@@ -25,7 +27,8 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn(
+      BuildContext context, String email, String password) async {
     print(email);
     print(password);
     final url = signinApi;
@@ -38,12 +41,20 @@ class Auth with ChangeNotifier {
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }
+
       _token = json.decode(response.body)["user"]["token"];
       _userId = json.decode(response.body)["user"]["name"];
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString('autoSignIn', _token);
+        preferences.setString('userToken', _token);
+        preferences.setString('itemDisplayToken', '21f@do8GP3RMISI0N-D@T@');
         preferences.setString('username', _userId);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (ctx) => TabsScreen(
+                      'Search Destinaiton',
+                    )));
       }
       notifyListeners();
     } catch (error) {
@@ -67,5 +78,29 @@ class Auth with ChangeNotifier {
     } catch (error) {
       throw error;
     }
+  }
+
+  void logOut() async {
+    http.post(logOutApi);
+
+    _token = null;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('autoSignIn', null);
+    preferences.setString('username', null);
+    notifyListeners();
+  }
+
+  Future<void> book() async {
+    final response = await http
+        .post("https://api.trabeely.com/api/booking/add-booking", headers: {
+      'Authorization': 'Bearer $_token',
+    }, body: {
+      "type": "Trek",
+      "agent_id": "603375168652600a34cd1b1a",
+      "package_id": "60520e4d9359244a2f4d32d7",
+      "bookDate": "11/11/2021",
+      "child": 5,
+      "adult": 5
+    });
   }
 }

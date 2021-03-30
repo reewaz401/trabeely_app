@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel/screens/tabsScreen/components/drawerList_widget.dart';
-import 'package:travel/screens/tabsScreen/components/endDrawer_widget.dart';
-import 'package:travel/services/tours_services.dart';
+import 'package:travel/screens/homePage/components/search_widget.dart';
+
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
+import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
-import 'components/drawerList_widget.dart';
-import '../search_screen.dart';
+import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
-
+  final String destination;
+  TabsScreen(this.destination);
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -24,15 +24,23 @@ class _TabsScreenState extends State<TabsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
-
+  String userName;
   @override
   void initState() {
     _pages = [
-      {'pages': HomePage(), 'title': 'Home'},
+      {'pages': HomePageScreen(), 'title': 'Home'},
       {'pages': StoryFeedScreen(), 'title': 'Story'},
-      {'pages': UserProfileScreen(), 'title': 'Profile'}
+      {'pages': UserProfileScreen(userName), 'title': 'Profile'}
     ];
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    // TODO: implement didChangeDependencies
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userName = prefs.getString('username');
+    super.didChangeDependencies();
   }
 
   void _selectPage(int index) {
@@ -86,7 +94,13 @@ class _TabsScreenState extends State<TabsScreen> {
                             titlePadding: EdgeInsetsDirectional.only(
                                 start: 30, bottom: 15),
                             title: GestureDetector(
-                              onTap: () async {},
+                              onTap: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchWidget('')));
+                              },
                               child: Container(
                                 margin: EdgeInsets.only(right: 50),
                                 width: 0.75 * MediaQuery.of(context).size.width,
@@ -101,7 +115,7 @@ class _TabsScreenState extends State<TabsScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Search Destinaiton',
+                                      widget.destination,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 15),
                                       textAlign: TextAlign.left,
@@ -131,7 +145,8 @@ class _TabsScreenState extends State<TabsScreen> {
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedPageIndex,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.surround_sound), label: 'Story'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
@@ -144,7 +159,10 @@ class _TabsScreenState extends State<TabsScreen> {
     return ListView(
       children: [
         DrawerHeader(
-          child: Text('Settings'),
+          child: Text(
+            'Settings',
+            style: TextStyle(fontSize: 25),
+          ),
         ),
         ListTile(
           title: Text('Dark Mode'),
@@ -160,8 +178,10 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
         ListTile(
-          title: Text('Item 2'),
-          onTap: () {},
+          title: Text('Log out'),
+          onTap: () {
+            Provider.of<Auth>(context, listen: false).logOut();
+          },
         ),
         ListTile(
           title: Text('Item 3'),

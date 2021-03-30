@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspaths;
+import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 
 class UploadPhoto {
   File imageTaken;
@@ -21,12 +22,19 @@ class UploadPhoto {
                       onPressed: () async {
                         imageTaken = await imageSource('Library', ctx);
                         Navigator.of(context).pop(imageTaken);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx) => AddStoryScreen(imageTaken)));
                       }),
                   FlatButton(
                     child: Text('Camera'),
                     onPressed: () async {
                       imageTaken = await imageSource('Camera', ctx);
-                      Navigator.of(context).pop(imageTaken);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => AddStoryScreen(imageTaken)));
                     },
                   )
                 ],

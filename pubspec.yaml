@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.19.0 
-  cloud_firestore: ^0.13.5
+  
   image_picker: ^0.6.7+15  
   date_time_picker: "^1.1.1"
   country_code_picker: ^1.7.0
@@ -33,7 +33,9 @@ dependencies:
   intl: ^0.16.1
   http: ^0.12.2
   provider: ^4.3.2+3
-  
+  cool_alert: ^1.0.3
+  double_back_to_close: ^1.0.2+mit
+ 
   shared_preferences: ^0.5.12+4
   
 
@@ -60,24 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/authBackground.svg
-     - assets/images/logo.svg
-     - assets/images/Treks.svg
-     - assets/images/Restaurants.svg
-     - assets/images/Hotels.svg
-     - assets/images/airlogo.svg
-     - assets/images/Tours.svg
-     - assets/images/Weekends.svg
-     - assets/images/All.svg
-     - assets/images/Clubs.svg
-     - assets/images/appLogo.svg
-     - assets/images/profile.jpeg
-     - assets/images/covidNepal.jpeg
-     - assets/images/anna.jpg
-     - assets/images/anna1.jpeg
-     - assets/images/anna2.jpeg
-     - assets/images/downArrow.png
-     - assets/images/anna3.jpeg
+     - assets/images/
      
 
   #   - images/a_dot_ham.jpeg

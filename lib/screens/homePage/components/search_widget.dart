@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/tabsScreen/tabs_screen.dart';
+import '../homePage_screen.dart';
 
 class SearchWidget extends StatefulWidget {
+  final String destination;
+  SearchWidget(this.destination);
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
 }
@@ -30,8 +34,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             Container(
               margin: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  border: Border.all(width: 0.5),
-                  borderRadius: BorderRadius.circular(12)),
+                  color: Color(0xFF4579B2).withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(10)),
               child: Form(
                 key: _formKey,
                 child: TextFormField(
@@ -46,10 +50,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                       contentPadding: EdgeInsets.only(
                           left: 15, bottom: 11, top: 11, right: 15),
                       hintText: "Enter Destination",
-                      hintStyle: TextStyle(color: Colors.grey[900])),
+                      hintStyle: TextStyle(color: Colors.white)),
                   onFieldSubmitted: (value) {
                     _formKey.currentState.save();
-                    Navigator.pop(context, value);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (ctx) => TabsScreen(value)));
                   },
                 ),
               ),

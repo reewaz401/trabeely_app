@@ -1,18 +1,175 @@
 import 'package:flutter/material.dart';
-class AddRoomPeople extends StatefulWidget {
+import 'package:travel/screens/Booking/bookingSucess.dart';
+
+class BookingInfo extends StatefulWidget {
   @override
-  _AddRoomPeopleState createState() => _AddRoomPeopleState();
+  _BookingInfoState createState() => _BookingInfoState();
 }
 
-class _AddRoomPeopleState extends State<AddRoomPeople> {
+class _BookingInfoState extends State<BookingInfo> {
+  var adultsNum = 1;
+
+  var childNum = 0;
+
+  var roomsNum = 1;
+  String _paymentMethod = 'Cash';
   @override
   Widget build(BuildContext context) {
-      ScaffoldFeatureController _bottomSheet;
-  var adultsNum = 1;
-  var childNum = 0;
-  var roomsNum = 1;
-    return Container(
-      child: StatefulBuilder(
+    Future<bool> _backPress() {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Do You Return Back ?'),
+            actions: [
+              FlatButton(
+                child: Text('Yes'),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+              FlatButton(
+                child: Text('No'),
+                onPressed: () => Navigator.pop(context, false),
+              )
+            ],
+          );
+        },
+      );
+    }
+
+    return WillPopScope(
+      onWillPop: _backPress,
+      child: Scaffold(
+        bottomSheet: Container(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              color: Colors.blue[900],
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookingConfirm(
+                      adult: adultsNum,
+                      child: childNum,
+                      room: roomsNum,
+                      payment: _paymentMethod,
+                    ),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Book Now',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        appBar: AppBar(
+          title: Text('Booking Info'),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: Text(
+                        'Annapurna',
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'Enter the number of people',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (bctx) {
+                                    return addRoomPeople();
+                                  });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.blueAccent)),
+                              width: double.infinity,
+                              height: 50,
+                              child: Center(
+                                child: Text(
+                                    'Adult : $adultsNum Children : $childNum Room : $roomsNum'),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: const Text('Cash On Hand'),
+                              leading: Radio(
+                                value: "Cash",
+                                groupValue: _paymentMethod,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _paymentMethod = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            ListTile(
+                              title: const Text('E-Cash'),
+                              leading: Radio(
+                                value: "E-Cash",
+                                groupValue: _paymentMethod,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _paymentMethod = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget addRoomPeople() {
+    return StatefulBuilder(
         builder: (BuildContext context, StateSetter modelSetState) {
       return Container(
         margin: EdgeInsets.all(5),
@@ -171,7 +328,9 @@ class _AddRoomPeopleState extends State<AddRoomPeople> {
               height: 60,
               padding: EdgeInsets.all(5),
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 color: Colors.blue[900],
                 child: Text(
                   'Apply',
@@ -182,7 +341,6 @@ class _AddRoomPeopleState extends State<AddRoomPeople> {
           ],
         ),
       );
-    }),
-    );
+    });
   }
 }

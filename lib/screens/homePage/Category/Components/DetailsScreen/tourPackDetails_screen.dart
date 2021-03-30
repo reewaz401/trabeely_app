@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class TourDetails extends StatelessWidget {
   final List mainList;
   int mainListIndex;
@@ -391,7 +392,7 @@ class TourDetails extends StatelessWidget {
                       ),
                       color: Colors.blue[900],
                       onPressed: () {
-                        print(detail);
+                        Navigator.pushNamed(context, '/bookinginfo');
                       },
                     ),
                   ),

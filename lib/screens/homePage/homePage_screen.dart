@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/card.dart';
+import 'package:travel/screens/homePage/components/homepagecard.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -7,23 +8,24 @@ import 'package:travel/screens/homePage/components/search_widget.dart';
 
 //import '../search_screen.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageScreen extends StatefulWidget {
+  static const routeName = '/homepage';
+
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageScreenState createState() => _HomePageScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
     //destinattion
     String typedDestination;
-
+    SearchWidget args;
     var deviceSize = MediaQuery.of(context).size;
     var paddingSize = MediaQuery.of(context).padding.top;
     return Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -94,44 +96,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Container(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Annapurna',
-                        country: 'Nepal',
-                        image: 'anna1',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Everest',
-                        country: 'Nepal',
-                        image: 'anna2',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Mardi',
-                        country: 'Nepal',
-                        image: 'anna3',
-                        des: 'We an go all out',
-                      ),
-                      DestinationCarousel(
-                        activites: 'Trek',
-                        cityName: 'Mardi',
-                        country: 'Nepal',
-                        image: 'anna1',
-                        des: 'We an go all out',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              HomepageCard()
             ],
           ),
         ));

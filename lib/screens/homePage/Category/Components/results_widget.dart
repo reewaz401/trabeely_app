@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel/services/tours_services.dart';
+import 'package:travel/services/viewData.dart';
+
 import './tour_item.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ResultsWidget extends StatefulWidget {
-  final String destination;
-  ResultsWidget(this.destination);
+  final String slectedType;
+  ResultsWidget(this.slectedType);
 
   @override
   _ResultsWidgetState createState() => _ResultsWidgetState();
@@ -15,38 +16,17 @@ class ResultsWidget extends StatefulWidget {
 
 class _ResultsWidgetState extends State<ResultsWidget> {
   List dataList;
-  String url = 'https://api.trabeely.com/api/packages';
-  String url1 = 'api.trabeely.com/uploads/package/itinerary/';
-  getData() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String _token = preferences.getString('autoSignIn');
-    try {
-      http.Response response = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $_token',
-        },
-      );
-      var jsonResponse = jsonDecode(response.body);
-      print(
-        jsonResponse,
-      );
-      return jsonResponse;
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   void initState() {
-    getData();
+    ViewData().viewData(widget.slectedType);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: getData(),
+      future: ViewData().viewData(widget.slectedType),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
             ? Expanded(
@@ -77,15 +57,5 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                 : Text('No data found');
       },
     );
-  }
-
-  Future<void> fetchMethod(String type, [String destination]) async {
-    if (type == 'Tours') {
-      return ToursServices().fetchPacakgeList(destination);
-    } else if (type == 'Hotels') {
-      // return To().fetchHotelList();
-    } else {
-      // return ViewServices().fetchRestaurantList();
-    }
   }
 }
