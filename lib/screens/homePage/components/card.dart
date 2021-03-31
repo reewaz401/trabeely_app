@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel/screens/homePage/Category/Components/DetailsScreen/tourPackDetails_screen.dart';
 
 class DestinationCarousel extends StatelessWidget {
   final cityName;

@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/model/Booking/booking.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
+import 'package:travel/services/urls.dart';
+import 'dart:io';
 
 class BookingConfirm extends StatefulWidget {
   final int child;
@@ -14,6 +20,61 @@ class BookingConfirm extends StatefulWidget {
 }
 
 class _BookingConfirmState extends State<BookingConfirm> {
+  Future createAlbum(String title) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String _token = preferences.getString('userToken');
+    String _cookie = preferences.getString('cookie');
+    String _server = preferences.getString('server');
+
+    print('Api started + $_token');
+    var response = await http.post(
+      'https://api.trabeely.com/api/booking/add-booking',
+      headers: {
+        'Authorization': 'Bearer $_token',
+        'content-type': 'application/json; charset=utf-8',
+        'Cookie': _cookie,
+        'Server': _server
+      },
+      // headers: {
+      //   'Authorization': Bearer $_token',
+      //   'content-type': 'application/json; charset=utf-8'
+      // },
+      body: jsonEncode({
+        "type": "Trek",
+        "agent_id": "603375168652600a34cd1b1a",
+        "package_id": "605401f2ffe9af1734132c91",
+        "bookDate": "11/11/2021",
+        "child": 1555,
+        "adult": 55,
+      }),
+    );
+    print(response.headers);
+    print(response.body);
+
+    print('Api ended');
+  }
+  // int child = 18;
+
+  // int adult = 15;
+  // Future<http.Response> createBooking() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   String _token = preferences.getString('userToken');
+  //   print(_token);
+  //   try {
+  //     print('Tried ');
+  //     return http.post(
+  //       (Uri.https(
+  //         'api.trabeely.com',
+  //         'api/booking/add-booking',
+  //       )),
+  //
+  //     );
+  //   } catch (e) {
+  //     print(e);
+  //     return e;
+  //   }
+  // }
+
   bool _success = false;
   @override
   Widget build(BuildContext context) {
@@ -51,31 +112,30 @@ class _BookingConfirmState extends State<BookingConfirm> {
                       SizedBox(
                         height: 50,
                       ),
-                      _success
-                          ? Text('Booking Successful')
-                          : RaisedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _success = true;
-                                });
-                                CoolAlert.show(
-                                  onConfirmBtnTap: () {
-                                    print('Pushed');
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(
-                                      builder: (context) {
-                                        return TabsScreen();
-                                      },
-                                    ));
-                                  },
-                                  context: context,
-                                  barrierDismissible: false,
-                                  type: CoolAlertType.success,
-                                  text: "Transaction completed successfully!",
-                                );
-                              },
-                              child: Text('Submit'),
-                            )
+                      RaisedButton(
+                        onPressed: () {
+                          setState(() {
+                            _success = true;
+                          });
+                          createAlbum('title');
+                          CoolAlert.show(
+                            onConfirmBtnTap: () {
+                              print('Pushed');
+                              // Navigator.pushReplacement(context,
+                              //     MaterialPageRoute(
+                              //   builder: (context) {
+                              //     return TabsScreen();
+                              //   },
+                              // ));
+                            },
+                            context: context,
+                            barrierDismissible: false,
+                            type: CoolAlertType.success,
+                            text: "Transaction completed successfully!",
+                          );
+                        },
+                        child: Text('Submit'),
+                      )
                     ],
                   ),
                 ),

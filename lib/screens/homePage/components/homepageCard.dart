@@ -19,8 +19,7 @@ class _HomepageCardState extends State<HomepageCard> {
   getData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String _token = preferences.getString('itemDisplayToken');
-    print(_token);
-    print(url);
+
     try {
       http.Response response = await http.get(
         url,
