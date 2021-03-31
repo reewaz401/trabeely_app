@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/homePage/components/viewDestination.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import '../homePage_screen.dart';
 
@@ -51,10 +52,18 @@ class _SearchWidgetState extends State<SearchWidget> {
                           left: 15, bottom: 11, top: 11, right: 15),
                       hintText: "Enter Destination",
                       hintStyle: TextStyle(color: Colors.white)),
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return ('Enter value');
+                    }
+                    return null;
+                  },
                   onFieldSubmitted: (value) {
                     _formKey.currentState.save();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (ctx) => TabsScreen(value)));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => ViewDestination(value)));
                   },
                 ),
               ),

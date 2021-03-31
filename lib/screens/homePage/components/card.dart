@@ -9,12 +9,14 @@ class DestinationCarousel extends StatelessWidget {
   final image;
   DestinationCarousel(
       {this.cityName, this.activites, this.country, this.des, this.image});
+  final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          controller: controller,
           child: Container(
             height: 200.0,
             width: 0.5 * MediaQuery.of(context).size.width,
