@@ -125,7 +125,7 @@ class _OnboardinPageState extends State<OnboardinPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => TabsScreen(),
+                      builder: (ctx) => TabsScreen('Search Destination'),
                     ),
                   );
                   print("Get Started Now");

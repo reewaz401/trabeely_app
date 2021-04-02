@@ -10,6 +10,7 @@ import 'package:travel/screens/homePage/components/search_widget.dart';
 
 class HomePageScreen extends StatefulWidget {
   static const routeName = '/homepage';
+
   @override
   _HomePageScreenState createState() => _HomePageScreenState();
 }

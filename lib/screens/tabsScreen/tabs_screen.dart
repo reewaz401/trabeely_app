@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/homePage/components/search_widget.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
@@ -13,7 +14,8 @@ import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
-
+  final String destination;
+  TabsScreen(this.destination);
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -80,7 +82,7 @@ class _TabsScreenState extends State<TabsScreen> {
                         Positioned.fill(
                           child: Image.asset(
                             'assets/images/anna2.jpeg',
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         ),
                         FlexibleSpaceBarSettings(
@@ -92,7 +94,13 @@ class _TabsScreenState extends State<TabsScreen> {
                             titlePadding: EdgeInsetsDirectional.only(
                                 start: 30, bottom: 15),
                             title: GestureDetector(
-                              onTap: () async {},
+                              onTap: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchWidget('')));
+                              },
                               child: Container(
                                 margin: EdgeInsets.only(right: 50),
                                 width: 0.75 * MediaQuery.of(context).size.width,
@@ -100,14 +108,14 @@ class _TabsScreenState extends State<TabsScreen> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 5),
                                 decoration: BoxDecoration(
-                                    color: Color(0xFF4579B2).withOpacity(0.5),
+                                    color: Color(0xFF4579B2).withOpacity(0.7),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Search Destinaiton',
+                                      widget.destination,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 15),
                                       textAlign: TextAlign.left,

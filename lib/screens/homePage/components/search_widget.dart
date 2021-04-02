@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/homePage/components/viewDestination.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import '../homePage_screen.dart';
 
@@ -34,8 +35,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             Container(
               margin: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  border: Border.all(width: 0.5),
-                  borderRadius: BorderRadius.circular(12)),
+                  color: Color(0xFF4579B2).withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(10)),
               child: Form(
                 key: _formKey,
                 child: TextFormField(
@@ -50,12 +51,19 @@ class _SearchWidgetState extends State<SearchWidget> {
                       contentPadding: EdgeInsets.only(
                           left: 15, bottom: 11, top: 11, right: 15),
                       hintText: "Enter Destination",
-                      hintStyle: TextStyle(color: Colors.grey[900])),
+                      hintStyle: TextStyle(color: Colors.white)),
+                  validator: (val) {
+                    if (val.isEmpty) {
+                      return ('Enter value');
+                    }
+                    return null;
+                  },
                   onFieldSubmitted: (value) {
                     _formKey.currentState.save();
-                    Navigator.pushReplacementNamed(
-                        context, TabsScreen.routeName,
-                        arguments: SearchWidget(value));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => ViewDestination(value)));
                   },
                 ),
               ),

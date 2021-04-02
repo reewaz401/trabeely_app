@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     autoSignIn();
+
     super.initState();
   }
 
@@ -69,7 +70,8 @@ class _MyAppState extends State<MyApp> {
                 //     ? TabsScreen
                 //     : AuthScreen(false),
                 routes: {
-                  TabsScreen.routeName: (ctx) => TabsScreen(),
+                  TabsScreen.routeName: (ctx) =>
+                      TabsScreen('Search Destination'),
                   CategoryScreen.routeName: (ctx) => CategoryScreen(),
                   StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
                   '/bookinginfo': (BuildContext context) => BookingInfo(),

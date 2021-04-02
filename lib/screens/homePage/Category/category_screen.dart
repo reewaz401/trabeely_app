@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/allFilter.dart';
 
@@ -55,7 +56,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               SizedBox(
                 height: 10,
               ),
-              ResultsWidget('pe'),
+              ResultsWidget(args.type),
             ],
           ),
         ),
@@ -65,30 +66,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   Widget categoryButton(String type, String _currentselectedType) {
     return Container(
-        decoration: _currentselectedType == type
-            ? BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue[900],
-              )
-            : null,
         child: MaterialButton(
-          onPressed: () {
-            setState(() {
-              _currentselectedType = type;
-            });
-          },
-          child: _currentselectedType == type
-              ? Icon(
-                  Icons.flight,
-                  color: Colors.white,
-                )
-              : Opacity(
-                  opacity: 0.5,
-                  child: Icon(
-                    Icons.flight,
-                  ),
-                ),
-        ));
+      onPressed: () {
+        setState(() {
+          _currentselectedType = type;
+        });
+      },
+      child: _currentselectedType == type
+          ? SvgPicture.asset(
+              'assets/images/$type.svg',
+              height: 35,
+            )
+          : Opacity(
+              opacity: 0.5,
+              child: SvgPicture.asset(
+                'assets/images/$type.svg',
+                height: 35,
+              ),
+            ),
+    ));
   }
 
   Widget filtering(String type) {

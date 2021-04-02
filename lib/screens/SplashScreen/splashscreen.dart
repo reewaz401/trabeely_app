@@ -45,7 +45,9 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return onboardingPage ? TabsScreen() : OnboardinPage();
+            return onboardingPage
+                ? TabsScreen('Search Destination')
+                : OnboardinPage();
           },
         ),
       ),

@@ -54,7 +54,11 @@ class Auth with ChangeNotifier {
         preferences.setString('server', response.headers['server']);
 
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (ctx) => TabsScreen()));
+            context,
+            MaterialPageRoute(
+                builder: (ctx) => TabsScreen(
+                      'Search Destinaiton',
+                    )));
       }
       notifyListeners();
     } catch (error) {
@@ -88,5 +92,23 @@ class Auth with ChangeNotifier {
     preferences.setString('autoSignIn', null);
     preferences.setString('username', null);
     notifyListeners();
+  }
+
+  Future<void> book() async {
+    final response = await http.post(
+      "https://api.trabeely.com/api/booking/add-booking",
+      headers: {
+        "Authorization": "Bearer $_token",
+        "content-type": "application/json",
+      },
+      body: json.encode({
+        "type": "Trek",
+        "agent_id": "603375168652600a34cd1b1a",
+        "package_id": "60520e4d9359244a2f4d32d7",
+        "bookDate": "11/11/2021",
+        "child": 5,
+        "adult": 90,
+      }),
+    );
   }
 }
