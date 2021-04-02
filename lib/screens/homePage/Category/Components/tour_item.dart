@@ -140,8 +140,13 @@ class TourItem extends StatelessWidget {
                   Icons.arrow_forward_rounded,
                   color: Colors.purple[900],
                 ),
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TourDetails())),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TourDetails(
+                              mainList: mainList,
+                              mainListIndex: index,
+                            ))),
               ),
             ],
           )

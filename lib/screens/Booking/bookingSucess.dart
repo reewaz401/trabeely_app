@@ -20,39 +20,40 @@ class BookingConfirm extends StatefulWidget {
 }
 
 class _BookingConfirmState extends State<BookingConfirm> {
-  Future createAlbum(String title) async {
+  Future createBooking() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String _token = preferences.getString('userToken');
     String _cookie = preferences.getString('cookie');
     String _server = preferences.getString('server');
-
-    print('Api started + $_token');
-    var response = await http.post(
-      'https://api.trabeely.com/api/booking/add-booking',
-      headers: {
-        'Authorization': 'Bearer $_token',
-        'content-type': 'application/json; charset=utf-8',
-        'Cookie': _cookie,
-        'Server': _server
-      },
-      // headers: {
-      //   'Authorization': Bearer $_token',
-      //   'content-type': 'application/json; charset=utf-8'
-      // },
-      body: jsonEncode({
-        "type": "Trek",
-        "agent_id": "603375168652600a34cd1b1a",
-        "package_id": "605401f2ffe9af1734132c91",
-        "bookDate": "11/11/2021",
-        "child": 1555,
-        "adult": 55,
-      }),
-    );
-    print(response.headers);
-    print(response.body);
-
-    print('Api ended');
+    try {
+      var response = await http.post(
+        'https://api.trabeely.com/api/booking/add-booking',
+        headers: {
+          'Authorization': 'Bearer $_token',
+          'content-type': 'application/json; charset=utf-8',
+          'Cookie': _cookie,
+          'Server': _server
+        },
+        // headers: {
+        //   'Authorization': Bearer $_token',
+        //   'content-type': 'application/json; charset=utf-8'
+        // },
+        body: jsonEncode({
+          "type": "Trek",
+          "agent_id": "603375168652600a34cd1b1a",
+          "package_id": "605401f2ffe9af1734132c91",
+          "bookDate": "11/11/2021",
+          "child": 1555,
+          "adult": 55,
+        }),
+      );
+      var booking_status = json.decode(response.body)['success'];
+      return booking_status;
+    } catch (e) {
+      print(e);
+    }
   }
+
   // int child = 18;
 
   // int adult = 15;
@@ -113,25 +114,29 @@ class _BookingConfirmState extends State<BookingConfirm> {
                         height: 50,
                       ),
                       RaisedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             _success = true;
                           });
-                          createAlbum('title');
+                          var status = await createBooking();
                           CoolAlert.show(
                             onConfirmBtnTap: () {
                               print('Pushed');
-                              // Navigator.pushReplacement(context,
-                              //     MaterialPageRoute(
-                              //   builder: (context) {
-                              //     return TabsScreen();
-                              //   },
-                              // ));
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
+                                builder: (context) {
+                                  return TabsScreen('Search Destination');
+                                },
+                              ));
                             },
                             context: context,
                             barrierDismissible: false,
-                            type: CoolAlertType.success,
-                            text: "Transaction completed successfully!",
+                            type: status
+                                ? CoolAlertType.success
+                                : CoolAlertType.error,
+                            text: status
+                                ? "Transaction completed successfully!"
+                                : "Try Again",
                           );
                         },
                         child: Text('Submit'),
