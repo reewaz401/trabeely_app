@@ -33,7 +33,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
+              /* Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CategoryTypeWidget('All'),
@@ -53,7 +53,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   CategoryTypeWidget('Restaurants'),
                   CategoryTypeWidget('Clubs'),
                 ],
-              ),
+              ),*/
               SizedBox(
                 height: 30,
               ),

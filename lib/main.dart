@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                 //supportedLocales: [Locale('pt', 'BR')],
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
-                theme: value.darkTheme ? dark : light,
+                // theme: light,
                 home: SplashScreen(),
                 // ? AuthScreen(false)
                 // : auth.isAuth

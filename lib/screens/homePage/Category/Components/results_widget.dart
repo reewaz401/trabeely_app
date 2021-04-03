@@ -8,7 +8,8 @@ import 'package:http/http.dart' as http;
 
 class ResultsWidget extends StatefulWidget {
   final String slectedType;
-  ResultsWidget(this.slectedType);
+  final String destination;
+  ResultsWidget(this.slectedType, this.destination);
 
   @override
   _ResultsWidgetState createState() => _ResultsWidgetState();
@@ -26,7 +27,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ViewData().viewData(widget.slectedType),
+      future: ViewData().viewData(widget.slectedType, widget.destination),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
             ? Expanded(

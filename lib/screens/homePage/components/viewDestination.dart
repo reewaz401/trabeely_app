@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
+import 'package:travel/services/viewData.dart';
 
 class ViewDestination extends StatefulWidget {
   final destination;
@@ -27,7 +28,7 @@ class _ViewDestinationState extends State<ViewDestination> {
               child: Text(''),
             ),
             expandedHeight: 350.0,
-            collapsedHeight: 200,
+            collapsedHeight: 175.0,
             floating: false,
             pinned: true,
             flexibleSpace: Stack(
@@ -49,7 +50,7 @@ class _ViewDestinationState extends State<ViewDestination> {
                   child: FlexibleSpaceBar(
                     titlePadding:
                         EdgeInsetsDirectional.only(start: 30, bottom: 15),
-                    title: null,
+                    title: Text(''),
                   ),
                 ),
                 Positioned(
@@ -101,186 +102,117 @@ class _ViewDestinationState extends State<ViewDestination> {
           ),
         ];
       },
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('All'),
-                CategoryTypeWidget('Tours'),
-              ],
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('Treks'),
-                CategoryTypeWidget('Hotels'),
-              ],
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('Restaurants'),
-                CategoryTypeWidget('Clubs'),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Treks in ${widget.destination}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => print('See All'),
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                itemCount: 1,
-                itemBuilder: (BuildContext context, int index) {
-                  // Activity activity = widget.destination.activities[index];
-                  return Stack(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-                        height: 170.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    width: 120.0,
-                                    child: Text(
-                                      'Trek',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '20',
-                                        style: TextStyle(
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        'per pax',
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'Trek',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              //_buildRatingStars(activity.rating),
-                              SizedBox(height: 10.0),
-                              Row(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    width: 70.0,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).accentColor,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '23:00',
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    width: 70.0,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).accentColor,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '23:00',
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 20.0,
-                        top: 15.0,
-                        bottom: 15.0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image(
-                            width: 110.0,
-                            image: AssetImage(
-                              'assets/images/anna2.jpeg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+      body: Expanded(
+        child: Column(children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('All', widget.destination),
+              CategoryTypeWidget('Tours', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Treks', widget.destination),
+              CategoryTypeWidget('Hotels', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Restaurants', widget.destination),
+              CategoryTypeWidget('Clubs', widget.destination),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          listData('Tours'),
+          listData('Treks'),
+          listData('Hotels'),
+        ]),
       ),
     ));
+  }
+
+  Widget listData(String type) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  '$type in ${widget.destination}',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => print('See All'),
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: Text(
+                    'See All',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          FutureBuilder(
+              future: ViewData().viewData(type, widget.destination, true),
+              builder: (context, snapshot) {
+                return snapshot.connectionState == ConnectionState.waiting
+                    ? Expanded(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : snapshot.hasData
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 150,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder: (BuildContext ctx, index) {
+                                    var data = snapshot.data[index];
+                                    return Container(
+                                      width: 150,
+                                      height: 100,
+                                      alignment: Alignment.center,
+                                      child: Column(
+                                        children: [
+                                          Text(data["title"]),
+                                        ],
+                                      ),
+                                      decoration: BoxDecoration(
+                                          color: Colors.amber,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                    );
+                                  }),
+                            ),
+                          )
+                        : Center(
+                            child: Text("No data"),
+                          );
+              }),
+        ],
+      ),
+    );
   }
 }

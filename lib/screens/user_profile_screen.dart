@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../services/authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,12 +52,75 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
               ),
               Positioned(
-                top: 20,
-                right: 5,
+                right: 8,
+                top: 15,
                 child: Container(
                   height: 0.25 * MediaQuery.of(context).size.height,
+                  //  color: Colors.red,
                   width: 0.70 * MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(color: Colors.black54),
+                  child: PageView(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        height: 0.25 * MediaQuery.of(context).size.height,
+                        width: 0.70 * MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(color: Colors.black54),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Up coming trips",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 8, left: 60, right: 15),
+                        height: 0.25 * MediaQuery.of(context).size.height,
+                        width: 0.70 * MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(color: Colors.black54),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Rewards : ",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                                Text(
+                                  "30 points",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Distance : ",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
+                                Text(
+                                  "356 km",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Positioned(

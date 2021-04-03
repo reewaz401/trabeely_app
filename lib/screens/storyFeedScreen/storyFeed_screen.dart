@@ -41,7 +41,7 @@ class StoryFeedScreen extends StatelessWidget {
       height: 60,
       child: InkWell(
         onTap: () async {
-          final image = await UploadPhoto().imagePickerDialog(context);
+          await UploadPhoto().imagePickerDialog(context);
         },
         child: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
           // Those are our background

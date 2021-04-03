@@ -55,18 +55,37 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
           SizedBox(
             height: 10,
           ),
-          SizedBox(
-              height: 0.4 * MediaQuery.of(context).size.width / 1.25,
-              width: 0.4 * MediaQuery.of(context).size.width,
-              child: widget.imageFile == null
-                  ? Container()
-                  : ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image.file(
-                        widget.imageFile,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                  height: 0.4 * MediaQuery.of(context).size.width / 1.25,
+                  width: 0.4 * MediaQuery.of(context).size.width,
+                  child: widget.imageFile == null
+                      ? Container()
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(25),
+                          child: Image.file(
+                            widget.imageFile,
+                            fit: BoxFit.fill,
+                          ),
+                        )),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.grey[200],
+                ),
+                height: 0.4 * MediaQuery.of(context).size.width / 1.25,
+                width: 0.4 * MediaQuery.of(context).size.width,
+                child: Icon(
+                  Icons.add,
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
