@@ -36,6 +36,7 @@ dependencies:
   cool_alert: ^1.0.3
   double_back_to_close: ^1.0.2+mit
   json_annotation:
+  bubble_tab_indicator: 
  
   shared_preferences: ^0.5.12+4
   
