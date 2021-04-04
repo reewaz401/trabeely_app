@@ -1,12 +1,10 @@
+import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/allFilter.dart';
-
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/hotelFilter_widget.dart';
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/tourFilter_widget.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
-
 import './Components/results_widget.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -20,61 +18,62 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
-    var deviceSize = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue[900],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.grey[200],
-          height: deviceSize.height,
-          width: deviceSize.width,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
+    return DefaultTabController(
+      length: 6,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue[900],
+          bottom: TabBar(
+            indicatorColor: Colors.green,
+            indicator: BubbleTabIndicator(
+                indicatorHeight: 40,
+                indicatorRadius: 150,
+                indicatorColor: Colors.green),
+            tabs: [
+              Tab(
+                child: SvgPicture.asset('assets/images/All.svg'),
               ),
-              //CategoryListWidget(args.type),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    categoryButton('All', args.type),
-                    categoryButton('Tours', args.type),
-                    categoryButton('Treks', args.type),
-                    categoryButton('Hotels', args.type),
-                    categoryButton('Restaurant', args.type),
-                    categoryButton('Clubs', args.type),
-                  ],
-                ),
+              Tab(
+                child: SvgPicture.asset('assets/images/Tours.svg'),
               ),
-              SizedBox(
-                height: 10,
+              Tab(
+                child: SvgPicture.asset('assets/images/Treks.svg'),
               ),
-              filtering(args.type),
-              SizedBox(
-                height: 10,
+              Tab(
+                child: SvgPicture.asset('assets/images/Hotels.svg'),
               ),
-              ResultsWidget(
-                args.type,
+              Tab(
+                child: SvgPicture.asset('assets/images/Restaurants.svg'),
+              ),
+              Tab(
+                child: SvgPicture.asset('assets/images/Restaurants.svg'),
               ),
             ],
           ),
+        ),
+        body: TabBarView(
+          children: [
+            ResultsWidget(args.type),
+            ResultsWidget(args.type),
+            ResultsWidget(args.type),
+            ResultsWidget(args.type),
+            ResultsWidget(args.type),
+            ResultsWidget(args.type),
+          ],
         ),
       ),
     );
   }
 
-  Widget categoryButton(String type, String _currentselectedType) {
+  Widget categoryButton(String type, String currentselectedType) {
     return Container(
         child: MaterialButton(
       onPressed: () {
         setState(() {
-          _currentselectedType = type;
+          currentselectedType = type;
         });
       },
-      child: _currentselectedType == type
+      child: currentselectedType == type
           ? SvgPicture.asset(
               'assets/images/$type.svg',
               height: 35,
