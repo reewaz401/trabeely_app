@@ -45,12 +45,12 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                           agencyName: 'Hello',
                           date: '2021-08-02 15:30',
                           destination: 'asd',
-                          price: dataList[index]['price'].toDouble(),
+                          /*       price: dataList[index]['price'].toDouble(),
                           title: dataList[index]['title'],
                           mainList: dataList,
                           overview: dataList[index]['overview'],
                           image: dataList[index]['packageImg'],
-                          index: index,
+                          index: index,*/
                         );
                       },
                     ),

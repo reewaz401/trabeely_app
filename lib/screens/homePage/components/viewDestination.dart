@@ -102,37 +102,35 @@ class _ViewDestinationState extends State<ViewDestination> {
           ),
         ];
       },
-      body: Expanded(
-        child: Column(children: [
-          SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              CategoryTypeWidget('All', widget.destination),
-              CategoryTypeWidget('Tours', widget.destination),
-            ],
-          ),
-          Row(
-            children: [
-              CategoryTypeWidget('Treks', widget.destination),
-              CategoryTypeWidget('Hotels', widget.destination),
-            ],
-          ),
-          Row(
-            children: [
-              CategoryTypeWidget('Restaurants', widget.destination),
-              CategoryTypeWidget('Clubs', widget.destination),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          listData('Tours'),
-          listData('Treks'),
-          listData('Hotels'),
-        ]),
-      ),
+      body: Column(children: [
+        SizedBox(
+          height: 15,
+        ),
+        Row(
+          children: [
+            CategoryTypeWidget('All', widget.destination),
+            CategoryTypeWidget('Tours', widget.destination),
+          ],
+        ),
+        Row(
+          children: [
+            CategoryTypeWidget('Treks', widget.destination),
+            CategoryTypeWidget('Hotels', widget.destination),
+          ],
+        ),
+        Row(
+          children: [
+            CategoryTypeWidget('Restaurants', widget.destination),
+            CategoryTypeWidget('Clubs', widget.destination),
+          ],
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        listData('Tours'),
+        listData('Treks'),
+        listData('Hotels'),
+      ]),
     ));
   }
 
