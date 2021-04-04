@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
+import 'package:travel/screens/homePage/components/search_widget.dart';
 import 'package:travel/services/viewData.dart';
 
 class ViewDestination extends StatefulWidget {
@@ -59,14 +60,29 @@ class _ViewDestinationState extends State<ViewDestination> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        widget.destination,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.2,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.destination,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35.0,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) =>
+                                        SearchWidget(widget.destination))),
+                          )
+                        ],
                       ),
                       Row(
                         children: <Widget>[
