@@ -20,6 +20,8 @@ class _ResultsWidgetState extends State<ResultsWidget> {
   @override
   void initState() {
     ViewData().viewData(widget.slectedType);
+    var a = ViewData().viewData(widget.slectedType);
+    print(a);
     super.initState();
   }
 
