@@ -38,7 +38,7 @@ List<SliderModel> getSlides() {
 
   //1
   sliderModel.setDesc(
-      "Discover Restaurants offering the best fast food food near you on Foodwa");
+      "Discover Restaurants offering the best fast food food near you on Trabeely");
   sliderModel.setTitle("Search");
   sliderModel.setImageAssetPath("assets/images/onboarding2.svg");
   slides.add(sliderModel);
@@ -46,8 +46,7 @@ List<SliderModel> getSlides() {
   sliderModel = new SliderModel();
 
   //2
-  sliderModel.setDesc(
-      "Our veggie plan is filled with delicious seasonal vegetables, whole grains, beautiful cheeses and vegetarian proteins");
+  sliderModel.setDesc("Travel to favorite destination with our booking");
   sliderModel.setTitle("Order");
   sliderModel.setImageAssetPath("assets/images/onboarding4.svg");
   slides.add(sliderModel);

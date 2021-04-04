@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/auth_screen.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import './data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +11,7 @@ class OnboardinPage extends StatefulWidget {
 }
 
 class _OnboardinPageState extends State<OnboardinPage> {
-  List<SliderModel> mySLides = new List<SliderModel>();
+  List<SliderModel> mySLides = <SliderModel>[];
   int slideIndex = 0;
   PageController controller;
 
@@ -75,13 +76,12 @@ class _OnboardinPageState extends State<OnboardinPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         controller.animateToPage(2,
                             duration: Duration(milliseconds: 400),
                             curve: Curves.linear);
                       },
-                      splashColor: Colors.blue[50],
                       child: Text(
                         "SKIP",
                         style: TextStyle(
@@ -99,14 +99,13 @@ class _OnboardinPageState extends State<OnboardinPage> {
                         ],
                       ),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         print("this is slideIndex: $slideIndex");
                         controller.animateToPage(slideIndex + 1,
                             duration: Duration(milliseconds: 500),
                             curve: Curves.linear);
                       },
-                      splashColor: Colors.blue[50],
                       child: Text(
                         "NEXT",
                         style: TextStyle(
@@ -125,7 +124,7 @@ class _OnboardinPageState extends State<OnboardinPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => TabsScreen('Search Destination'),
+                      builder: (ctx) => AuthScreen(false),
                     ),
                   );
                   print("Get Started Now");

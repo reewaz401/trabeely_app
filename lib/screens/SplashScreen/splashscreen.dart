@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
+import 'package:travel/services/authentication.dart';
 import '../auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -45,9 +47,13 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return onboardingPage
-                ? TabsScreen('Search Destination')
-                : OnboardinPage();
+            return Consumer<Auth>(builder: (context, auth, _) {
+              return onboardingPage
+                  ? auth.isAuth
+                      ? AuthScreen(false)
+                      : TabsScreen('Search Destination')
+                  : OnboardinPage();
+            });
           },
         ),
       ),

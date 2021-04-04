@@ -64,11 +64,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: value.darkTheme ? light : dark,
-                home: AuthScreen(false),
-                // ? AuthScreen(false)
-                // : auth.isAuth
-                //     ? TabsScreen
-                //     : AuthScreen(false),
+                home: SplashScreen(),
                 routes: {
                   TabsScreen.routeName: (ctx) =>
                       TabsScreen('Search Destination'),
