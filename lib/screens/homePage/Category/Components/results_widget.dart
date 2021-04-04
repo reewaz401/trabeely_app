@@ -20,13 +20,32 @@ class _ResultsWidgetState extends State<ResultsWidget> {
 
   @override
   void initState() {
-    ViewData().viewData(widget.slectedType);
+    // ViewData().viewData(widget.slectedType);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return Expanded(
+      child: ListView(
+        children: [
+          TourItem(
+            agencyName: 'Hello',
+            date: '2021-08-02 15:30',
+            destination: widget.destination,
+            /*       price: dataList[index]['price'].toDouble(),
+                          title: dataList[index]['title'],
+                          mainList: dataList,
+                          overview: dataList[index]['overview'],
+                          image: dataList[index]['packageImg'],
+                          index: index,*/
+          )
+        ],
+      ),
+    );
+  }
+}
+  /* FutureBuilder(
       future: ViewData().viewData(widget.slectedType, widget.destination),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
@@ -38,25 +57,23 @@ class _ResultsWidgetState extends State<ResultsWidget> {
             : snapshot.hasData
                 ? Expanded(
                     child: ListView.builder(
-                      itemCount: snapshot.data['packages'].length,
+                      itemCount: 5,
                       itemBuilder: (context, index) {
                         dataList = snapshot.data['packages'];
                         return TourItem(
                           agencyName: 'Hello',
                           date: '2021-08-02 15:30',
                           destination: 'asd',
-                          /*       price: dataList[index]['price'].toDouble(),
+                              price: dataList[index]['price'].toDouble(),
                           title: dataList[index]['title'],
                           mainList: dataList,
                           overview: dataList[index]['overview'],
                           image: dataList[index]['packageImg'],
-                          index: index,*/
+                          index: index,
                         );
                       },
                     ),
                   )
                 : Text('No data found');
       },
-    );
-  }
-}
+    );*/

@@ -102,40 +102,49 @@ class _ViewDestinationState extends State<ViewDestination> {
           ),
         ];
       },
-      body: Column(children: [
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          children: [
-            CategoryTypeWidget('All', widget.destination),
-            CategoryTypeWidget('Tours', widget.destination),
-          ],
-        ),
-        Row(
-          children: [
-            CategoryTypeWidget('Treks', widget.destination),
-            CategoryTypeWidget('Hotels', widget.destination),
-          ],
-        ),
-        Row(
-          children: [
-            CategoryTypeWidget('Restaurants', widget.destination),
-            CategoryTypeWidget('Clubs', widget.destination),
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        listData('Tours'),
-        listData('Treks'),
-        listData('Hotels'),
-      ]),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('All', widget.destination),
+              CategoryTypeWidget('Tours', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Treks', widget.destination),
+              CategoryTypeWidget('Hotels', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Restaurants', widget.destination),
+              CategoryTypeWidget('Clubs', widget.destination),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          listData('Tours'),
+          listData(
+            'Treks',
+          ),
+          listData("Hotels")
+
+          //listData('Hotels'),
+        ]),
+      ),
     ));
   }
 
-  Widget listData(String type) {
+  Widget listData(
+    String type,
+  ) {
     return Container(
+      height: 220,
       child: Column(
         children: [
           Row(
@@ -169,46 +178,124 @@ class _ViewDestinationState extends State<ViewDestination> {
               ),
             ],
           ),
-          FutureBuilder(
+          SizedBox(
+            height: 10,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? "Holiday Inn" : 'A drive in Mustang',
+                    type == "Hotels" ? '1300' : '25000',
+                    type == "Hotels" ? 'mhotel1' : 'mustang1'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Royal' : 'Mustang',
+                    type == "Hotels" ? '2000' : '25000',
+                    type == "Hotels" ? 'mhotel2' : 'musatng2'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Monalisa' : 'Live Mustang',
+                    type == "Hotels" ? '1000' : '25000',
+                    type == "Hotels" ? 'mhotel3' : 'mustang3'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Oms Homs' : 'Uproad Mustang',
+                    type == "Hotels" ? '1500' : '25000',
+                    type == "Hotels" ? 'mhotel4' : 'musatng2'),
+              ],
+            ),
+          ),
+
+          /* FutureBuilder(
               future: ViewData().viewData(type, widget.destination, true),
               builder: (context, snapshot) {
                 return snapshot.connectionState == ConnectionState.waiting
-                    ? Expanded(
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                    ? Center(
+                        child: CircularProgressIndicator(),
                       )
                     : snapshot.hasData
                         ? Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              height: 150,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (BuildContext ctx, index) {
-                                    var data = snapshot.data[index];
-                                    return Container(
-                                      width: 150,
-                                      height: 100,
-                                      alignment: Alignment.center,
-                                      child: Column(
-                                        children: [
-                                          Text(data["title"]),
-                                        ],
-                                      ),
-                                      decoration: BoxDecoration(
-                                          color: Colors.amber,
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                    );
-                                  }),
-                            ),
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  var data = snapshot.data[index];
+                                  return Container(
+                                    width: 150,
+                                    height: 100,
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Text(data["title"]),
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: Colors.amber,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                  );
+                                }),
                           )
                         : Center(
                             child: Text("No data"),
                           );
-              }),
+              }),*/
+        ],
+      ),
+    );
+  }
+
+  Widget card(String title, String price, String image) {
+    return Container(
+      width: 150,
+      height: 170,
+      child: Column(
+        children: [
+          Container(
+            height: 120,
+            child: Image.asset(
+              'assets/images/$image.jpeg',
+              fit: BoxFit.fill,
+            ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 18),
+                ),
+                Row(
+                  children: [
+                    Text('Starting from',
+                        style: TextStyle(
+                          fontSize: 10,
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(price,
+                        style: TextStyle(fontSize: 15, color: Colors.green))
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

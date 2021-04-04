@@ -43,9 +43,12 @@ class ViewData with ChangeNotifier {
 
       print(jsonResponse['packages'][0]['destination']);
       print(jsonResponse);
-      var finalList = await sortByDestination(destination);
-      // sortList();
-      return finalList;
+      if (destination != null) {
+        var finalList = await sortByDestination(destination);
+        // sortList();
+        return finalList;
+      }
+      return jsonResponse;
     } catch (error) {
       throw error;
     }
