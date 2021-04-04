@@ -56,7 +56,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               SizedBox(
                 height: 10,
               ),
-              ResultsWidget(args.type, args.destination),
+              ResultsWidget(
+                args.type,
+              ),
             ],
           ),
         ),

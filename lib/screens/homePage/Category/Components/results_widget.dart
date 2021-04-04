@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 
 class ResultsWidget extends StatefulWidget {
   final String slectedType;
-  final String destination;
-  ResultsWidget(this.slectedType, this.destination);
+  ResultsWidget(this.slectedType);
 
   @override
   _ResultsWidgetState createState() => _ResultsWidgetState();
@@ -20,33 +19,14 @@ class _ResultsWidgetState extends State<ResultsWidget> {
 
   @override
   void initState() {
-    // ViewData().viewData(widget.slectedType);
+    ViewData().viewData(widget.slectedType);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: [
-          TourItem(
-            agencyName: 'Hello',
-            date: '2021-08-02 15:30',
-            destination: widget.destination,
-            /*       price: dataList[index]['price'].toDouble(),
-                          title: dataList[index]['title'],
-                          mainList: dataList,
-                          overview: dataList[index]['overview'],
-                          image: dataList[index]['packageImg'],
-                          index: index,*/
-          )
-        ],
-      ),
-    );
-  }
-}
-  /* FutureBuilder(
-      future: ViewData().viewData(widget.slectedType, widget.destination),
+    return FutureBuilder(
+      future: ViewData().viewData(widget.slectedType),
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.waiting
             ? Expanded(
@@ -57,14 +37,14 @@ class _ResultsWidgetState extends State<ResultsWidget> {
             : snapshot.hasData
                 ? Expanded(
                     child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: snapshot.data['packages'].length,
                       itemBuilder: (context, index) {
                         dataList = snapshot.data['packages'];
                         return TourItem(
                           agencyName: 'Hello',
                           date: '2021-08-02 15:30',
                           destination: 'asd',
-                              price: dataList[index]['price'].toDouble(),
+                          price: dataList[index]['price'].toDouble(),
                           title: dataList[index]['title'],
                           mainList: dataList,
                           overview: dataList[index]['overview'],
@@ -76,4 +56,6 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                   )
                 : Text('No data found');
       },
-    );*/
+    );
+  }
+}
