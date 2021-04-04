@@ -29,6 +29,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+<<<<<<< HEAD
   bubble_tab_indicator:
     dependency: "direct main"
     description:
@@ -36,6 +37,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4"
+=======
+>>>>>>> homepage
   characters:
     dependency: transitive
     description:
@@ -219,6 +222,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+<<<<<<< HEAD
   json_annotation:
     dependency: "direct main"
     description:
@@ -226,6 +230,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
+=======
+>>>>>>> homepage
   logging:
     dependency: transitive
     description:

@@ -4,7 +4,8 @@ import '../Category/category_screen.dart';
 
 class CategoryTypeWidget extends StatefulWidget with ChangeNotifier {
   final String type;
-  CategoryTypeWidget([this.type]);
+
+  CategoryTypeWidget(this.type);
 
   @override
   _CategoryTypeWidgetState createState() => _CategoryTypeWidgetState();

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/card.dart';
 import 'package:travel/screens/homePage/components/homepagecard.dart';
+import 'package:travel/screens/homePage/components/hotelCard.dart';
+import 'package:travel/screens/homePage/components/toursCard.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -96,7 +98,71 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ],
                 ),
               ),
-              HomepageCard()
+              HomepageCard(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Tours Deals',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => print('See All'),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              toursCard(),
+              SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'Hotels Deals',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => print('See All'),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              hotelCard(),
             ],
           ),
         ));
