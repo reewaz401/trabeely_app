@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future createBooking(String type) async {
+Future createBooking(String type, int child, int adult) async {
   String maintype = type;
   SharedPreferences preferences = await SharedPreferences.getInstance();
   String _token = preferences.getString('userToken');
@@ -25,8 +25,8 @@ Future createBooking(String type) async {
             "agent_id": "603375168652600a34cd1b1a",
             "package_id": "605401f2ffe9af1734132c91",
             "bookDate": "11/11/2021",
-            "child": 1555,
-            "adult": 55,
+            "child": child,
+            "adult": adult,
           },
         ),
       );

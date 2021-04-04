@@ -82,7 +82,8 @@ class _BookingConfirmState extends State<BookingConfirm> {
                           setState(() {
                             _success = true;
                           });
-                          var status = await createBooking('Trek');
+                          var status = await createBooking(
+                              'Trek', widget.child, widget.adult);
                           CoolAlert.show(
                             onConfirmBtnTap: () {
                               print('Pushed');
