@@ -15,7 +15,7 @@ import '../../services/themeData.dart';
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
   final String destination;
-  TabsScreen(this.destination);
+  TabsScreen([this.destination]);
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }

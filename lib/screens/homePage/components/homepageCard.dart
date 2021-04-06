@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/components/card.dart';
 import 'package:http/http.dart' as http;
+import 'package:travel/screens/homePage/components/viewDestination.dart';
 import 'package:travel/services/urls.dart';
 
 class HomepageCard extends StatefulWidget {
@@ -53,26 +54,50 @@ class _HomepageCardState extends State<HomepageCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            DestinationCarousel(
-              activites: 'Trek',
-              cityName: 'Annapurna',
-              country: 'Nepal',
-              image: 'anna1',
-              des: 'We an go all out',
+            GestureDetector(
+              child: DestinationCarousel(
+                activites: 'Trek',
+                cityName: 'Annapurna',
+                country: 'Nepal',
+                image: 'anna1',
+                des: 'We an go all out',
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => ViewDestination('Annapurna')));
+              },
             ),
-            DestinationCarousel(
-              activites: 'Trek',
-              cityName: 'Everest',
-              country: 'Nepal',
-              image: 'anna2',
-              des: 'We an go all out',
+            GestureDetector(
+              child: DestinationCarousel(
+                activites: 'Trek',
+                cityName: 'Everest',
+                country: 'Nepal',
+                image: 'anna2',
+                des: 'We an go all out',
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => ViewDestination('Everest')));
+              },
             ),
-            DestinationCarousel(
-              activites: 'Trek',
-              cityName: 'Mardi',
-              country: 'Nepal',
-              image: 'anna3',
-              des: 'We an go all out',
+            GestureDetector(
+              child: DestinationCarousel(
+                activites: 'Trek',
+                cityName: 'Mardi',
+                country: 'Nepal',
+                image: 'anna3',
+                des: 'We an go all out',
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (ctx) => ViewDestination('Mardi')));
+              },
             ),
           ],
         ),

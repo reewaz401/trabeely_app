@@ -26,6 +26,7 @@ class TourDetails extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -216,40 +217,66 @@ class TourDetails extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),*/
+              SizedBox(
+                height: 5,
+              ),
               Divider(),
-              Container(
-                margin: EdgeInsets.only(left: 15, bottom: 10),
-                child: Text(
-                  'Type : ' + detail[mainListIndex]['packageType'],
-                  style: TextStyle(
-                    fontSize: 23,
-                  ),
-                ),
+              SizedBox(
+                height: 5,
               ),
               Container(
-                margin: EdgeInsets.only(left: 20, bottom: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                //  margin: EdgeInsets.only(left: 15, bottom: 10, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Staring from:',
-                      style: TextStyle(color: Colors.grey),
+                      'Type : ' + detail[mainListIndex]['packageType'],
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                    Text(
-                      'Rs ' + detail[mainListIndex]['price'].toString() + '/-',
-                      style: TextStyle(color: Colors.green, fontSize: 20),
-                    )
+                    Container(
+                      margin: EdgeInsets.only(left: 20, bottom: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Staring from:',
+                            style: TextStyle(color: Colors.grey, fontSize: 13),
+                          ),
+                          Text(
+                            'Rs ' +
+                                detail[mainListIndex]['price'].toString() +
+                                '/-',
+                            style: TextStyle(color: Colors.green, fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 5,
+              ),
               Container(
-                margin: EdgeInsets.only(left: 15),
-                child: Text(
-                  'Includes',
-                  style: TextStyle(
-                    fontSize: 23,
-                  ),
-                ),
+                // margin: EdgeInsets.only(left: 15),
+                child: Text('Includes',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 5,
               ),
               // SizedBox(
               //   height: 50,
@@ -281,7 +308,7 @@ class TourDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 10, top: 5),
+                          //  margin: EdgeInsets.only(left: 10, top: 5),
                           child: Text(
                             'Itinerary',
                             style: TextStyle(
@@ -289,6 +316,13 @@ class TourDetails extends StatelessWidget {
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Divider(),
+                        SizedBox(
+                          height: 5,
                         ),
                         // Container(
                         //   height: 200,
@@ -310,7 +344,7 @@ class TourDetails extends StatelessWidget {
                     )
                   : Container(),
               Container(
-                margin: EdgeInsets.only(left: 10, top: 20),
+                //  margin: EdgeInsets.only(left: 10, top: 20),
                 child: Text(
                   'Things recommended to bring : ',
                   style: TextStyle(
@@ -333,8 +367,15 @@ class TourDetails extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 5,
+              ),
               Container(
-                margin: EdgeInsets.only(left: 10, top: 20),
+                // margin: EdgeInsets.only(left: 10, top: 20),
                 child: Text(
                   'Cancellation Policies : ',
                   style: TextStyle(
@@ -352,6 +393,13 @@ class TourDetails extends StatelessWidget {
                     Text(detail[mainListIndex]['cancelPolicy']),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Divider(),
+              SizedBox(
+                height: 5,
               ),
               // Container(
               //   margin: EdgeInsets.all(5),

@@ -33,6 +33,30 @@ class _HomePageScreenState extends State<HomePageScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  CategoryTypeWidget('All'),
+                  CategoryTypeWidget('Tours'),
+                ],
+              ),
+              Row(
+                children: [
+                  CategoryTypeWidget('Treks'),
+                  CategoryTypeWidget('Hotels'),
+                ],
+              ),
+              Row(
+                children: [
+                  CategoryTypeWidget('Restaurants'),
+                  CategoryTypeWidget('Clubs'),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              SizedBox(
                 height: 20,
               ),
               /* Row(

@@ -3,29 +3,29 @@ import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
-import 'DetailsScreen/tourPackDetails_screen.dart';
+import 'package:travel/screens/hotelDetails_screen.dart';
 
-class TourItem extends StatelessWidget {
-  final String agencyName;
-  final String title;
+class HotelItem extends StatelessWidget {
+  final String hotelName;
+  //final String title;
   final String destination;
   final double price;
-  final List includes;
-  final String date;
-  final List mainList;
+  final List amenities;
+  //final String date;
+  final List<dynamic> mainList;
   final String overview;
   final List image;
   final int index;
 
-  TourItem(
-      {this.includes,
+  HotelItem(
+      {this.amenities,
       this.index,
       this.image,
-      this.agencyName,
-      this.title,
+      this.hotelName,
+      //  this.title,
       this.destination,
       this.price,
-      this.date,
+      // this.date,
       this.overview,
       this.mainList});
 
@@ -79,7 +79,7 @@ class TourItem extends StatelessWidget {
               Expanded(
                 child: Container(
                   child: Text(
-                    title,
+                    hotelName,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -105,51 +105,42 @@ class TourItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Date : ',
-                      style: TextStyle(color: Colors.grey, fontSize: 10)),
-                  TextSpan(
-                      text: DateFormat.yMMMd('en_US')
-                          .format(DateTime.parse(date))
-                          .toString(),
-                      style: TextStyle(color: Colors.pink[900]))
-                ]),
+              Column(
+                children: [
+                  Text(
+                    "starting from",
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: 'Npr : ',
+                          style: TextStyle(color: Colors.grey, fontSize: 10)),
+                      TextSpan(
+                          text: price.toString(),
+                          style: TextStyle(color: Colors.green[900]))
+                    ]),
+                  ),
+                ],
               ),
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Npr : ',
-                      style: TextStyle(color: Colors.grey, fontSize: 10)),
-                  TextSpan(
-                      text: price.toString(),
-                      style: TextStyle(color: Colors.green[900]))
-                ]),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Seller : $agencyName'),
               IconButton(
                 icon: Icon(
                   Icons.arrow_forward_rounded,
                   color: Colors.purple[900],
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TourDetails(
-                          mainList: mainList, mainListIndex: index)),
-                ),
-              )
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HotelDetailsScreen(
+                              mainList: mainList,
+                              mainListIndex: index,
+                            ))),
+              ),
             ],
-          )
+          ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );

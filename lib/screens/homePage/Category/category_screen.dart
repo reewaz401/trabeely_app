@@ -10,6 +10,9 @@ import './Components/results_widget.dart';
 class CategoryScreen extends StatefulWidget {
   static const routeName = '/category-scren';
 
+  final String destination;
+  CategoryScreen([this.destination]);
+
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
@@ -46,19 +49,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 child: SvgPicture.asset('assets/images/Restaurants.svg'),
               ),
               Tab(
-                child: SvgPicture.asset('assets/images/Restaurants.svg'),
+                child: SvgPicture.asset('assets/images/Clubs.svg'),
               ),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            ResultsWidget(args.type),
-            ResultsWidget(args.type),
-            ResultsWidget(args.type),
-            ResultsWidget(args.type),
-            ResultsWidget(args.type),
-            ResultsWidget(args.type),
+            ResultsWidget(args.type, widget.destination),
+            ResultsWidget(args.type, widget.destination),
+            ResultsWidget(args.type, widget.destination),
+            ResultsWidget(args.type, widget.destination),
+            ResultsWidget(args.type, widget.destination),
+            ResultsWidget(args.type, widget.destination),
           ],
         ),
       ),
