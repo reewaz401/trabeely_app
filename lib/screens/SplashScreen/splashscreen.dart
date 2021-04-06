@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
-
+import 'package:travel/screens/Onboarding/Slider.dart';
+import 'package:travel/services/authentication.dart';
 import '../auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool onboardingPage;
   bool isAuto = false;
   void autoSignIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -23,22 +26,34 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+  onboardingPageDisplay() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    bool display = preferences.getBool('onboardingpageDisplay');
+    if (display == true) return true;
+    if (display == false) return false;
+    if (display == null) return false;
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     autoSignIn();
+    onboardingPageDisplay().then((value) {
+      onboardingPage = value;
+    });
     Timer(
-      Duration(milliseconds: 100),
+      Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return isAuto
-                ? TabsScreen(
-                    'Search Destinaiton',
-                  )
-                : AuthScreen(isAuto);
+            return Consumer<Auth>(builder: (context, auth, _) {
+              return onboardingPage
+                  ? auth.isAuth
+                      ? AuthScreen(false)
+                      : TabsScreen('Search Destination')
+                  : OnboardinPage();
+            });
           },
         ),
       ),

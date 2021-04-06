@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
@@ -37,7 +37,6 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   void didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     userName = prefs.getString('username');
     super.didChangeDependencies();
@@ -52,6 +51,13 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (ctx) => CreateTour()));
+        },
+        child: Icon(Icons.add),
+      ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
       appBar: _pages[_selectedPageIndex]['title'] == 'Home'
@@ -169,7 +175,7 @@ class _TabsScreenState extends State<TabsScreen> {
           trailing: Consumer<colors.ThemeNotifier>(
             builder: (context, colors.ThemeNotifier value, child) {
               return Switch(
-                value: value.darkTheme,
+                value: !value.darkTheme,
                 onChanged: (theme) {
                   value.toggleTheme();
                 },

@@ -37,18 +37,22 @@ class Auth with ChangeNotifier {
         'email': email,
         'password': password,
       });
-      print(response.body);
+      print(response.headers['set-cookie']);
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }
 
       _token = json.decode(response.body)["user"]["token"];
       _userId = json.decode(response.body)["user"]["name"];
+      print(response.headers['server']);
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('userToken', _token);
         preferences.setString('itemDisplayToken', '21f@do8GP3RMISI0N-D@T@');
         preferences.setString('username', _userId);
+        preferences.setString('cookie', response.headers['set-cookie']);
+        preferences.setString('server', response.headers['server']);
+
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(

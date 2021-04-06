@@ -34,9 +34,10 @@ dependencies:
   http: ^0.12.2
   provider: ^4.3.2+3
   cool_alert: ^1.0.3
-  double_back_to_close: ^1.0.2+mit
-
+  
+  json_annotation:
   bubble_tab_indicator: 
+  qr_flutter: ^4.0.0
   shared_preferences: ^0.5.12+4
   
 

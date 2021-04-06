@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/Booking/bookingFunction.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 
 class BookingConfirm extends StatefulWidget {
@@ -14,6 +18,28 @@ class BookingConfirm extends StatefulWidget {
 }
 
 class _BookingConfirmState extends State<BookingConfirm> {
+  // int child = 18;
+
+  // int adult = 15;
+  // Future<http.Response> createBooking() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   String _token = preferences.getString('userToken');
+  //   print(_token);
+  //   try {
+  //     print('Tried ');
+  //     return http.post(
+  //       (Uri.https(
+  //         'api.trabeely.com',
+  //         'api/booking/add-booking',
+  //       )),
+  //
+  //     );
+  //   } catch (e) {
+  //     print(e);
+  //     return e;
+  //   }
+  // }
+
   bool _success = false;
   @override
   Widget build(BuildContext context) {
@@ -51,33 +77,35 @@ class _BookingConfirmState extends State<BookingConfirm> {
                       SizedBox(
                         height: 50,
                       ),
-                      _success
-                          ? Text('Booking Successful')
-                          : RaisedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _success = true;
-                                });
-                                CoolAlert.show(
-                                  onConfirmBtnTap: () {
-                                    print('Pushed');
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(
-                                      builder: (context) {
-                                        return TabsScreen(
-                                          'Search Destinaiton',
-                                        );
-                                      },
-                                    ));
-                                  },
-                                  context: context,
-                                  barrierDismissible: false,
-                                  type: CoolAlertType.success,
-                                  text: "Transaction completed successfully!",
-                                );
-                              },
-                              child: Text('Submit'),
-                            )
+                      RaisedButton(
+                        onPressed: () async {
+                          setState(() {
+                            _success = true;
+                          });
+                          var status = await createBooking(
+                              'Trek', widget.child, widget.adult);
+                          CoolAlert.show(
+                            onConfirmBtnTap: () {
+                              print('Pushed');
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(
+                                builder: (context) {
+                                  return TabsScreen('Search Destination');
+                                },
+                              ));
+                            },
+                            context: context,
+                            barrierDismissible: false,
+                            type: status
+                                ? CoolAlertType.success
+                                : CoolAlertType.error,
+                            text: status
+                                ? "Transaction completed successfully!"
+                                : "Try Again",
+                          );
+                        },
+                        child: Text('Submit'),
+                      )
                     ],
                   ),
                 ),
