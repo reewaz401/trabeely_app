@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../services/authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,9 +33,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(children: [
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
           Stack(
             alignment: Alignment.center,
             children: [
@@ -145,8 +147,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ],
           ),
           Container(
-              margin: EdgeInsets.all(15),
-              child: Column(children: [
+            margin: EdgeInsets.all(15),
+            child: Column(
+              children: [
                 Text(
                   userName == null ? '' : userName,
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -158,7 +161,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   'A mantra goes here',
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
-              ])),
-        ]));
+              ],
+            ),
+          ),
+          QrImage(
+            data: "1234567890",
+            version: QrVersions.auto,
+            size: 200.0,
+          ),
+        ],
+      ),
+    );
   }
 }
