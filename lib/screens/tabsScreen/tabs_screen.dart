@@ -10,7 +10,7 @@ import '../homePage/homePage_screen.dart';
 import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
-import '../../services/themeData.dart';
+import 'package:travel/screens/Booking/bookingHistory.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -185,7 +185,10 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         ListTile(
           title: Text('Item 3'),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (ctx) => BookingHistory()));
+          },
         ),
       ],
     );
