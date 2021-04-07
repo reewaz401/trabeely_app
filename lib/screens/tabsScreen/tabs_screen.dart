@@ -10,7 +10,6 @@ import '../homePage/homePage_screen.dart';
 import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
-import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -51,13 +50,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (ctx) => CreateTour()));
-        },
-        child: Icon(Icons.add),
-      ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
       appBar: _pages[_selectedPageIndex]['title'] == 'Home'
