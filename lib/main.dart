@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
-import 'package:travel/screens/Booking/bookingSucess.dart';
 import 'package:travel/screens/SplashScreen/splashscreen.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
-import 'package:travel/screens/Onboarding/Slider.dart';
-
 import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
-
 import './screens/auth_screen.dart';
 import './services/themeData.dart';
-import './screens/homePage//homePage_screen.dart';
-import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
-
 import './screens/storyFeedScreen/storyFeed_screen.dart';
 
 void main() {

@@ -29,13 +29,12 @@ class ViewData with ChangeNotifier {
       if (slectedType == 'Hotels') {
         print('Hotels Enter');
         final SharedPreferences prefs = await SharedPreferences.getInstance();
-        final String autoToken = prefs.getString('autoSignIn');
+        final String autoToken = prefs.getString('userToken');
         print("token : $autoToken");
         response = await http.get(
           url,
           headers: {
-            HttpHeaders.authorizationHeader:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDRlY2UxYWJmYmFhYzNjN2M1YTk2MzAiLCJhY2Nlc3NMZXZlbCI6InN1cGVyLWFkbWluLXNjb3V0IiwiaWF0IjoxNjE3NjgyMzg2LCJleHAiOjE2MTc3Njg3ODZ9.SBMq5M8_UhdiUwX52NPIRoizDrKQuNFouJst6NqG9J0",
+            HttpHeaders.authorizationHeader: "Bearer $autoToken",
           },
         );
         print(jsonDecode(response.body));
