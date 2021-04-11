@@ -62,9 +62,9 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                             },
                           )
                         : ListView.builder(
-                            itemCount: snapshot.data['packages'].length,
+                            itemCount: snapshot.data['data'].length,
                             itemBuilder: (context, index) {
-                              dataList = snapshot.data['packages'];
+                              dataList = snapshot.data['data'];
                               return TourItem(
                                 agencyName: 'Hello',
                                 date: '2021-08-02 15:30',

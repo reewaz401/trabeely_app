@@ -7,9 +7,11 @@ getIndex(String destination) {
     return 2;
   } else if (destination == 'Hotels') {
     return 3;
-  } else if (destination == 'Restauranest') {
+  } else if (destination == 'Restaurants') {
     return 4;
   } else if (destination == 'Clubs') {
     return 5;
+  } else {
+    return null;
   }
 }

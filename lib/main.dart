@@ -60,7 +60,6 @@ class _MyAppState extends State<MyApp> {
                 routes: {
                   TabsScreen.routeName: (ctx) =>
                       TabsScreen('Search Destination'),
-                  CategoryScreen.routeName: (ctx) => CategoryScreen(),
                   StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
                   '/bookinginfo': (BuildContext context) => BookingInfo(),
                 });
