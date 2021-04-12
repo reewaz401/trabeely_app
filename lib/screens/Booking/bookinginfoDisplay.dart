@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 import 'package:travel/components/datePicker_widget.dart';
 import 'package:travel/screens/Booking/bookingSucess.dart';
@@ -10,11 +11,27 @@ class BookingInfo extends StatefulWidget {
 }
 
 class _BookingInfoState extends State<BookingInfo> {
-  var adultsNum = 1;
-  var childNum = 0;
+  int adultsNum = 1;
+  int childNum = 0;
   String paymentMethod = 'Cash';
-  var roomsNum = 1;
+  int roomsNum = 1;
   String _paymentMethod = 'Cash';
+  void updateChild(int count) {
+    setState(() {
+      print(childNum);
+      childNum = count;
+      print(childNum);
+    });
+  }
+
+  void updateAdult(int count) {
+    setState(() => adultsNum = count);
+  }
+
+  void updateRoom(int count) {
+    setState(() => roomsNum = count);
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime initDate = DateTime.now();
@@ -49,29 +66,26 @@ class _BookingInfoState extends State<BookingInfo> {
       child: Scaffold(
         bottomSheet: Container(
           width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RaisedButton(
-              color: Colors.blue[900],
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookingConfirm(
-                      adult: adultsNum,
-                      child: childNum,
-                      room: roomsNum,
-                      payment: _paymentMethod,
-                    ),
+          child: RaisedButton(
+            color: Colors.blue[900],
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookingConfirm(
+                    adult: adultsNum,
+                    child: childNum,
+                    room: roomsNum,
+                    payment: _paymentMethod,
                   ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Book Now',
-                  style: TextStyle(color: Colors.white),
                 ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Book Now',
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),
@@ -126,121 +140,34 @@ class _BookingInfoState extends State<BookingInfo> {
                 SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Children',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                    SizedBox(
-                      child: Row(
-                        children: [
-                          Container(
-                            color: Colors.red,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_minus_1_sharp),
-                                onPressed: () {}),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '5',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.green,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_plus_1_outlined),
-                                onPressed: () {}),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: 15,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Adult',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                    SizedBox(
-                      child: Row(
-                        children: [
-                          Container(
-                            color: Colors.red,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_minus_1_sharp),
-                                onPressed: () {}),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '5',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.green,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_plus_1_outlined),
-                                onPressed: () {}),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Room',
-                      style: TextStyle(fontSize: 30),
-                    ),
-                    SizedBox(
-                      child: Row(
-                        children: [
-                          Container(
-                            color: Colors.red,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_minus_1_sharp),
-                                onPressed: () {}),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              '5',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.green,
-                            child: IconButton(
-                                icon: Icon(Icons.exposure_plus_1_outlined),
-                                onPressed: () {}),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                BookingInfos(
+                    type: 'Children', number: childNum, update: updateChild),
+                BookingInfos(
+                    type: 'Adult', number: adultsNum, update: updateAdult),
+                BookingInfos(
+                    type: 'Room', number: roomsNum, update: updateRoom),
                 SizedBox(
                   height: 15,
                 ),
                 heading('Your Total Cost'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Rs. 5000 x 2 nights'), Text('Rs. 10,000')],
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        'Rs. 5000 x 2 nights',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Text(
+                      'Rs. 10,000',
+                      style: TextStyle(fontSize: 18),
+                    )
+                  ],
                 ),
                 heading('Payment Method'),
                 RadioListTile(
@@ -262,8 +189,11 @@ class _BookingInfoState extends State<BookingInfo> {
                       });
                     }),
                 heading('Cancelation Policy'),
-                Text('''This hotel offers cancellation policy of 
-before 1 day of check in.''')
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text('''This hotel offers cancellation policy of 
+before 1 day of check in.'''),
+                )
               ],
             ),
           ),
@@ -301,17 +231,90 @@ datepicker(context) {
 }
 
 Widget heading(String heading) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15.0),
-      color: Colors.grey,
-    ),
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        heading,
-        style: TextStyle(fontSize: 25),
+  return Column(
+    children: [
+      SizedBox(
+        height: 15,
       ),
-    ),
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            heading,
+            style: TextStyle(fontSize: 25),
+          ),
+        ),
+      ),
+    ],
   );
+}
+
+class BookingInfos extends StatelessWidget {
+  final ValueChanged<int> update;
+  String type;
+  int number;
+  BookingInfos({this.type, this.number, this.update});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              type,
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              child: Row(
+                children: [
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        border: Border.all(color: Colors.red)),
+                    child: IconButton(
+                        color: Colors.red,
+                        icon: Icon(Icons.exposure_minus_1_sharp),
+                        onPressed: () {
+                          update(-1);
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      number.toString(),
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        border: Border.all(color: Colors.green)),
+                    child: IconButton(
+                      color: Colors.green,
+                      icon: Icon(Icons.exposure_plus_1),
+                      onPressed: () {
+                        update(1);
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        )
+      ],
+    );
+  }
 }
