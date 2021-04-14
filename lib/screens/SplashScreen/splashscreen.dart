@@ -7,6 +7,7 @@ import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
 import 'package:travel/services/authentication.dart';
 import '../auth_screen.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -82,19 +83,19 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: SvgPicture.asset(
                           'assets/images/logo.svg',
                           alignment: Alignment.center,
-                          height: 50,
+                          height: 100,
                         ),
-                      ),
+                      ).shimmer(
+                          count: 1,
+                          showAnimation: true,
+                          primaryColor: Colors.blue[900],
+                          secondaryColor: Colors.orange),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
               ),
             ],
           )

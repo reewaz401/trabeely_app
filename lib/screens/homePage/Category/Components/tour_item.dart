@@ -32,14 +32,14 @@ class TourItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return Card(
         color: Colors.white,
         margin: EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
         ),
         // color: Colors.blueAccent,
-        height: 220,
+        /// height: 220,
         child: Row(
           children: [
             Flexible(
@@ -52,18 +52,19 @@ class TourItem extends StatelessWidget {
   }
 
   Widget imageTile() {
-    return image[0] != null
+    return /*image[0] != null
         ? Image.network(
             'https://api.trabeely.com/uploads/package/${image[0]}',
             height: 150,
             fit: BoxFit.fill,
             // fit: BoxFit.fill,
           )
-        : SvgPicture.asset(
-            'assets/images/logo.svg',
+        : */
+        SvgPicture.asset(
+      'assets/images/logo.svg',
 
-            //alignment: Alignment.center,
-          );
+      //alignment: Alignment.center,
+    );
   }
 
   Widget detailsTile(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
@@ -15,7 +15,7 @@ import 'package:travel/screens/Booking/bookingHistory.dart';
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
   final String destination;
-  TabsScreen(this.destination);
+  TabsScreen([this.destination]);
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -37,7 +37,6 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   void didChangeDependencies() async {
-    // TODO: implement didChangeDependencies
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     userName = prefs.getString('username');
     super.didChangeDependencies();
@@ -52,6 +51,13 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (ctx) => CreateTour()));
+        },
+        child: Icon(Icons.add),
+      ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
       appBar: _pages[_selectedPageIndex]['title'] == 'Home'
@@ -141,7 +147,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        selectedItemColor: Color(0xFF0F367C),
+        selectedItemColor: Colors.orange[900], //Color(0xFF0F367C),
         unselectedItemColor: Colors.grey,
         currentIndex: _selectedPageIndex,
         items: [

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
+import 'package:travel/screens/homePage/components/search_widget.dart';
+import 'package:travel/services/viewData.dart';
 
 class ViewDestination extends StatefulWidget {
   final destination;
@@ -27,7 +29,7 @@ class _ViewDestinationState extends State<ViewDestination> {
               child: Text(''),
             ),
             expandedHeight: 350.0,
-            collapsedHeight: 200,
+            collapsedHeight: 175.0,
             floating: false,
             pinned: true,
             flexibleSpace: Stack(
@@ -49,7 +51,7 @@ class _ViewDestinationState extends State<ViewDestination> {
                   child: FlexibleSpaceBar(
                     titlePadding:
                         EdgeInsetsDirectional.only(start: 30, bottom: 15),
-                    title: null,
+                    title: Text(''),
                   ),
                 ),
                 Positioned(
@@ -58,14 +60,29 @@ class _ViewDestinationState extends State<ViewDestination> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        widget.destination,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.2,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.destination,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 35.0,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) =>
+                                        SearchWidget(widget.destination))),
+                          )
+                        ],
                       ),
                       Row(
                         children: <Widget>[
@@ -101,186 +118,202 @@ class _ViewDestinationState extends State<ViewDestination> {
           ),
         ];
       },
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('All'),
-                CategoryTypeWidget('Tours'),
-              ],
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('Treks'),
-                CategoryTypeWidget('Hotels'),
-              ],
-            ),
-            Row(
-              children: [
-                CategoryTypeWidget('Restaurants'),
-                CategoryTypeWidget('Clubs'),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Treks in ${widget.destination}',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => print('See All'),
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                itemCount: 1,
-                itemBuilder: (BuildContext context, int index) {
-                  // Activity activity = widget.destination.activities[index];
-                  return Stack(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-                        height: 170.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    width: 120.0,
-                                    child: Text(
-                                      'Trek',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        '20',
-                                        style: TextStyle(
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        'per pax',
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'Trek',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              //_buildRatingStars(activity.rating),
-                              SizedBox(height: 10.0),
-                              Row(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    width: 70.0,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).accentColor,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '23:00',
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    width: 70.0,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).accentColor,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '23:00',
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 20.0,
-                        top: 15.0,
-                        bottom: 15.0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image(
-                            width: 110.0,
-                            image: AssetImage(
-                              'assets/images/anna2.jpeg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('All', widget.destination),
+              CategoryTypeWidget('Tours', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Treks', widget.destination),
+              CategoryTypeWidget('Hotels', widget.destination),
+            ],
+          ),
+          Row(
+            children: [
+              CategoryTypeWidget('Restaurants', widget.destination),
+              CategoryTypeWidget('Clubs', widget.destination),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          listData('Tours'),
+          listData(
+            'Treks',
+          ),
+          listData("Hotels")
+
+          //listData('Hotels'),
+        ]),
       ),
     ));
+  }
+
+  Widget listData(
+    String type,
+  ) {
+    return Container(
+      height: 220,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  '$type in ${widget.destination}',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => print('See All'),
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20),
+                  child: Text(
+                    'See All',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? "Holiday Inn" : 'A drive in Mustang',
+                    type == "Hotels" ? '1300' : '25000',
+                    type == "Hotels" ? 'mhotel1' : 'mustang1'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Royal' : 'Mustang',
+                    type == "Hotels" ? '2000' : '25000',
+                    type == "Hotels" ? 'mhotel2' : 'musatng2'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Monalisa' : 'Live Mustang',
+                    type == "Hotels" ? '1000' : '25000',
+                    type == "Hotels" ? 'mhotel3' : 'mustang3'),
+                SizedBox(
+                  width: 15,
+                ),
+                card(
+                    type == "Hotels" ? 'Oms Homs' : 'Uproad Mustang',
+                    type == "Hotels" ? '1500' : '25000',
+                    type == "Hotels" ? 'mhotel4' : 'musatng2'),
+              ],
+            ),
+          ),
+
+          /* FutureBuilder(
+              future: ViewData().viewData(type, widget.destination, true),
+              builder: (context, snapshot) {
+                return snapshot.connectionState == ConnectionState.waiting
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : snapshot.hasData
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  var data = snapshot.data[index];
+                                  return Container(
+                                    width: 150,
+                                    height: 100,
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Text(data["title"]),
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: Colors.amber,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                  );
+                                }),
+                          )
+                        : Center(
+                            child: Text("No data"),
+                          );
+              }),*/
+        ],
+      ),
+    );
+  }
+
+  Widget card(String title, String price, String image) {
+    return Container(
+      width: 150,
+      height: 170,
+      child: Column(
+        children: [
+          Container(
+            height: 120,
+            child: Image.asset(
+              'assets/images/$image.jpeg',
+              fit: BoxFit.fill,
+            ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 18),
+                ),
+                Row(
+                  children: [
+                    Text('Starting from',
+                        style: TextStyle(
+                          fontSize: 10,
+                        )),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(price,
+                        style: TextStyle(fontSize: 15, color: Colors.green))
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

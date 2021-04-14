@@ -4,7 +4,8 @@ import '../Category/category_screen.dart';
 
 class CategoryTypeWidget extends StatefulWidget with ChangeNotifier {
   final String type;
-  CategoryTypeWidget([this.type]);
+  final String destination;
+  CategoryTypeWidget(this.type, [this.destination]);
 
   @override
   _CategoryTypeWidgetState createState() => _CategoryTypeWidgetState();
@@ -15,8 +16,17 @@ class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, CategoryScreen.routeName,
-            arguments: CategoryTypeWidget(widget.type));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return CategoryScreen(
+                widget.type,
+                widget.destination,
+              );
+            },
+          ),
+        );
       },
       child: Container(
           margin: EdgeInsets.all(5),
