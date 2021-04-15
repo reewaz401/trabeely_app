@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/Settings/writeToUs.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
@@ -184,16 +185,31 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
         ListTile(
-          title: Text('Log out'),
+          title: Text('Booking History'),
           onTap: () {
-            Provider.of<Auth>(context, listen: false).logOut();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => BookingHistory(),
+              ),
+            );
           },
         ),
         ListTile(
-          title: Text('Item 3'),
+          title: Text('Write To Us'),
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (ctx) => BookingHistory()));
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => WriteToUs(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          title: Text('Log out'),
+          onTap: () {
+            Provider.of<Auth>(context, listen: false).logOut();
           },
         ),
       ],

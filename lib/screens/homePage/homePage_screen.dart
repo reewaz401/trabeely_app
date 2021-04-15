@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/card.dart';
 import 'package:travel/screens/homePage/components/homepagecard.dart';
@@ -69,6 +70,27 @@ class _HomePageScreenState extends State<HomePageScreen> {
             ),
             SizedBox(
               height: 20,
+            ),
+            SizedBox(
+                height: 200.0,
+                width: 350.0,
+                child: Carousel(
+                  showIndicator: false,
+                  autoplayDuration: Duration(seconds: 10),
+                  images: [
+                    ExactAssetImage("assets/images/anna1.jpeg"),
+                    ExactAssetImage("assets/images/anna2.jpeg"),
+                    ExactAssetImage("assets/images/anna.jpg")
+                  ],
+                  dotSize: 4.0,
+                  dotSpacing: 15.0,
+                  dotColor: Colors.lightGreenAccent,
+                  indicatorBgPadding: 5.0,
+                  dotBgColor: Colors.purple.withOpacity(0.5),
+                  borderRadius: true,
+                )),
+            SizedBox(
+              height: 10,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),

@@ -9,6 +9,37 @@ class _CreateTourState extends State<CreateTour> {
   String hotel = '2 Star';
   int destination = 0;
   String transportationway = 'Two Way';
+  String vehicle = 'Bus';
+
+  Widget vehicleType(String type) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 250,
+          width: 150,
+          child: Column(
+            children: [
+              RadioListTile(
+                title: Text(type),
+                value: type,
+                groupValue: vehicle,
+                onChanged: (value) {
+                  setState(() {
+                    vehicle = value;
+                  });
+                },
+              ),
+              Container(
+                height: 150,
+                color: Colors.grey,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +80,12 @@ class _CreateTourState extends State<CreateTour> {
                     children: [
                       Container(
                         width: 150,
-                        height: 30,
+                        height: 40,
                         child: textfield(),
                       ),
                       Container(
                         width: 150,
-                        height: 30,
+                        height: 40,
                         child: textfield(),
                       ),
                     ],
@@ -81,12 +112,12 @@ class _CreateTourState extends State<CreateTour> {
                                         children: [
                                           Container(
                                             width: 125,
-                                            height: 30,
+                                            height: 40,
                                             child: textfield(),
                                           ),
                                           Container(
                                             width: 125,
-                                            height: 30,
+                                            height: 40,
                                             child: textfield(),
                                           ),
                                         ],
@@ -120,12 +151,12 @@ class _CreateTourState extends State<CreateTour> {
                   children: [
                     Container(
                       width: 150,
-                      height: 30,
+                      height: 40,
                       child: textfield(),
                     ),
                     Container(
                       width: 150,
-                      height: 30,
+                      height: 40,
                       child: textfield(),
                     ),
                   ],
@@ -172,6 +203,18 @@ class _CreateTourState extends State<CreateTour> {
                       hotel = value;
                     });
                   },
+                ),
+                Row(
+                  children: [
+                    vehicleType('Microbus'),
+                    vehicleType('Bus'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    vehicleType('Plane'),
+                    vehicleType('Other'),
+                  ],
                 ),
                 Text('Transportaion'),
                 SingleChildScrollView(
