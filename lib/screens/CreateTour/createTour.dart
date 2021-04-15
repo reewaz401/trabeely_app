@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CreateTour extends StatefulWidget {
   @override
@@ -62,6 +63,11 @@ class _CreateTourState extends State<CreateTour> {
       );
     }
 
+    DateTime initDate = DateTime.now();
+    String initformattedDate = DateFormat.yMMMd().format(initDate);
+
+    DateTime finalDate = DateTime.now();
+    String finalformattedDate = DateFormat.yMMMd().format(finalDate);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -70,9 +76,15 @@ class _CreateTourState extends State<CreateTour> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                headingText('Destination'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [Text('From '), Text('To')],
+                  children: [
+                    subheading('From'),
+                    subheading(
+                      'To',
+                    )
+                  ],
                 ),
                 Center(
                   child: Row(
@@ -80,12 +92,12 @@ class _CreateTourState extends State<CreateTour> {
                     children: [
                       Container(
                         width: 150,
-                        height: 40,
+                        height: 60,
                         child: textfield(),
                       ),
                       Container(
                         width: 150,
-                        height: 40,
+                        height: 60,
                         child: textfield(),
                       ),
                     ],
@@ -108,6 +120,11 @@ class _CreateTourState extends State<CreateTour> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
+                                      Container(
+                                        width: 125,
+                                        height: 40,
+                                        child: textfield(),
+                                      ),
                                       Row(
                                         children: [
                                           Container(
@@ -115,20 +132,32 @@ class _CreateTourState extends State<CreateTour> {
                                             height: 40,
                                             child: textfield(),
                                           ),
-                                          Container(
-                                            width: 125,
-                                            height: 40,
-                                            child: textfield(),
-                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  destination--;
+                                                });
+                                              },
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  border: Border.all(),
+                                                  color: Colors.red,
+                                                ),
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          )
                                         ],
-                                      ),
-                                      IconButton(
-                                          icon: Icon(Icons.minimize_rounded),
-                                          onPressed: () {
-                                            setState(() {
-                                              destination--;
-                                            });
-                                          })
+                                      )
                                     ],
                                   ),
                                 ),
@@ -142,31 +171,65 @@ class _CreateTourState extends State<CreateTour> {
                   ),
                 ),
                 deestinationFieldIncreaser(),
+                headingText('Additional Info'),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [Text('Date From '), Text('Date To')],
-                ),
-                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      width: 150,
-                      height: 40,
-                      child: textfield(),
+                    subheading('Date From'),
+                    subheading('Date To'),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2025),
+                        ).then((value) {
+                          setState(() {
+                            initDate = value;
+                          });
+                        });
+                      },
+                      child: Text(initformattedDate),
                     ),
-                    Container(
-                      width: 150,
-                      height: 40,
+                    ElevatedButton(
+                      onPressed: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2025),
+                        ).then((value) {
+                          setState(() {
+                            finalDate = value;
+                          });
+                        });
+                      },
+                      child: Text(finalformattedDate),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    subheading('Total People'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
                       child: textfield(),
                     ),
                   ],
                 ),
-                Text('Number of Travellers'),
-                SizedBox(
-                  width: 50,
-                  child: textfield(),
-                ),
-                Text('Hotel'),
+                headingText('Hotel'),
                 RadioListTile(
                     title: Text('2 Star'),
                     value: '2 Star',
@@ -204,6 +267,13 @@ class _CreateTourState extends State<CreateTour> {
                     });
                   },
                 ),
+                headingText('Transportaion'),
+                Row(
+                  children: [
+                    vehicleType('Self'),
+                    vehicleType('Jeep'),
+                  ],
+                ),
                 Row(
                   children: [
                     vehicleType('Microbus'),
@@ -216,7 +286,7 @@ class _CreateTourState extends State<CreateTour> {
                     vehicleType('Other'),
                   ],
                 ),
-                Text('Transportaion'),
+                headingText('Transportaion Way'),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -250,11 +320,39 @@ class _CreateTourState extends State<CreateTour> {
                     ],
                   ),
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      backgroundColor: Colors.blue[900], primary: Colors.white),
-                  onPressed: () {},
-                  child: Text('Add Request'),
+                headingText('Additional Needs'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: TextField(
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        hintText: 'Add Your Needs And Prority In This Field',
+                        isDense: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: double.infinity,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Colors.blue[900],
+                          primary: Colors.white),
+                      onPressed: () {},
+                      child: Text('Proceed'),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -266,18 +364,45 @@ class _CreateTourState extends State<CreateTour> {
 }
 
 Widget textfield() {
-  return TextField(
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      isDense: true,
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(color: Colors.grey),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: TextField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        isDense: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(color: Colors.grey),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: BorderSide(color: Colors.red),
+        ),
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        borderSide: BorderSide(color: Colors.red),
-      ),
+    ),
+  );
+}
+
+Widget headingText(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        Text(
+          text,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget subheading(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      style: TextStyle(fontWeight: FontWeight.bold),
     ),
   );
 }
