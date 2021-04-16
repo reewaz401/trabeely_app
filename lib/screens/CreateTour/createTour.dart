@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:travel/screens/CreateTour/widgets.dart';
+import 'package:travel/screens/CreateTour/dialogue.dart';
 
 class CreateTour extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class _CreateTourState extends State<CreateTour> {
   int destination = 0;
   String transportationway = 'Two Way';
   String vehicle = 'Bus';
+  bool institutionalBooking = false;
 
   Widget vehicleType(String type) {
     return Center(
@@ -76,6 +79,34 @@ class _CreateTourState extends State<CreateTour> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                CheckboxListTile(
+                    title: Text('Are You An Instution?'),
+                    value: institutionalBooking,
+                    activeColor: Colors.blue[900],
+                    onChanged: (value) {
+                      setState(() {
+                        institutionalBooking = value;
+                      });
+                    }),
+                institutionalBooking
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Enter Institution Name',
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.red),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
                 headingText('Destination'),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,12 +124,12 @@ class _CreateTourState extends State<CreateTour> {
                       Container(
                         width: 150,
                         height: 60,
-                        child: textfield(),
+                        child: numberfield(),
                       ),
                       Container(
                         width: 150,
                         height: 60,
-                        child: textfield(),
+                        child: numberfield(),
                       ),
                     ],
                   ),
@@ -123,14 +154,14 @@ class _CreateTourState extends State<CreateTour> {
                                       Container(
                                         width: 125,
                                         height: 40,
-                                        child: textfield(),
+                                        child: numberfield(),
                                       ),
                                       Row(
                                         children: [
                                           Container(
                                             width: 125,
                                             height: 40,
-                                            child: textfield(),
+                                            child: numberfield(),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -225,7 +256,7 @@ class _CreateTourState extends State<CreateTour> {
                   children: [
                     SizedBox(
                       width: 80,
-                      child: textfield(),
+                      child: numberfield(),
                     ),
                   ],
                 ),
@@ -342,14 +373,14 @@ class _CreateTourState extends State<CreateTour> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(18.0),
                   child: Container(
                     width: double.infinity,
                     child: TextButton(
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.blue[900],
                           primary: Colors.white),
-                      onPressed: () {},
+                      onPressed: () => showBookingDialogue(context),
                       child: Text('Proceed'),
                     ),
                   ),
@@ -361,48 +392,4 @@ class _CreateTourState extends State<CreateTour> {
       ),
     );
   }
-}
-
-Widget textfield() {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: TextField(
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-        isDense: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.red),
-        ),
-      ),
-    ),
-  );
-}
-
-Widget headingText(String text) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      children: [
-        Text(
-          text,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget subheading(String text) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Text(
-      text,
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-  );
 }
