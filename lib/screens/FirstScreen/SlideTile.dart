@@ -285,9 +285,10 @@ class _SlideTileState extends State<SlideTile> {
                           obscureText: true,
                           validator: (val) =>
                               validation('Confirm Password', val),
-                          onFieldSubmitted: (value) =>
-                              FocusScope.of(context).unfocus(),
-                        ),
+                          onFieldSubmitted: (value) {
+                            _formKeySignUp.currentState.save();
+                            FocusScope.of(context).unfocus();
+                          }),
     );
   }
 
