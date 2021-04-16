@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewData with ChangeNotifier {
   ToursForm tempTours;
-  dynamic result = [];
+  Map<String, dynamic> result = {'data': []};
   http.Response response;
 
   Map<String, dynamic> dataList;
@@ -61,11 +61,10 @@ class ViewData with ChangeNotifier {
 
       print("Destination: $destination");
       if (destination != null) {
-        print('Enter by destinaiton');
-        jsonResponse = await sortByDestination(destination, jsonResponse);
-
-        return jsonResponse;
+        jsonResponse =
+            await sortByDestination(destination, dataList['data'].length);
       }
+      print("Destination: $destination");
 
       return jsonResponse;
     } catch (error) {
@@ -74,18 +73,19 @@ class ViewData with ChangeNotifier {
     }
   }
 
-  Future<List> sortByDestination(String destination, dynamic length) async {
+  Future<Map<String, dynamic>> sortByDestination(
+      String destination, int length) async {
     // result.clear();
 
-    for (int i = 0; i < 1; i++) {
-      var data = dataList['packages'][i]['destination'];
+    for (int i = 0; i < length; i++) {
+      var data = dataList['data'][i]['destination'];
       if (data.toLowerCase() == destination.toLowerCase()) {
         print('sortByDestinaiton');
 
-        result.add(dataList['packages'][i]);
+        result['data'].add(dataList['data'][i]);
         return result;
       }
     }
-    return null;
+    return result;
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 
@@ -51,13 +50,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (ctx) => CreateTour()));
-        },
-        child: Icon(Icons.add),
-      ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
       appBar: _pages[_selectedPageIndex]['title'] == 'Home'

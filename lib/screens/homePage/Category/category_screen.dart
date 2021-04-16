@@ -73,12 +73,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body: TabBarView(
           children: [
-            ResultsWidget('All'),
-            ResultsWidget('Tours'),
-            ResultsWidget('Treks'),
-            ResultsWidget('Hotels'),
-            ResultsWidget('Restaurents'),
-            ResultsWidget('Clubs'),
+            ResultsWidget('All', widget.destination),
+            ResultsWidget('Tours', widget.destination),
+            ResultsWidget('Treks', widget.destination),
+            ResultsWidget('Hotels', widget.destination),
+            ResultsWidget('Restaurents', widget.destination),
+            ResultsWidget('Clubs', widget.destination),
           ],
         ),
       ),

@@ -12,6 +12,12 @@ class StoryFeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await UploadPhoto().imagePickerDialog(context);
+        },
+        child: Icon(Icons.add_a_photo),
+      ),
       body: Container(
         color: Colors.grey[300],
         height: MediaQuery.of(context).size.height - 130,
