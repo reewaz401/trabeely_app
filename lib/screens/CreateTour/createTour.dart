@@ -14,6 +14,11 @@ class _CreateTourState extends State<CreateTour> {
   String transportationway = 'Two Way';
   String vehicle = 'Bus';
   bool institutionalBooking = false;
+  TextEditingController institutionalName = TextEditingController();
+  TextEditingController destinationfromName = TextEditingController();
+  TextEditingController destinationToName = TextEditingController();
+  TextEditingController additionalInfo = TextEditingController();
+  TextEditingController totalPeople = TextEditingController();
 
   Widget vehicleType(String type) {
     return Center(
@@ -124,12 +129,12 @@ class _CreateTourState extends State<CreateTour> {
                       Container(
                         width: 150,
                         height: 60,
-                        child: numberfield(),
+                        child: numberfield(destinationfromName),
                       ),
                       Container(
                         width: 150,
                         height: 60,
-                        child: numberfield(),
+                        child: numberfield(destinationToName),
                       ),
                     ],
                   ),
@@ -154,14 +159,15 @@ class _CreateTourState extends State<CreateTour> {
                                       Container(
                                         width: 125,
                                         height: 40,
-                                        child: numberfield(),
+                                        child: numberfield(destinationfromName),
                                       ),
                                       Row(
                                         children: [
                                           Container(
                                             width: 125,
                                             height: 40,
-                                            child: numberfield(),
+                                            child:
+                                                numberfield(destinationToName),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -256,7 +262,7 @@ class _CreateTourState extends State<CreateTour> {
                   children: [
                     SizedBox(
                       width: 80,
-                      child: numberfield(),
+                      child: numberfield(totalPeople),
                     ),
                   ],
                 ),
@@ -380,7 +386,13 @@ class _CreateTourState extends State<CreateTour> {
                       style: TextButton.styleFrom(
                           backgroundColor: Colors.blue[900],
                           primary: Colors.white),
-                      onPressed: () => showBookingDialogue(context),
+                      onPressed: () => showBookingDialogue(
+                        context,
+                        institutionalBooking,
+                        destinationfromName,
+                        destinationToName,
+                        institutionalName,
+                      ),
                       child: Text('Proceed'),
                     ),
                   ),

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-showBookingDialogue(context) async {
+showBookingDialogue(
+    context,
+    bool institutionalBooking,
+    TextEditingController destinationfromName,
+    TextEditingController destinationToName,
+    [TextEditingController institutionalName]) async {
   return await showDialog(
     context: context,
     builder: (ctx) {
@@ -9,10 +14,15 @@ showBookingDialogue(context) async {
         content: SingleChildScrollView(
           child: Column(
             children: [
-              doubleRowText(context, 'Institutional', 'False'),
-              doubleRowText(context, 'Institutional Name', 'Trabeely'),
-              doubleRowText(context, 'Destination From', 'Kathmandu'),
-              doubleRowText(context, 'Destination To', 'Pokhara'),
+              doubleRowText(
+                  context, 'Institutional', institutionalBooking.toString()),
+              institutionalBooking
+                  ? doubleRowText(
+                      context, 'Institutional Name', institutionalName.text)
+                  : Container(),
+              doubleRowText(
+                  context, 'Destination From', destinationfromName.text),
+              doubleRowText(context, 'Destination To', destinationToName.text),
               doubleRowText(context, 'Starting Date', '3 March, 2021'),
               doubleRowText(context, 'Ending Date', '3 March, 2021'),
               doubleRowText(context, 'Vechicle Type', 'Jeep, Bus'),
