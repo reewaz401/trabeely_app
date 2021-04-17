@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel/model/SignupForm.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
+import 'package:travel/services/authentication.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SlideTile extends StatefulWidget {
@@ -39,11 +41,11 @@ class _SlideTileState extends State<SlideTile> {
   String dropdownValue = 'Male';
   @override
   Widget build(BuildContext context) {
-    return widget.index == 0
-        ? first()
-        : widget.index == 1
-            ? second()
-            : third();
+    return SingleChildScrollView(
+      child: Column(
+        children: [first(), second(), third(), button()],
+      ),
+    );
   }
 
   Widget first() {
@@ -52,32 +54,46 @@ class _SlideTileState extends State<SlideTile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 20,
+          height: 5,
         ),
-        Text(
-          'Sign Up',
-          style: TextStyle(fontSize: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.orange,
+                  size: 20,
+                ),
+                onPressed: () => Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (ctx) => OneScreen()))),
+            Text(
+              'Sign Up',
+              style: TextStyle(fontSize: 25),
+            ),
+          ],
         ),
         SizedBox(
-          height: 30,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'General Information',
-              style: TextStyle(color: Colors.blue, fontSize: 22),
+              style: TextStyle(color: Colors.blue, fontSize: 15),
             ),
             Container(
               child: Icon(
                 Icons.person,
                 color: Colors.blue,
+                size: 20,
               ),
             )
           ],
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         inputBox('Full Name', context),
         SizedBox(
@@ -94,22 +110,23 @@ class _SlideTileState extends State<SlideTile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         SizedBox(
-          height: 30,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Verification',
-              style: TextStyle(color: Colors.blue, fontSize: 22),
+              style: TextStyle(color: Colors.blue, fontSize: 15),
             ),
             Container(
                 child: Icon(
               Icons.mail,
               color: Colors.blue,
+              size: 20,
             ))
           ],
         ),
@@ -131,28 +148,29 @@ class _SlideTileState extends State<SlideTile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         SizedBox(
-          height: 30,
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               'Security',
-              style: TextStyle(color: Colors.blue, fontSize: 22),
+              style: TextStyle(color: Colors.blue, fontSize: 15),
             ),
             Container(
               child: Icon(
                 Icons.security,
                 color: Colors.blue,
+                size: 20,
               ),
             )
           ],
         ),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         inputBox('Password', context),
         SizedBox(
@@ -165,11 +183,13 @@ class _SlideTileState extends State<SlideTile> {
 
   Widget inputBox(String type, BuildContext context) {
     return Container(
+      height: 43,
       decoration: BoxDecoration(
           color: Colors.orange[300], borderRadius: BorderRadius.circular(15)),
       child: type == 'Full Name'
           ? TextFormField(
               focusNode: _firstNameFocusNode,
+              style: TextStyle(color: Colors.white),
               decoration: new InputDecoration(
                   suffixIcon: Icon(
                     Icons.person,
@@ -181,9 +201,9 @@ class _SlideTileState extends State<SlideTile> {
                   errorBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
                   contentPadding:
-                      EdgeInsets.only(left: 15, bottom: 12, right: 15, top: 15),
+                      EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   hintText: type,
-                  hintStyle: TextStyle(fontSize: 15, color: Colors.white)),
+                  hintStyle: TextStyle(fontSize: 13, color: Colors.white)),
               textInputAction: TextInputAction.next,
               validator: (val) => validation('Full Name', val),
               onFieldSubmitted: (value) =>
@@ -193,6 +213,7 @@ class _SlideTileState extends State<SlideTile> {
           : type == 'Contact Number'
               ? TextFormField(
                   focusNode: _lastNameFocusNode,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.call,
@@ -216,6 +237,7 @@ class _SlideTileState extends State<SlideTile> {
               : type == 'Email'
                   ? TextFormField(
                       focusNode: _emailFocusNode,
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           suffixIcon: Icon(
                             Icons.email,
@@ -242,6 +264,7 @@ class _SlideTileState extends State<SlideTile> {
                       ? TextFormField(
                           focusNode: _passwordFocusNode,
                           controller: _passwordController,
+                          style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
@@ -266,6 +289,7 @@ class _SlideTileState extends State<SlideTile> {
                         )
                       : TextFormField(
                           focusNode: _confirmPasswordFocusNode,
+                          style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
@@ -329,6 +353,7 @@ class _SlideTileState extends State<SlideTile> {
 
   Widget gender(String dropdownValue) {
     return Container(
+        height: 43,
         padding: EdgeInsets.symmetric(horizontal: 15),
         width: 0.9 * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -346,13 +371,48 @@ class _SlideTileState extends State<SlideTile> {
               dropdownValue = newValue;
             });
           },
-          items: ['Male', 'Female', 'Others', 'dde']
-              .map<DropdownMenuItem<String>>((String value) {
+          items: [
+            'Male',
+            'Female',
+            'Others',
+          ].map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(value),
             );
           }).toList(),
         ));
+  }
+
+  Widget button() {
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+          color: Colors.blue, borderRadius: BorderRadius.circular(15)),
+      //alignment: Alignment.centerRight,
+      width: MediaQuery.of(context).size.width,
+      child: _isloading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : TextButton(
+              child: Text(
+                'Sign up',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async {
+                _formKeySignUp.currentState.validate();
+                _formKeySignUp.currentState.save();
+                setState(() {
+                  _isloading = true;
+                });
+                await Auth().signUp(_addingUser);
+                setState(() {
+                  _isloading = false;
+                });
+              },
+            ),
+    );
   }
 }

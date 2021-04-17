@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
+import 'package:travel/screens/FirstScreen/signup_screen.dart';
 
 class OneScreen extends StatelessWidget {
   @override
@@ -30,7 +31,7 @@ class OneScreen extends StatelessWidget {
                     button(
                       context,
                       'Sign Up',
-                      200,
+                      300,
                     ),
                     SizedBox(
                       height: 5,
@@ -62,10 +63,11 @@ class OneScreen extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           if (buttonName == 'Log In') {
-            return Navigator.of(context).pushReplacement(
+            Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (ctx) => LoginScreen()));
           } else {
-            return null;
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (ctx) => SignUpScreen()));
           }
         },
         child: Text(

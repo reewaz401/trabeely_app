@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel/screens/FirstScreen/signup_screen.dart';
 import 'package:travel/services/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,24 +17,30 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SvgPicture.asset('assets/images/logo.svg'),
-            inputBox(),
-            Container(
-                child: Column(
-              children: [
-                button(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text('Do not have account ? Sign Up instead'))
-              ],
-            ))
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                  height: 170,
+                  width: 0.9 * MediaQuery.of(context).size.width,
+                  child: SvgPicture.asset('assets/images/loginLogo.svg')),
+              inputBox(),
+              Container(
+                  child: Column(
+                children: [
+                  button(),
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (ctx) => SignUpScreen())),
+                      child: Text('Do not have account ? Sign Up instead'))
+                ],
+              ))
+            ],
+          ),
         ),
       ),
     );
@@ -53,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextFormField(
                   focusNode: _emailFocusNode,
                   keyboardType: TextInputType.emailAddress,
+                  style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       suffixIcon: Icon(
@@ -92,6 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(15)),
                 child: TextFormField(
                   focusNode: _passwordFocusNode,
+                  style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.name,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -135,6 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: TextButton(
         onPressed: () async {
           FocusScope.of(context).unfocus();
+          _formKeyLogIn.currentState.validate();
+          _formKeyLogIn.currentState.save();
           setState(() {
             _isloading = true;
           });
