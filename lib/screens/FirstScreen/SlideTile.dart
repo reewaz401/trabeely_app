@@ -42,8 +42,11 @@ class _SlideTileState extends State<SlideTile> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [first(), second(), third(), button()],
+      child: Form(
+        key: _formKeySignUp,
+        child: Column(
+          children: [first(), second(), third(), button()],
+        ),
       ),
     );
   }
@@ -319,7 +322,7 @@ class _SlideTileState extends State<SlideTile> {
   String validation(String type, String value) {
     switch (type) {
       case 'Email':
-        if (!value.contains('@') && !value.contains('.com')) {
+        if (!value.contains('@') || !value.contains('.com')) {
           return ('enter a valid email');
         }
         break;
