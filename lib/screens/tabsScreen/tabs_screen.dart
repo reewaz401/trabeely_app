@@ -12,6 +12,7 @@ import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
 import 'package:travel/screens/Booking/bookingHistory.dart';
+import 'package:travel/screens/Settings/settings.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -172,17 +173,15 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
         ListTile(
-          title: Text('Dark Mode'),
-          trailing: Consumer<colors.ThemeNotifier>(
-            builder: (context, colors.ThemeNotifier value, child) {
-              return Switch(
-                value: !value.darkTheme,
-                onChanged: (theme) {
-                  value.toggleTheme();
-                },
-              );
-            },
-          ),
+          title: Text('Settings'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => Settings(),
+              ),
+            );
+          },
         ),
         ListTile(
           title: Text('Booking History'),
