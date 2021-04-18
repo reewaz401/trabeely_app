@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
 import 'package:travel/services/authentication.dart';
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             return Consumer<Auth>(builder: (context, auth, _) {
               return onboardingPage
                   ? auth.isAuth
-                      ? AuthScreen(false)
+                      ? OneScreen()
                       : TabsScreen('Search Destination')
                   : OnboardinPage();
             });

@@ -255,9 +255,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           setState(() {
             _isloading = true;
           });
-          setState(() {
-            _isloading = false;
-          });
         },
       ),
     );

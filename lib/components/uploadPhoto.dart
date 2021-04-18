@@ -6,6 +6,17 @@ import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 
 class UploadPhoto {
+  Future getImage(ImageSource source) async {
+    File _imagePath;
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: source);
+
+    _imagePath = File(pickedFile.path);
+
+    Image image = Image.file(_imagePath);
+    return image;
+  }
+
   File imageTaken;
   Future<File> imagePickerDialog(BuildContext context) async {
     await showDialog(
@@ -20,21 +31,12 @@ class UploadPhoto {
                   FlatButton(
                       child: Text('Library'),
                       onPressed: () async {
-                        imageTaken = await imageSource('Library', ctx);
-                        Navigator.of(context).pop(imageTaken);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => AddStoryScreen(imageTaken)));
+                        await getImage(ImageSource.gallery);
                       }),
                   FlatButton(
                     child: Text('Camera'),
                     onPressed: () async {
-                      imageTaken = await imageSource('Camera', ctx);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (ctx) => AddStoryScreen(imageTaken)));
+                      await getImage(ImageSource.camera);
                     },
                   )
                 ],

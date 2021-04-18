@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/Settings/userProfileEdit.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -10,6 +14,21 @@ class UserProfileScreen extends StatefulWidget {
 class UserProfileScreenState extends State<UserProfileScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
   @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
@@ -121,10 +140,15 @@ class UserProfileScreenState extends State<UserProfileScreen>
                       Container(
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/images/profile.jpeg',
-                            fit: BoxFit.cover,
-                          ),
+                          child: _image == null
+                              ? Image.asset(
+                                  'assets/images/profile.jpeg',
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.file(
+                                  _image,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                         margin: EdgeInsets.only(left: 10),
                         decoration: BoxDecoration(
@@ -145,20 +169,30 @@ class UserProfileScreenState extends State<UserProfileScreen>
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        content: Column(
-                                          children: [
-                                            ListTile(
-                                              title: Text('Upload An Image'),
-                                            ),
-                                            ListTile(
-                                              title: Text('Edit Your Info'),
-                                              onTap: () => Navigator.push(
-                                                  context, MaterialPageRoute(
-                                                      builder: (context) {
-                                                return ProfileData();
-                                              })),
-                                            )
-                                          ],
+                                        content: Container(
+                                          height: 150,
+                                          child: Column(
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                  getImage();
+                                                },
+                                                title: Text('Upload An Image'),
+                                              ),
+                                              ListTile(
+                                                title: Text('Edit Your Info'),
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                  return Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return ProfileData();
+                                                  }));
+                                                },
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       );
                                     });
