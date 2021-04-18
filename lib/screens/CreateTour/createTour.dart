@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travel/screens/CreateTour/widgets.dart';
 import 'package:travel/screens/CreateTour/dialogue.dart';
+import 'package:travel/screens/CreateTour/institutionalForm.dart';
 
 class CreateTour extends StatefulWidget {
   @override
@@ -94,309 +95,309 @@ class _CreateTourState extends State<CreateTour> {
                       });
                     }),
                 institutionalBooking
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Enter Institution Name',
-                            isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.grey),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.red),
+                    ? InstitutionalForm()
+                    : Column(
+                        children: [
+                          headingText('Destination'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              subheading('From'),
+                              subheading(
+                                'To',
+                              )
+                            ],
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  width: 150,
+                                  height: 60,
+                                  child: inputfield(
+                                      destinationfromName, TextInputType.text),
+                                ),
+                                Container(
+                                  width: 150,
+                                  height: 60,
+                                  child: inputfield(
+                                      destinationToName, TextInputType.text),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                      )
-                    : Container(),
-                headingText('Destination'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    subheading('From'),
-                    subheading(
-                      'To',
-                    )
-                  ],
-                ),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: 150,
-                        height: 60,
-                        child: numberfield(destinationfromName),
-                      ),
-                      Container(
-                        width: 150,
-                        height: 60,
-                        child: numberfield(destinationToName),
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: destination,
-                          itemBuilder: (context, index) {
-                            return Column(
+                          Center(
+                            child: Column(
                               children: [
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Center(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Container(
-                                        width: 125,
-                                        height: 40,
-                                        child: numberfield(destinationfromName),
-                                      ),
-                                      Row(
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: destination,
+                                    itemBuilder: (context, index) {
+                                      return Column(
                                         children: [
-                                          Container(
-                                            width: 125,
-                                            height: 40,
-                                            child:
-                                                numberfield(destinationToName),
+                                          SizedBox(
+                                            height: 15,
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  destination--;
-                                                });
-                                              },
-                                              child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  border: Border.all(),
-                                                  color: Colors.red,
+                                          Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Container(
+                                                  width: 125,
+                                                  height: 40,
+                                                  child: inputfield(
+                                                      destinationfromName,
+                                                      TextInputType.text),
                                                 ),
-                                                child: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
+                                                Row(
+                                                  children: [
+                                                    Container(
+                                                      width: 125,
+                                                      height: 40,
+                                                      child: inputfield(
+                                                          destinationToName,
+                                                          TextInputType.text),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            destination--;
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          height: 25,
+                                                          width: 25,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30),
+                                                            border:
+                                                                Border.all(),
+                                                            color: Colors.red,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons.delete,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                )
+                                              ],
                                             ),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
                                           )
                                         ],
-                                      )
-                                    ],
+                                      );
+                                    }),
+                              ],
+                            ),
+                          ),
+                          deestinationFieldIncreaser(),
+                          headingText('Additional Info'),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              subheading('Date From'),
+                              subheading('Date To'),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2025),
+                                  ).then((value) {
+                                    setState(() {
+                                      initDate = value;
+                                    });
+                                  });
+                                },
+                                child: Text(initformattedDate),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(2020),
+                                    lastDate: DateTime(2025),
+                                  ).then((value) {
+                                    setState(() {
+                                      finalDate = value;
+                                    });
+                                  });
+                                },
+                                child: Text(finalformattedDate),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              subheading('Total People'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 80,
+                                child: inputfield(
+                                    totalPeople, TextInputType.number),
+                              ),
+                            ],
+                          ),
+                          headingText('Hotel'),
+                          RadioListTile(
+                              title: Text('2 Star'),
+                              value: '2 Star',
+                              groupValue: hotel,
+                              onChanged: (value) {
+                                setState(() {
+                                  hotel = value;
+                                });
+                              }),
+                          RadioListTile(
+                              title: Text('3 Star'),
+                              value: '3 Star',
+                              groupValue: hotel,
+                              onChanged: (value) {
+                                setState(() {
+                                  hotel = value;
+                                });
+                              }),
+                          RadioListTile(
+                              title: Text('4 Star'),
+                              value: '4 Star',
+                              groupValue: hotel,
+                              onChanged: (value) {
+                                setState(() {
+                                  hotel = value;
+                                });
+                              }),
+                          RadioListTile(
+                            title: Text('5 Star'),
+                            value: '5 Star',
+                            groupValue: hotel,
+                            onChanged: (value) {
+                              setState(() {
+                                hotel = value;
+                              });
+                            },
+                          ),
+                          headingText('Transportaion'),
+                          Row(
+                            children: [
+                              vehicleType('Self'),
+                              vehicleType('Jeep'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              vehicleType('Microbus'),
+                              vehicleType('Bus'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              vehicleType('Plane'),
+                              vehicleType('Other'),
+                            ],
+                          ),
+                          headingText('Transportaion Way'),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  child: RadioListTile(
+                                    title: Text('One Way'),
+                                    value: 'One Way',
+                                    groupValue: transportationway,
+                                    onChanged: (a) {
+                                      setState(() {
+                                        transportationway = a;
+                                      });
+                                    },
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  width: 200,
+                                  child: RadioListTile(
+                                    title: Text('Two Way'),
+                                    value: 'Two Way',
+                                    groupValue: transportationway,
+                                    onChanged: (a) {
+                                      setState(() {
+                                        transportationway = a;
+                                      });
+                                    },
+                                  ),
                                 )
                               ],
-                            );
-                          }),
-                    ],
-                  ),
-                ),
-                deestinationFieldIncreaser(),
-                headingText('Additional Info'),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    subheading('Date From'),
-                    subheading('Date To'),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime(2025),
-                        ).then((value) {
-                          setState(() {
-                            initDate = value;
-                          });
-                        });
-                      },
-                      child: Text(initformattedDate),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime(2025),
-                        ).then((value) {
-                          setState(() {
-                            finalDate = value;
-                          });
-                        });
-                      },
-                      child: Text(finalformattedDate),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    subheading('Total People'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 80,
-                      child: numberfield(totalPeople),
-                    ),
-                  ],
-                ),
-                headingText('Hotel'),
-                RadioListTile(
-                    title: Text('2 Star'),
-                    value: '2 Star',
-                    groupValue: hotel,
-                    onChanged: (value) {
-                      setState(() {
-                        hotel = value;
-                      });
-                    }),
-                RadioListTile(
-                    title: Text('3 Star'),
-                    value: '3 Star',
-                    groupValue: hotel,
-                    onChanged: (value) {
-                      setState(() {
-                        hotel = value;
-                      });
-                    }),
-                RadioListTile(
-                    title: Text('4 Star'),
-                    value: '4 Star',
-                    groupValue: hotel,
-                    onChanged: (value) {
-                      setState(() {
-                        hotel = value;
-                      });
-                    }),
-                RadioListTile(
-                  title: Text('5 Star'),
-                  value: '5 Star',
-                  groupValue: hotel,
-                  onChanged: (value) {
-                    setState(() {
-                      hotel = value;
-                    });
-                  },
-                ),
-                headingText('Transportaion'),
-                Row(
-                  children: [
-                    vehicleType('Self'),
-                    vehicleType('Jeep'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    vehicleType('Microbus'),
-                    vehicleType('Bus'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    vehicleType('Plane'),
-                    vehicleType('Other'),
-                  ],
-                ),
-                headingText('Transportaion Way'),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 200,
-                        child: RadioListTile(
-                          title: Text('One Way'),
-                          value: 'One Way',
-                          groupValue: transportationway,
-                          onChanged: (a) {
-                            setState(() {
-                              transportationway = a;
-                            });
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: 200,
-                        child: RadioListTile(
-                          title: Text('Two Way'),
-                          value: 'Two Way',
-                          groupValue: transportationway,
-                          onChanged: (a) {
-                            setState(() {
-                              transportationway = a;
-                            });
-                          },
-                        ),
+                            ),
+                          ),
+                          headingText('Additional Needs'),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              child: TextField(
+                                maxLines: 5,
+                                decoration: InputDecoration(
+                                  hintText:
+                                      'Add Your Needs And Prority In This Field',
+                                  isDense: true,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(color: Colors.grey),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Container(
+                              width: double.infinity,
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.blue[900],
+                                    primary: Colors.white),
+                                onPressed: () => showBookingDialogue(
+                                  context,
+                                  institutionalBooking,
+                                  destinationfromName,
+                                  destinationToName,
+                                  institutionalName,
+                                ),
+                                child: Text('Proceed'),
+                              ),
+                            ),
+                          ),
+                        ],
                       )
-                    ],
-                  ),
-                ),
-                headingText('Additional Needs'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: TextField(
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        hintText: 'Add Your Needs And Prority In This Field',
-                        isDense: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.grey),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.red),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Container(
-                    width: double.infinity,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue[900],
-                          primary: Colors.white),
-                      onPressed: () => showBookingDialogue(
-                        context,
-                        institutionalBooking,
-                        destinationfromName,
-                        destinationToName,
-                        institutionalName,
-                      ),
-                      child: Text('Proceed'),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

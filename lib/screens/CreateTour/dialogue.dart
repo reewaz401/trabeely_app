@@ -45,22 +45,26 @@ Widget doubleRowText(BuildContext context, String heading, String trailing) {
   final width = MediaQuery.of(context).size.width;
   return Column(
     children: [
-      Row(
+      Column(
         children: [
-          SizedBox(
-            width: width * 0.25,
-            child: Text(
-              heading + ' :',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+          Row(
+            children: [
+              SizedBox(
+                width: width * 0.25,
+                child: Text(
+                  heading + ' :',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                width: width * 0.45,
+                child: Text(
+                  trailing,
+                  style: TextStyle(color: Colors.grey[800]),
+                ),
+              )
+            ],
           ),
-          SizedBox(
-            width: width * 0.45,
-            child: Text(
-              trailing,
-              style: TextStyle(color: Colors.grey[800]),
-            ),
-          )
         ],
       ),
       SizedBox(

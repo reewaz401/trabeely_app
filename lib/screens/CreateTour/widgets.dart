@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget numberfield(TextEditingController controller) {
+Widget inputfield(TextEditingController controller, TextInputType texttype) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: TextField(
       controller: controller,
-      keyboardType: TextInputType.number,
+      keyboardType: texttype,
       decoration: InputDecoration(
         isDense: true,
         enabledBorder: OutlineInputBorder(

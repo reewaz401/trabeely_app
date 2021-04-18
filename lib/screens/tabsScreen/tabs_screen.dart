@@ -32,7 +32,7 @@ class _TabsScreenState extends State<TabsScreen> {
     _pages = [
       {'pages': HomePageScreen(), 'title': 'Home'},
       {'pages': StoryFeedScreen(), 'title': 'Story'},
-      {'pages': UserProfileScreen(userName), 'title': 'Profile'}
+      {'pages': UserProfileScreen(), 'title': 'Profile'}
     ];
     super.initState();
   }
