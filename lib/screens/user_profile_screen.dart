@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:travel/screens/Settings/userProfileEdit.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -115,20 +116,56 @@ class UserProfileScreenState extends State<UserProfileScreen>
                 Positioned(
                   left: 0,
                   top: 40,
-                  child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'assets/images/profile.jpeg',
-                        fit: BoxFit.cover,
+                  child: Stack(
+                    children: [
+                      Container(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            'assets/images/profile.jpeg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        margin: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 8),
+                            borderRadius: BorderRadius.circular(20)),
+                        height: 145,
+                        width: 145,
                       ),
-                    ),
-                    margin: EdgeInsets.only(left: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 8),
-                        borderRadius: BorderRadius.circular(20)),
-                    height: 145,
-                    width: 145,
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Column(
+                                          children: [
+                                            ListTile(
+                                              title: Text('Upload An Image'),
+                                            ),
+                                            ListTile(
+                                              title: Text('Edit Your Info'),
+                                              onTap: () => Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                return ProfileData();
+                                              })),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    });
+                              }),
+                        ),
+                      )
+                    ],
                   ),
                 )
               ],
