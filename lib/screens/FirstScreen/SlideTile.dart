@@ -201,7 +201,8 @@ class _SlideTileState extends State<SlideTile> {
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
+                  // errorBorder: InputBorder.none,
+
                   disabledBorder: InputBorder.none,
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),

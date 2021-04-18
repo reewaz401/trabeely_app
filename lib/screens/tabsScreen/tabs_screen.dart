@@ -20,6 +20,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  bool _isloading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
@@ -176,9 +177,19 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
         ListTile(
-          title: Text('Log out'),
-          onTap: () {
-            Provider.of<Auth>(context, listen: false).logOut();
+          title: _isloading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Text('Log out'),
+          onTap: () async {
+            setState(() {
+              _isloading = true;
+            });
+            Provider.of<Auth>(context, listen: false).logOut(context);
+            setState(() {
+              _isloading = false;
+            });
           },
         ),
         ListTile(
