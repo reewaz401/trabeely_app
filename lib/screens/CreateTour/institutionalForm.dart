@@ -18,11 +18,11 @@ class InstitutionalForm extends StatelessWidget {
               subheading('Institution Name'),
               inputfield(institutionalName, TextInputType.text),
               subheading('Institution Location'),
-              inputfield(institutionalName, TextInputType.text),
+              inputfield(location, TextInputType.text),
               subheading('Institution Phonenumber'),
-              inputfield(institutionalName, TextInputType.number),
+              inputfield(phoneNumber, TextInputType.number),
               subheading('Institution Email'),
-              inputfield(institutionalName, TextInputType.emailAddress),
+              inputfield(email, TextInputType.emailAddress),
               Container(
                 width: double.infinity,
                 child: TextButton(
