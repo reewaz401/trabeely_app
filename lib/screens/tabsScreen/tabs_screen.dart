@@ -1,4 +1,6 @@
+import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/material.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Settings/writeToUs.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
@@ -26,6 +28,8 @@ class _TabsScreenState extends State<TabsScreen> {
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
   String userName;
+  String qrCodeResult = "Not Yet Scanned";
+
   @override
   void initState() {
     _pages = [
@@ -184,6 +188,16 @@ class _TabsScreenState extends State<TabsScreen> {
                 builder: (ctx) => BookingHistory(),
               ),
             );
+          },
+        ),
+        ListTile(
+          title: Text('Scan Qr'),
+          onTap: () async {
+            String codeSanner = await BarcodeScanner.scan(); //barcode scnner
+            setState(() {
+              qrCodeResult = codeSanner;
+              print(qrCodeResult);
+            });
           },
         ),
         ListTile(

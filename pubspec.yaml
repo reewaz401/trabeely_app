@@ -42,6 +42,8 @@ dependencies:
   nepali_date_picker: ^5.0.0
   datetime_picker_formfield:
   carousel_pro: ^1.0.0
+  barcode_scan_fix: ^1.0.2
+  
   
 
 
