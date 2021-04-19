@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
+import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
@@ -52,11 +54,22 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (ctx) => CreateTour()));
+        onPressed: () async {
+          if (_pages[_selectedPageIndex]['title'] == 'Story') {
+            final image = await UploadPhoto().imagePickerDialog(context);
+            if (image == null) {
+              return;
+            }
+            Navigator.push(context,
+                MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
+          } else {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (ctx) => CreateTour()));
+          }
         },
-        child: Icon(Icons.add),
+        child: Icon(_pages[_selectedPageIndex]['title'] == 'Story'
+            ? Icons.add_a_photo_outlined
+            : Icons.add),
       ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),

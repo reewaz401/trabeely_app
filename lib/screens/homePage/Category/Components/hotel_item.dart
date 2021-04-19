@@ -6,34 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:travel/screens/hotelDetails_screen.dart';
 
 class HotelItem extends StatelessWidget {
-  final String hotelName;
-  //final String title;
-  final String destination;
-  final double price;
-  final List amenities;
-  //final String date;
   final List<dynamic> mainList;
-  final String overview;
-  final List image;
+
   final int index;
 
-  HotelItem(
-      {this.amenities,
-      this.index,
-      this.image,
-      this.hotelName,
-      //  this.title,
-      this.destination,
-      this.price,
-      // this.date,
-      this.overview,
-      this.mainList});
+  HotelItem({this.index, this.mainList});
 
   @override
   Widget build(BuildContext context) {
+    print(mainList[index]['hotelDesc']);
     Size size = MediaQuery.of(context).size;
-    return Card(
-        color: Colors.white,
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         margin: EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
@@ -79,7 +66,7 @@ class HotelItem extends StatelessWidget {
               Expanded(
                 child: Container(
                   child: Text(
-                    hotelName,
+                    mainList[index]['name'],
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -94,7 +81,7 @@ class HotelItem extends StatelessWidget {
           SizedBox(
             height: 90,
             child: Text(
-              overview,
+              mainList[index]['hotelDesc'],
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
             ),
@@ -117,7 +104,7 @@ class HotelItem extends StatelessWidget {
                           text: 'Npr : ',
                           style: TextStyle(color: Colors.grey, fontSize: 10)),
                       TextSpan(
-                          text: price.toString(),
+                          text: mainList[index]['price'].toString(),
                           style: TextStyle(color: Colors.green[900]))
                     ]),
                   ),

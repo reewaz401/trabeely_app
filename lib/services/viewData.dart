@@ -12,81 +12,92 @@ class ViewData with ChangeNotifier {
   http.Response response;
 
   Map<String, dynamic> dataList;
-  Future<dynamic> viewData(String slectedType,
+//  Map<String, dynamic> finalList = {"data": []};
+
+  Future<dynamic> viewData(String selectedType,
       [String destination, bool isInitial = false]) async {
     String url;
-    if (slectedType == 'Tours') {
-      url = viewToursApi;
-    } else if (slectedType == 'Treks') {
-      url = viewTreksApi;
-    } else if (slectedType == 'Hotels') {
-      url = viewHotelsApi;
-    } else if (slectedType == 'Restaurants') {
-      url = viewRestaurantsApi; //api for restaurant
-    }
-
-    try {
-      if (slectedType == 'Hotels') {
-        print('Hotels Enter');
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        final String autoToken = prefs.getString('autoSignIn');
-        print("token : $autoToken");
-        response = await http.get(
-          url,
-          headers: {
-            HttpHeaders.authorizationHeader:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDRlY2UxYWJmYmFhYzNjN2M1YTk2MzAiLCJhY2Nlc3NMZXZlbCI6InN1cGVyLWFkbWluLXNjb3V0IiwiaWF0IjoxNjE3NjgyMzg2LCJleHAiOjE2MTc3Njg3ODZ9.SBMq5M8_UhdiUwX52NPIRoizDrKQuNFouJst6NqG9J0",
-          },
-        );
-        print(jsonDecode(response.body));
-      } else {
-        response = await http.get(
-          url,
-          headers: {
-            'Permission': '21f@do8GP3RMISI0N-D@T@',
-          },
-        );
-      }
-
+    if (destination != null) {
+      print('Enter by destinaiton');
+      url = '$viewByDestinationApi$destination';
+      response = await http.post(url, headers: {
+        'Permission': '21f@do8GP3RMISI0N-D@T@',
+      }, body: {
+        "type": selectedType
+      });
       var jsonResponse = jsonDecode(response.body);
-
-      if (slectedType == 'Tours') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Treks') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Hotels') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Restaurants') {
-        dataList = jsonResponse as Map<String, dynamic>;
+      print(jsonResponse);
+      return jsonResponse;
+    } else {
+      if (selectedType == 'Tours') {
+        url = viewToursApi;
+      } else if (selectedType == 'Treks') {
+        url = viewTreksApi;
+      } else if (selectedType == 'Hotels') {
+        url = viewHotelsApi;
+      } else if (selectedType == 'Restaurants') {
+        url = viewRestaurantsApi; //api for restaurant
       }
 
-      print("Destination: $destination");
-      if (destination != null) {
-        print('Enter by destinaiton');
-        jsonResponse = await sortByDestination(destination, jsonResponse);
+      try {
+        if (selectedType == 'Hotels') {
+          print('Hotels Enter');
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          final String autoToken = prefs.getString('autoSignIn');
+          print("token : $autoToken");
+          response = await http.get(
+            url,
+            headers: {
+              HttpHeaders.authorizationHeader:
+                  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDYwNmJhODMwZGEwMDBjOTQzNmNiMTMiLCJhY2Nlc3NMZXZlbCI6InN1cGVyLWFkbWluLXNjb3V0IiwiaWF0IjoxNjE3ODc3MDgzLCJleHAiOjE2MTc5NjM0ODN9.3sd0vSVnTCNLOnIXz7p3Zo2vabDxDQVodvJ8iqPfpqs",
+            },
+          );
+          print(jsonDecode(response.body));
+        } else {
+          response = await http.get(
+            url,
+            headers: {
+              'Permission': '21f@do8GP3RMISI0N-D@T@',
+            },
+          );
+        }
+
+        var jsonResponse = jsonDecode(response.body);
+
+        if (selectedType == 'Tours') {
+          dataList = jsonResponse as Map<String, dynamic>;
+        } else if (selectedType == 'Treks') {
+          dataList = jsonResponse as Map<String, dynamic>;
+        } else if (selectedType == 'Hotels') {
+          dataList = jsonResponse as Map<String, dynamic>;
+        } else if (selectedType == 'Restaurants') {
+          dataList = jsonResponse as Map<String, dynamic>;
+        }
+        print(jsonResponse);
+        print("Destination: $destination");
 
         return jsonResponse;
+      } catch (error) {
+        print(error);
+        throw error;
       }
-
-      return jsonResponse;
-    } catch (error) {
-      print(error);
-      throw error;
     }
   }
 
-  Future<List> sortByDestination(String destination, dynamic length) async {
+  /*Future<Map<String, dynamic>> sortByDestination(
+    String destination,
+  ) async {
     // result.clear();
 
-    for (int i = 0; i < 1; i++) {
-      var data = dataList['packages'][i]['destination'];
+    for (int i = 0; i < dataList['data'].toList().length; i++) {
+      var data = dataList['data'][i]['destination'];
       if (data.toLowerCase() == destination.toLowerCase()) {
         print('sortByDestinaiton');
-
-        result.add(dataList['packages'][i]);
-        return result;
+        finalList['packages'].add(dataList['packages'][i]);
       }
     }
-    return null;
-  }
+    print('object');
+    print(finalList);
+    return finalList;
+  }*/
 }

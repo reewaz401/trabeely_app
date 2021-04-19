@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel/components/datePicker_widget.dart';
+import 'package:travel/components/searchBox.dart';
+import 'package:travel/components/searchButton.dart';
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class TourFilter extends StatelessWidget {
@@ -10,65 +12,75 @@ class TourFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     var destination = '';
     final _tourDestination = TextEditingController();
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-                height: 50,
-                width: 0.76 * MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(width: 0.5)),
-                child: TextField(
-                  controller: _tourDestination,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 25, bottom: 11, top: 11, right: 15),
-                      hintText: "Enter Destination",
-                      hintStyle: TextStyle(color: Colors.black)),
-                )),
-            FilterIcon()
-          ],
-        ),
-        // Padding(
-        //   padding: const EdgeInsets.only(
-        //     left: 13,
-        //     right: 13,
-        //     top: 5,
-        //   ),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.start,
-        //     children: [
-        //       Container(
-        //         child: DatePickerWidget(),
-        //         width: 0.5 * MediaQuery.of(context).size.width,
-        //       ),
-        //       Spacer(
-        //         flex: 2,
-        //       ),
-        //       SizedBox(
-        //         child: Text('Number of People'),
-        //         width: 65,
-        //       ),
-        //       Spacer(
-        //         flex: 1,
-        //       ),
-        //       numberOfPeople(),
-        //     ],
-        //   ),
-        // ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(15)),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                  height: 50,
+                  width: 0.76 * MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(width: 0.5)),
+                  child: TextField(
+                    controller: _tourDestination,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(
+                            left: 25, bottom: 11, top: 11, right: 15),
+                        hintText: "Enter Destination",
+                        hintStyle: TextStyle(color: Colors.black)),
+                  )),
+              FilterIcon('Tours')
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          SearchButton(),
+          // Padding(
+          //   padding: const EdgeInsets.only(
+          //     left: 13,
+          //     right: 13,
+          //     top: 5,
+          //   ),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.start,
+          //     children: [
+          //       Container(
+          //         child: DatePickerWidget(),
+          //         width: 0.5 * MediaQuery.of(context).size.width,
+          //       ),
+          //       Spacer(
+          //         flex: 2,
+          //       ),
+          //       SizedBox(
+          //         child: Text('Number of People'),
+          //         width: 65,
+          //       ),
+          //       Spacer(
+          //         flex: 1,
+          //       ),
+          //       numberOfPeople(),
+          //     ],
+          //   ),
+          // ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 

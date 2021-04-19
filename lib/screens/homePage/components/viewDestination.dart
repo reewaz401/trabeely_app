@@ -12,7 +12,7 @@ class ViewDestination extends StatefulWidget {
 }
 
 class _ViewDestinationState extends State<ViewDestination> {
-  @override
+  List<dynamic> dataList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,6 +197,26 @@ class _ViewDestinationState extends State<ViewDestination> {
           SizedBox(
             height: 10,
           ),
+          FutureBuilder(
+              future: ViewData().viewData('Tours', widget.destination),
+              builder: (context, snapshot) {
+                return snapshot.connectionState == ConnectionState.waiting
+                    ? Expanded(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : snapshot.hasData
+                        ? ListView.builder(
+                            itemCount: snapshot.data['data'].length,
+                            itemBuilder: (context, index) {
+                              dataList = snapshot.data['data'];
+                              return card(dataList[index]['title'],
+                                  dataList[index]['price'], 'mustang1');
+                            },
+                          )
+                        : Text("NO DATA");
+              }),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(

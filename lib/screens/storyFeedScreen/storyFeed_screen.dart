@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'dart:io';
-
-import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
-import '../../components/uploadPhoto.dart';
 
 class StoryFeedScreen extends StatelessWidget {
   static const routeName = '/storyScreen';
@@ -17,7 +12,6 @@ class StoryFeedScreen extends StatelessWidget {
       width: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          addStoryCard(context),
           Expanded(
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -34,7 +28,7 @@ class StoryFeedScreen extends StatelessWidget {
       ),
     );
   }
-
+/*
   Widget addStoryCard(BuildContext context) {
     return Container(
       // color: Colors.blueAccent,
@@ -120,7 +114,7 @@ class StoryFeedScreen extends StatelessWidget {
       ),
     );
   }
-
+*/
   // our product image
 
   // Product title and price

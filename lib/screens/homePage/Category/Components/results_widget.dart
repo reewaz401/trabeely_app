@@ -20,7 +20,7 @@ class ResultsWidget extends StatefulWidget {
 }
 
 class _ResultsWidgetState extends State<ResultsWidget> {
-  List dataList;
+  List<dynamic> dataList;
 
   @override
   void initState() {
@@ -49,22 +49,15 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                             itemBuilder: (context, index) {
                               dataList = snapshot.data['data'];
                               return ht.HotelItem(
-                                hotelName: dataList[index]['name'],
-                                //     date: '2021-08-02 15:30',
-
-                                destination: dataList[index]['address'],
-                                //  title: dataList[index]['name'],
                                 mainList: dataList,
-                                overview: dataList[index]['hotelDesc'],
-                                image: dataList[index]['packageImg'],
                                 index: index,
                               );
                             },
                           )
                         : ListView.builder(
-                            itemCount: snapshot.data['packages'].length,
+                            itemCount: snapshot.data['data'].length,
                             itemBuilder: (context, index) {
-                              dataList = snapshot.data['packages'];
+                              dataList = snapshot.data['data'];
                               return TourItem(
                                 agencyName: 'Hello',
                                 date: '2021-08-02 15:30',

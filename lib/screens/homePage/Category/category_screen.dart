@@ -24,6 +24,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return DefaultTabController(
       length: 6,
       child: Scaffold(
+        backgroundColor: Color(0xFFF3F2F2),
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
           bottom: TabBar(
@@ -56,12 +57,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body: TabBarView(
           children: [
-            ResultsWidget('All'),
-            ResultsWidget('Tours'),
-            ResultsWidget('Treks'),
-            ResultsWidget('Hotels'),
-            ResultsWidget('Restaurents'),
-            ResultsWidget('Clubs'),
+            Column(
+              children: [AllFilter(), ResultsWidget('All', args.destination)],
+            ),
+            Column(
+              children: [
+                TourFilter(),
+                ResultsWidget('Tours', args.destination),
+              ],
+            ),
+            Column(
+              children: [
+                TourFilter(),
+                ResultsWidget('Treks', args.destination),
+              ],
+            ),
+            Column(
+              children: [
+                HotelFilter(),
+                ResultsWidget('Hotels', args.destination),
+              ],
+            ),
+            ResultsWidget('Restaurents', args.destination),
+            ResultsWidget('Clubs', args.destination),
           ],
         ),
       ),

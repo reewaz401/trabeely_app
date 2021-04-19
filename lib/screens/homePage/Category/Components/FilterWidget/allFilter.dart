@@ -26,7 +26,7 @@ class AllFilter extends StatelessWidget {
                   hintText: "Enter Destination",
                   hintStyle: TextStyle(color: Colors.grey)),
             )),
-        FilterIcon()
+        FilterIcon('All')
       ],
     );
   }
