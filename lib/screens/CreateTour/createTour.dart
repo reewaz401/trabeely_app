@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travel/screens/CreateTour/widgets.dart';
-import 'package:travel/screens/CreateTour/dialogue.dart';
+import 'package:travel/screens/CreateTour/creatbookingFuntion.dart';
 import 'package:travel/screens/CreateTour/institutionalForm.dart';
 
 class CreateTour extends StatefulWidget {
@@ -385,13 +385,7 @@ class _CreateTourState extends State<CreateTour> {
                                 style: TextButton.styleFrom(
                                     backgroundColor: Colors.blue[900],
                                     primary: Colors.white),
-                                onPressed: () => showBookingDialogue(
-                                  context,
-                                  institutionalBooking,
-                                  destinationfromName,
-                                  destinationToName,
-                                  institutionalName,
-                                ),
+                                onPressed: () => createCustomBooking(),
                                 child: Text('Proceed'),
                               ),
                             ),

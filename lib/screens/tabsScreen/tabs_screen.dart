@@ -14,6 +14,7 @@ import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
 import 'package:travel/screens/Booking/bookingHistory.dart';
 import 'package:travel/screens/Settings/settings.dart';
+import 'package:travel/screens/ExtraScreens/qrScanned.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -199,6 +200,9 @@ class _TabsScreenState extends State<TabsScreen> {
               qrCodeResult = codeSanner;
               print(qrCodeResult);
             });
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return QrScanned(qrCodeResult);
+            }));
           },
         ),
         ListTile(

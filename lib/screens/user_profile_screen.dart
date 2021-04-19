@@ -224,7 +224,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
                   Text('people'),
                   Center(
                     child: QrImage(
-                      data: "1234567890",
+                      data: "6076a25b5ada354cae965f7b",
                       version: QrVersions.auto,
                       size: 200.0,
                     ),
