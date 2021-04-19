@@ -141,34 +141,41 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       width: 0.7 * MediaQuery.of(context).size.width,
       height: 50,
-      child: TextButton(
-        onPressed: () async {
-          FocusScope.of(context).unfocus();
-          _formKeyLogIn.currentState.validate();
-          _formKeyLogIn.currentState.save();
-          setState(() {
-            _isloading = true;
-          });
+      child: _isloading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : TextButton(
+              onPressed: () async {
+                FocusScope.of(context).unfocus();
+                var validation = _formKeyLogIn.currentState.validate();
+                if (validation) {
+                  _formKeyLogIn.currentState.save();
+                  setState(() {
+                    _isloading = true;
+                  });
 
-          _formKeyLogIn.currentState.save();
-          _formKeyLogIn.currentState.validate();
-          await Auth()
-              .signIn(context, _authData['email'], _authData['password']);
-          setState(() {
-            _isloading = false;
-          });
-        },
-        child: Text(
-          'Log In',
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue[700]),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ))),
-      ),
+                  _formKeyLogIn.currentState.save();
+                  _formKeyLogIn.currentState.validate();
+                  await Auth().signIn(
+                      context, _authData['email'], _authData['password']);
+                  setState(() {
+                    _isloading = false;
+                  });
+                }
+              },
+              child: Text(
+                'Log In',
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue[700]),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ))),
+            ),
     );
   }
 }

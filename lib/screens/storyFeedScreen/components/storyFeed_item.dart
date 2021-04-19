@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class StoryFeedItem extends StatefulWidget {
   final String userName;
@@ -50,8 +51,24 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
           SizedBox(
             height: 10,
           ),
-          Container(
-            child: Image.network(widget.imageUrl),
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 250,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              Container(
+                height: 250,
+                child: Center(
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: widget.imageUrl,
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 10,
