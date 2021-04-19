@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:intl/intl.dart';
+import 'package:travel/components/datePicker_widget.dart';
 import 'package:travel/screens/Booking/bookingSucess.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class BookingInfo extends StatefulWidget {
   @override
@@ -7,14 +11,35 @@ class BookingInfo extends StatefulWidget {
 }
 
 class _BookingInfoState extends State<BookingInfo> {
-  var adultsNum = 1;
-
-  var childNum = 0;
-
-  var roomsNum = 1;
+  int adultsNum = 1;
+  int childNum = 0;
+  String paymentMethod = 'Cash';
+  int roomsNum = 1;
   String _paymentMethod = 'Cash';
+  void updateChild(int count) {
+    setState(() {
+      print(childNum);
+      childNum = count;
+      print(childNum);
+    });
+  }
+
+  void updateAdult(int count) {
+    setState(() => adultsNum = count);
+  }
+
+  void updateRoom(int count) {
+    setState(() => roomsNum = count);
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime initDate = DateTime.now();
+    DateTime finalDate = DateTime.now();
+    String initformattedDate = DateFormat.yMMMd().format(initDate);
+
+    String finalformatDate = DateFormat.yMMMd().format(finalDate);
+
     Future<bool> _backPress() {
       return showDialog(
         context: context,
@@ -41,29 +66,26 @@ class _BookingInfoState extends State<BookingInfo> {
       child: Scaffold(
         bottomSheet: Container(
           width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RaisedButton(
-              color: Colors.blue[900],
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookingConfirm(
-                      adult: adultsNum,
-                      child: childNum,
-                      room: roomsNum,
-                      payment: _paymentMethod,
-                    ),
+          child: RaisedButton(
+            color: Colors.blue[900],
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookingConfirm(
+                    adult: adultsNum,
+                    child: childNum,
+                    room: roomsNum,
+                    payment: _paymentMethod,
                   ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Book Now',
-                  style: TextStyle(color: Colors.white),
                 ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Book Now',
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),
@@ -77,88 +99,100 @@ class _BookingInfoState extends State<BookingInfo> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Text(
-                        'Annapurna',
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                Text('Annapurna'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [Text('Date From '), Text('Date To')],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          datepicker(context).then((val) {
+                            setState(() {
+                              finalDate = val;
+                            });
+                          });
+                        },
+                        child: Text(initformattedDate),
                       ),
-                    )),
+                    ),
+                    Container(
+                      width: 150,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          datepicker(context).then((val) {
+                            setState(() {
+                              finalDate = val;
+                            });
+                          });
+                        },
+                        child: Text(finalformatDate),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 15,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'Enter the number of people',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w400),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (bctx) {
-                                    return addRoomPeople();
-                                  });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blueAccent)),
-                              width: double.infinity,
-                              height: 50,
-                              child: Center(
-                                child: Text(
-                                    'Adult : $adultsNum Children : $childNum Room : $roomsNum'),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            ListTile(
-                              title: const Text('Cash On Hand'),
-                              leading: Radio(
-                                value: "Cash",
-                                groupValue: _paymentMethod,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _paymentMethod = value;
-                                  });
-                                },
-                              ),
-                            ),
-                            ListTile(
-                              title: const Text('E-Cash'),
-                              leading: Radio(
-                                value: "E-Cash",
-                                groupValue: _paymentMethod,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _paymentMethod = value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                SizedBox(
+                  height: 15,
+                ),
+                BookingInfos(
+                    type: 'Children', number: childNum, update: updateChild),
+                BookingInfos(
+                    type: 'Adult', number: adultsNum, update: updateAdult),
+                BookingInfos(
+                    type: 'Room', number: roomsNum, update: updateRoom),
+                SizedBox(
+                  height: 15,
+                ),
+                heading('Your Total Cost'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        'Rs. 5000 x 2 nights',
+                        style: TextStyle(fontSize: 18),
+                      ),
                     ),
-                  ),
+                    Text(
+                      'Rs. 10,000',
+                      style: TextStyle(fontSize: 18),
+                    )
+                  ],
+                ),
+                heading('Payment Method'),
+                RadioListTile(
+                    title: Text('Cash'),
+                    value: 'Cash',
+                    groupValue: paymentMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        paymentMethod = value;
+                      });
+                    }),
+                RadioListTile(
+                    title: Text('E-Cash'),
+                    value: 'E-Cash',
+                    groupValue: paymentMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        paymentMethod = value;
+                      });
+                    }),
+                heading('Cancelation Policy'),
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Text('''This hotel offers cancellation policy of 
+before 1 day of check in.'''),
                 )
               ],
             ),
@@ -167,180 +201,120 @@ class _BookingInfoState extends State<BookingInfo> {
       ),
     );
   }
+}
 
-  Widget addRoomPeople() {
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter modelSetState) {
-      return Container(
-        margin: EdgeInsets.all(5),
-        height: 0.35 * MediaQuery.of(context).size.height,
-        child: Column(
+Widget textfield() {
+  return TextField(
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+      isDense: true,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(color: Colors.grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(color: Colors.red),
+      ),
+    ),
+  );
+}
+
+datepicker(context) {
+  showDatePicker(
+    confirmText: 'Pick',
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2020),
+    lastDate: DateTime(2025),
+  );
+}
+
+Widget heading(String heading) {
+  return Column(
+    children: [
+      SizedBox(
+        height: 15,
+      ),
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            heading,
+            style: TextStyle(fontSize: 25),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+class BookingInfos extends StatelessWidget {
+  final ValueChanged<int> update;
+  String type;
+  int number;
+  BookingInfos({this.type, this.number, this.update});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              padding: EdgeInsets.only(left: 10),
+            Text(
+              type,
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Adults',
-                    style: TextStyle(fontSize: 16),
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        border: Border.all(color: Colors.red)),
+                    child: IconButton(
+                        color: Colors.red,
+                        icon: Icon(Icons.exposure_minus_1_sharp),
+                        onPressed: () {
+                          update(-1);
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      number.toString(),
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
                   Container(
-                    child: Row(
-                      children: [
-                        FlatButton(
-                            child: Icon(
-                              Icons.remove,
-                              color: Colors.red,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                modelSetState(() {
-                                  adultsNum <= 1 ? adultsNum = 1 : adultsNum--;
-                                });
-                              });
-                            }),
-                        Text(
-                          adultsNum.toString(),
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        FlatButton(
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.green,
-                          ),
-                          onPressed: () => setState(() {
-                            modelSetState(() {
-                              adultsNum > 15
-                                  ? adultsNum = adultsNum
-                                  : adultsNum++;
-                            });
-                          }),
-                        )
-                      ],
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.0),
+                        border: Border.all(color: Colors.green)),
+                    child: IconButton(
+                      color: Colors.green,
+                      icon: Icon(Icons.exposure_plus_1),
+                      onPressed: () {
+                        update(1);
+                      },
                     ),
                   )
                 ],
               ),
             ),
-            Divider(
-              color: Colors.grey,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Children',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Container(
-                    child: Row(
-                      children: [
-                        FlatButton(
-                          child: Icon(
-                            Icons.remove,
-                            color: Colors.red,
-                          ),
-                          onPressed: () => setState(() {
-                            modelSetState(() {
-                              childNum <= 0 ? childNum = 0 : childNum--;
-                            });
-                          }),
-                        ),
-                        Text(
-                          childNum.toString(),
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        FlatButton(
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.green,
-                          ),
-                          onPressed: () => setState(() {
-                            modelSetState(() {
-                              childNum > 5 ? childNum = childNum : childNum++;
-                              /*childNum <= -1
-                                  ? childNum = 0
-                                  : childNum > 5
-                                      ? childNum = childNum
-                                      : childNum++;*/
-                            });
-                          }),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Divider(
-              color: Colors.grey,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Rooms',
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  Container(
-                    child: Row(
-                      children: [
-                        FlatButton(
-                          child: Icon(
-                            Icons.remove,
-                            color: Colors.red,
-                          ),
-                          onPressed: () => setState(() {
-                            modelSetState(() {
-                              roomsNum <= 1 ? roomsNum = 1 : roomsNum--;
-                            });
-                          }),
-                        ),
-                        Text(
-                          roomsNum.toString(),
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        FlatButton(
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.green,
-                          ),
-                          onPressed: () => setState(() {
-                            modelSetState(() {
-                              roomsNum > 8 ? roomsNum = roomsNum : roomsNum++;
-                            });
-                          }),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              width: double.infinity,
-              height: 60,
-              padding: EdgeInsets.all(5),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Colors.blue[900],
-                child: Text(
-                  'Apply',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            )
           ],
         ),
-      );
-    });
+        SizedBox(
+          height: 10,
+        )
+      ],
+    );
   }
 }

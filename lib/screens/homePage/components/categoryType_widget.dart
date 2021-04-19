@@ -16,8 +16,17 @@ class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, CategoryScreen.routeName,
-            arguments: CategoryTypeWidget(widget.type, widget.destination));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return CategoryScreen(
+                widget.type,
+                widget.destination,
+              );
+            },
+          ),
+        );
       },
       child: Container(
           margin: EdgeInsets.all(5),

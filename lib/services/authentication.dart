@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import './Api/apiAll.dart';
 import '../model/SignupForm.dart';
@@ -12,6 +13,7 @@ import '../model/httpExecption.dart' as exp;
 class Auth with ChangeNotifier {
   String _token;
   String _userId;
+
   bool get isAuth {
     return token != null;
   }
@@ -84,14 +86,14 @@ class Auth with ChangeNotifier {
     }
   }
 
-  void logOut() async {
-    http.post(logOutApi);
-
-    _token = null;
+  Future<void> logOut(BuildContext context) async {
+    await http.post(logOutApi);
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('autoSignIn', null);
+    print(preferences.getString('userToken'));
+    preferences.setString('userToken', null);
     preferences.setString('username', null);
-    notifyListeners();
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => OneScreen()));
   }
 
   Future<void> book() async {

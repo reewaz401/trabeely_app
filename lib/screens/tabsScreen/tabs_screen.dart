@@ -23,6 +23,7 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  bool _isloading = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
@@ -53,24 +54,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          if (_pages[_selectedPageIndex]['title'] == 'Story') {
-            final image = await UploadPhoto().imagePickerDialog(context);
-            if (image == null) {
-              return;
-            }
-            Navigator.push(context,
-                MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
-          } else {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (ctx) => CreateTour()));
-          }
-        },
-        child: Icon(_pages[_selectedPageIndex]['title'] == 'Story'
-            ? Icons.add_a_photo_outlined
-            : Icons.add),
-      ),
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),
       appBar: _pages[_selectedPageIndex]['title'] == 'Home'
@@ -197,9 +180,19 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
         ListTile(
-          title: Text('Log out'),
-          onTap: () {
-            Provider.of<Auth>(context, listen: false).logOut();
+          title: _isloading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Text('Log out'),
+          onTap: () async {
+            setState(() {
+              _isloading = true;
+            });
+            Provider.of<Auth>(context, listen: false).logOut(context);
+            setState(() {
+              _isloading = false;
+            });
           },
         ),
         ListTile(

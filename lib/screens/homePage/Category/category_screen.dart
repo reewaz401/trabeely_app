@@ -5,23 +5,40 @@ import 'package:travel/screens/homePage/Category/Components/FilterWidget/allFilt
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/hotelFilter_widget.dart';
 import 'package:travel/screens/homePage/Category/Components/FilterWidget/tourFilter_widget.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
+import 'package:travel/services/getTabIndex.dart';
 import './Components/results_widget.dart';
 
 class CategoryScreen extends StatefulWidget {
   static const routeName = '/category-scren';
-
+  String type;
   final String destination;
-  CategoryScreen([this.destination]);
+  CategoryScreen(this.type, [this.destination]);
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  bool inital = false;
+  var path = 'Treks';
+  int index;
+  bool indexFinder = true;
+
+  @override
+  void didChangeDependencies() {
+    if (indexFinder) {
+      index = getIndex(widget.type);
+      print('Type' + widget.type);
+      indexFinder = false;
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
+      initialIndex: index,
       length: 6,
       child: Scaffold(
         backgroundColor: Color(0xFFF3F2F2),

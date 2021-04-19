@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StoryFeedItem extends StatefulWidget {
   final String userName;
@@ -20,7 +21,6 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(10),
       width: deviceSize.width,
-      height: 0.6 * deviceSize.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,10 +39,6 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    ' at ${widget.location}',
-                    style: TextStyle(color: Colors.grey),
-                  )
                 ],
               ),
             ],
@@ -61,27 +57,45 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
             height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RaisedButton.icon(
-                  color: Colors.white,
-                  onPressed: () {},
-                  icon: Icon(Icons.face),
-                  label: Text('Amazed')),
-              RaisedButton.icon(
-                  color: Colors.white,
-                  onPressed: () {},
-                  icon: Icon(Icons.book),
-                  label: Text('Ask')),
-              RaisedButton.icon(
-                  color: Colors.white,
-                  onPressed: () {},
-                  icon: Icon(Icons.location_on),
-                  label: Text('Location'))
+              Row(
+                children: [
+                  button('assets/images/Group-3.svg'),
+                  button('assets/images/Group-1.svg'),
+                  button('assets/images/Group.svg')
+                ],
+              ),
+              Row(
+                children: [
+                  button('assets/images/Vector.svg'),
+                  button('assets/images/Group-2.svg')
+                ],
+              )
             ],
           )
         ],
       ),
     );
   }
+}
+
+Widget button(String path) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ClipOval(
+      child: Material(
+        // button color
+        child: InkWell(
+          splashColor: Colors.red, // inkwell color
+          child: SizedBox(
+            height: 25,
+            width: 25,
+            child: SvgPicture.asset(path),
+          ),
+          onTap: () {},
+        ),
+      ),
+    ),
+  );
 }

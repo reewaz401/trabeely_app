@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
-import 'package:travel/screens/Booking/bookingSucess.dart';
+import 'package:travel/screens/FirstScreen/login_screen.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
+import 'package:travel/screens/FirstScreen/signup_screen.dart';
 import 'package:travel/screens/SplashScreen/splashscreen.dart';
 import 'package:travel/screens/homePage/Category/category_screen.dart';
-import 'package:travel/screens/Onboarding/Slider.dart';
-
 import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
-
 import './screens/auth_screen.dart';
 import './services/themeData.dart';
-import './screens/homePage//homePage_screen.dart';
-import 'screens/user_profile_screen.dart';
 import './screens/tabsScreen/tabs_screen.dart';
-
 import './screens/storyFeedScreen/storyFeed_screen.dart';
 
 void main() {
@@ -40,7 +35,7 @@ class _MyAppState extends State<MyApp> {
 
   void autoSignIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String autoToken = prefs.getString('autoSignIn');
+    final String autoToken = prefs.getString('userToken');
     if (autoToken != null) {
       setState(() {
         isAuto = true;
@@ -64,11 +59,10 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: value.darkTheme ? light : dark,
-                home: SplashScreen(),
+                home: isAuto ? TabsScreen('Search Destination') : OneScreen(),
                 routes: {
                   TabsScreen.routeName: (ctx) =>
                       TabsScreen('Search Destination'),
-                  CategoryScreen.routeName: (ctx) => CategoryScreen(),
                   StoryFeedScreen.routeName: (ctx) => StoryFeedScreen(),
                   '/bookinginfo': (BuildContext context) => BookingInfo(),
                 });

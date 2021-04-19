@@ -34,11 +34,13 @@ dependencies:
   http: ^0.12.2
   provider: ^4.3.2+3
   cool_alert: ^1.0.3
-  
+  velocity_x:
   json_annotation:
   bubble_tab_indicator: 
   qr_flutter: ^4.0.0
   shared_preferences: ^0.5.12+4
+  nepali_date_picker: ^5.0.0
+  datetime_picker_formfield:
   
 
 

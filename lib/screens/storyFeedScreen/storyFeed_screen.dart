@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/components/uploadPhoto.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
 
@@ -6,25 +7,33 @@ class StoryFeedScreen extends StatelessWidget {
   static const routeName = '/storyScreen';
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey[300],
-      height: MediaQuery.of(context).size.height - 130,
-      width: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: StoryFeedData.length,
-                itemBuilder: (context, index) => Container(
-                        child: StoryFeedItem(
-                      userName: StoryFeedData[index].userName,
-                      description: StoryFeedData[index].description,
-                      imageUrl: StoryFeedData[index].imageUrl,
-                      location: StoryFeedData[index].location,
-                    ))),
-          )
-        ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await UploadPhoto().imagePickerDialog(context);
+        },
+        child: Icon(Icons.add_a_photo),
+      ),
+      body: Container(
+        color: Colors.grey[300],
+        height: MediaQuery.of(context).size.height - 130,
+        width: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: StoryFeedData.length,
+                  itemBuilder: (context, index) => Container(
+                          child: StoryFeedItem(
+                        userName: StoryFeedData[index].userName,
+                        description: StoryFeedData[index].description,
+                        imageUrl: StoryFeedData[index].imageUrl,
+                        location: StoryFeedData[index].location,
+                      ))),
+            )
+          ],
+        ),
       ),
     );
   }

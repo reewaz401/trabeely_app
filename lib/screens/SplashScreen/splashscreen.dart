@@ -3,10 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
 import 'package:travel/services/authentication.dart';
 import '../auth_screen.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -50,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             return Consumer<Auth>(builder: (context, auth, _) {
               return onboardingPage
                   ? auth.isAuth
-                      ? AuthScreen(false)
+                      ? OneScreen()
                       : TabsScreen('Search Destination')
                   : OnboardinPage();
             });
@@ -82,19 +84,19 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: SvgPicture.asset(
                           'assets/images/logo.svg',
                           alignment: Alignment.center,
-                          height: 50,
+                          height: 100,
                         ),
-                      ),
+                      ).shimmer(
+                          count: 1,
+                          showAnimation: true,
+                          primaryColor: Colors.blue[900],
+                          secondaryColor: Colors.orange),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
               ),
             ],
           )

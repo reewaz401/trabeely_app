@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/auth_screen.dart';
-import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import './data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +13,6 @@ class _OnboardinPageState extends State<OnboardinPage> {
   List<SliderModel> mySLides = <SliderModel>[];
   int slideIndex = 0;
   PageController controller;
-
   Widget _buildPageIndicator(bool isCurrentPage) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2.0),
@@ -29,7 +27,6 @@ class _OnboardinPageState extends State<OnboardinPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     mySLides = getSlides();
     controller = new PageController();
@@ -66,11 +63,16 @@ class _OnboardinPageState extends State<OnboardinPage> {
                 imagePath: mySLides[2].getImageAssetPath(),
                 title: mySLides[2].getTitle(),
                 desc: mySLides[2].getDesc(),
+              ),
+              SlideTile(
+                imagePath: mySLides[3].getImageAssetPath(),
+                title: mySLides[3].getTitle(),
+                desc: mySLides[3].getDesc(),
               )
             ],
           ),
         ),
-        bottomSheet: slideIndex != 2
+        bottomSheet: slideIndex != 3
             ? Container(
                 margin: EdgeInsets.symmetric(vertical: 16),
                 child: Row(
@@ -78,7 +80,7 @@ class _OnboardinPageState extends State<OnboardinPage> {
                   children: <Widget>[
                     TextButton(
                       onPressed: () {
-                        controller.animateToPage(2,
+                        controller.animateToPage(3,
                             duration: Duration(milliseconds: 400),
                             curve: Curves.linear);
                       },
@@ -92,7 +94,7 @@ class _OnboardinPageState extends State<OnboardinPage> {
                     Container(
                       child: Row(
                         children: [
-                          for (int i = 0; i < 3; i++)
+                          for (int i = 0; i < 4; i++)
                             i == slideIndex
                                 ? _buildPageIndicator(true)
                                 : _buildPageIndicator(false),
@@ -127,7 +129,6 @@ class _OnboardinPageState extends State<OnboardinPage> {
                       builder: (ctx) => AuthScreen(false),
                     ),
                   );
-                  print("Get Started Now");
                 },
                 child: Container(
                   height: 60,
