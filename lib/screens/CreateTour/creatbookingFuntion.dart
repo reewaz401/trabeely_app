@@ -1,9 +1,24 @@
 import 'dart:convert';
 
+import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-createCustomBooking() async {
+Future createCustomBooking(
+    {String hotel,
+    TextEditingController destinationfromName,
+    TextEditingController destinationToName,
+    String initformattedDate,
+    String finalformattedDate,
+    TextEditingController totalPeople,
+    String vehicle,
+    String transportationway,
+    TextEditingController additionalInfo,
+    bool isinstitution,
+    String instituionalname,
+    String institutionalLocation,
+    String instituitonContact,
+    String instituionalemail}) async {
   print('Entered');
   SharedPreferences preferences = await SharedPreferences.getInstance();
   String _token = preferences.getString('userToken');
@@ -15,35 +30,35 @@ createCustomBooking() async {
     var response = await http.post(
       'https://api.trabeely.com/api/booking/custom-booking',
       headers: {
-        'Authorization': 'Bearer $_token',
-        'content-type': 'application/json; charset=utf-8',
-        'Cookie': _cookie,
-        'Server': _server
+        // 'Authorization': 'Bearer $_token',
+        // 'content-type': 'application/json; charset=utf-8',
+        // 'Cookie': _cookie,
+        // 'Server': _server
       },
       body: jsonEncode(
         {
-          "hotel": "3 star",
-          "from": "Bhaktapur",
-          "to": "Kathmandu",
-          "dateFrom": "11/11/2021",
-          "dateTo": "11/20/2021",
+          "hotel": hotel,
+          "from": destinationfromName,
+          "to": destinationToName,
+          "dateFrom": initformattedDate,
+          "dateTo": finalformattedDate,
           "contact": "1111111",
-          "totalPeople": "4",
+          "totalPeople": totalPeople,
           "duration": "3",
-          "transportation": "Jeep",
-          "transportationType": "One Way",
-          "extraNeed": "fruits bringing",
-          "isInstution": false,
-          "iName": "School Test",
-          "iLocation": "Imadol",
-          "iContact": "7856235569",
-          "iEmail": "rr@gmail.com"
+          "transportation": vehicle,
+          "transportationType": transportationway,
+          "extraNeed": additionalInfo,
+          "isInstution": isinstitution,
+          "iName": instituionalname,
+          "iLocation": institutionalLocation,
+          "iContact": instituitonContact,
+          "iEmail": instituionalemail
         },
       ),
     );
-    print(response.body);
-    var bookingStatus = json.decode(response.body)['success'];
 
+    var bookingStatus = json.decode(response.body)['success'];
+    print(bookingStatus);
     return bookingStatus;
   } catch (e) {
     print(e);

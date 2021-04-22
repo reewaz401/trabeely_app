@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:travel/screens/CreateTour/widgets.dart';
 import 'package:travel/screens/CreateTour/creatbookingFuntion.dart';
 import 'package:travel/screens/CreateTour/institutionalForm.dart';
+import 'package:travel/widget/alertWidget.dart';
 
 class CreateTour extends StatefulWidget {
   @override
@@ -302,6 +303,15 @@ class _CreateTourState extends State<CreateTour> {
                               });
                             },
                           ),
+                          RadioListTile(
+                              title: Text('Any'),
+                              value: 'Any Hotel',
+                              groupValue: hotel,
+                              onChanged: (value) {
+                                setState(() {
+                                  hotel = value;
+                                });
+                              }),
                           headingText('Transportaion'),
                           Row(
                             children: [
@@ -385,7 +395,20 @@ class _CreateTourState extends State<CreateTour> {
                                 style: TextButton.styleFrom(
                                     backgroundColor: Colors.blue[900],
                                     primary: Colors.white),
-                                onPressed: () => createCustomBooking(),
+                                onPressed: () async {
+                                  var status = await createCustomBooking(
+                                      hotel: hotel,
+                                      destinationfromName: destinationfromName,
+                                      destinationToName: destinationToName,
+                                      initformattedDate: initformattedDate,
+                                      finalformattedDate: finalformattedDate,
+                                      totalPeople: totalPeople,
+                                      vehicle: vehicle,
+                                      transportationway: transportationway,
+                                      additionalInfo: additionalInfo,
+                                      isinstitution: false);
+                                  bookingAlert(status, context);
+                                },
                                 child: Text('Proceed'),
                               ),
                             ),

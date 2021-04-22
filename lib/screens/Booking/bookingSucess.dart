@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/widget/alertWidget.dart';
 import 'package:travel/screens/Booking/bookingFunction.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 
@@ -84,25 +84,7 @@ class _BookingConfirmState extends State<BookingConfirm> {
                           });
                           var status = await createBooking(
                               'Trek', widget.child, widget.adult);
-                          CoolAlert.show(
-                            onConfirmBtnTap: () {
-                              print('Pushed');
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(
-                                builder: (context) {
-                                  return TabsScreen('Search Destination');
-                                },
-                              ));
-                            },
-                            context: context,
-                            barrierDismissible: false,
-                            type: status
-                                ? CoolAlertType.success
-                                : CoolAlertType.error,
-                            text: status
-                                ? "Transaction completed successfully!"
-                                : "Try Again",
-                          );
+                          bookingAlert(status, context);
                         },
                         child: Text('Submit'),
                       )
