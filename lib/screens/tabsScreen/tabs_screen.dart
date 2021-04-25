@@ -7,7 +7,7 @@ import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
-import '../user_profile_screen.dart';
+import '../UserProile/user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
 import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;

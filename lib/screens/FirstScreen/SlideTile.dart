@@ -65,15 +65,11 @@ class _SlideTileState extends State<SlideTile> {
             IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.orange,
+                  color: Colors.blue[900],
                   size: 20,
                 ),
                 onPressed: () => Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (ctx) => OneScreen()))),
-            Text(
-              'Sign Up',
-              style: TextStyle(fontSize: 25),
-            ),
           ],
         ),
         SizedBox(
@@ -188,7 +184,7 @@ class _SlideTileState extends State<SlideTile> {
     return Container(
       height: 43,
       decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.orange),
+          border: Border.all(width: 1, color: Colors.blue[900]),
           borderRadius: BorderRadius.circular(15)),
       child: type == 'Full Name'
           ? TextFormField(
@@ -197,7 +193,7 @@ class _SlideTileState extends State<SlideTile> {
               decoration: new InputDecoration(
                   suffixIcon: Icon(
                     Icons.person,
-                    color: Colors.orange,
+                    color: Colors.blue[900],
                   ),
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -224,7 +220,7 @@ class _SlideTileState extends State<SlideTile> {
                   decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.call,
-                        color: Colors.orange,
+                        color: Colors.blue[900],
                       ),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -250,7 +246,7 @@ class _SlideTileState extends State<SlideTile> {
                       decoration: InputDecoration(
                           suffixIcon: Icon(
                             Icons.email,
-                            color: Colors.orange,
+                            color: Colors.blue[900],
                           ),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -278,7 +274,7 @@ class _SlideTileState extends State<SlideTile> {
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
-                                color: Colors.orange,
+                                color: Colors.blue[900],
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -304,7 +300,7 @@ class _SlideTileState extends State<SlideTile> {
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
-                                color: Colors.orange,
+                                color: Colors.blue[900],
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -369,7 +365,7 @@ class _SlideTileState extends State<SlideTile> {
         padding: EdgeInsets.symmetric(horizontal: 15),
         width: 0.9 * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.orange),
+            border: Border.all(width: 1, color: Colors.blue[900]),
             borderRadius: BorderRadius.circular(15)),
         child: DropdownButton<String>(
           value: dropdownValue,

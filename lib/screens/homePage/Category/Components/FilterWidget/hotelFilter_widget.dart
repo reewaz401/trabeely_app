@@ -3,7 +3,7 @@ import 'package:travel/components/datePicker_widget.dart';
 import 'package:travel/components/searchBox.dart';
 import 'package:travel/components/searchButton.dart';
 
-import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
+//import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class HotelFilter extends StatelessWidget {
   var adultsNum = 1;
@@ -40,7 +40,7 @@ class HotelFilter extends StatelessWidget {
                         hintText: "Enter Destination",
                         hintStyle: TextStyle(color: Colors.grey)),
                   )),
-              FilterIcon('Hotels')
+              // FilterIcon('Hotels')
             ],
           ),
           SizedBox(

@@ -39,7 +39,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
       initialIndex: index,
-      length: 6,
+      length: 4,
       child: Scaffold(
         backgroundColor: Color(0xFFF3F2F2),
         appBar: AppBar(
@@ -52,16 +52,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 indicatorColor: Colors.green),
             tabs: [
               Tab(
-                child: SvgPicture.asset('assets/images/All.svg'),
-              ),
-              Tab(
                 child: SvgPicture.asset('assets/images/Tours.svg'),
               ),
               Tab(
                 child: SvgPicture.asset('assets/images/Treks.svg'),
-              ),
-              Tab(
-                child: SvgPicture.asset('assets/images/Hotels.svg'),
               ),
               Tab(
                 child: SvgPicture.asset('assets/images/Restaurants.svg'),
@@ -75,28 +69,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
         body: TabBarView(
           children: [
             Column(
-              children: [AllFilter(), ResultsWidget('All', args.destination)],
-            ),
-            Column(
               children: [
                 TourFilter(),
-                ResultsWidget('Tours', args.destination),
+                ResultsWidget('Tours', widget.destination),
               ],
             ),
             Column(
               children: [
                 TourFilter(),
-                ResultsWidget('Treks', args.destination),
+                ResultsWidget('Treks', widget.destination),
               ],
             ),
-            Column(
-              children: [
-                HotelFilter(),
-                ResultsWidget('Hotels', args.destination),
-              ],
-            ),
-            ResultsWidget('Restaurents', args.destination),
-            ResultsWidget('Clubs', args.destination),
+            ResultsWidget('Restaurents', widget.destination),
+            ResultsWidget('Clubs', widget.destination),
           ],
         ),
       ),

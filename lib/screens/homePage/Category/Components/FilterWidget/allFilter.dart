@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
+//import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class AllFilter extends StatelessWidget {
   @override
@@ -26,7 +26,7 @@ class AllFilter extends StatelessWidget {
                   hintText: "Enter Destination",
                   hintStyle: TextStyle(color: Colors.grey)),
             )),
-        FilterIcon('All')
+        // FilterIcon('All')
       ],
     );
   }

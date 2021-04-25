@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isloading = false;
+  bool _isVisibility = false;
   final GlobalKey<FormState> _formKeyLogIn = GlobalKey();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
@@ -103,12 +104,38 @@ class _LoginScreenState extends State<LoginScreen> {
                   focusNode: _passwordFocusNode,
                   //tra style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.name,
-                  obscureText: true,
+                  obscureText: _isVisibility ? false : true,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    suffixIcon: Icon(
-                      Icons.vpn_key,
-                      color: Colors.blue[900],
+                    suffixIcon: Container(
+                      width: 90,
+                      child: Row(
+                        children: [
+                          IconButton(
+                              icon: _isVisibility
+                                  ? Icon(
+                                      Icons.visibility,
+                                      color: Colors.blue[900],
+                                    )
+                                  : Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.blue[900],
+                                    ),
+                              onPressed: () {
+                                setState(() {
+                                  if (_isVisibility) {
+                                    _isVisibility = false;
+                                  } else {
+                                    _isVisibility = true;
+                                  }
+                                });
+                              }),
+                          Icon(
+                            Icons.vpn_key,
+                            color: Colors.blue[900],
+                          ),
+                        ],
+                      ),
                     ),
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
