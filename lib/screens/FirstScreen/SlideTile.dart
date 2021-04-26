@@ -65,15 +65,11 @@ class _SlideTileState extends State<SlideTile> {
             IconButton(
                 icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.orange,
+                  color: Colors.blue[900],
                   size: 20,
                 ),
                 onPressed: () => Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (ctx) => OneScreen()))),
-            Text(
-              'Sign Up',
-              style: TextStyle(fontSize: 25),
-            ),
           ],
         ),
         SizedBox(
@@ -188,15 +184,16 @@ class _SlideTileState extends State<SlideTile> {
     return Container(
       height: 43,
       decoration: BoxDecoration(
-          color: Colors.orange[300], borderRadius: BorderRadius.circular(15)),
+          border: Border.all(width: 1, color: Colors.blue[900]),
+          borderRadius: BorderRadius.circular(15)),
       child: type == 'Full Name'
           ? TextFormField(
               focusNode: _firstNameFocusNode,
-              style: TextStyle(color: Colors.white),
+              //  style: TextStyle(color: Colors.white),
               decoration: new InputDecoration(
                   suffixIcon: Icon(
                     Icons.person,
-                    color: Colors.white,
+                    color: Colors.blue[900],
                   ),
                   border: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -207,7 +204,9 @@ class _SlideTileState extends State<SlideTile> {
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   hintText: type,
-                  hintStyle: TextStyle(fontSize: 13, color: Colors.white)),
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                  )),
               textInputAction: TextInputAction.next,
               validator: (val) => validation('Full Name', val),
               onFieldSubmitted: (value) =>
@@ -221,7 +220,7 @@ class _SlideTileState extends State<SlideTile> {
                   decoration: InputDecoration(
                       suffixIcon: Icon(
                         Icons.call,
-                        color: Colors.white,
+                        color: Colors.blue[900],
                       ),
                       border: InputBorder.none,
                       focusedBorder: InputBorder.none,
@@ -231,7 +230,9 @@ class _SlideTileState extends State<SlideTile> {
                       contentPadding: EdgeInsets.only(
                           left: 15, bottom: 12, right: 15, top: 15),
                       hintText: type,
-                      hintStyle: TextStyle(fontSize: 15, color: Colors.white)),
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                      )),
                   textInputAction: TextInputAction.next,
                   validator: (val) => validation('Contact number', val),
                   onFieldSubmitted: (value) =>
@@ -245,7 +246,7 @@ class _SlideTileState extends State<SlideTile> {
                       decoration: InputDecoration(
                           suffixIcon: Icon(
                             Icons.email,
-                            color: Colors.white,
+                            color: Colors.blue[900],
                           ),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -255,8 +256,9 @@ class _SlideTileState extends State<SlideTile> {
                           contentPadding: EdgeInsets.only(
                               left: 15, bottom: 12, right: 15, top: 15),
                           hintText: type,
-                          hintStyle:
-                              TextStyle(fontSize: 15, color: Colors.white)),
+                          hintStyle: TextStyle(
+                            fontSize: 15,
+                          )),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.emailAddress,
                       validator: (val) => validation('Email', val),
@@ -272,7 +274,7 @@ class _SlideTileState extends State<SlideTile> {
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
-                                color: Colors.white,
+                                color: Colors.blue[900],
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -282,8 +284,9 @@ class _SlideTileState extends State<SlideTile> {
                               contentPadding: EdgeInsets.only(
                                   left: 15, bottom: 12, right: 15, top: 15),
                               hintText: type,
-                              hintStyle:
-                                  TextStyle(fontSize: 15, color: Colors.white)),
+                              hintStyle: TextStyle(
+                                fontSize: 15,
+                              )),
                           textInputAction: TextInputAction.next,
                           obscureText: true,
                           validator: (val) => validation('Password', val),
@@ -297,7 +300,7 @@ class _SlideTileState extends State<SlideTile> {
                           decoration: InputDecoration(
                               suffixIcon: Icon(
                                 Icons.vpn_key,
-                                color: Colors.white,
+                                color: Colors.blue[900],
                               ),
                               border: InputBorder.none,
                               focusedBorder: InputBorder.none,
@@ -307,8 +310,9 @@ class _SlideTileState extends State<SlideTile> {
                               contentPadding: EdgeInsets.only(
                                   left: 15, bottom: 12, right: 15, top: 15),
                               hintText: type,
-                              hintStyle:
-                                  TextStyle(fontSize: 15, color: Colors.white)),
+                              hintStyle: TextStyle(
+                                fontSize: 15,
+                              )),
                           textInputAction: TextInputAction.next,
                           obscureText: true,
                           validator: (val) =>
@@ -361,7 +365,7 @@ class _SlideTileState extends State<SlideTile> {
         padding: EdgeInsets.symmetric(horizontal: 15),
         width: 0.9 * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.orange),
+            border: Border.all(width: 1, color: Colors.blue[900]),
             borderRadius: BorderRadius.circular(15)),
         child: DropdownButton<String>(
           value: dropdownValue,

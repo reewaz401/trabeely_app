@@ -5,15 +5,21 @@ import 'package:travel/model/toursForm.dart';
 import 'package:travel/services/Api/apiAll.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/services/themeData.dart';
 
 class ViewData with ChangeNotifier {
   ToursForm tempTours;
   Map<String, dynamic> result = {'data': []};
-  http.Response response;
 
   Map<String, dynamic> dataList;
-  Future<dynamic> viewData(String slectedType,
-      [String destination, bool isInitial = false]) async {
+  dynamic jsonResponse;
+
+  Future<dynamic> viewData(
+    String slectedType, [
+    String destination,
+    int startPriceRange,
+    int endPriceRange,
+  ]) async {
     String url;
     if (slectedType == 'Tours') {
       url = viewToursApi;
@@ -26,29 +32,14 @@ class ViewData with ChangeNotifier {
     }
 
     try {
-      if (slectedType == 'Hotels') {
-        print('Hotels Enter');
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
-        final String autoToken = prefs.getString('userToken');
-        print("token : $autoToken");
-        response = await http.get(
-          url,
-          headers: {
-            HttpHeaders.authorizationHeader: "Bearer $autoToken",
-          },
-        );
-        print(jsonDecode(response.body));
-      } else {
-        response = await http.get(
-          url,
-          headers: {
-            'Permission': '21f@do8GP3RMISI0N-D@T@',
-          },
-        );
-      }
+      final response = await http.get(
+        url,
+        headers: {
+          'Permission': '21f@do8GP3RMISI0N-D@T@',
+        },
+      );
 
-      var jsonResponse = jsonDecode(response.body);
-
+      jsonResponse = jsonDecode(response.body);
       if (slectedType == 'Tours') {
         dataList = jsonResponse as Map<String, dynamic>;
       } else if (slectedType == 'Treks') {
@@ -56,17 +47,39 @@ class ViewData with ChangeNotifier {
       } else if (slectedType == 'Hotels') {
         dataList = jsonResponse as Map<String, dynamic>;
       } else if (slectedType == 'Restaurants') {
-        dataList = jsonResponse as Map<String, dynamic>;
+        dataList = jsonResponse as Map<String, dynamic>; //api for restaurant
+      }
+      print('object');
+      print(destination);
+      print('price $startPriceRange');
+      print('p $endPriceRange');
+
+      if (destination == '') {
+        destination = null;
       }
 
-      print("Destination: $destination");
       if (destination != null) {
-        jsonResponse =
-            await sortByDestination(destination, dataList['data'].length);
-      }
-      print("Destination: $destination");
+        print('null des');
+        print(jsonResponse);
+        jsonResponse = await sortByDestination(
+            destination: destination, length: dataList['data'].length);
+        if (startPriceRange > 0 || endPriceRange > 0) {
+          jsonResponse = await sortByPriceRange(
+              startPriceRange, endPriceRange, jsonResponse['data'].length);
+        }
 
-      return jsonResponse;
+        return jsonResponse;
+      } else if (destination == null || destination == '') {
+        if (startPriceRange > 0 || endPriceRange > 0) {
+          jsonResponse = await sortByPriceRange(
+              startPriceRange, endPriceRange, jsonResponse['data'].length);
+        }
+
+        return jsonResponse;
+      } else {
+        print('snull des');
+        return null;
+      }
     } catch (error) {
       print(error);
       throw error;
@@ -74,7 +87,7 @@ class ViewData with ChangeNotifier {
   }
 
   Future<Map<String, dynamic>> sortByDestination(
-      String destination, int length) async {
+      {String destination, int length, int startPrice, int endPrice}) async {
     // result.clear();
 
     for (int i = 0; i < length; i++) {
@@ -83,9 +96,24 @@ class ViewData with ChangeNotifier {
         print('sortByDestinaiton');
 
         result['data'].add(dataList['data'][i]);
-        return result;
       }
     }
+    print('des');
+    print(result);
+    return result;
+  }
+
+  sortByPriceRange(int start, int end, int length) async {
+    result = {'data': []};
+    for (int i = 0; i < length; i++) {
+      var priceData = jsonResponse['data'][i]['price'];
+      if (priceData >= start && priceData <= end) {
+        print('sortByprice');
+        result['data'].add(dataList['data'][i]);
+      }
+    }
+    print('pr');
+    print(result);
     return result;
   }
 }

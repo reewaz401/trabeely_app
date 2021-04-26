@@ -1,13 +1,16 @@
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/material.dart';
-
+import 'package:travel/components/uploadPhoto.dart';
+import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Settings/writeToUs.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
+import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
+import 'package:travel/services/isLogin.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
-import '../user_profile_screen.dart';
+import '../UserProile/user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
 import '../../services/authentication.dart';
 import '../../services/themeData.dart' as colors;
@@ -15,6 +18,8 @@ import 'package:provider/provider.dart';
 import 'package:travel/screens/Booking/bookingHistory.dart';
 import 'package:travel/screens/Settings/settings.dart';
 import 'package:travel/screens/ExtraScreens/qrScanned.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -29,6 +34,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
+  String istoken;
   String userName;
   String qrCodeResult = "Not Yet Scanned";
 
@@ -39,13 +45,15 @@ class _TabsScreenState extends State<TabsScreen> {
       {'pages': StoryFeedScreen(), 'title': 'Story'},
       {'pages': UserProfileScreen(), 'title': 'Profile'}
     ];
+    Islogin().getToken().then((value) => setState(() {
+          istoken = value;
+        }));
+
     super.initState();
   }
 
   @override
   void didChangeDependencies() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    userName = prefs.getString('username');
     super.didChangeDependencies();
   }
 
@@ -205,31 +213,27 @@ class _TabsScreenState extends State<TabsScreen> {
             }));
           },
         ),
+        istoken == null
+            ? ListTile()
+            : ListTile(
+                title: _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Text('Log out'),
+                onTap: () async {
+                  setState(() {
+                    _isloading = true;
+                  });
+                  Provider.of<Auth>(context, listen: false).logOut(context);
+                  setState(() {
+                    _isloading = false;
+                  });
+                },
+              ),
         ListTile(
-            title: Text('Write To Us'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (ctx) => WriteToUs(),
-                ),
-              );
-            }),
-        ListTile(
-          title: _isloading
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Text('Log out'),
-          onTap: () async {
-            setState(() {
-              _isloading = true;
-            });
-            Provider.of<Auth>(context, listen: false).logOut(context);
-            setState(() {
-              _isloading = false;
-            });
-          },
+          title: Text('Item 3'),
+          onTap: () {},
         ),
       ],
     );

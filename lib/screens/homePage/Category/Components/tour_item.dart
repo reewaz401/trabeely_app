@@ -31,9 +31,13 @@ class TourItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(mainList[index]['user']['companyName']);
     Size size = MediaQuery.of(context).size;
-    return Card(
-        color: Colors.white,
+    return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         margin: EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 5,
@@ -135,7 +139,13 @@ class TourItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Seller : $agencyName'),
+              SizedBox(
+                width: 170,
+                child: Text(
+                  'Seller : ${mainList[index]['user']['companyName']}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               IconButton(
                 icon: Icon(
                   Icons.arrow_forward_rounded,

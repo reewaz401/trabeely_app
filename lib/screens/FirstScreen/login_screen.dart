@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isloading = false;
+  bool _isVisibility = false;
   final GlobalKey<FormState> _formKeyLogIn = GlobalKey();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
@@ -55,26 +56,27 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.orange[300],
+                    border: Border.all(width: 1, color: Colors.blue[900]),
                     borderRadius: BorderRadius.circular(15)),
                 child: TextFormField(
                   focusNode: _emailFocusNode,
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(color: Colors.white),
+                  //     style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      suffixIcon: Icon(
-                        Icons.email,
-                        color: Colors.white,
-                      ),
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Colors.white)),
+                    border: InputBorder.none,
+                    suffixIcon: Icon(
+                      Icons.email,
+                      color: Colors.blue[900],
+                    ),
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 11, top: 11, right: 15),
+                    hintText: 'Email',
+                    //hintStyle: TextStyle(color: Colors.orange)
+                  ),
                   onFieldSubmitted: (value) =>
                       FocusScope.of(context).requestFocus(_passwordFocusNode),
                   onSaved: (value) {
@@ -96,27 +98,54 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.orange[300],
+                    border: Border.all(width: 1, color: Colors.blue[900]),
                     borderRadius: BorderRadius.circular(15)),
                 child: TextFormField(
                   focusNode: _passwordFocusNode,
-                  style: TextStyle(color: Colors.white),
+                  //tra style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.name,
-                  obscureText: true,
+                  obscureText: _isVisibility ? false : true,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      suffixIcon: Icon(
-                        Icons.vpn_key,
-                        color: Colors.white,
+                    border: InputBorder.none,
+                    suffixIcon: Container(
+                      width: 90,
+                      child: Row(
+                        children: [
+                          IconButton(
+                              icon: _isVisibility
+                                  ? Icon(
+                                      Icons.visibility,
+                                      color: Colors.blue[900],
+                                    )
+                                  : Icon(
+                                      Icons.visibility_off,
+                                      color: Colors.blue[900],
+                                    ),
+                              onPressed: () {
+                                setState(() {
+                                  if (_isVisibility) {
+                                    _isVisibility = false;
+                                  } else {
+                                    _isVisibility = true;
+                                  }
+                                });
+                              }),
+                          Icon(
+                            Icons.vpn_key,
+                            color: Colors.blue[900],
+                          ),
+                        ],
                       ),
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.white)),
+                    ),
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 11, top: 11, right: 15),
+                    hintText: 'Password',
+                    //     hintStyle: TextStyle(color: Colors.white)
+                  ),
                   onSaved: (value) {
                     _authData['email'] = _authData['email'];
                     _authData['password'] = value;
@@ -170,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue[700]),
+                      MaterialStateProperty.all<Color>(Colors.orange[900]),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

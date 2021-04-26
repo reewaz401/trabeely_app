@@ -4,9 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
-import 'package:travel/screens/FirstScreen/signup_screen.dart';
-import 'package:travel/screens/SplashScreen/splashscreen.dart';
-import 'package:travel/screens/homePage/Category/category_screen.dart';
+import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
+
 import 'package:travel/services/themeData.dart';
 import './services/authentication.dart';
 import './screens/auth_screen.dart';
@@ -35,7 +34,7 @@ class _MyAppState extends State<MyApp> {
 
   void autoSignIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String autoToken = prefs.getString('autoSignIn');
+    final String autoToken = prefs.getString('userToken');
     if (autoToken != null) {
       setState(() {
         isAuto = true;
@@ -49,7 +48,13 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider(create: (e) => Auth()),
           ChangeNotifierProvider(
             create: (a) => ThemeNotifier(),
-          )
+          ),
+          ChangeNotifierProvider(
+            create: (e) => FilterData(),
+          ),
+          ChangeNotifierProvider(
+            create: (e) => InitialSetPrice(),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) =>
@@ -59,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: value.darkTheme ? light : dark,
-                home: OneScreen(),
+                home: TabsScreen('Seach destination'),
                 routes: {
                   TabsScreen.routeName: (ctx) =>
                       TabsScreen('Search Destination'),

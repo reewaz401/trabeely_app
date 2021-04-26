@@ -39,8 +39,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
       initialIndex: index,
-      length: 6,
+      length: 4,
       child: Scaffold(
+        backgroundColor: Color(0xFFF3F2F2),
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
           bottom: TabBar(
@@ -51,16 +52,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 indicatorColor: Colors.green),
             tabs: [
               Tab(
-                child: SvgPicture.asset('assets/images/All.svg'),
-              ),
-              Tab(
                 child: SvgPicture.asset('assets/images/Tours.svg'),
               ),
               Tab(
                 child: SvgPicture.asset('assets/images/Treks.svg'),
-              ),
-              Tab(
-                child: SvgPicture.asset('assets/images/Hotels.svg'),
               ),
               Tab(
                 child: SvgPicture.asset('assets/images/Restaurants.svg'),
@@ -73,10 +68,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body: TabBarView(
           children: [
-            ResultsWidget('All', widget.destination),
-            ResultsWidget('Tours', widget.destination),
-            ResultsWidget('Treks', widget.destination),
-            ResultsWidget('Hotels', widget.destination),
+            Column(
+              children: [
+                TourFilter(),
+                ResultsWidget('Tours', widget.destination),
+              ],
+            ),
+            Column(
+              children: [
+                TourFilter(),
+                ResultsWidget('Treks', widget.destination),
+              ],
+            ),
             ResultsWidget('Restaurents', widget.destination),
             ResultsWidget('Clubs', widget.destination),
           ],

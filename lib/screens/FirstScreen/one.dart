@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
 import 'package:travel/screens/FirstScreen/signup_screen.dart';
+import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 
 class OneScreen extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class OneScreen extends StatelessWidget {
                     button(
                       context,
                       'Log In',
-                      800,
+                      900,
                     ),
                     SizedBox(
                       height: 20,
@@ -31,18 +32,20 @@ class OneScreen extends StatelessWidget {
                     button(
                       context,
                       'Sign Up',
-                      300,
+                      700,
                     ),
                     SizedBox(
                       height: 5,
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (ctx) =>
+                                      TabsScreen('Search Destination')));
+                        },
                         child: Text(
                           'Explore the App',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
                         ))
                   ],
                 ),
