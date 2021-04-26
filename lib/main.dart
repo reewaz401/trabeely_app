@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
+import 'package:travel/screens/SplashScreen/splashscreen.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
 
 import 'package:travel/services/themeData.dart';
@@ -64,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: value.darkTheme ? light : dark,
-                home: TabsScreen('Seach destination'),
+                home: SplashScreen(),
                 routes: {
                   TabsScreen.routeName: (ctx) =>
                       TabsScreen('Search Destination'),
