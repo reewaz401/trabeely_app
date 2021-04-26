@@ -57,6 +57,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
               SizedBox(
                 height: 30,
               ),
+              Text(
+                'Discover',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
               SizedBox(
                   height: 200.0,
                   width: 350.0,
@@ -75,14 +86,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     dotBgColor: Colors.purple.withOpacity(0.5),
                     borderRadius: true,
                   )),
-              Text(
-                'Discover',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                ),
-              ),
               SizedBox(
                 height: 20,
               ),

@@ -174,11 +174,12 @@ class _TabsScreenState extends State<TabsScreen> {
       children: [
         DrawerHeader(
           child: Text(
-            'Settings',
+            'Menu',
             style: TextStyle(fontSize: 25),
           ),
         ),
         ListTile(
+          leading: Icon(Icons.settings),
           title: Text('Settings'),
           onTap: () {
             Navigator.push(
@@ -190,6 +191,7 @@ class _TabsScreenState extends State<TabsScreen> {
           },
         ),
         ListTile(
+          leading: Icon(Icons.bookmark),
           title: Text('Booking History'),
           onTap: () {
             Navigator.push(
@@ -201,6 +203,7 @@ class _TabsScreenState extends State<TabsScreen> {
           },
         ),
         ListTile(
+          leading: Icon(Icons.qr_code),
           title: Text('Scan Qr'),
           onTap: () async {
             String codeSanner = await BarcodeScanner.scan(); //barcode scnner
@@ -216,6 +219,7 @@ class _TabsScreenState extends State<TabsScreen> {
         istoken == null
             ? ListTile()
             : ListTile(
+                leading: Icon(Icons.logout),
                 title: _isloading
                     ? Center(
                         child: CircularProgressIndicator(),
@@ -231,10 +235,6 @@ class _TabsScreenState extends State<TabsScreen> {
                   });
                 },
               ),
-        ListTile(
-          title: Text('Item 3'),
-          onTap: () {},
-        ),
       ],
     );
   }
