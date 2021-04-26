@@ -8,11 +8,16 @@ class RangeSliderCustom extends StatefulWidget {
 }
 
 class _RangeSliderCustomState extends State<RangeSliderCustom> {
-  var selectedRange = RangeValues(2000, 15000);
   List<int> priceRange = [];
+  var _isInitial = true;
+  var selectedRange;
   @override
   Widget build(BuildContext context) {
+    var providerData = Provider.of<FilterData>(context);
     var provider = Provider.of<InitialSetPrice>(context);
+    if (_isInitial) {
+      selectedRange = providerData.selectedPriceRange;
+    }
 
     return Column(
       children: [
@@ -21,8 +26,9 @@ class _RangeSliderCustomState extends State<RangeSliderCustom> {
           onChanged: (RangeValues newRange) {
             setState(() {
               selectedRange = newRange;
-              provider.setInitialPrice(
-                  selectedRange.start.round(), selectedRange.end.round());
+              provider.setInitialPrice(selectedRange.start.round().toDouble(),
+                  selectedRange.end.round().toDouble());
+              _isInitial = false;
             });
           },
           min: 0,

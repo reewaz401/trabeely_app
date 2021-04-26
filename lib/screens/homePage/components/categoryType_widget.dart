@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
+import 'package:travel/services/isLogin.dart';
 import '../Category/category_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryTypeWidget extends StatefulWidget with ChangeNotifier {
   final String type;
@@ -17,8 +19,9 @@ class _CategoryTypeWidgetState extends State<CategoryTypeWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         Provider.of<FilterData>(context, listen: false).clearData();
+
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
             return CategoryScreen(

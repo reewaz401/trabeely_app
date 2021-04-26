@@ -2,32 +2,32 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:travel/screens/UserProile/Components/askSignup.dart';
+import 'package:travel/services/isLogin.dart';
 import '../../services/authentication.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  final String userName;
-  UserProfileScreen(this.userName);
-
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  var _istoken;
   String userName;
-  Future<String> getUserName() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    final String userName = preferences.getString('username');
-    return userName;
+  void getUsername() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    userName = prefs.getString('username');
   }
 
   @override
   void initState() {
-    getUserName().then((value) {
+    Islogin().getToken().then((value) {
       setState(() {
-        userName = value;
+        _istoken = value;
       });
     });
+    getUsername();
+
     super.initState();
   }
 
@@ -36,7 +36,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: userName == null
+      child: _istoken == null
           ? Center(
               child: AskSignUpScreen(),
             )

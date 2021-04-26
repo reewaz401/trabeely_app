@@ -36,8 +36,11 @@ class _ResultsWidgetState extends State<ResultsWidget> {
   Widget build(BuildContext context) {
     return Consumer<FilterData>(builder: (ctx, fildata, _) {
       return FutureBuilder(
-        future: ViewData().viewData(widget.slectedType, fildata.destination,
-            fildata.startPriceRange, fildata.endPriceRange),
+        future: ViewData().viewData(
+            widget.slectedType,
+            fildata.destination,
+            fildata.selectedPriceRange.start.round(),
+            fildata.selectedPriceRange.end.round()),
         builder: (context, snapshot) {
           return snapshot.connectionState == ConnectionState.waiting
               ? Expanded(
