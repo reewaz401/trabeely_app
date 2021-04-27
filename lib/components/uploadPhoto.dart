@@ -23,7 +23,7 @@ class UploadPhoto {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: Text('Choose Method'),
+            title: Text('Upload Travel Photo'),
             content: Text('Please choose the source of your image'),
             actions: [
               Column(

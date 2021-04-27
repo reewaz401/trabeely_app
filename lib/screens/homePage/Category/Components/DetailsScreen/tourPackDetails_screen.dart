@@ -10,6 +10,7 @@ class TourDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('$mainListIndex' + 'Tjos os adsad');
     detail = this.mainList;
     mainListIndex = this.mainListIndex;
     print(mainListIndex);
@@ -133,38 +134,38 @@ class TourDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.blue[300]),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Text(
-                            'Time',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Container(
-                          width: 90,
-                          child: Divider(
-                            color: Colors.white,
-                            thickness: 2,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            '15:30',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Container(
+                  //   height: 100,
+                  //   width: 100,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(5),
+                  //       color: Colors.blue[300]),
+                  //   child: Column(
+                  //     children: [
+                  //       Padding(
+                  //         padding: const EdgeInsets.only(top: 8),
+                  //         child: Text(
+                  //           'Time',
+                  //           style: TextStyle(fontSize: 18),
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         width: 90,
+                  //         child: Divider(
+                  //           color: Colors.white,
+                  //           thickness: 2,
+                  //         ),
+                  //       ),
+                  //       Padding(
+                  //         padding: const EdgeInsets.all(15.0),
+                  //         child: Text(
+                  //           '15:30',
+                  //           style: TextStyle(fontSize: 20),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   Container(
                     height: 100,
                     width: 100,

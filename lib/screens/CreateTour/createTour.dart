@@ -79,7 +79,9 @@ class _CreateTourState extends State<CreateTour> {
     DateTime finalDate = DateTime.now();
     String finalformattedDate = DateFormat.yMMMd().format(finalDate);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Create Your Booking'),
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/screens/Settings/helpCenter.dart';
 import 'package:travel/screens/Settings/writeToUs.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
@@ -202,20 +203,24 @@ class _TabsScreenState extends State<TabsScreen> {
             );
           },
         ),
-        ListTile(
-          leading: Icon(Icons.qr_code),
-          title: Text('Scan Qr'),
-          onTap: () async {
-            String codeSanner = await BarcodeScanner.scan(); //barcode scnner
-            setState(() {
-              qrCodeResult = codeSanner;
-              print(qrCodeResult);
-            });
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return QrScanned(qrCodeResult);
-            }));
-          },
-        ),
+        // ListTile(
+        //   leading: Icon(Icons.qr_code),
+        //   title: Text('Scan Qr'),
+        //   onTap: () async {
+        //     String codeSanner = await BarcodeScanner.scan(); //barcode scnner
+        //     setState(() {
+        //       qrCodeResult = codeSanner;
+        //       print(qrCodeResult);
+        //     });
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //       return QrScanned(qrCodeResult);
+        //     }));
+        //   },
+        // ),
+
+        listTile(context, 'Help Center', HelpCenter(), Icons.help),
+        listTile(context, 'Feedback', WriteToUs(), Icons.feedback),
+        listTile(context, 'Rate Us', WriteToUs(), Icons.stars),
         istoken == null
             ? ListTile()
             : ListTile(

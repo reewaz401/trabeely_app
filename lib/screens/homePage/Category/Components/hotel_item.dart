@@ -116,12 +116,14 @@ class HotelItem extends StatelessWidget {
                   color: Colors.purple[900],
                 ),
                 onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HotelDetailsScreen(
-                              mainList: mainList,
-                              mainListIndex: index,
-                            ))),
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HotelDetailsScreen(
+                      mainList: mainList,
+                      mainListIndex: index,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
