@@ -263,8 +263,12 @@ class _BookingInfoState extends State<BookingInfo> {
                                     color: Colors.red,
                                     icon: Icon(Icons.exposure_minus_1_sharp),
                                     onPressed: () {
-                                      if (childNum == 0) {}
-                                      childNum--;
+                                      setState(() {
+                                        if (childNum == 0) {
+                                        } else {
+                                          childNum--;
+                                        }
+                                      });
                                     }),
                               ),
                               Padding(
@@ -283,7 +287,11 @@ class _BookingInfoState extends State<BookingInfo> {
                                 child: IconButton(
                                   color: Colors.green,
                                   icon: Icon(Icons.exposure_plus_1),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      childNum++;
+                                    });
+                                  },
                                 ),
                               )
                             ],
@@ -317,7 +325,14 @@ class _BookingInfoState extends State<BookingInfo> {
                                 child: IconButton(
                                     color: Colors.red,
                                     icon: Icon(Icons.exposure_minus_1_sharp),
-                                    onPressed: () {}),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (roomsNum == 1) {
+                                        } else {
+                                          roomsNum--;
+                                        }
+                                      });
+                                    }),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -335,7 +350,11 @@ class _BookingInfoState extends State<BookingInfo> {
                                 child: IconButton(
                                   color: Colors.green,
                                   icon: Icon(Icons.exposure_plus_1),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      roomsNum++;
+                                    });
+                                  },
                                 ),
                               )
                             ],
