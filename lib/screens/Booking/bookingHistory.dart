@@ -6,16 +6,18 @@ class BookingHistory extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        child: Column(
-          children: [
-            historyCard(width),
-            historyCard(width),
-            historyCard(width),
-            historyCard(width),
-            historyCard(width),
-            historyCard(width)
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              historyCard(width),
+              historyCard(width),
+              historyCard(width),
+              historyCard(width),
+              historyCard(width),
+              historyCard(width)
+            ],
+          ),
         ),
       ),
     );
