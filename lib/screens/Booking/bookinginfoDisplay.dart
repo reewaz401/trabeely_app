@@ -96,32 +96,6 @@ class _BookingInfoState extends State<BookingInfo> {
     return WillPopScope(
       onWillPop: _backPress,
       child: Scaffold(
-        bottomSheet: Container(
-          width: double.infinity,
-          child: RaisedButton(
-            color: Colors.blue[900],
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookingConfirm(
-                    adult: adultsNum,
-                    child: childNum,
-                    room: roomsNum,
-                    payment: _paymentMethod,
-                  ),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Book Now',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
         appBar: AppBar(
           title: Text('Booking Info'),
         ),
@@ -408,7 +382,33 @@ class _BookingInfoState extends State<BookingInfo> {
                   padding: const EdgeInsets.all(18.0),
                   child: Text('''This hotel offers cancellation policy of 
 before 1 day of check in.'''),
-                )
+                ),
+                Container(
+                  width: double.infinity,
+                  child: RaisedButton(
+                    color: Colors.blue[900],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingConfirm(
+                            adult: adultsNum,
+                            child: childNum,
+                            room: roomsNum,
+                            payment: _paymentMethod,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Book Now',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
