@@ -7,6 +7,7 @@ import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/Settings/userProfileEdit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/UserProile/Components/askSignup.dart';
+import 'package:travel/services/deviceSize.dart';
 import 'package:travel/services/isLogin.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
 
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: _istoken == null
           ? Center(child: AskSignUpScreen())
@@ -74,88 +76,94 @@ class UserProfileScreenState extends State<UserProfileScreen>
                           height: 0.30 * MediaQuery.of(context).size.height,
                           width: 0.75 * MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(color: Colors.blue[900]),
-                        ),
-                      ),
-                      Positioned(
-                        right: 8,
-                        top: 15,
-                        child: Container(
-                          height: 0.25 * MediaQuery.of(context).size.height,
-                          //  color: Colors.red,
-                          width: 0.70 * MediaQuery.of(context).size.width,
-                          child: PageView(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                height:
-                                    0.25 * MediaQuery.of(context).size.height,
-                                width: 0.70 * MediaQuery.of(context).size.width,
-                                decoration:
-                                    BoxDecoration(color: Colors.black54),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Up coming trips",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    )
-                                  ],
+                          child: Container(
+                            height: 0.25 * MediaQuery.of(context).size.height,
+                            //  color: Colors.red,
+                            width: 0.70 * MediaQuery.of(context).size.width,
+                            child: PageView(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all(15),
+                                  padding: EdgeInsets.all(10),
+                                  height:
+                                      0.25 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.70 * MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black54,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Up coming trips",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    top: 8, left: 60, right: 15),
-                                height:
-                                    0.25 * MediaQuery.of(context).size.height,
-                                width: 0.70 * MediaQuery.of(context).size.width,
-                                decoration:
-                                    BoxDecoration(color: Colors.black54),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Rewards : ",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18),
-                                        ),
-                                        Text(
-                                          "30 points",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 25,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Distance : ",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18),
-                                        ),
-                                        Text(
-                                          "356 km",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                Container(
+                                  margin: EdgeInsets.all(10),
+                                  padding: EdgeInsets.only(
+                                      top: 0.01005364 * deviceSize.height,
+                                      left: 0.15277781 * deviceSize.width,
+                                      right: 0.03819445 * deviceSize.width),
+                                  height:
+                                      0.25 * MediaQuery.of(context).size.height,
+                                  width:
+                                      0.70 * MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      color: Colors.black54,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Rewards : ",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                          Text(
+                                            "30 points",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            (2 * tspacing) * deviceSize.height,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Distance : ",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18),
+                                          ),
+                                          Text(
+                                            "356 km",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -182,14 +190,16 @@ class UserProfileScreenState extends State<UserProfileScreen>
                                   border:
                                       Border.all(color: Colors.white, width: 8),
                                   borderRadius: BorderRadius.circular(20)),
-                              height: 145,
-                              width: 145,
+                              height: 0.19097222 * deviceSize.height,
+                              width: 0.36921303 * deviceSize.width,
                             ),
                             Positioned(
                               top: 0,
                               right: 0,
                               child: Container(
-                                decoration: BoxDecoration(color: Colors.white),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15)),
                                 child: IconButton(
                                     icon: Icon(Icons.edit),
                                     onPressed: () {
@@ -241,11 +251,11 @@ class UserProfileScreenState extends State<UserProfileScreen>
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 8,
+                    height: tspacing * deviceSize.height,
                   ),
                   Text('A mantra goes here'),
                   SizedBox(
-                    height: 15,
+                    height: 0.01975575 * deviceSize.height,
                   ),
                   TabBar(
                     unselectedLabelColor: Colors.black,

@@ -16,7 +16,7 @@ class DestinationCarousel extends StatelessWidget {
       children: <Widget>[
         Container(
           height: 150,
-          width: 0.5 * MediaQuery.of(context).size.width,
+          width: 0.485 * MediaQuery.of(context).size.width,
           child: PageView(
             scrollDirection: Axis.vertical,
             children: [

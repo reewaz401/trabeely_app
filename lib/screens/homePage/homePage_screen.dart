@@ -5,6 +5,7 @@ import 'package:travel/screens/homePage/components/card.dart';
 import 'package:travel/screens/homePage/components/homepagecard.dart';
 import 'package:travel/screens/homePage/components/hotelCard.dart';
 import 'package:travel/screens/homePage/components/toursCard.dart';
+import 'package:travel/services/deviceSize.dart';
 
 import './components/categoryType_widget.dart';
 
@@ -43,19 +44,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 20,
+                height: (tspacing + tspacing) * deviceSize.height,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CategoryTypeWidget('Tours'),
                   CategoryTypeWidget('Treks'),
-                  CategoryTypeWidget('Restaurants'),
-                  CategoryTypeWidget('Clubs')
+                  CategoryTypeWidget('Weekends'),
+                  CategoryTypeWidget('Adventures')
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: (3 * tspacing) * deviceSize.height,
               ),
               Text(
                 'Discover',
@@ -66,11 +67,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: (2 * tspacing) * deviceSize.height,
               ),
               SizedBox(
-                  height: 200.0,
-                  width: 350.0,
+                  height: 0.26340996 * deviceSize.height,
+                  width: 0.89120387 * deviceSize.width,
                   child: Carousel(
                     showIndicator: false,
                     autoplayDuration: Duration(seconds: 10),
@@ -87,7 +88,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     borderRadius: true,
                   )),
               SizedBox(
-                height: 20,
+                height: (2 * tspacing) * deviceSize.height,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),

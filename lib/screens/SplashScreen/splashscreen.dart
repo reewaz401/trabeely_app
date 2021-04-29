@@ -7,6 +7,7 @@ import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
 import 'package:travel/services/authentication.dart';
+import 'package:travel/services/deviceSize.dart';
 import '../auth_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -52,8 +53,8 @@ class _SplashScreenState extends State<SplashScreen> {
             return Consumer<Auth>(builder: (context, auth, _) {
               return onboardingPage
                   ? auth.isAuth
-                      ? OneScreen()
-                      : TabsScreen('Search Destination')
+                      ? TabsScreen('Search Destination')
+                      : OneScreen()
                   : OnboardinPage();
             });
           },

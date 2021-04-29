@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travel/components/datePicker_widget.dart';
-import 'package:travel/components/searchBox.dart';
-import 'package:travel/components/searchButton.dart';
+
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/rangeSliderCustom.dart';
 //import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
-import 'package:travel/screens/storyFeedScreen/components/storyFeed_item.dart';
 
 class TourFilter extends StatelessWidget {
   var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -41,13 +38,16 @@ class TourFilter extends StatelessWidget {
                       controller: _tourDestination,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
+                          suffix: IconButton(
+                            icon: Icon(Icons.search),
+                          ),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 25, bottom: 11, top: 11, right: 15),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
                           hintText: "Enter Destination",
                           hintStyle: TextStyle(color: Colors.blue[900])),
                       onSaved: (value) {

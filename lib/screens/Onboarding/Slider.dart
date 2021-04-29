@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/auth_screen.dart';
 import './data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -126,7 +127,7 @@ class _OnboardinPageState extends State<OnboardinPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => AuthScreen(false),
+                      builder: (ctx) => OneScreen(),
                     ),
                   );
                 },
