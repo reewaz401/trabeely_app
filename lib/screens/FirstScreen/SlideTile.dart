@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:travel/components/button.dart';
 import 'package:travel/model/SignupForm.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/services/authentication.dart';
+import 'package:travel/services/deviceSize.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SlideTile extends StatefulWidget {
@@ -38,20 +40,37 @@ class _SlideTileState extends State<SlideTile> {
       address: null,
       email: null,
       password: null);
-  String dropdownValue = 'Male';
+  String dropdownValue;
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Form(
         key: _formKeySignUp,
         child: Column(
-          children: [first(), second(), third(), button()],
+          children: [
+            first(deviceSize),
+            second(deviceSize),
+            third(deviceSize),
+            Container(
+              child: !_isloading
+                  ? Button(
+                      text: 'Sign Up',
+                      callback: () {
+                        mySignupMethod();
+                      },
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Widget first() {
+  Widget first(Size deviceSize) {
     return Container(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +92,7 @@ class _SlideTileState extends State<SlideTile> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: tspacing * deviceSize.height,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,27 +111,24 @@ class _SlideTileState extends State<SlideTile> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: tpaddng * deviceSize.height,
         ),
         inputBox('Full Name', context),
         SizedBox(
-          height: 8,
+          height: tspacing * deviceSize.height,
         ),
-        gender(dropdownValue),
+        gender(),
       ],
     ));
   }
 
-  Widget second() {
+  Widget second(Size deviceSize) {
     return Container(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: 10,
+          height: (tpaddng + tpaddng) * deviceSize.height,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,27 +146,24 @@ class _SlideTileState extends State<SlideTile> {
           ],
         ),
         SizedBox(
-          height: 20,
+          height: (tspacing + tspacing) * deviceSize.height,
         ),
         inputBox('Email', context),
         SizedBox(
-          height: 8,
+          height: tspacing * deviceSize.height,
         ),
         inputBox('Contact Number', context),
       ],
     ));
   }
 
-  Widget third() {
+  Widget third(Size deviceSize) {
     return Container(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-          height: 10,
-        ),
-        SizedBox(
-          height: 10,
+          height: (tpaddng + tpaddng) * deviceSize.height,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,11 +182,11 @@ class _SlideTileState extends State<SlideTile> {
           ],
         ),
         SizedBox(
-          height: 10,
+          height: tspacing * deviceSize.height,
         ),
         inputBox('Password', context),
         SizedBox(
-          height: 8,
+          height: tspacing * deviceSize.height,
         ),
         inputBox('Confirm Password', context),
       ],
@@ -359,7 +372,7 @@ class _SlideTileState extends State<SlideTile> {
         password: type == 'password' ? newValue : _addingUser.password);
   }
 
-  Widget gender(String dropdownValue) {
+  Widget gender() {
     return Container(
         height: 43,
         padding: EdgeInsets.symmetric(horizontal: 15),
@@ -368,6 +381,7 @@ class _SlideTileState extends State<SlideTile> {
             border: Border.all(width: 1, color: Colors.blue[900]),
             borderRadius: BorderRadius.circular(15)),
         child: DropdownButton<String>(
+          hint: Text('Gender'),
           value: dropdownValue,
           isExpanded: true,
           icon: const Icon(Icons.arrow_downward),
@@ -392,35 +406,15 @@ class _SlideTileState extends State<SlideTile> {
         ));
   }
 
-  Widget button() {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(
-          color: Colors.blue, borderRadius: BorderRadius.circular(15)),
-      //alignment: Alignment.centerRight,
-      width: MediaQuery.of(context).size.width,
-      child: _isloading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : TextButton(
-              child: Text(
-                'Sign up',
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-              onPressed: () async {
-                _formKeySignUp.currentState.validate();
-                _formKeySignUp.currentState.save();
-                setState(() {
-                  _isloading = true;
-                });
-                await Auth().signUp(_addingUser);
-                setState(() {
-                  _isloading = false;
-                });
-              },
-            ),
-    );
+  mySignupMethod() async {
+    _formKeySignUp.currentState.validate();
+    _formKeySignUp.currentState.save();
+    setState(() {
+      _isloading = true;
+    });
+    await Auth().signUp(_addingUser);
+    setState(() {
+      _isloading = false;
+    });
   }
 }

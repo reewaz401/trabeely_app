@@ -124,21 +124,12 @@ class _ViewDestinationState extends State<ViewDestination> {
             height: 15,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CategoryTypeWidget('All', widget.destination),
-              CategoryTypeWidget('Tours', widget.destination),
-            ],
-          ),
-          Row(
-            children: [
-              CategoryTypeWidget('Treks', widget.destination),
-              CategoryTypeWidget('Hotels', widget.destination),
-            ],
-          ),
-          Row(
-            children: [
-              CategoryTypeWidget('Restaurants', widget.destination),
-              CategoryTypeWidget('Clubs', widget.destination),
+              CategoryTypeWidget('Tours'),
+              CategoryTypeWidget('Treks'),
+              CategoryTypeWidget('Restaurants'),
+              CategoryTypeWidget('Clubs')
             ],
           ),
           SizedBox(

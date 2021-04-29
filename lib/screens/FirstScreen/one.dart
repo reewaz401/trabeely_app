@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel/components/button.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
 import 'package:travel/screens/FirstScreen/signup_screen.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
+import 'package:travel/services/deviceSize.dart';
 
 class OneScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
           height: MediaQuery.of(context).size.height,
@@ -21,70 +24,42 @@ class OneScreen extends StatelessWidget {
               Container(
                 child: Column(
                   children: [
-                    button(
-                      context,
-                      'Log In',
-                      900,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    button(
-                      context,
-                      'Sign Up',
-                      700,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextButton(
-                        onPressed: () {
+                    Button(
+                        text: 'Login',
+                        callback: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (ctx) =>
-                                      TabsScreen('Search Destination')));
-                        },
-                        child: Text(
-                          'Explore the App',
-                        ))
+                                  builder: (ctx) => LoginScreen()));
+                        }),
+                    SizedBox(
+                      height: tpaddng * deviceSize.height,
+                    ),
+                    Button(
+                        text: 'Sign Up',
+                        backgroundColor: Colors.blue[700],
+                        callback: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (ctx) => SignUpScreen()));
+                        }),
+                    SizedBox(
+                      height: tpaddng * deviceSize.height - 5,
+                    ),
+                    Button(
+                      text: 'Explore App',
+                      isDecoration: false,
+                      textColor: Colors.black,
+                      callback: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) =>
+                                TabsScreen('Search Destination')));
+                      },
+                    )
                   ],
                 ),
               )
             ],
           )),
-    );
-  }
-
-  Widget button(
-    BuildContext context,
-    String buttonName,
-    int colVal,
-  ) {
-    return Container(
-      width: 0.7 * MediaQuery.of(context).size.width,
-      height: 50,
-      child: TextButton(
-        onPressed: () {
-          if (buttonName == 'Log In') {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (ctx) => LoginScreen()));
-          } else {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (ctx) => SignUpScreen()));
-          }
-        },
-        child: Text(
-          buttonName,
-          style: TextStyle(color: Colors.white),
-        ),
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.blue[colVal]),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ))),
-      ),
     );
   }
 }

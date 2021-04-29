@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/homePage/components/viewDestination.dart';
-import 'package:travel/screens/tabsScreen/tabs_screen.dart';
-import '../homePage_screen.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:travel/services/tours_services.dart';
 
 class SearchWidget extends StatefulWidget {
   final String destination;
@@ -26,53 +26,26 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        margin: EdgeInsets.all(10),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Color(0xFF4579B2).withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(10)),
-              child: Form(
-                key: _formKey,
-                child: TextFormField(
-                  focusNode: _destinationFocusnode,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: "Enter Destination",
-                      hintStyle: TextStyle(color: Colors.white)),
-                  validator: (val) {
-                    if (val.isEmpty) {
-                      return ('Enter value');
-                    }
-                    return null;
-                  },
-                  onFieldSubmitted: (value) {
-                    _formKey.currentState.save();
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (ctx) => ViewDestination(value)));
-                  },
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-          ],
-        ),
+      body: TypeAheadField<User>(
+        textFieldConfiguration: TextFieldConfiguration(
+            decoration: InputDecoration(
+                hintText: 'Search Destianiton',
+                suffixIcon: Icon(Icons.search),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 15))),
+        suggestionsCallback: UserApi.getSuggestion,
+        itemBuilder: (context, User suggestion) {
+          final user = suggestion;
+          return ListTile(
+            title: Text(user.name),
+          );
+        },
+        onSuggestionSelected: (User suggestion) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (ctx) => ViewDestination(suggestion.name)));
+        },
       ),
     );
   }

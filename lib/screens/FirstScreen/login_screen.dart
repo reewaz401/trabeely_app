@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel/components/button.dart';
 import 'package:travel/screens/FirstScreen/signup_screen.dart';
 import 'package:travel/services/authentication.dart';
+import 'package:travel/services/deviceSize.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Map<String, String> _authData = {'email': '', 'password': ''};
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -26,18 +29,38 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                  height: 170,
-                  width: 0.9 * MediaQuery.of(context).size.width,
-                  child: SvgPicture.asset('assets/images/loginLogo.svg')),
+                  height: 0.263 * deviceSize.height,
+                  width: 0.9 * deviceSize.width,
+                  child: SvgPicture.asset('assets/images/logo.svg')),
               inputBox(),
               Container(
                   child: Column(
                 children: [
-                  button(),
+                  //     button(),
+                  Container(
+                      child: !_isloading
+                          ? Button(
+                              text: 'Log In',
+                              callback: () {
+                                myLoginMethod();
+                              })
+                          : Center(
+                              child: CircularProgressIndicator(),
+                            )),
                   TextButton(
                       onPressed: () => Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (ctx) => SignUpScreen())),
-                      child: Text('Do not have account ? Sign Up instead'))
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                            text: 'Do not have account?  ',
+                            style: TextStyle(color: Colors.grey[700])),
+                        TextSpan(
+                            text: 'Sign Up',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline))
+                      ])))
                 ],
               ))
             ],
@@ -51,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Form(
       key: _formKeyLogIn,
       child: Container(
-          width: 0.8 * MediaQuery.of(context).size.width,
+          width: kwtextfield * MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Container(
@@ -72,8 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                     hintText: 'Email',
                     //hintStyle: TextStyle(color: Colors.orange)
                   ),
@@ -141,8 +164,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     enabledBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                     hintText: 'Password',
                     //     hintStyle: TextStyle(color: Colors.white)
                   ),
@@ -166,45 +189,22 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget button() {
-    return Container(
-      width: 0.7 * MediaQuery.of(context).size.width,
-      height: 50,
-      child: _isloading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : TextButton(
-              onPressed: () async {
-                FocusScope.of(context).unfocus();
-                var validation = _formKeyLogIn.currentState.validate();
-                if (validation) {
-                  _formKeyLogIn.currentState.save();
-                  setState(() {
-                    _isloading = true;
-                  });
+  myLoginMethod() async {
+    FocusScope.of(context).unfocus();
+    var validation = _formKeyLogIn.currentState.validate();
+    if (validation) {
+      _formKeyLogIn.currentState.save();
+      setState(() {
+        _isloading = true;
+      });
 
-                  _formKeyLogIn.currentState.save();
-                  _formKeyLogIn.currentState.validate();
-                  await Auth().signIn(
-                      context, _authData['email'], _authData['password']);
-                  setState(() {
-                    _isloading = false;
-                  });
-                }
-              },
-              child: Text(
-                'Log In',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.orange[900]),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ))),
-            ),
-    );
+      _formKeyLogIn.currentState.save();
+      _formKeyLogIn.currentState.validate();
+      await Auth().signIn(
+          context, _authData['email'].trim(), _authData['password'].trim());
+      setState(() {
+        _isloading = false;
+      });
+    }
   }
 }
