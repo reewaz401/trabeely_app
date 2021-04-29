@@ -72,96 +72,104 @@ class TourItem extends StatelessWidget {
   }
 
   Widget detailsTile(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          SizedBox(
-            height: 90,
-            child: Text(
-              overview,
-              maxLines: 5,
-              overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      onTap: () {
+        print('The index' + index.toString());
+        return Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TourDetails(
+              mainList: mainList,
+              mainListIndex: index,
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Date : ',
-                      style: TextStyle(color: Colors.grey, fontSize: 10)),
-                  TextSpan(
-                      text: DateFormat.yMMMd('en_US')
-                          .format(DateTime.parse(date))
-                          .toString(),
-                      style: TextStyle(color: Colors.pink[900]))
-                ]),
-              ),
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Npr : ',
-                      style: TextStyle(color: Colors.grey, fontSize: 10)),
-                  TextSpan(
-                      text: price.toString(),
-                      style: TextStyle(color: Colors.green[900]))
-                ]),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 170,
-                child: Text(
-                  'Seller : ${mainList[index]['user']['companyName']}',
-                  overflow: TextOverflow.ellipsis,
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                  ),
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            SizedBox(
+              height: 90,
+              child: Text(
+                overview,
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_rounded,
-                  color: Colors.purple[900],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: 'Date : ',
+                        style: TextStyle(color: Colors.grey, fontSize: 10)),
+                    TextSpan(
+                        text: DateFormat.yMMMd('en_US')
+                            .format(DateTime.parse(date))
+                            .toString(),
+                        style: TextStyle(color: Colors.pink[900]))
+                  ]),
                 ),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TourDetails(
-                              mainList: mainList,
-                              mainListIndex: index,
-                            ))),
-              ),
-            ],
-          )
-        ],
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: 'Npr : ',
+                        style: TextStyle(color: Colors.grey, fontSize: 10)),
+                    TextSpan(
+                        text: price.toString(),
+                        style: TextStyle(color: Colors.green[900]))
+                  ]),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 170,
+                  child: Text(
+                    'Seller : ${mainList[index]['user']['companyName']}',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: Colors.purple[900],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

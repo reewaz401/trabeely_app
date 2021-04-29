@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travel/components/datePicker_widget.dart';
 import 'package:travel/screens/Booking/bookingSucess.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import '../Booking/bookingPeopleNumber.dart';
 
 class BookingInfo extends StatefulWidget {
   @override
@@ -16,20 +16,53 @@ class _BookingInfoState extends State<BookingInfo> {
   String paymentMethod = 'Cash';
   int roomsNum = 1;
   String _paymentMethod = 'Cash';
-  void updateChild(int count) {
-    setState(() {
-      print(childNum);
-      childNum = count;
-      print(childNum);
-    });
-  }
 
-  void updateAdult(int count) {
-    setState(() => adultsNum = count);
-  }
-
-  void updateRoom(int count) {
-    setState(() => roomsNum = count);
+  Widget bookingInfo(number) {
+    return SizedBox(
+      child: Row(
+        children: [
+          Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.0),
+                border: Border.all(color: Colors.red)),
+            child: IconButton(
+                color: Colors.red,
+                icon: Icon(Icons.exposure_minus_1_sharp),
+                onPressed: () {
+                  setState(() {
+                    number--;
+                  });
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              number.toString(),
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
+          Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.0),
+                border: Border.all(color: Colors.green)),
+            child: IconButton(
+              color: Colors.green,
+              icon: Icon(Icons.exposure_plus_1),
+              onPressed: () {
+                print('Pressed');
+                setState(() {
+                  number++;
+                });
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -37,7 +70,6 @@ class _BookingInfoState extends State<BookingInfo> {
     DateTime initDate = DateTime.now();
     DateTime finalDate = DateTime.now();
     String initformattedDate = DateFormat.yMMMd().format(initDate);
-
     String finalformatDate = DateFormat.yMMMd().format(finalDate);
 
     Future<bool> _backPress() {
@@ -64,32 +96,6 @@ class _BookingInfoState extends State<BookingInfo> {
     return WillPopScope(
       onWillPop: _backPress,
       child: Scaffold(
-        bottomSheet: Container(
-          width: double.infinity,
-          child: RaisedButton(
-            color: Colors.blue[900],
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookingConfirm(
-                    adult: adultsNum,
-                    child: childNum,
-                    room: roomsNum,
-                    payment: _paymentMethod,
-                  ),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Book Now',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
         appBar: AppBar(
           title: Text('Booking Info'),
         ),
@@ -143,14 +149,197 @@ class _BookingInfoState extends State<BookingInfo> {
                 SizedBox(
                   height: 15,
                 ),
-                BookingInfos(
-                    type: 'Children', number: childNum, update: updateChild),
-                BookingInfos(
-                    type: 'Adult', number: adultsNum, update: updateAdult),
-                BookingInfos(
-                    type: 'Room', number: roomsNum, update: updateRoom),
                 SizedBox(
                   height: 15,
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Adult',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.red)),
+                                child: IconButton(
+                                    color: Colors.red,
+                                    icon: Icon(Icons.exposure_minus_1_sharp),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (adultsNum == 0) {
+                                        } else {
+                                          adultsNum--;
+                                        }
+                                      });
+                                    }),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  adultsNum.toString(),
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              ),
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.green)),
+                                child: IconButton(
+                                  color: Colors.green,
+                                  icon: Icon(Icons.exposure_plus_1),
+                                  onPressed: () {
+                                    setState(() {
+                                      adultsNum++;
+                                    });
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Children',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.red)),
+                                child: IconButton(
+                                    color: Colors.red,
+                                    icon: Icon(Icons.exposure_minus_1_sharp),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (childNum == 0) {
+                                        } else {
+                                          childNum--;
+                                        }
+                                      });
+                                    }),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  childNum.toString(),
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              ),
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.green)),
+                                child: IconButton(
+                                  color: Colors.green,
+                                  icon: Icon(Icons.exposure_plus_1),
+                                  onPressed: () {
+                                    setState(() {
+                                      childNum++;
+                                    });
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Room',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.red)),
+                                child: IconButton(
+                                    color: Colors.red,
+                                    icon: Icon(Icons.exposure_minus_1_sharp),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (roomsNum == 1) {
+                                        } else {
+                                          roomsNum--;
+                                        }
+                                      });
+                                    }),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  roomsNum.toString(),
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                              ),
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    border: Border.all(color: Colors.green)),
+                                child: IconButton(
+                                  color: Colors.green,
+                                  icon: Icon(Icons.exposure_plus_1),
+                                  onPressed: () {
+                                    setState(() {
+                                      roomsNum++;
+                                    });
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
                 ),
                 heading('Your Total Cost'),
                 Row(
@@ -193,7 +382,33 @@ class _BookingInfoState extends State<BookingInfo> {
                   padding: const EdgeInsets.all(18.0),
                   child: Text('''This hotel offers cancellation policy of 
 before 1 day of check in.'''),
-                )
+                ),
+                Container(
+                  width: double.infinity,
+                  child: RaisedButton(
+                    color: Colors.blue[900],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingConfirm(
+                            adult: adultsNum,
+                            child: childNum,
+                            room: roomsNum,
+                            payment: _paymentMethod,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Book Now',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -250,71 +465,4 @@ Widget heading(String heading) {
       ),
     ],
   );
-}
-
-class BookingInfos extends StatelessWidget {
-  final ValueChanged<int> update;
-  String type;
-  int number;
-  BookingInfos({this.type, this.number, this.update});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              type,
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(
-              child: Row(
-                children: [
-                  Container(
-                    width: 38,
-                    height: 38,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        border: Border.all(color: Colors.red)),
-                    child: IconButton(
-                        color: Colors.red,
-                        icon: Icon(Icons.exposure_minus_1_sharp),
-                        onPressed: () {
-                          update(-1);
-                        }),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      number.toString(),
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ),
-                  Container(
-                    width: 38,
-                    height: 38,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        border: Border.all(color: Colors.green)),
-                    child: IconButton(
-                      color: Colors.green,
-                      icon: Icon(Icons.exposure_plus_1),
-                      onPressed: () {
-                        update(1);
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        )
-      ],
-    );
-  }
 }
