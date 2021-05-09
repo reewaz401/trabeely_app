@@ -99,6 +99,7 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                             if (loadingProgress == null) return child;
                             return Center(
                               child: CircularProgressIndicator(
+                                backgroundColor: Colors.blue[900],
                                 value: loadingProgress.expectedTotalBytes !=
                                         null
                                     ? loadingProgress.cumulativeBytesLoaded /
