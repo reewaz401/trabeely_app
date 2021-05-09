@@ -36,7 +36,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final CategoryTypeWidget args = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
       initialIndex: index,
       length: 4,
@@ -58,10 +57,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 child: SvgPicture.asset('assets/images/Treks.svg'),
               ),
               Tab(
-                child: SvgPicture.asset('assets/images/Restaurants.svg'),
+                child: SvgPicture.asset('assets/images/Weekends.svg'),
               ),
               Tab(
-                child: SvgPicture.asset('assets/images/Clubs.svg'),
+                child: SvgPicture.asset('assets/images/Adventures.svg'),
               ),
             ],
           ),

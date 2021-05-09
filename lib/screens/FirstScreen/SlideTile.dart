@@ -52,6 +52,9 @@ class _SlideTileState extends State<SlideTile> {
             first(deviceSize),
             second(deviceSize),
             third(deviceSize),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               child: !_isloading
                   ? Button(
@@ -99,7 +102,7 @@ class _SlideTileState extends State<SlideTile> {
           children: [
             Text(
               'General Information',
-              style: TextStyle(color: Colors.blue, fontSize: 15),
+              style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
             Container(
               child: Icon(
@@ -135,7 +138,7 @@ class _SlideTileState extends State<SlideTile> {
           children: [
             Text(
               'Verification',
-              style: TextStyle(color: Colors.blue, fontSize: 15),
+              style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
             Container(
                 child: Icon(
@@ -170,7 +173,7 @@ class _SlideTileState extends State<SlideTile> {
           children: [
             Text(
               'Security',
-              style: TextStyle(color: Colors.blue, fontSize: 15),
+              style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
             Container(
               child: Icon(
@@ -182,7 +185,7 @@ class _SlideTileState extends State<SlideTile> {
           ],
         ),
         SizedBox(
-          height: tspacing * deviceSize.height,
+          height: (tspacing + tspacing) * deviceSize.height,
         ),
         inputBox('Password', context),
         SizedBox(
@@ -195,7 +198,7 @@ class _SlideTileState extends State<SlideTile> {
 
   Widget inputBox(String type, BuildContext context) {
     return Container(
-      height: 43,
+      height: 50,
       decoration: BoxDecoration(
           border: Border.all(width: 1, color: Colors.blue[900]),
           borderRadius: BorderRadius.circular(15)),
@@ -374,7 +377,7 @@ class _SlideTileState extends State<SlideTile> {
 
   Widget gender() {
     return Container(
-        height: 43,
+        height: 50,
         padding: EdgeInsets.symmetric(horizontal: 15),
         width: 0.9 * MediaQuery.of(context).size.width,
         decoration: BoxDecoration(

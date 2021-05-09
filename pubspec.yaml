@@ -26,6 +26,7 @@ dependencies:
   flutter_svg: ^0.20.0-nullsafety.3
   
   image_picker: ^0.6.7+15  
+  multi_image_picker: ^4.6.3
   date_time_picker: "^1.1.1"
   country_code_picker: ^1.7.0
   path_provider: ^1.6.24
@@ -45,6 +46,8 @@ dependencies:
   barcode_scan_fix: ^1.0.2
   transparent_image: ^2.0.0
   flutter_typeahead: ^2.0.0
+  uuid: ^2.1.0
+  flutter_absolute_path: ^1.0.6
   
   
 

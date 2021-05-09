@@ -28,6 +28,10 @@ class _SearchWidgetState extends State<SearchWidget> {
       appBar: AppBar(),
       body: TypeAheadField<User>(
         textFieldConfiguration: TextFieldConfiguration(
+            // onSubmitted: (value) {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (ctx) => ViewDestination(value)));
+            // },
             decoration: InputDecoration(
                 hintText: 'Search Destianiton',
                 suffixIcon: Icon(Icons.search),

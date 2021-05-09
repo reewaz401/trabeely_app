@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel/components/data.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
 import 'package:travel/screens/FirstScreen/login_screen.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
@@ -61,7 +62,7 @@ class _MyAppState extends State<MyApp> {
           builder: (ctx, auth, _) =>
               Consumer(builder: (context, ThemeNotifier value, _) {
             return MaterialApp(
-                //supportedLocales: [Locale('pt', 'BR')],
+                // supportedLocales: [Locale('pt', 'BR')],
                 debugShowCheckedModeBanner: false,
                 title: 'Flutter Demo',
                 theme: value.darkTheme ? light : dark,

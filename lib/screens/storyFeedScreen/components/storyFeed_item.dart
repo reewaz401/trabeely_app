@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
+import 'package:travel/services/themeData.dart';
 
 class StoryFeedItem extends StatefulWidget {
   final String userName;
@@ -18,80 +20,83 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Container(
-      color: Colors.white,
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.all(10),
+      //margin: EdgeInsets.only(top: 10),
       width: deviceSize.width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  Text(
-                    widget.userName,
-                    style: TextStyle(
-                      fontSize: 20,
+                  CircleAvatar(),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.userName,
+                        style: light.textTheme.headline1,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.description,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Stack(
+                children: <Widget>[
+                  Container(
+                    height: 250,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  Container(
+                    height: 250,
+                    child: Center(
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: widget.imageUrl,
+                      ),
                     ),
                   ),
                 ],
               ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(widget.description),
-          SizedBox(
-            height: 10,
-          ),
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 250,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              SizedBox(
+                height: 10,
               ),
-              Container(
-                height: 250,
-                child: Center(
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: widget.imageUrl,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      button('assets/images/like.svg'),
+                      button('assets/images/Group-1.svg'),
+                      button('assets/images/Group.svg')
+                    ],
                   ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  button('assets/images/Group-3.svg'),
-                  button('assets/images/Group-1.svg'),
-                  button('assets/images/Group.svg')
-                ],
-              ),
-              Row(
-                children: [
-                  button('assets/images/Vector.svg'),
-                  button('assets/images/Group-2.svg')
+                  Row(
+                    children: [
+                      button('assets/images/Vector.svg'),
+                      button('assets/images/Group-2.svg')
+                    ],
+                  )
                 ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

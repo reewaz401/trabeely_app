@@ -43,15 +43,16 @@ class Auth with ChangeNotifier {
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }
-
+      print(response.body);
       _token = json.decode(response.body)["user"]["token"];
-      _userId = json.decode(response.body)["user"]["name"];
+      _userId = json.decode(response.body)["user"]["_id"];
+      print(_userId);
       print(response.headers['server']);
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('userToken', _token);
         preferences.setString('itemDisplayToken', '21f@do8GP3RMISI0N-D@T@');
-        preferences.setString('username', _userId);
+        preferences.setString('userId', _userId);
         preferences.setString('cookie', response.headers['set-cookie']);
         preferences.setString('server', response.headers['server']);
 

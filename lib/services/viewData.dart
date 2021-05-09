@@ -49,24 +49,21 @@ class ViewData with ChangeNotifier {
       } else if (slectedType == 'Restaurants') {
         dataList = jsonResponse as Map<String, dynamic>; //api for restaurant
       }
-      print('object');
+
       print(destination);
-      print('price $startPriceRange');
-      print('p $endPriceRange');
 
       if (destination == '') {
         destination = null;
       }
 
       if (destination != null) {
-        print('null des');
-        print(jsonResponse);
         jsonResponse = await sortByDestination(
             destination: destination, length: dataList['data'].length);
         if (startPriceRange > 0 || endPriceRange > 0) {
           jsonResponse = await sortByPriceRange(
               startPriceRange, endPriceRange, jsonResponse['data'].length);
         }
+        print(jsonResponse);
 
         return jsonResponse;
       } else if (destination == null || destination == '') {
@@ -75,7 +72,7 @@ class ViewData with ChangeNotifier {
               startPriceRange, endPriceRange, jsonResponse['data'].length);
         }
 
-        return jsonResponse;
+        return dataList;
       } else {
         print('snull des');
         return null;
@@ -98,8 +95,7 @@ class ViewData with ChangeNotifier {
         result['data'].add(dataList['data'][i]);
       }
     }
-    print('des');
-    print(result);
+
     return result;
   }
 
@@ -112,8 +108,7 @@ class ViewData with ChangeNotifier {
         result['data'].add(dataList['data'][i]);
       }
     }
-    print('pr');
-    print(result);
+
     return result;
   }
 }
