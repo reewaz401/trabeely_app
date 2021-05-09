@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
+        // physics: AlwaysScrollableScrollPhysics(),
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

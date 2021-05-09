@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/services/accessPublicApi.dart';
+import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
+import 'package:travel/screens/storyFeedScreen/components/postStory.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
+import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class StoryFeedScreen extends StatefulWidget {
   static const routeName = '/storyScreen';
@@ -18,13 +23,41 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
 
     return res;
   }
+  var _isloading = false;
+  List<Asset> images = <Asset>[];
+  String _error = 'No Error Dectected';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await UploadPhoto().imagePickerDialog(context);
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+          var userToken = prefs.getString('userToken');
+          if (userToken == null) {
+            return;
+          }
+          setState(() {
+            _isloading = true;
+          });
+
+          await loadAssets();
+
+          if (images.isEmpty) {
+            setState(() {
+              _isloading = false;
+            });
+            return;
+          }
+          setState(() {
+            _isloading = false;
+          });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (ctx) => AddStoryScreen(
+                    images: images,
+                  )));
+
+          //UploadPhoto().imagePickerDialog(context);
         },
         child: Icon(Icons.add_a_photo),
       ),
@@ -63,5 +96,37 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
         ),
       ),
     );
+  }
+  Future<void> loadAssets() async {
+    List<Asset> resultList = <Asset>[];
+    String error = 'No Error Detected';
+
+    try {
+      resultList = await MultiImagePicker.pickImages(
+        maxImages: 300,
+        enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
+      );
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      _error = error;
+    });
   }
 }

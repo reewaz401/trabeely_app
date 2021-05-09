@@ -5,7 +5,7 @@ class UserInfo {
   String email;
   Future<String> getUserName() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    final String userName = preferences.getString('username');
+    final String userName = preferences.getString('userId');
     return userName;
   }
 

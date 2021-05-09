@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ThemeData light = ThemeData(
+    appBarTheme: AppBarTheme(backgroundColor: Color(0xFF0F367C)),
     brightness: Brightness.light,
     primarySwatch: Colors.blue,
+    textTheme: TextTheme(headline1: TextStyle(color: Colors.black)),
     accentColor: Colors.orange,
-    scaffoldBackgroundColor: Colors.white);
+    cardColor: Colors.white);
 ThemeData dark = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.orange,
-  accentColor: Colors.blue,
-);
+    brightness: Brightness.dark,
+    textTheme: TextTheme(headline1: TextStyle(color: Colors.white)),
+    primarySwatch: Colors.orange,
+    accentColor: Colors.blue,
+    cardColor: Colors.black,
+    scaffoldBackgroundColor: Colors.black);
 
 class ThemeNotifier extends ChangeNotifier {
   final String key = "theme";

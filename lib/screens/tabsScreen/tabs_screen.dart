@@ -19,9 +19,6 @@ import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
 import 'package:travel/screens/Booking/bookingHistory.dart';
 import 'package:travel/screens/Settings/settings.dart';
-import 'package:travel/screens/ExtraScreens/qrScanned.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../services/themeData.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs-screen';
@@ -180,6 +177,7 @@ class _TabsScreenState extends State<TabsScreen> {
             style: TextStyle(fontSize: 25),
           ),
         ),
+
         ListTile(
           leading: Icon(Icons.settings),
           title: Text('Settings'),
@@ -204,6 +202,7 @@ class _TabsScreenState extends State<TabsScreen> {
             );
           },
         ),
+
         // ListTile(
         //   leading: Icon(Icons.qr_code),
         //   title: Text('Scan Qr'),

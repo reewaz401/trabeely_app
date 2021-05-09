@@ -56,7 +56,7 @@ class Auth with ChangeNotifier {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('userToken', _token);
         preferences.setString('itemDisplayToken', '21f@do8GP3RMISI0N-D@T@');
-        preferences.setString('username', _userId);
+        preferences.setString('userId', _userId);
         preferences.setString('cookie', response.headers['set-cookie']);
         preferences.setString('server', response.headers['server']);
         preferences.setString('email', _email);

@@ -3,9 +3,9 @@ getIndex(String destination) {
     return 0;
   } else if (destination == 'Treks') {
     return 1;
-  } else if (destination == 'Restaurants') {
+  } else if (destination == 'Weekends') {
     return 2;
-  } else if (destination == 'Clubs') {
+  } else if (destination == 'Adventures') {
     return 3;
   } else {
     return null;
