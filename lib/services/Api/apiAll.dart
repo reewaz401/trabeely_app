@@ -7,3 +7,4 @@ const viewTreksApi = '${Base_Url}packages/package-trek';
 const viewHotelsApi = '${Base_Url}hotels';
 const viewRestaurantsApi = '${Base_Url}restaurants';
 const viewByDestinationApi = '${Base_Url}search/all/';
+const updateProfileAPi = '${Base_Url}users/update';

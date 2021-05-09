@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:travel/components/uploadPhoto.dart';
+import 'package:travel/services/accessPublicApi.dart';
 import '../../dummyData/storyFeedData.dart';
 import 'components/storyFeed_item.dart';
 
-class StoryFeedScreen extends StatelessWidget {
+class StoryFeedScreen extends StatefulWidget {
   static const routeName = '/storyScreen';
+
+  @override
+  _StoryFeedScreenState createState() => _StoryFeedScreenState();
+}
+
+class _StoryFeedScreenState extends State<StoryFeedScreen> {
+  storrySettingUp() async {
+    var res =
+        await getPublicDataApi('https://api.trabeely.com/api/story/getpost');
+
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,111 +35,33 @@ class StoryFeedScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: StoryFeedData.length,
-                  itemBuilder: (context, index) => Container(
-                          child: StoryFeedItem(
-                        userName: StoryFeedData[index].userName,
-                        description: StoryFeedData[index].description,
-                        imageUrl: StoryFeedData[index].imageUrl,
-                        location: StoryFeedData[index].location,
-                      ))),
+              child: FutureBuilder(
+                  future: storrySettingUp(),
+                  builder: (context, snapshot) {
+                    return snapshot.hasData
+                        ? ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: snapshot.data['data'].length,
+                            itemBuilder: (context, index) {
+                              final data = snapshot.data['data'];
+                              return Container(
+                                child: StoryFeedItem(
+                                  userName: data[index]['user']['fullname'],
+                                  description: data[index]['post_desc'],
+                                  location: 'Kathmandu',
+                                  imageUrl: data[index]['post_image'],
+                                ),
+                              );
+                            },
+                          )
+                        : Container(
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                  }),
             )
           ],
         ),
       ),
     );
   }
-/*
-  Widget addStoryCard(BuildContext context) {
-    return Container(
-      // color: Colors.blueAccent,
-      height: 60,
-      child: InkWell(
-        onTap: () async {
-          await UploadPhoto().imagePickerDialog(context);
-        },
-        child: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 0.7 * MediaQuery.of(context).size.width,
-                //color: Colors.red,
-                child: Text(
-                  'Add your story',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 25),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.add,
-                    color: Colors.orange,
-                    size: 40,
-                  ),
-                  onPressed: null,
-                ),
-              )
-            ],
-          ),
-        ]),
-      ),
-    );
-  }
-
-  Widget addStoryBox(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        final image = await UploadPhoto().imagePickerDialog(context);
-        if (image == null) {
-          return;
-        }
-        Navigator.push(context,
-            MaterialPageRoute(builder: (ctx) => AddStoryScreen(image)));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        margin: EdgeInsets.only(right: 0, bottom: 5),
-        padding: EdgeInsets.only(left: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 0.7 * MediaQuery.of(context).size.width,
-              //color: Colors.red,
-              child: Text(
-                'Add your story',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(right: 25),
-              child: IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.orange,
-                  size: 40,
-                ),
-                onPressed: null,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-*/
-  // our product image
-
-  // Product title and price
-
 }

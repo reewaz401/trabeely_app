@@ -1,8 +1,17 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-String userName;
-Future<String> getUserName() async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  final String userName = preferences.getString('username');
-  return userName;
+class UserInfo {
+  String userName;
+  String email;
+  Future<String> getUserName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final String userName = preferences.getString('username');
+    return userName;
+  }
+
+  Future<String> getEmail() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final String userName = preferences.getString('email');
+    return userName;
+  }
 }

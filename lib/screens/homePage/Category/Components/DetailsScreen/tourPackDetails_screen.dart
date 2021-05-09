@@ -35,7 +35,7 @@ class TourDetails extends StatelessWidget {
                 height: 300,
                 width: double.infinity,
                 color: Colors.white,
-                child: detail[0]['packageImg'].length == '2'
+                child: detail[0]['packageImg'].length == 2
                     ? Column(
                         children: [
                           Flexible(

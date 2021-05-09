@@ -13,6 +13,8 @@ import '../model/httpExecption.dart' as exp;
 class Auth with ChangeNotifier {
   String _token;
   String _userId;
+  String _email;
+  String _id;
 
   bool get isAuth {
     return token != null;
@@ -43,10 +45,13 @@ class Auth with ChangeNotifier {
       if (json.decode(response.body)['success'] == false) {
         throw exp.HttpException(json.decode(response.body)["message"]);
       }
+      print(response.body);
 
       _token = json.decode(response.body)["user"]["token"];
       _userId = json.decode(response.body)["user"]["name"];
-      print(response.headers['server']);
+      _email = json.decode(response.body)["user"]['email'];
+      _id = json.decode(response.body)["user"]['_id'];
+      print('This is email id of mr and mrs' + _email);
       if (_token != null) {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('userToken', _token);
@@ -54,6 +59,8 @@ class Auth with ChangeNotifier {
         preferences.setString('username', _userId);
         preferences.setString('cookie', response.headers['set-cookie']);
         preferences.setString('server', response.headers['server']);
+        preferences.setString('email', _email);
+        preferences.setString('id', _id);
 
         Navigator.pushReplacement(
             context,
