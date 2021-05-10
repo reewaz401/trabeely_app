@@ -37,7 +37,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
   String userName;
   void getUsername() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    userName = prefs.getString('username');
+    userName = prefs.getString('userId');
   }
 
   @override

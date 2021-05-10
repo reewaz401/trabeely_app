@@ -6,15 +6,18 @@ import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 
 class UploadPhoto {
-  Future getImage(ImageSource source) async {
+  void getImage(BuildContext ctx, ImageSource source) async {
     File _imagePath;
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: source);
 
     _imagePath = File(pickedFile.path);
 
-    Image image = Image.file(_imagePath);
-    return image;
+    // Image image = Image.file(_imagePath);
+    Navigator.of(ctx).push(MaterialPageRoute(
+        builder: (ctx) => AddStoryScreen(
+              imageFile: _imagePath,
+            )));
   }
 
   File imageTaken;
@@ -31,12 +34,12 @@ class UploadPhoto {
                   FlatButton(
                       child: Text('Library'),
                       onPressed: () async {
-                        await getImage(ImageSource.gallery);
+                        getImage(context, ImageSource.gallery);
                       }),
                   FlatButton(
                     child: Text('Camera'),
                     onPressed: () async {
-                      await getImage(ImageSource.camera);
+                      getImage(context, ImageSource.camera);
                     },
                   )
                 ],
@@ -55,10 +58,10 @@ class UploadPhoto {
     }
     final fileImage = File(imageFile.path);
 
-    final appDir = await syspaths
-        .getApplicationDocumentsDirectory(); //findnig app directory to store data
-    final fileName = path.basename(fileImage.path);
-    final savedImage = await fileImage.copy('${appDir.path}/$fileName');
+    Navigator.of(ctx).push(MaterialPageRoute(
+        builder: (ctx) => AddStoryScreen(
+              imageFile: fileImage,
+            )));
     return fileImage;
   }
 }

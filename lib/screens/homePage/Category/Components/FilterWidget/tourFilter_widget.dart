@@ -6,8 +6,8 @@ import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/rangeS
 //import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class TourFilter extends StatelessWidget {
-  var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var _currentnumOfCustomer = 1;
+  // var _numOfCustomer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  // var _currentnumOfCustomer = 1;
   var selectedRange = RangeValues(0.2, 0.8);
   final GlobalKey<FormState> _formDestination = GlobalKey();
   final _tourDestination = TextEditingController();
@@ -17,8 +17,8 @@ class TourFilter extends StatelessWidget {
     var destination = '';
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+      padding: EdgeInsets.only(top: 10, left: 15),
+      margin: EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
       child: Column(
@@ -27,7 +27,7 @@ class TourFilter extends StatelessWidget {
             children: [
               Container(
                   height: 50,
-                  width: 0.76 * MediaQuery.of(context).size.width,
+                  width: 0.8 * MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
@@ -38,9 +38,6 @@ class TourFilter extends StatelessWidget {
                       controller: _tourDestination,
                       keyboardType: TextInputType.name,
                       decoration: InputDecoration(
-                          suffix: IconButton(
-                            icon: Icon(Icons.search),
-                          ),
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -53,19 +50,25 @@ class TourFilter extends StatelessWidget {
                       onSaved: (value) {
                         FilterData().setDestination(value);
                       },
+                      onFieldSubmitted: (val) {
+                        var provider = Provider.of<InitialSetPrice>(context,
+                            listen: false);
+                        Provider.of<FilterData>(context, listen: false)
+                            .setDestination(_tourDestination.text);
+                        Provider.of<FilterData>(context, listen: false)
+                            .setPrice(provider.iniStart, provider.iniEnd);
+                      },
                     ),
                   )),
               IconButton(
-                  icon: Icon(Icons.file_copy),
+                  icon: Icon(
+                    Icons.filter_list_outlined,
+                  ),
                   onPressed: () {
                     alertBox(context: context, title: 'Advance Filter');
-                  })
+                  }),
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          button(context),
           SizedBox(
             height: 10,
           ),
@@ -74,33 +77,32 @@ class TourFilter extends StatelessWidget {
     );
   }
 
-  Widget numberOfPeople() {
-    return DropdownButton(
-      items: _numOfCustomer.map((int dropDownItem) {
-        return DropdownMenuItem(
-            value: dropDownItem, child: Text(dropDownItem.toString()));
-      }).toList(),
-      onChanged: (newValue) {
-        this._currentnumOfCustomer = newValue;
-      },
-      value: _currentnumOfCustomer,
-    );
-  }
+  // Widget numberOfPeople() {
+  //   return DropdownButton(
+  //     items: _numOfCustomer.map((int dropDownItem) {
+  //       return DropdownMenuItem(
+  //           value: dropDownItem, child: Text(dropDownItem.toString()));
+  //     }).toList(),
+  //     onChanged: (newValue) {
+  //       this._currentnumOfCustomer = newValue;
+  //     },
+  //     value: _currentnumOfCustomer,
+  //   );
+  // }
 
-  Widget button(BuildContext context) {
-    var provider = Provider.of<InitialSetPrice>(context);
-    return Container(
-      child: TextButton(
-        child: Text('Search'),
-        onPressed: () async {
-          Provider.of<FilterData>(context, listen: false)
-              .setDestination(_tourDestination.text);
-          Provider.of<FilterData>(context, listen: false)
-              .setPrice(provider.iniStart, provider.iniEnd);
-        },
-      ),
-    );
-  }
+  // Widget button(BuildContext context) {
+  //   return Container(
+  //     child: TextButton(
+  //       child: Text('Search'),
+  //       onPressed: () async {
+  //         Provider.of<FilterData>(context, listen: false)
+  //             .setDestination(_tourDestination.text);
+  //         Provider.of<FilterData>(context, listen: false)
+  //             .setPrice(provider.iniStart, provider.iniEnd);
+  //       },
+  //     ),
+  //   );
+  // }
 
   Future<void> alertBox({BuildContext context, String title}) async {
     return showDialog(
@@ -129,6 +131,13 @@ class TourFilter extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
+                      var provider =
+                          Provider.of<InitialSetPrice>(context, listen: false);
+                      Provider.of<FilterData>(context, listen: false)
+                          .setDestination(_tourDestination.text);
+                      Provider.of<FilterData>(context, listen: false)
+                          .setPrice(provider.iniStart, provider.iniEnd);
+
                       Navigator.of(context).pop();
                     },
                     child: Text('Apply'))
