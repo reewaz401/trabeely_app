@@ -63,18 +63,17 @@ class ViewData with ChangeNotifier {
           jsonResponse = await sortByPriceRange(
               startPriceRange, endPriceRange, jsonResponse['data'].length);
         }
-        print(jsonResponse);
 
         return jsonResponse;
       } else if (destination == null || destination == '') {
         if (startPriceRange > 0 || endPriceRange > 0) {
           jsonResponse = await sortByPriceRange(
               startPriceRange, endPriceRange, jsonResponse['data'].length);
+          return jsonResponse;
         }
 
         return dataList;
       } else {
-        print('snull des');
         return null;
       }
     } catch (error) {
@@ -104,7 +103,6 @@ class ViewData with ChangeNotifier {
     for (int i = 0; i < length; i++) {
       var priceData = jsonResponse['data'][i]['price'];
       if (priceData >= start && priceData <= end) {
-        print('sortByprice');
         result['data'].add(dataList['data'][i]);
       }
     }

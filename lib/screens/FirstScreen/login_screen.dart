@@ -24,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
         child: Container(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(

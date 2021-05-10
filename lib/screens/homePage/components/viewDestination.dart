@@ -15,10 +15,13 @@ class ViewDestination extends StatefulWidget {
 
 class _ViewDestinationState extends State<ViewDestination> {
   List<dynamic> dataList;
+  var isTour = true;
+  var isTrek = true;
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<FilterData>(context, listen: false);
     provider.setDestination(widget.destination);
+
 
     return Scaffold(
         body: NestedScrollView(
@@ -68,17 +71,17 @@ class _ViewDestinationState extends State<ViewDestination> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CategoryTypeWidget('Tours', widget.destination),
-              CategoryTypeWidget('Treks', widget.destination),
-              CategoryTypeWidget('Restaurants', widget.destination),
-              CategoryTypeWidget('Clubs', widget.destination)
+              CategoryTypeWidget('Tours', provider.destination),
+              CategoryTypeWidget('Treks', provider.destination),
+              CategoryTypeWidget('Weekends', provider.destination),
+              CategoryTypeWidget('Adventures', provider.destination)
             ],
           ),
           SizedBox(
             height: 15,
           ),
-          listData('Tours', provider),
-          listData('Treks', provider),
+          isTour ? listData('Tours', provider) : Container(),
+          isTrek ? listData('Treks', provider) : Container(),
 
           //listData('Hotels'),
         ]),
@@ -88,7 +91,7 @@ class _ViewDestinationState extends State<ViewDestination> {
 
   Widget listData(String type, FilterData provider) {
     return Container(
-      height: 220,
+      height: 230,
       child: Column(
         children: [
           Row(
@@ -128,8 +131,6 @@ class _ViewDestinationState extends State<ViewDestination> {
           FutureBuilder(
               future: ViewData().viewData(type, provider.destination, 0, 0),
               builder: (context, snapshot) {
-                print('sdsddsfsdfddsffsdfsdds');
-
                 return snapshot.connectionState == ConnectionState.waiting
                     ? Expanded(
                         child: Center(
@@ -143,13 +144,13 @@ class _ViewDestinationState extends State<ViewDestination> {
                               itemCount: snapshot.data['data'].length,
                               itemBuilder: (context, index) {
                                 dataList = snapshot.data['data'];
-                                print(dataList[index]['price']);
+
                                 return card(dataList[index]['title'],
                                     dataList[index]['price'], 'mustang1');
                               },
                             ),
                           )
-                        : Text("No DATA");
+                        : noData(type);
               }),
 
           /* FutureBuilder(
@@ -192,17 +193,34 @@ class _ViewDestinationState extends State<ViewDestination> {
     );
   }
 
+  Widget noData(String type) {
+    if (type == 'Tours') {
+      print('is tour false');
+      setState(() {
+        isTour = false;
+      });
+    } else if (type == 'Treks') {
+      setState(() {
+        isTrek = false;
+      });
+    }
+
+    return Container();
+  }
+
   Widget card(String title, int price, String image) {
     return Container(
-      width: 200,
-      height: 170,
+      padding: EdgeInsets.all(10),
+      width: 170,
+      height: 200,
       child: Column(
         children: [
           Container(
-            height: 120,
+            // height: 13  0,
             child: Image.asset(
               'assets/images/$image.jpeg',
               fit: BoxFit.fill,
+              height: 120,
             ),
           ),
           Container(
@@ -215,15 +233,15 @@ class _ViewDestinationState extends State<ViewDestination> {
                   title,
                   style: TextStyle(fontSize: 18),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
-                    Text('Starting from',
+                    Text('From',
                         style: TextStyle(
                           fontSize: 10,
                         )),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Text(price.toString(),
                         style: TextStyle(fontSize: 15, color: Colors.green))
                   ],

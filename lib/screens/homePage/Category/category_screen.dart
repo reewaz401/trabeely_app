@@ -28,7 +28,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   void didChangeDependencies() {
     if (indexFinder) {
       index = getIndex(widget.type);
-      print('Type' + widget.type);
+
       indexFinder = false;
     }
     super.didChangeDependencies();
@@ -120,11 +120,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           borderRadius: BorderRadius.circular(15)),
       child: Column(
         children: [
-          type == "Hotels"
-              ? HotelFilter()
-              : type == "All"
-                  ? AllFilter()
-                  : TourFilter(),
+          TourFilter(),
           SizedBox(
             height: 10,
           ),

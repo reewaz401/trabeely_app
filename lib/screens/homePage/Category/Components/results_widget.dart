@@ -26,9 +26,6 @@ class _ResultsWidgetState extends State<ResultsWidget> {
 
   @override
   void initState() {
-    ViewData().viewData(widget.slectedType);
-    var a = ViewData().viewData(widget.slectedType);
-    print(a);
     super.initState();
   }
 
@@ -50,34 +47,23 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                 )
               : snapshot.hasData
                   ? Expanded(
-                      child: widget.slectedType == "Hotels"
-                          ? ListView.builder(
-                              itemCount: snapshot.data['data'].length,
-                              itemBuilder: (context, index) {
-                                dataList = snapshot.data['data'];
-                                return ht.HotelItem(
-                                  mainList: dataList,
-                                  index: index,
-                                );
-                              },
-                            )
-                          : ListView.builder(
-                              itemCount: snapshot.data['data'].length,
-                              itemBuilder: (context, index) {
-                                dataList = snapshot.data['data'];
-                                return TourItem(
-                                  agencyName: 'Hello',
-                                  date: '2021-08-02 15:30',
-                                  destination: 'asd',
-                                  price: dataList[index]['price'].toDouble(),
-                                  title: dataList[index]['title'],
-                                  mainList: dataList,
-                                  overview: dataList[index]['overview'],
-                                  image: dataList[index]['packageImg'],
-                                  index: index,
-                                );
-                              },
-                            ),
+                      child: ListView.builder(
+                        itemCount: snapshot.data['data'].length,
+                        itemBuilder: (context, index) {
+                          dataList = snapshot.data['data'];
+                          return TourItem(
+                            agencyName: 'Hello',
+                            date: '2021-08-02 15:30',
+                            destination: 'asd',
+                            price: dataList[index]['price'].toDouble(),
+                            title: dataList[index]['title'],
+                            mainList: dataList,
+                            overview: dataList[index]['overview'],
+                            image: dataList[index]['packageImg'],
+                            index: index,
+                          );
+                        },
+                      ),
                     )
                   : Center(child: Text('No data found'));
         },

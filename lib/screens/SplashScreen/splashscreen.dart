@@ -7,8 +7,7 @@ import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
 import 'package:travel/services/authentication.dart';
-import 'package:travel/services/deviceSize.dart';
-import '../auth_screen.dart';
+
 import 'package:velocity_x/velocity_x.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isAuto = false;
   void autoSignIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String autoToken = prefs.getString('autoSignIn');
+    final String autoToken = prefs.getString('userToken');
     if (autoToken != null) {
       setState(() {
         isAuto = true;
@@ -52,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
           builder: (context) {
             return Consumer<Auth>(builder: (context, auth, _) {
               return onboardingPage
-                  ? auth.isAuth
+                  ? isAuto
                       ? TabsScreen('Search Destination')
                       : OneScreen()
                   : OnboardinPage();
