@@ -3,10 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:travel/screens/storyFeedScreen/components/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:transparent_image/transparent_image.dart';
-import 'package:http/http.dart' as http;
-import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
-import 'package:travel/services/themeData.dart';
 
 class StoryFeedItem extends StatefulWidget {
   final String userName;
@@ -28,49 +24,58 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
       //margin: EdgeInsets.only(top: 10),
       width: deviceSize.width,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.userName,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                PopupMenuButton(
-                    child: button(path: 'assets/images/Group-2.svg'),
-                    itemBuilder: (context) => [
-                          PopupMenuItem(
-                            value: 'Detail',
-                            child: Text('View Detail'),
-                          ),
-                          PopupMenuItem(
-                            value: 'Save',
-                            child: Text('Save Image'),
-                          ),
-                        ]),
-              ],
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.userName,
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  PopupMenuButton(
+                      child: button(path: 'assets/images/Group-2.svg'),
+                      itemBuilder: (context) => [
+                            PopupMenuItem(
+                              value: 'Detail',
+                              child: Text('View Detail'),
+                            ),
+                            PopupMenuItem(
+                              value: 'Save',
+                              child: Text('Save Image'),
+                            ),
+                          ]),
+                ],
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 10,
         ),
-        Text(widget.description),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(widget.description),
+          ),
+        ),
         SizedBox(
           height: 10,
         ),
@@ -96,6 +101,7 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                           if (loadingProgress == null) return child;
                           return Center(
                             child: CircularProgressIndicator(
+                              backgroundColor: Colors.blue[900],
                               value: loadingProgress.expectedTotalBytes != null
                                   ? loadingProgress.cumulativeBytesLoaded /
                                       loadingProgress.expectedTotalBytes
@@ -105,13 +111,6 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                         })
                     ]))
             : Container(),
-        SizedBox(
-          height: 10,
-        ),
-        Text(widget.description),
-        SizedBox(
-          height: 10,
-        ),
         SizedBox(
           height: 10,
         ),
@@ -139,7 +138,10 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                             );
                           });
                     }),
-                button(path: 'assets/images/Group.svg', ontap: () {})
+                button(path: 'assets/images/Group.svg', ontap: () {}),
+                SizedBox(
+                  height: 15,
+                )
               ],
             ),
           ],

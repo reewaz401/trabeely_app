@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/services/accessPublicApi.dart';
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
@@ -23,43 +24,96 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
 
     return res;
   }
+
   var _isloading = false;
   List<Asset> images = <Asset>[];
   String _error = 'No Error Dectected';
+  ScrollController _scrollController =
+      new ScrollController(); // set controller on scrolling
+  bool _show = true;
+  List<String> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+    addItemsToTheList();
+    handleScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(() {});
+    super.dispose();
+  }
+
+  void showFloationButton() {
+    setState(() {
+      _show = true;
+    });
+  }
+
+  void hideFloationButton() {
+    setState(() {
+      _show = false;
+    });
+  }
+
+  void addItemsToTheList() {
+    for (int count = 1; count <= 100; count++) {
+      items.add("Book " + count.toString());
+    }
+  }
+
+  void handleScroll() async {
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        hideFloationButton();
+      }
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        showFloationButton();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final SharedPreferences prefs = await SharedPreferences.getInstance();
-          var userToken = prefs.getString('userToken');
-          if (userToken == null) {
-            return;
-          }
-          setState(() {
-            _isloading = true;
-          });
+      floatingActionButton: Visibility(
+        visible: _show,
+        child: FloatingActionButton(
+          onPressed: () async {
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+            var userToken = prefs.getString('userToken');
+            if (userToken == null) {
+              return;
+            }
+            setState(() {
+              _isloading = true;
+            });
 
-          await loadAssets();
+            await loadAssets();
 
-          if (images.isEmpty) {
+            if (images.isEmpty) {
+              setState(() {
+                _isloading = false;
+              });
+              return;
+            }
             setState(() {
               _isloading = false;
             });
-            return;
-          }
-          setState(() {
-            _isloading = false;
-          });
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => AddStoryScreen(
-                    images: images,
-                  )));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => AddStoryScreen(
+                      images: images,
+                    )));
 
-          //UploadPhoto().imagePickerDialog(context);
-        },
-        child: Icon(Icons.add_a_photo),
+            //UploadPhoto().imagePickerDialog(context);
+          },
+          child: Icon(Icons.add_a_photo),
+        ),
       ),
       body: Container(
         color: Colors.grey[300],
@@ -73,16 +127,19 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                   builder: (context, snapshot) {
                     return snapshot.hasData
                         ? ListView.builder(
+                            controller: _scrollController,
                             scrollDirection: Axis.vertical,
                             itemCount: snapshot.data['data'].length,
                             itemBuilder: (context, index) {
                               final data = snapshot.data['data'];
-                              return Container(
-                                child: StoryFeedItem(
-                                  userName: data[index]['user']['fullname'],
-                                  description: data[index]['post_desc'],
-                                  location: 'Kathmandu',
-                                  imageUrl: data[index]['post_image'],
+                              return Card(
+                                child: Container(
+                                  child: StoryFeedItem(
+                                    userName: data[index]['user']['fullname'],
+                                    description: data[index]['post_desc'],
+                                    location: 'Kathmandu',
+                                    imageUrl: data[index]['post_image'],
+                                  ),
                                 ),
                               );
                             },
@@ -97,6 +154,7 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
       ),
     );
   }
+
   Future<void> loadAssets() async {
     List<Asset> resultList = <Asset>[];
     String error = 'No Error Detected';
@@ -128,5 +186,88 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
       images = resultList;
       _error = error;
     });
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  ScrollController _scrollController =
+      new ScrollController(); // set controller on scrolling
+  bool _show = true;
+  List<String> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+    addItemsToTheList();
+    handleScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(() {});
+    super.dispose();
+  }
+
+  void showFloationButton() {
+    setState(() {
+      _show = true;
+    });
+  }
+
+  void hideFloationButton() {
+    setState(() {
+      _show = false;
+    });
+  }
+
+  void addItemsToTheList() {
+    for (int count = 1; count <= 100; count++) {
+      items.add("Book " + count.toString());
+    }
+  }
+
+  void handleScroll() async {
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        hideFloationButton();
+      }
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        showFloationButton();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Tutorial App"),
+      ),
+      body: Container(
+        child: new ListView.builder(
+            controller: _scrollController,
+            itemCount: items.length,
+            itemBuilder: (BuildContext ctxt, int index) {
+              return new Card(
+                  child: ListTile(
+                title: Text(items[index]),
+              ));
+            }),
+      ),
+      floatingActionButton: Visibility(
+        visible: _show,
+        child: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
+        ),
+      ),
+    );
   }
 }
