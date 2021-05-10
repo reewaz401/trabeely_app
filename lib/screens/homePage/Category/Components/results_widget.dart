@@ -46,25 +46,29 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                   ),
                 )
               : snapshot.hasData
-                  ? Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data['data'].length,
-                        itemBuilder: (context, index) {
-                          dataList = snapshot.data['data'];
-                          return TourItem(
-                            agencyName: 'Hello',
-                            date: '2021-08-02 15:30',
-                            destination: 'asd',
-                            price: dataList[index]['price'].toDouble(),
-                            title: dataList[index]['title'],
-                            mainList: dataList,
-                            overview: dataList[index]['overview'],
-                            image: dataList[index]['packageImg'],
-                            index: index,
-                          );
-                        },
-                      ),
-                    )
+                  ? snapshot.data['data'].length == 0
+                      ? Center(
+                          child: Text('No Data'),
+                        )
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: snapshot.data['data'].length,
+                            itemBuilder: (context, index) {
+                              dataList = snapshot.data['data'];
+                              return TourItem(
+                                agencyName: 'Hello',
+                                date: '2021-08-02 15:30',
+                                destination: 'asd',
+                                price: dataList[index]['price'].toDouble(),
+                                title: dataList[index]['title'],
+                                mainList: dataList,
+                                overview: dataList[index]['overview'],
+                                image: dataList[index]['packageImg'],
+                                index: index,
+                              );
+                            },
+                          ),
+                        )
                   : Center(child: Text('No data found'));
         },
       );

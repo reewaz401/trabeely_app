@@ -22,7 +22,6 @@ class _ViewDestinationState extends State<ViewDestination> {
     var provider = Provider.of<FilterData>(context, listen: false);
     provider.setDestination(widget.destination);
 
-
     return Scaffold(
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScroll) {
@@ -138,18 +137,20 @@ class _ViewDestinationState extends State<ViewDestination> {
                         ),
                       )
                     : snapshot.hasData
-                        ? Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: snapshot.data['data'].length,
-                              itemBuilder: (context, index) {
-                                dataList = snapshot.data['data'];
+                        ? snapshot.data['data'].length == 0
+                            ? noData(type)
+                            : Expanded(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data['data'].length,
+                                  itemBuilder: (context, index) {
+                                    dataList = snapshot.data['data'];
 
-                                return card(dataList[index]['title'],
-                                    dataList[index]['price'], 'mustang1');
-                              },
-                            ),
-                          )
+                                    return card(dataList[index]['title'],
+                                        dataList[index]['price'], 'mustang1');
+                                  },
+                                ),
+                              )
                         : noData(type);
               }),
 
