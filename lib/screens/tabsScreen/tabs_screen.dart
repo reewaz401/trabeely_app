@@ -225,12 +225,18 @@ class _TabsScreenState extends State<TabsScreen> {
         istoken == null
             ? ListTile()
             : ListTile(
-                leading: Icon(Icons.logout),
+                leading: Icon(
+                  Icons.logout,
+                  color: Colors.red[400],
+                ),
                 title: _isloading
                     ? Center(
                         child: CircularProgressIndicator(),
                       )
-                    : Text('Log out'),
+                    : Text(
+                        'Log out',
+                        style: TextStyle(color: Colors.red[400]),
+                      ),
                 onTap: () async {
                   setState(() {
                     _isloading = true;

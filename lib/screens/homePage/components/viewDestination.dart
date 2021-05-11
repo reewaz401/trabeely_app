@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/screens/CreateTour/createTourCard.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
@@ -8,12 +9,14 @@ import 'package:provider/provider.dart';
 
 class ViewDestination extends StatefulWidget {
   final destination;
+
   ViewDestination(this.destination);
   @override
   _ViewDestinationState createState() => _ViewDestinationState();
 }
 
 class _ViewDestinationState extends State<ViewDestination> {
+  var minHeight = false;
   List<dynamic> dataList;
   var isTour = true;
   var isTrek = true;
@@ -77,10 +80,10 @@ class _ViewDestinationState extends State<ViewDestination> {
             ],
           ),
           SizedBox(
-            height: 15,
+            height: 20,
           ),
-          isTour ? listData('Tours', provider) : Container(),
-          isTrek ? listData('Treks', provider) : Container(),
+          listData('Tours', provider),
+          listData('Treks', provider),
 
           //listData('Hotels'),
         ]),
@@ -89,11 +92,11 @@ class _ViewDestinationState extends State<ViewDestination> {
   }
 
   Widget listData(String type, FilterData provider) {
-    return Container(
-      height: 230,
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Container(
+          height: 100,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
@@ -124,10 +127,13 @@ class _ViewDestinationState extends State<ViewDestination> {
               ),
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
-          FutureBuilder(
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 130,
+          child: FutureBuilder(
               future: ViewData().viewData(type, provider.destination, 0, 0),
               builder: (context, snapshot) {
                 return snapshot.connectionState == ConnectionState.waiting
@@ -138,7 +144,7 @@ class _ViewDestinationState extends State<ViewDestination> {
                       )
                     : snapshot.hasData
                         ? snapshot.data['data'].length == 0
-                            ? noData(type)
+                            ? CreateTourCard()
                             : Expanded(
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -151,46 +157,10 @@ class _ViewDestinationState extends State<ViewDestination> {
                                   },
                                 ),
                               )
-                        : noData(type);
+                        : null;
               }),
-
-          /* FutureBuilder(
-              future: ViewData().viewData(type, widget.destination, true),
-              builder: (context, snapshot) {
-                return snapshot.connectionState == ConnectionState.waiting
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : snapshot.hasData
-                        ? Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (BuildContext ctx, index) {
-                                  var data = snapshot.data[index];
-                                  return Container(
-                                    width: 150,
-                                    height: 100,
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      children: [
-                                        Text(data["title"]),
-                                      ],
-                                    ),
-                                    decoration: BoxDecoration(
-                                        color: Colors.amber,
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                  );
-                                }),
-                          )
-                        : Center(
-                            child: Text("No data"),
-                          );
-              }),*/
-        ],
-      ),
+        ),
+      ],
     );
   }
 
