@@ -148,7 +148,7 @@ class TourItem extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,13 +160,10 @@ class TourItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.purple[900],
-                  ),
-                ),
               ],
+            ),
+            SizedBox(
+              height: 10,
             )
           ],
         ),
