@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:travel/screens/storyFeedScreen/components/LikeButton.dart';
 import 'package:travel/screens/storyFeedScreen/components/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,8 +10,15 @@ class StoryFeedItem extends StatefulWidget {
   final String location;
   final List imageUrl;
   final String description;
+  final String postId;
+  final bool isLike;
   StoryFeedItem(
-      {this.userName, this.location, this.imageUrl, this.description});
+      {this.userName,
+      this.location,
+      this.imageUrl,
+      this.description,
+      this.postId,
+      this.isLike});
   @override
   _StoryFeedItemState createState() => _StoryFeedItemState();
 }
@@ -119,11 +127,10 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
           children: [
             Row(
               children: [
-                button(
-                    path: 'assets/images/Group-3.svg',
-                    ontap: () {
-                      print('The Story Is Like By You');
-                    }),
+                LikeButton(
+                  postId: widget.postId,
+                  islike: widget.isLike,
+                ),
                 button(
                     path: 'assets/images/Group-1.svg',
                     ontap: () {

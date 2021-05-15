@@ -132,6 +132,9 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                             itemCount: snapshot.data['data'].length,
                             itemBuilder: (context, index) {
                               final data = snapshot.data['data'];
+                              final like = data[index]['likes'].length > 0
+                                  ? true
+                                  : false;
                               return Card(
                                 child: Container(
                                   child: StoryFeedItem(
@@ -139,6 +142,8 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                                     description: data[index]['post_desc'],
                                     location: 'Kathmandu',
                                     imageUrl: data[index]['post_image'],
+                                    postId: data[index]['_id'],
+                                    isLike: like,
                                   ),
                                 ),
                               );
