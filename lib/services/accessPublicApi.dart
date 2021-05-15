@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 getPublicDataApi(url) async {
-  print('function opened');
   try {
     final response = await http.get(
       'https://api.trabeely.com/api/story/getpost',

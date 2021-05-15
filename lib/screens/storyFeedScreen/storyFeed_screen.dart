@@ -36,7 +36,7 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
   @override
   void initState() {
     super.initState();
-    addItemsToTheList();
+
     handleScroll();
   }
 
@@ -56,12 +56,6 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
     setState(() {
       _show = false;
     });
-  }
-
-  void addItemsToTheList() {
-    for (int count = 1; count <= 100; count++) {
-      items.add("Book " + count.toString());
-    }
   }
 
   void handleScroll() async {
@@ -132,6 +126,8 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                             itemCount: snapshot.data['data'].length,
                             itemBuilder: (context, index) {
                               final data = snapshot.data['data'];
+
+                              final storyId = data[index]['_id'];
                               return Card(
                                 child: Container(
                                   child: StoryFeedItem(
@@ -139,6 +135,8 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                                     description: data[index]['post_desc'],
                                     location: 'Kathmandu',
                                     imageUrl: data[index]['post_image'],
+                                    id: storyId,
+                                    like: data[index]['likes'],
                                   ),
                                 ),
                               );
