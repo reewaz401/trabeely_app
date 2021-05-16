@@ -9,45 +9,23 @@ class UpdateProfile extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text('My Information'),
+            onTap: () => Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return ProfileData();
+              },
+            )),
+          ),
+          ListTile(
+              leading: Icon(Icons.vpn_key),
+              title: Text('Change Password'),
               onTap: () => Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return ProfileData();
-                },
-              )),
-              child: Container(
-                color: Colors.red,
-                height: 45,
-                child: Row(
-                  children: [
-                    Icon(Icons.person),
-                    Text('     My Information'),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () => showGeneralDialog(
-                  context: context,
-                  pageBuilder: (context, animation, secondaryAnimation) =>
-                      Scaffold(body: Center(child: UpdatePassword()))),
-              child: Container(
-                color: Colors.red,
-                height: 45,
-                child: Row(
-                  children: [
-                    Icon(Icons.vpn_key_outlined),
-                    Text('     Update Password'),
-                  ],
-                ),
-              ),
-            ),
-          ),
+                    builder: (context) {
+                      return UpdatePassword();
+                    },
+                  ))),
         ],
       ),
     );
