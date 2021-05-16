@@ -80,7 +80,10 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Colors.blue[900]),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.blue[900],
+                    ),
                     borderRadius: BorderRadius.circular(15)),
                 child: TextFormField(
                   focusNode: _emailFocusNode,

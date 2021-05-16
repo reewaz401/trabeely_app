@@ -38,15 +38,9 @@ class _LikeButtonState extends State<LikeButton> {
               onTap: () async {
                 await PostLike()
                     .postLike(widget.postId, userLiked ? false : true);
-                if (userLiked) {
-                  setState(() {
-                    userLiked = false;
-                  });
-                } else if (!userLiked) {
-                  setState(() {
-                    userLiked = true;
-                  });
-                }
+                setState(() {
+                  userLiked = !userLiked;
+                });
               }),
         ),
       ),

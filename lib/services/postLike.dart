@@ -1,28 +1,32 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:travel/services/usernameGetter.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PostLike {
-  Future<void> postLike(String postId, bool isLike) async {
-    print('postLike' + isLike.toString());
-    var id = await UserInfo().getId();
+  Future<void> postLike(id, bool islike) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String _token = preferences.getString('userToken');
+    String _cookie = preferences.getString('cookie');
+    String _server = preferences.getString('server');
 
-    var userToken = await UserInfo().getToken();
-    String cookie = await UserInfo().getCookie();
-    String server = await UserInfo().getServer();
-
-    var body =
-        json.encode({"post_id": postId, "user_id": id, "isLike": isLike});
-    final response =
-        await http.post('https://api.trabeely.com/api/story/dolike',
-            headers: {
-              'Authorization': 'Bearer $userToken',
-              'content': 'application/json; charset-utf-8',
-              'Cookie': cookie,
-              'Server': server
-            },
-            body: body);
-    print(response.body);
+    var res = await http.post(
+      'https://api.trabeely.com/api/story/dolike',
+      body: json.encode(
+        {
+          'post_id': id,
+          "user_id": "604ece1abfbaac3c7c5a9630",
+          "isLike": islike,
+        },
+      ),
+      headers: {
+        'Authorization': 'Bearer $_token',
+        'content-type': 'application/json; charset=utf-8',
+        'Cookie': _cookie,
+        'Server': _server
+      },
+    );
+    print(res.body);
   }
 }
