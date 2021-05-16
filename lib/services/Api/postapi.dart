@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,5 +19,8 @@ postApi(url, postBody) async {
       'Server': _server
     },
   );
-  print(res.body);
+
+  var response = json.decode(res.body);
+  print(response['message']);
+  return response;
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:travel/components/uploadPhoto.dart';
-import 'package:travel/screens/Settings/userProfileEdit.dart';
+import 'package:travel/screens/Settings/UserUpdate/userProfileEdit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/UserProile/Components/askSignup.dart';
 import 'package:travel/services/deviceSize.dart';
@@ -293,21 +293,21 @@ class UserProfileScreenState extends State<UserProfileScreen>
   }
 }
 
-  // var _istoken;
-  // String userName;
-  // void getUsername() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   userName = prefs.getString('username');
-  // }
+// var _istoken;
+// String userName;
+// void getUsername() async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   userName = prefs.getString('username');
+// }
 
-  // @override
-  // void initState() {
-    // Islogin().getToken().then((value) {
-    //   setState(() {
-    //     _istoken = value;
-    //   });
-    // });
-    // getUsername();
+// @override
+// void initState() {
+// Islogin().getToken().then((value) {
+//   setState(() {
+//     _istoken = value;
+//   });
+// });
+// getUsername();
 
-  //   super.initState();
-  // }
+//   super.initState();
+// }

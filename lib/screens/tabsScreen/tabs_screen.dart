@@ -4,10 +4,10 @@ import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/Settings/helpCenter.dart';
-import 'package:travel/screens/Settings/userProfileEdit.dart';
+import 'package:travel/screens/Settings/UserUpdate/userProfileEdit.dart';
 import 'package:travel/screens/Settings/writeToUs.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
-import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
+import 'package:travel/screens/Settings/UserUpdate/ProfileUpdateScreen.dart';
 import 'package:travel/services/isLogin.dart';
 
 import '../../screens/homePage/homePage_screen.dart';
@@ -217,8 +217,7 @@ class _TabsScreenState extends State<TabsScreen> {
         //     }));
         //   },
         // ),
-        listTile(
-            context, "Personal Information", ProfileData(), Icons.person_pin),
+        listTile(context, "My Profile", UpdateProfile(), Icons.person_pin),
         listTile(context, 'Help Center', HelpCenter(), Icons.help),
         listTile(context, 'Feedback', WriteToUs(), Icons.feedback),
         listTile(context, 'Rate Us', WriteToUs(), Icons.stars),

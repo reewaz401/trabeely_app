@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/services/Api/apiputdata.dart';
 import 'package:travel/services/usernameGetter.dart';
 import 'package:travel/services/Api/apiAll.dart';
+import 'package:travel/widget/textField.dart';
 
 class ProfileData extends StatefulWidget {
   @override
@@ -47,7 +50,8 @@ class _ProfileDataState extends State<ProfileData> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              textField('Full Name', Icons.person, username),
+              textField(
+                  title: 'Full Name', icon: Icons.person, controller: username),
               Column(
                 children: [
                   GestureDetector(
@@ -83,19 +87,32 @@ class _ProfileDataState extends State<ProfileData> {
                   )
                 ],
               ),
-              textField('Email', Icons.email, userEmail),
-              textField('Phone Number', Icons.phone),
+              textField(
+                  title: 'Email', icon: Icons.email, controller: userEmail),
+              textField(title: 'Phone Number', icon: Icons.phone),
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
-                    putData(
-                        url: updateProfileAPi,
-                        name: username.text != await UserInfo().getUserName()
-                            ? username.text
-                            : await UserInfo().getUserName(),
-                        email: userEmail.text != await UserInfo().getEmail()
-                            ? userEmail.text
-                            : await UserInfo().getEmail());
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
+                    String _token = preferences.getString('userToken');
+                    String _userId = preferences.getString('id');
+                    String _cookie = preferences.getString('cookie');
+                    String _server = preferences.getString('server');
+                    var res = await putData(
+                        updateProfileAPi,
+                        json.encode({
+                          "_id": _userId,
+                          "email": userEmail.text,
+                          "contact": 123321,
+                          "address": "Nepal",
+                          "country": "Nepal",
+                          "fullname": username.text,
+                        }));
+                    print(res);
+                    if (res['success']) {
+                      preferences.setString('username', username.text);
+                    }
                   },
                   child: Text('Update'),
                 ),
@@ -106,30 +123,4 @@ class _ProfileDataState extends State<ProfileData> {
       ),
     );
   }
-}
-
-Widget textField(String title, IconData icon,
-    [TextEditingController controller]) {
-  return Column(
-    children: [
-      Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.blueAccent)),
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            icon: Icon(icon),
-            hintText: title,
-            hintStyle: TextStyle(color: Colors.grey),
-          ),
-        ),
-      ),
-      SizedBox(
-        height: 25,
-      )
-    ],
-  );
 }
