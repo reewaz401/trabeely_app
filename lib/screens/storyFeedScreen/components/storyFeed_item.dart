@@ -79,15 +79,20 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
         SizedBox(
           height: 10,
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(widget.description),
-          ),
-        ),
+        widget.description == null
+            ? SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.description),
+                ),
+              )
+            : Container(),
         SizedBox(
           height: 10,
+        ),
+        Divider(
+          color: Colors.grey,
         ),
         widget.imageUrl.length != 0
             ? SizedBox(

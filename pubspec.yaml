@@ -47,7 +47,7 @@ dependencies:
   transparent_image: ^2.0.0
   flutter_typeahead: ^2.0.0
   carousel_slider: ^3.0.0
-  
+  dio:
   
   multi_image_picker: ^4.8.0
   uuid: ^2.1.0

@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:travel/components/uploadPhoto.dart';
+import 'package:travel/services/Api/getApi.dart';
 import 'package:travel/services/accessPublicApi.dart';
 import 'package:travel/screens/storyFeedScreen/components/addStory_screen.dart';
 import 'package:travel/screens/storyFeedScreen/components/postStory.dart';
@@ -18,57 +20,30 @@ class StoryFeedScreen extends StatefulWidget {
 }
 
 class _StoryFeedScreenState extends State<StoryFeedScreen> {
-  storrySettingUp() async {
-    var res =
-        await getPublicDataApi('https://api.trabeely.com/api/story/getpost');
-
-    return res;
-  }
-
-  var _isloading = false;
-  List<Asset> images = <Asset>[];
-  String _error = 'No Error Dectected';
-  ScrollController _scrollController =
-      new ScrollController(); // set controller on scrolling
+  int page = 1;
   bool _show = true;
-  List<String> items = [];
-
+  String _error = 'No Error Dectected';
+  bool _isloading = false;
+  List<Asset> images = <Asset>[];
+  ScrollController _sc = new ScrollController();
+  bool isLoading = false;
+  List story = [];
+  final dio = new Dio();
   @override
   void initState() {
+    this._getMoreData(page);
     super.initState();
-
-    handleScroll();
+    _sc.addListener(() {
+      if (_sc.position.pixels == _sc.position.maxScrollExtent) {
+        _getMoreData(page);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _scrollController.removeListener(() {});
+    _sc.dispose();
     super.dispose();
-  }
-
-  void showFloationButton() {
-    setState(() {
-      _show = true;
-    });
-  }
-
-  void hideFloationButton() {
-    setState(() {
-      _show = false;
-    });
-  }
-
-  void handleScroll() async {
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        hideFloationButton();
-      }
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
-        showFloationButton();
-      }
-    });
   }
 
   @override
@@ -110,44 +85,68 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
         ),
       ),
       body: Container(
-        color: Colors.grey[300],
-        height: MediaQuery.of(context).size.height - 130,
-        width: MediaQuery.of(context).size.height,
-        child: Column(
-          children: [
-            Expanded(
-              child: FutureBuilder(
-                  future: storrySettingUp(),
-                  builder: (context, snapshot) {
-                    return snapshot.hasData
-                        ? ListView.builder(
-                            controller: _scrollController,
-                            scrollDirection: Axis.vertical,
-                            itemCount: snapshot.data['data'].length,
-                            itemBuilder: (context, index) {
-                              final data = snapshot.data['data'];
+          color: Colors.grey[300],
+          height: MediaQuery.of(context).size.height - 130,
+          width: MediaQuery.of(context).size.height,
+          child: ListView.builder(
+            itemCount:
+                story.length + 1, // Add one more item for progress indicator
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            itemBuilder: (BuildContext context, int index) {
+              print(story);
+              if (index == story.length) {
+                return _buildProgressIndicator();
+              } else {
+                return Card(
+                  child: StoryFeedItem(
+                    description: story[index]['post_desc'],
+                    id: story[index]['_id'],
+                    userName: story[index]['user']['fullname'],
+                    location: story[index]['post_location'],
+                    like: story[index]['likes'],
+                    imageUrl: story[index]['post_image'],
+                  ),
+                );
+              }
+            },
+            controller: _sc,
+          )),
+    );
+  }
 
-                              final storyId = data[index]['_id'];
-                              return Card(
-                                child: Container(
-                                  child: StoryFeedItem(
-                                    userName: data[index]['user']['fullname'],
-                                    description: data[index]['post_desc'],
-                                    location: 'Kathmandu',
-                                    imageUrl: data[index]['post_image'],
-                                    id: storyId,
-                                    like: data[index]['likes'],
-                                  ),
-                                ),
-                              );
-                            },
-                          )
-                        : Container(
-                            child: Center(child: CircularProgressIndicator()),
-                          );
-                  }),
-            )
-          ],
+  void _getMoreData(int index) async {
+    if (!isLoading) {
+      setState(() {
+        isLoading = true;
+      });
+      var url = "https://api.trabeely.com/api/story/getpost/$page";
+      print(url);
+      final response = await getApiData(url);
+      // print(response['data'][1]);
+      List tList = [];
+      if (response['data'].length == 0) {
+        print("End");
+      } else {
+        for (int i = 0; i < response['data'].length; i++) {
+          tList.add(response['data'][i]);
+        }
+      }
+
+      setState(() {
+        isLoading = false;
+        story.addAll(tList);
+        page++;
+      });
+    }
+  }
+
+  Widget _buildProgressIndicator() {
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: new Opacity(
+          opacity: isLoading ? 1.0 : 00,
+          child: new CircularProgressIndicator(),
         ),
       ),
     );

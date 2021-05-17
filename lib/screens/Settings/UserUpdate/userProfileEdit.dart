@@ -111,7 +111,7 @@ class _ProfileDataState extends State<ProfileData> {
                         }));
                     print(res);
                     if (res['success']) {
-                      preferences.setString('username', username.text);
+                      preferences.setString('userId', username.text);
                     }
                   },
                   child: Text('Update'),
