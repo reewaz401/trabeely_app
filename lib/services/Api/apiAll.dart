@@ -5,6 +5,7 @@ const logOutApi = '${Base_Url}auth/logout';
 const viewToursApi = '${Base_Url}packages/package-tour';
 const viewTreksApi = '${Base_Url}packages/package-trek';
 const viewHotelsApi = '${Base_Url}hotels';
+const viewWeekendsApi = '${Base_Url}packages/package-weekend';
 const viewRestaurantsApi = '${Base_Url}restaurants';
 const viewByDestinationApi = '${Base_Url}search/all/';
 const updateProfileAPi = '${Base_Url}users/update';

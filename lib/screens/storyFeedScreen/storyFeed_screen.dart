@@ -97,13 +97,15 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
               if (index == story.length) {
                 return _buildProgressIndicator();
               } else {
+                final like = story[index]['likes'].length > 0 ? true : false;
                 return Card(
                   child: StoryFeedItem(
                     description: story[index]['post_desc'],
                     id: story[index]['_id'],
                     userName: story[index]['user']['fullname'],
                     location: story[index]['post_location'],
-                    like: story[index]['likes'],
+                    postId: story[index]['_id'],
+                    isLike: like,
                     imageUrl: story[index]['post_image'],
                   ),
                 );

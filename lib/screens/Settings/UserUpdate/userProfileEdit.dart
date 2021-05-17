@@ -16,6 +16,7 @@ class ProfileData extends StatefulWidget {
 class _ProfileDataState extends State<ProfileData> {
   TextEditingController username = TextEditingController();
   TextEditingController userEmail = TextEditingController();
+  TextEditingController contactNum = TextEditingController();
 
   String dobformattedDate;
   DateTime dob = DateTime.now();
@@ -89,7 +90,10 @@ class _ProfileDataState extends State<ProfileData> {
               ),
               textField(
                   title: 'Email', icon: Icons.email, controller: userEmail),
-              textField(title: 'Phone Number', icon: Icons.phone),
+              textField(
+                  title: 'Phone Number',
+                  icon: Icons.phone,
+                  controller: contactNum),
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
@@ -104,7 +108,7 @@ class _ProfileDataState extends State<ProfileData> {
                         json.encode({
                           "_id": _userId,
                           "email": userEmail.text,
-                          "contact": 123321,
+                          "contact": 3453453,
                           "address": "Nepal",
                           "country": "Nepal",
                           "fullname": username.text,

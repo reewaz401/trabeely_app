@@ -29,6 +29,8 @@ class ViewData with ChangeNotifier {
       url = viewHotelsApi;
     } else if (slectedType == 'Restaurants') {
       url = viewRestaurantsApi; //api for restaurant
+    } else if (slectedType == 'Weekends') {
+      url = viewWeekendsApi; //api for restaurant
     }
 
     try {
@@ -40,17 +42,17 @@ class ViewData with ChangeNotifier {
       );
 
       jsonResponse = jsonDecode(response.body);
-      if (slectedType == 'Tours') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Treks') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Hotels') {
-        dataList = jsonResponse as Map<String, dynamic>;
-      } else if (slectedType == 'Restaurants') {
-        dataList = jsonResponse as Map<String, dynamic>; //api for restaurant
-      }
 
-      print(destination);
+      dataList = jsonResponse as Map<String, dynamic>;
+      // if (slectedType == 'Tours') {
+      //   dataList = jsonResponse as Map<String, dynamic>;
+      // } else if (slectedType == 'Treks') {
+      //   dataList = jsonResponse as Map<String, dynamic>;
+      // } else if (slectedType == 'Hotels') {
+      //   dataList = jsonResponse as Map<String, dynamic>;
+      // } else if (slectedType == 'Restaurants') {
+      //   dataList = jsonResponse as Map<String, dynamic>; //api for restaurant
+      // }
 
       if (destination == '') {
         destination = null;
@@ -63,7 +65,6 @@ class ViewData with ChangeNotifier {
           jsonResponse = await sortByPriceRange(
               startPriceRange, endPriceRange, jsonResponse['data'].length);
         }
-        print(jsonResponse);
 
         return jsonResponse;
       } else if (destination == null || destination == '') {
@@ -72,7 +73,7 @@ class ViewData with ChangeNotifier {
               startPriceRange, endPriceRange, jsonResponse['data'].length);
         }
 
-        return dataList;
+        return jsonResponse;
       } else {
         print('snull des');
         return null;
@@ -100,6 +101,7 @@ class ViewData with ChangeNotifier {
   }
 
   sortByPriceRange(int start, int end, int length) async {
+    print('sort by price');
     result = {'data': []};
     for (int i = 0; i < length; i++) {
       var priceData = jsonResponse['data'][i]['price'];
@@ -108,7 +110,8 @@ class ViewData with ChangeNotifier {
         result['data'].add(dataList['data'][i]);
       }
     }
-
+    print('reslut pri');
+    print(result);
     return result;
   }
 }

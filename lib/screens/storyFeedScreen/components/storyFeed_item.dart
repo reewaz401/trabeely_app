@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:travel/screens/storyFeedScreen/components/LikeButton.dart';
 import 'package:travel/screens/storyFeedScreen/components/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,14 +14,16 @@ class StoryFeedItem extends StatefulWidget {
   final List imageUrl;
   final String id;
   final String description;
-  final List like;
+  final String postId;
+  final bool isLike;
   StoryFeedItem(
       {this.userName,
       this.location,
       this.imageUrl,
-      this.description,
       this.id,
-      this.like});
+      this.description,
+      this.postId,
+      this.isLike});
   @override
   _StoryFeedItemState createState() => _StoryFeedItemState();
 }
@@ -126,17 +129,6 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                         })
                     ]))
             : Container(),
-        Container(
-          child: widget.like.length == 0
-              ? Text('Be First to Like This Post')
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.like.length.toString() + ' bell',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-        ),
         SizedBox(
           height: 10,
         ),
@@ -145,23 +137,10 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
           children: [
             Row(
               children: [
-                button(
-                    path: 'assets/images/Group-3.svg',
-                    ontap: () {
-                      print('hello');
-                      postApi(
-                        'https://api.trabeely.com/api/story/dolike',
-                        json.encode(
-                          {
-                            'post_id': widget.id,
-                            "user_id": "604ece1abfbaac3c7c5a9630",
-                            "isLike": true,
-                          },
-                        ),
-                      );
-
-                      // api/story/dolike
-                    }),
+                LikeButton(
+                  postId: widget.postId,
+                  islike: widget.isLike,
+                ),
                 button(
                     path: 'assets/images/Group-1.svg',
                     ontap: () {

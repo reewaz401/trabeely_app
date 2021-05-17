@@ -79,7 +79,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ResultsWidget('Treks', widget.destination),
               ],
             ),
-            ResultsWidget('Restaurents', widget.destination),
+            Column(
+              children: [
+                TourFilter(),
+                ResultsWidget('Weekends', widget.destination),
+              ],
+            ),
             ResultsWidget('Clubs', widget.destination),
           ],
         ),
