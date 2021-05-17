@@ -108,7 +108,7 @@ class _ProfileDataState extends State<ProfileData> {
                         json.encode({
                           "_id": _userId,
                           "email": userEmail.text,
-                          "contact": 3453453,
+                          "contact": contactNum.text,
                           "address": "Nepal",
                           "country": "Nepal",
                           "fullname": username.text,
