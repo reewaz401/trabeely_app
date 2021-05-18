@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:travel/components/SizeConfig.dart';
+import 'package:travel/components/button.dart';
 
 // ignore: must_be_immutable
 class TourDetails extends StatelessWidget {
@@ -32,7 +34,7 @@ class TourDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 300,
+                height: SizeConfig.khstoryImage,
                 width: double.infinity,
                 color: Colors.white,
                 child: detail[0]['packageImg'].length == 2
@@ -85,7 +87,7 @@ class TourDetails extends StatelessWidget {
                       ),
               ),
               SizedBox(
-                height: 5,
+                height: SizeConfig.khspace + 5,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -96,14 +98,14 @@ class TourDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: SizeConfig.khspace + 5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    height: 100,
-                    width: 100,
+                    height: 0.13 * SizeConfig.screenHeight,
+                    width: 0.13 * SizeConfig.screenHeight,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.orange[300]),
@@ -116,12 +118,9 @@ class TourDetails extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
-                        Container(
-                          width: 90,
-                          child: Divider(
-                            color: Colors.white,
-                            thickness: 2,
-                          ),
+                        Divider(
+                          color: Colors.white,
+                          thickness: 2,
                         ),
                         Text(
                           splitTime[1],
@@ -204,22 +203,9 @@ class TourDetails extends StatelessWidget {
                   )
                 ],
               ),
-              /*Container(
-                height: 50,
-                width: double.infinity,
-                margin: EdgeInsets.all(20),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.pink[900]),
-                child: Text(
-                  'Rs 25000 per person ',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              ),*/
+
               SizedBox(
-                height: 5,
+                height: SizeConfig.khspace,
               ),
               Divider(),
               SizedBox(
@@ -237,7 +223,7 @@ class TourDetails extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, bottom: 10),
+                      //margin: EdgeInsets.only(left: 20, bottom: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -279,31 +265,7 @@ class TourDetails extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              // SizedBox(
-              //   height: 50,
-              //   child: Container(
-              //     height: 30,
-              //     margin: EdgeInsets.all(5),
-              //     child: ListView.builder(
-              //         scrollDirection: Axis.horizontal,
-              //         shrinkWrap: true,
-              //         itemCount: detail[mainListIndex]['includes'].length,
-              //         itemBuilder: (context, index) {
-              //           return Row(
-              //             children: [
-              //               Container(
-              //                   padding: EdgeInsets.all(8.0),
-              //                   color: Colors.blue.shade200,
-              //                   child: Text(
-              //                       detail[mainListIndex]['includes'][index])),
-              //               SizedBox(
-              //                 width: 2,
-              //               ),
-              //             ],
-              //           );
-              //         }),
-              //   ),
-              // ),
+
               detail[mainListIndex]['itinerary'].length != 0
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -417,35 +379,13 @@ class TourDetails extends StatelessWidget {
               Divider(
                 color: Colors.grey,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    width: 0.4 * MediaQuery.of(context).size.width,
-                    child: FlatButton(
-                        child: Text(
-                          'Reserve',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                        color: Colors.blue[900],
-                        onPressed: () {}),
-                  ),
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    width: 0.4 * MediaQuery.of(context).size.width,
-                    child: FlatButton(
-                      child: Text(
-                        'Book',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                      color: Colors.blue[900],
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/bookinginfo');
-                      },
-                    ),
-                  ),
-                ],
+              Center(
+                child: Button(
+                  text: 'Book',
+                  callback: () {
+                    Navigator.pushNamed(context, '/bookinginfo');
+                  },
+                ),
               )
             ],
           ),

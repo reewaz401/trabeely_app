@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel/screens/CreateTour/createTourCard.dart';
 import 'package:travel/screens/homePage/components/viewDestination.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:travel/services/tours_services.dart';
@@ -27,7 +28,11 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Scaffold(
       appBar: AppBar(),
       body: TypeAheadField<User>(
+        noItemsFoundBuilder: (context) {
+          return CreateTourCard();
+        },
         textFieldConfiguration: TextFieldConfiguration(
+
             // onSubmitted: (value) {
             //   Navigator.push(context,
             //       MaterialPageRoute(builder: (ctx) => ViewDestination(value)));
@@ -40,6 +45,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         suggestionsCallback: UserApi.getSuggestion,
         itemBuilder: (context, User suggestion) {
           final user = suggestion;
+
           return ListTile(
             title: Text(user.name),
           );

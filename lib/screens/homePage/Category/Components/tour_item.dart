@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'DetailsScreen/tourPackDetails_screen.dart';
 
 class TourItem extends StatelessWidget {
@@ -34,6 +35,7 @@ class TourItem extends StatelessWidget {
     print(mainList[index]['user']['companyName']);
     Size size = MediaQuery.of(context).size;
     return Container(
+        height: SizeConfig.khResult,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -107,10 +109,10 @@ class TourItem extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 15,
+              height: SizeConfig.khspace + 5,
             ),
             SizedBox(
-              height: 90,
+              height: 0.11 * MediaQuery.of(context).size.height,
               child: Text(
                 overview,
                 maxLines: 5,
@@ -118,7 +120,7 @@ class TourItem extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: SizeConfig.khspace,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,7 +150,7 @@ class TourItem extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: SizeConfig.khspace * 3,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,12 +160,6 @@ class TourItem extends StatelessWidget {
                   child: Text(
                     'Seller : ${mainList[index]['user']['companyName']}',
                     overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.purple[900],
                   ),
                 ),
               ],

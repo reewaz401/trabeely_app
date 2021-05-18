@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travel/components/SizeConfig.dart';
 
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/rangeSliderCustom.dart';
+import 'package:travel/services/deviceSize.dart';
 //import 'package:travel/screens/homePage/Category/Components/FilterWidget/filterIcon_widget.dart';
 
 class TourFilter extends StatelessWidget {
@@ -26,8 +28,8 @@ class TourFilter extends StatelessWidget {
           Row(
             children: [
               Container(
-                  height: 50,
-                  width: 0.8 * MediaQuery.of(context).size.width,
+                  height: SizeConfig.khTextField,
+                  width: SizeConfig.kwTextField,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),

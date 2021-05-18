@@ -48,7 +48,6 @@ class _HomepageCardState extends State<HomepageCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

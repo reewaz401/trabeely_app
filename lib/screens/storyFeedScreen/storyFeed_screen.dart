@@ -86,8 +86,8 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
       ),
       body: Container(
           color: Colors.grey[300],
-          height: MediaQuery.of(context).size.height - 130,
-          width: MediaQuery.of(context).size.height,
+          //height: 200,
+          //  width: MediaQuery.of(context).size.height,
           child: ListView.builder(
             itemCount:
                 story.length + 1, // Add one more item for progress indicator
@@ -99,6 +99,7 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
               } else {
                 final like = story[index]['likes'].length > 0 ? true : false;
                 return Card(
+                  margin: EdgeInsets.all(5),
                   child: StoryFeedItem(
                     description: story[index]['post_desc'],
                     id: story[index]['_id'],

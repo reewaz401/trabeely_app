@@ -10,19 +10,26 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>
+    with SingleTickerProviderStateMixin {
   bool _isloading = false;
   bool _isVisibility = false;
   final GlobalKey<FormState> _formKeyLogIn = GlobalKey();
   final _emailFocusNode = FocusNode();
   final _passwordFocusNode = FocusNode();
   Map<String, String> _authData = {'email': '', 'password': ''};
+
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
+        //    FocusScopeNode currentFocus = FocusScope.of(context);
+
+        // if (!currentFocus.hasPrimaryFocus) {
+        //   currentFocus.unfocus();
+        // }
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -30,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                  height: 0.263 * deviceSize.height,
+                  height: 0.23 * deviceSize.height,
                   width: 0.9 * deviceSize.width,
                   child: SvgPicture.asset('assets/images/logo.svg')),
               inputBox(),
@@ -48,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           : Center(
                               child: CircularProgressIndicator(),
                             )),
+
                   TextButton(
                       onPressed: () => Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (ctx) => SignUpScreen())),

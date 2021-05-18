@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
@@ -65,6 +66,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,

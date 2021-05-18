@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/storyFeedScreen/components/LikeButton.dart';
 import 'package:travel/screens/storyFeedScreen/components/comment.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,6 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Container(
-      //margin: EdgeInsets.only(top: 10),
       width: deviceSize.width,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
@@ -94,12 +94,9 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
         SizedBox(
           height: 10,
         ),
-        Divider(
-          color: Colors.grey,
-        ),
         widget.imageUrl.length != 0
             ? SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: SizeConfig.khstoryImage,
                 child: Carousel(
                     borderRadius: true,
                     dotColor: Colors.blue[900],
@@ -177,8 +174,8 @@ Widget button({String path, ontap}) {
         child: InkWell(
             splashColor: Colors.red, // inkwell color
             child: SizedBox(
-              height: 25,
-              width: 25,
+              height: SizeConfig.khcommentButton,
+              width: SizeConfig.khcommentButton,
               child: SvgPicture.asset(path),
             ),
             onTap: ontap),

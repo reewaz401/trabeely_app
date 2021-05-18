@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/components/SizeConfig.dart';
+import 'package:travel/screens/CreateTour/createTourCard.dart';
 import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/FilterData.dart';
 import 'package:travel/screens/homePage/components/categoryType_widget.dart';
 import 'package:travel/screens/homePage/components/search_widget.dart';
@@ -33,8 +35,7 @@ class _ViewDestinationState extends State<ViewDestination> {
               //   preferredSize: Size.fromHeight(20.0),
               //   child: Text(''),
               // ),
-              expandedHeight: 350.0,
-              collapsedHeight: 60.0,
+              expandedHeight: SizeConfig.khextendedAppBar,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
@@ -61,69 +62,66 @@ class _ViewDestinationState extends State<ViewDestination> {
         ];
       },
       body: SingleChildScrollView(
-        child: Column(children: [
-          SizedBox(
-            height: 15,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CategoryTypeWidget('Tours', widget.destination),
-              CategoryTypeWidget('Treks', widget.destination),
-              CategoryTypeWidget('Restaurants', widget.destination),
-              CategoryTypeWidget('Clubs', widget.destination)
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          listData('Tours', provider),
-          listData('Treks', provider),
+        child: Container(
+          padding: EdgeInsets.all(SizeConfig.kSafeAreaHorizental),
+          child: Column(children: [
+            SizedBox(
+              height: SizeConfig.khspace + 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CategoryTypeWidget('Tours', widget.destination),
+                CategoryTypeWidget('Treks', widget.destination),
+                CategoryTypeWidget('Restaurants', widget.destination),
+                CategoryTypeWidget('Clubs', widget.destination)
+              ],
+            ),
+            SizedBox(
+              height: SizeConfig.khspace + 5,
+            ),
+            listData('Tours', provider),
+            listData('Treks', provider),
 
-          //listData('Hotels'),
-        ]),
+            //listData('Hotels'),
+          ]),
+        ),
       ),
     ));
   }
 
   Widget listData(String type, FilterData provider) {
     return Container(
-      height: 220,
+      height: 210,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text(
-                  '$type in ${widget.destination}',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1.5,
-                  ),
+              Text(
+                '$type in ${widget.destination}',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1.5,
                 ),
               ),
               GestureDetector(
                 onTap: () => print('See All'),
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20),
-                  child: Text(
-                    'See All',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.0,
-                    ),
+                child: Text(
+                  'See All',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.0,
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: SizeConfig.khspace + 5,
           ),
           FutureBuilder(
               future: ViewData().viewData(type, provider.destination, 0, 0),
@@ -137,19 +135,21 @@ class _ViewDestinationState extends State<ViewDestination> {
                         ),
                       )
                     : snapshot.hasData
-                        ? Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: snapshot.data['data'].length,
-                              itemBuilder: (context, index) {
-                                dataList = snapshot.data['data'];
-                                print(dataList[index]['price']);
-                                return card(dataList[index]['title'],
-                                    dataList[index]['price'], 'mustang1');
-                              },
-                            ),
-                          )
-                        : Text("No DATA");
+                        ? snapshot.data['data'].length > 0
+                            ? Expanded(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data['data'].length,
+                                  itemBuilder: (context, index) {
+                                    dataList = snapshot.data['data'];
+                                    print(dataList[index]['price']);
+                                    return card(dataList[index]['title'],
+                                        dataList[index]['price'], 'mustang1');
+                                  },
+                                ),
+                              )
+                            : CreateTourCard()
+                        : CreateTourCard();
               }),
 
           /* FutureBuilder(
@@ -194,8 +194,7 @@ class _ViewDestinationState extends State<ViewDestination> {
 
   Widget card(String title, int price, String image) {
     return Container(
-      width: 200,
-      height: 170,
+      //margin: EdgeInsets.only(left: ),
       child: Column(
         children: [
           Container(

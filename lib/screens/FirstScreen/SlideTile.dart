@@ -198,7 +198,7 @@ class _SlideTileState extends State<SlideTile> {
 
   Widget inputBox(String type, BuildContext context) {
     return Container(
-      height: 50,
+      //height: 50,
       decoration: BoxDecoration(
           border: Border.all(width: 1, color: Colors.blue[900]),
           borderRadius: BorderRadius.circular(15)),

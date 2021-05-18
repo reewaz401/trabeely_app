@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/services/deviceSize.dart';
+import 'package:provider/provider.dart';
 
 class Button extends StatelessWidget {
   final String text;
@@ -21,11 +23,10 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Container(
-      width: height == null
-          ? kwbutton * MediaQuery.of(context).size.width
-          : height,
-      height: height == null ? 50 : height,
+      width: width == null ? SizeConfig.kwbutton : width,
+      height: height == null ? khbutton * deviceSize.height : height,
       child: TextButton(
         onPressed: callback,
         child: Text(

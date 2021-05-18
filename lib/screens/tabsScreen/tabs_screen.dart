@@ -64,6 +64,8 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
+    print(MediaQuery.of(context).size.width);
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: Drawer(child: drawerList()),

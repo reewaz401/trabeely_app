@@ -12,14 +12,17 @@ class OneScreen extends StatelessWidget {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
+          height: deviceSize.height,
+          width: deviceSize.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'assets/images/logo.svg',
+              Container(
+                height: 0.23 * deviceSize.height,
+                child: SvgPicture.asset(
+                  'assets/images/logo.svg',
+                ),
               ),
               Container(
                 child: Column(

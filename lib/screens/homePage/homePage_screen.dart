@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:travel/screens/homePage/components/card.dart';
 import 'package:travel/screens/homePage/components/homepagecard.dart';
@@ -39,12 +40,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
       body: Container(
         height: deviceSize.height,
         width: deviceSize.width,
+        padding: EdgeInsets.all(kcontentpadding),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: (tspacing + tspacing) * deviceSize.height,
+                height: (SizeConfig.khspace * 2),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +58,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ],
               ),
               SizedBox(
-                height: (3 * tspacing) * deviceSize.height,
+                height: (3 * SizeConfig.khspace),
               ),
               Text(
                 'Discover',
@@ -67,11 +69,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
               ),
               SizedBox(
-                height: (2 * tspacing) * deviceSize.height,
+                height: (2 * SizeConfig.khspace),
               ),
               SizedBox(
-                  height: 0.26340996 * deviceSize.height,
-                  width: 0.89120387 * deviceSize.width,
+                  height: SizeConfig.khAdvertise,
+                  width: SizeConfig.kwAdvertise,
                   child: Carousel(
                     showIndicator: false,
                     autoplayDuration: Duration(seconds: 10),
@@ -88,35 +90,32 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     borderRadius: true,
                   )),
               SizedBox(
-                height: (2 * tspacing) * deviceSize.height,
+                height: (2 * SizeConfig.khspace),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'Best Deals',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Best Deals',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => print('See All'),
+                    child: Text(
+                      'See All',
                       style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1.5,
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.0,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => print('See All'),
-                      child: Text(
-                        'See All',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               HomepageCard()
             ],

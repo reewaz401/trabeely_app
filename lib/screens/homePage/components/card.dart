@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/homePage/Category/Components/DetailsScreen/tourPackDetails_screen.dart';
+import 'package:travel/services/deviceSize.dart';
 
 class DestinationCarousel extends StatelessWidget {
   final cityName;
@@ -12,17 +14,18 @@ class DestinationCarousel extends StatelessWidget {
   final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Container(
-          height: 150,
-          width: 0.485 * MediaQuery.of(context).size.width,
+          height: SizeConfig.khDeals,
+          width: SizeConfig.kwDeals,
           child: PageView(
             scrollDirection: Axis.vertical,
             children: [
               Container(
-                margin: EdgeInsets.all(10.0),
-                width: 150.0,
+                margin: EdgeInsets.only(right: 12, top: 12),
+                // width: 0.38 * deviceSize.width,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 child: Stack(
@@ -31,8 +34,8 @@ class DestinationCarousel extends StatelessWidget {
                     Positioned(
                       bottom: 15.0,
                       child: Container(
-                        height: 120.0,
-                        width: 180.0,
+                        // height: 120.0,
+                        // width: 180.0,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
