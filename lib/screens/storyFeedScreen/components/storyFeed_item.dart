@@ -145,10 +145,7 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                           context: context,
                           builder: (BuildContext context) {
                             return CommentBox(
-                              title: "Comment",
-                              descriptions:
-                                  "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
-                              text: "Done",
+                              postId: widget.postId,
                             );
                           });
                     }),

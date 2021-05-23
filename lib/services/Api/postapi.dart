@@ -19,8 +19,9 @@ postApi(url, postBody) async {
       'Server': _server
     },
   );
+  Map<String, dynamic> map = json.decode(res.body);
 
-  var response = json.decode(res.body);
-  print(response['message']);
-  return response;
+  List<dynamic> data = map['data'];
+
+  return data;
 }
