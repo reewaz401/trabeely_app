@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -7,8 +8,10 @@ import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/Settings/UserUpdate/userProfileEdit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/UserProile/Components/askSignup.dart';
+import 'package:travel/screens/UserProile/storyDisplay.dart';
 import 'package:travel/services/deviceSize.dart';
 import 'package:travel/services/isLogin.dart';
+import 'package:travel/services/Api/postapi.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -18,20 +21,41 @@ class UserProfileScreen extends StatefulWidget {
 class UserProfileScreenState extends State<UserProfileScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  Map postedStory;
   File _image;
   final picker = ImagePicker();
+  storysetingUp() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String _token = preferences.getString('userToken');
+    String _cookie = preferences.getString('cookie');
+    String _server = preferences.getString('server');
+    var data = await http.post(
+      'https://api.trabeely.com/api/story/get-my-story',
+      headers: {
+        'Authorization': 'Bearer $_token',
+        'Cookie': _cookie,
+        'Server': _server
+      },
+      body: {"userId": "60606ba830da000c9436cb13"},
+    );
 
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
+    var response = json.decode(data.body);
     setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
+      postedStory = response;
     });
   }
+
+  // Future getImage() async {
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _image = File(pickedFile.path);
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
 
   var _istoken;
   String userName;
@@ -42,6 +66,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
 
   @override
   void initState() {
+    storysetingUp();
     _tabController = new TabController(length: 2, vsync: this);
     Islogin().getToken().then((value) {
       setState(() {
@@ -50,6 +75,11 @@ class UserProfileScreenState extends State<UserProfileScreen>
     });
     getUsername();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -214,7 +244,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
                                                     ListTile(
                                                       onTap: () {
                                                         Navigator.pop(context);
-                                                        getImage();
+                                                        // getImage();
                                                       },
                                                       title: Text(
                                                           'Upload An Image'),
@@ -274,7 +304,7 @@ class UserProfileScreenState extends State<UserProfileScreen>
                   Expanded(
                     child: TabBarView(
                       children: [
-                        Text('people'),
+                        myStoryView(postedStory),
                         Center(
                           child: QrImage(
                             data: "6076a25b5ada354cae965f7b",

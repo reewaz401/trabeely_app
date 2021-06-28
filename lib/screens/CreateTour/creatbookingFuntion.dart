@@ -19,14 +19,12 @@ Future createCustomBooking(
     String institutionalLocation,
     String instituitonContact,
     String instituionalemail}) async {
-  print('Entered');
   SharedPreferences preferences = await SharedPreferences.getInstance();
   String _token = preferences.getString('userToken');
   String _cookie = preferences.getString('cookie');
   String _server = preferences.getString('server');
-  print(_token + _cookie + _server);
+
   try {
-    print('Trying');
     var response = await http.post(
       'https://api.trabeely.com/api/booking/custom-booking',
       headers: {
@@ -58,7 +56,6 @@ Future createCustomBooking(
     );
 
     var bookingStatus = json.decode(response.body)['success'];
-    print(bookingStatus);
     return bookingStatus;
   } catch (e) {
     print(e);

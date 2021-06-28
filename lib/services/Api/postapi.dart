@@ -8,20 +8,22 @@ postApi(url, postBody) async {
   String _token = preferences.getString('userToken');
   String _cookie = preferences.getString('cookie');
   String _server = preferences.getString('server');
-  print(postBody);
-  var res = await http.post(
-    url,
-    body: postBody,
-    headers: {
-      'Authorization': 'Bearer $_token',
-      'content-type': 'application/json; charset=utf-8',
-      'Cookie': _cookie,
-      'Server': _server
-    },
-  );
-  Map<String, dynamic> map = json.decode(res.body);
+  try {
+    var res = await http.post(
+      url,
+      body: postBody,
+      headers: {
+        'Authorization': 'Bearer $_token',
+        'content-type': 'application/json; charset=utf-8',
+        'Cookie': _cookie,
+        'Server': _server
+      },
+    );
+    Map<String, dynamic> map = json.decode(res.body);
 
-  List<dynamic> data = map['data'];
-
-  return data;
+    List<dynamic> data = map['data'];
+    return data;
+  } catch (e) {
+    print(e);
+  }
 }

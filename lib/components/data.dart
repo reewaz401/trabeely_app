@@ -16,7 +16,6 @@ class _DataState extends State<Data> {
           onPressed: () async {
             String url = 'https://newweb.nepalstock.com/api/nots';
             final response = await http.get(url);
-            print(response.body);
           },
         ),
       ),

@@ -328,7 +328,7 @@
 //       alignment: Alignment.center,
 //       child: FlatButton(
 //         onPressed: () async {
-//           print('ok $_tourDestination');
+//
 
 //           /*setState(() {
 //             _isloading = true;
@@ -340,7 +340,7 @@
 //                   : destination = null;
 //             });
 //           } catch (error) {
-//             print(error);
+//
 //           }
 //           setState(() {
 //             _isloading = false;

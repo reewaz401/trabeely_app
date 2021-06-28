@@ -53,7 +53,6 @@ class _BookingInfoState extends State<BookingInfo> {
               color: Colors.green,
               icon: Icon(Icons.exposure_plus_1),
               onPressed: () {
-                print('Pressed');
                 setState(() {
                   number++;
                 });
