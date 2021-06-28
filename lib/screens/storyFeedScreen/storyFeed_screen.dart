@@ -97,6 +97,7 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
               if (index == story.length) {
                 return _buildProgressIndicator();
               } else {
+                final num = story[index]['likes'].length;
                 final like = story[index]['likes'].length > 0 ? true : false;
                 return Card(
                   margin: EdgeInsets.all(5),
@@ -107,6 +108,7 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                     location: story[index]['post_location'],
                     postId: story[index]['_id'],
                     isLike: like,
+                    numLike: num,
                     imageUrl: story[index]['post_image'],
                   ),
                 );

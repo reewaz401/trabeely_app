@@ -32,8 +32,8 @@ class _LikeButtonState extends State<LikeButton> {
                 height: 25,
                 width: 25,
                 child: userLiked
-                    ? Container()
-                    : SvgPicture.asset('assets/images/Group-3.svg'),
+                    ? SvgPicture.asset('assets/images/liked.svg')
+                    : SvgPicture.asset('assets/images/unlike.svg'),
               ),
               onTap: () async {
                 await PostLike()

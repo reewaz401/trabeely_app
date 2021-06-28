@@ -17,6 +17,7 @@ class StoryFeedItem extends StatefulWidget {
   final String description;
   final String postId;
   final bool isLike;
+  final int numLike;
   StoryFeedItem(
       {this.userName,
       this.location,
@@ -24,12 +25,16 @@ class StoryFeedItem extends StatefulWidget {
       this.id,
       this.description,
       this.postId,
-      this.isLike});
+      this.isLike,
+      this.numLike});
   @override
-  _StoryFeedItemState createState() => _StoryFeedItemState();
+  _StoryFeedItemState createState() => _StoryFeedItemState(numLike);
 }
 
 class _StoryFeedItemState extends State<StoryFeedItem> {
+  int nLike;
+  _StoryFeedItemState(this.nLike);
+
   CarouselController buttonCarouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
@@ -127,20 +132,25 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
                     ]))
             : Container(),
         SizedBox(
-          height: 10,
+          height: 5,
+        ),
+        Text('${widget.numLike} Likes'),
+        SizedBox(
+          height: 5,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                LikeButton(
+                LikeButton( 
                   postId: widget.postId,
                   islike: widget.isLike,
                 ),
                 button(
                     path: 'assets/images/Group-1.svg',
                     ontap: () {
+
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
