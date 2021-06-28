@@ -7,7 +7,6 @@ class HotelDetailsScreen extends StatelessWidget {
   HotelDetailsScreen({this.mainListIndex, this.mainList});
   @override
   Widget build(BuildContext context) {
-    print('a ${mainList[mainListIndex]}');
     detail = mainList;
     mainListIndex = mainListIndex;
     var data = mainList[mainListIndex];

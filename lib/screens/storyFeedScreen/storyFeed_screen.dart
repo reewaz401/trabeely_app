@@ -93,7 +93,6 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
                 story.length + 1, // Add one more item for progress indicator
             padding: EdgeInsets.symmetric(vertical: 8.0),
             itemBuilder: (BuildContext context, int index) {
-              print(story);
               if (index == story.length) {
                 return _buildProgressIndicator();
               } else {
@@ -123,12 +122,11 @@ class _StoryFeedScreenState extends State<StoryFeedScreen> {
         isLoading = true;
       });
       var url = "https://api.trabeely.com/api/story/getpost/$page";
-      print(url);
+
       final response = await getApiData(url);
-      // print(response['data'][1]);
+
       List tList = [];
       if (response['data'].length == 0) {
-        print("End");
       } else {
         for (int i = 0; i < response['data'].length; i++) {
           tList.add(response['data'][i]);

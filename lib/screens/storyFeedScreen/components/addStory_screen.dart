@@ -42,7 +42,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
               await postStory();
               // Navigator.of(context).pushReplacement(
               //     MaterialPageRoute(builder: (ctx) => StoryFeedScreen()));
-              print('post click');
+
               setState(() {
                 _isloading = false;
               });
@@ -146,7 +146,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
                             // Navigator.of(context).pushReplacement(
                             //     MaterialPageRoute(
                             //         builder: (ctx) => StoryFeedScreen()));
-                            print('post click');
+
                             setState(() {
                               _isloading = false;
                             });

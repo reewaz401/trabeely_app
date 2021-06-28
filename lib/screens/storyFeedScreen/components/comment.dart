@@ -4,8 +4,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/services/Api/postapi.dart';
-import 'package:travel/services/Api/getApi.dart';
-import 'package:travel/services/accessPublicApi.dart';
 
 class CommentBox extends StatefulWidget {
   final String postId;
