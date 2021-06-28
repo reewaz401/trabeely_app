@@ -143,14 +143,13 @@ class _StoryFeedItemState extends State<StoryFeedItem> {
           children: [
             Row(
               children: [
-                LikeButton( 
+                LikeButton(
                   postId: widget.postId,
                   islike: widget.isLike,
                 ),
                 button(
                     path: 'assets/images/Group-1.svg',
                     ontap: () {
-
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {

@@ -19,19 +19,26 @@ Widget myStoryView(Map postedStory) {
               return InkResponse(
                 onTap: () {
                   final story = postedStory['data'];
-                  return Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StoryFeedItem(
-                          description: story[index]['post_desc'],
-                          id: story[index]['_id'],
-                          userName: story[index]['user']['fullname'],
-                          location: story[index]['post_location'],
-                          postId: story[index]['_id'],
-                          isLike: true,
-                          imageUrl: story[index]['post_image'],
-                        ),
-                      ));
+                  return showDialog(
+                      context: context,
+                      builder: (ctx) {
+                        return AlertDialog(
+                          content: StoryFeedItem(
+                            description: story[index]['post_desc'],
+                            id: story[index]['_id'],
+                            userName: story[index]['user']['fullname'],
+                            location: story[index]['post_location'],
+                            postId: story[index]['_id'],
+                            isLike: true,
+                            imageUrl: story[index]['post_image'],
+                          ),
+                          actions: [
+                            MaterialButton(
+                                child: Text('Ok'),
+                                onPressed: () => Navigator.of(context).pop())
+                          ],
+                        );
+                      });
                 },
                 child: Image.network(
                     'https://api.trabeely.com/uploads/story/' +
