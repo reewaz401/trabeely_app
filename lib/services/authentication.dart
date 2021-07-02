@@ -98,7 +98,12 @@ class Auth with ChangeNotifier {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     print(preferences.getString('userToken'));
     preferences.setString('userToken', null);
-    preferences.setString('username', null);
+    preferences.setString('itemDisplayToken', null);
+    preferences.setString('userId', null);
+    preferences.setString('cookie', null);
+    preferences.setString('server', null);
+    preferences.setString('email', null);
+    preferences.setString('id', null);
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (ctx) => OneScreen()));
   }

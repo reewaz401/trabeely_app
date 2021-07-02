@@ -9,11 +9,11 @@ class AskSignUpScreen extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 50,
+          height: 20,
         ),
         SvgPicture.asset(
           'assets/images/isLogin.svg',
-          height: 250,
+          height: 150,
         ),
         SizedBox(
           height: 30,
@@ -37,7 +37,7 @@ class AskSignUpScreen extends StatelessWidget {
                 ),
                 button(context, 'Log In', 800),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 button(context, 'Sign Up', 400)
               ],
@@ -75,7 +75,7 @@ class AskSignUpScreen extends StatelessWidget {
                 MaterialStateProperty.all<Color>(Colors.blue[colVal]),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
             ))),
       ),
     );
