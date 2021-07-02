@@ -17,4 +17,16 @@ class CustomAlertBox {
           );
         });
   }
+
+  Future<void> popUpBox(
+      {BuildContext context, Widget item, String content}) async {
+    return showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(content),
+            content: item,
+          );
+        });
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel/screens/storyFeedScreen/components/storyFeed_item.dart';
+import 'package:travel/screens/storyFeedScreen/storyFeed_item.dart';
 
 class PostedStoryDisplay extends StatefulWidget {
   final Map postedStory;

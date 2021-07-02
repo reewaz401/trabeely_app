@@ -2,7 +2,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
-import 'package:travel/screens/homePage/components/card.dart';
+import 'package:travel/screens/homePage/components/destinationCarousel.dart';
 import 'package:travel/screens/homePage/components/homepagecard.dart';
 import 'package:travel/screens/homePage/components/hotelCard.dart';
 import 'package:travel/screens/homePage/components/toursCard.dart';

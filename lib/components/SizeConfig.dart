@@ -38,7 +38,7 @@ class SizeConfig {
     khAdvertise = 0.25 * screenHeight;
     kwAdvertise = 0.9 * screenWidth;
     khspace = 0.013 * screenHeight;
-    khcommentButton = 0.030 * screenHeight;
+    khcommentButton = 0.035 * screenHeight;
     khstoryImage = 0.4 * screenHeight;
     khextendedAppBar = 0.45 * screenHeight;
     khResult = 0.29 * screenHeight;

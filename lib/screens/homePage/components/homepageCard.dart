@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel/screens/homePage/components/card.dart';
+import 'package:travel/screens/homePage/components/destinationCarousel.dart';
 import 'package:http/http.dart' as http;
 import 'package:travel/screens/homePage/components/viewDestination.dart';
 import 'package:travel/services/urls.dart';
@@ -104,11 +104,3 @@ class _HomepageCardState extends State<HomepageCard> {
     );
   }
 }
-
-// DestinationCarousel(
-//               activites: 'Trek',
-//               cityName: 'Mardi',
-//               country: 'Nepal',
-//               image: 'anna1',
-//               des: 'We an go all out',
-//             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:travel/screens/CreateTour/widgets.dart';
-import 'package:travel/screens/CreateTour/creatbookingFuntion.dart';
+import 'package:travel/controller/creatbookingFuntion.dart';
 import 'package:travel/screens/CreateTour/institutionalForm.dart';
 import 'package:travel/widget/alertWidget.dart';
 

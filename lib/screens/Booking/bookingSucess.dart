@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/widget/alertWidget.dart';
-import 'package:travel/screens/Booking/bookingFunction.dart';
+import 'package:travel/controller/bookingFunction.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 
 class BookingConfirm extends StatefulWidget {

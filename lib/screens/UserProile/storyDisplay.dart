@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel/screens/storyFeedScreen/components/storyFeed_item.dart';
+import 'package:travel/screens/storyFeedScreen/storyFeed_item.dart';
 import './postedStoryDisplay.dart';
 
 Widget myStoryView(Map postedStory) {
@@ -13,8 +13,8 @@ Widget myStoryView(Map postedStory) {
           child: GridView.builder(
             cacheExtent: 1000,
             itemCount: postedStory['data'].length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, crossAxisSpacing: 2),
             itemBuilder: (BuildContext context, int index) {
               return InkResponse(
                 onTap: () {

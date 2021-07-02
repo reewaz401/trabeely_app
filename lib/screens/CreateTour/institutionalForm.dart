@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel/screens/Booking/bookinginfoDisplay.dart';
-import 'package:travel/screens/CreateTour/creatbookingFuntion.dart';
+import 'package:travel/controller/creatbookingFuntion.dart';
 import 'package:travel/screens/CreateTour/widgets.dart';
 import 'package:travel/widget/alertWidget.dart';
 

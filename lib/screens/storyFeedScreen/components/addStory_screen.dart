@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:travel/components/button.dart';
-import 'package:travel/screens/storyFeedScreen/components/postStory.dart';
+import 'package:travel/controller/postStory.dart';
 
 import 'package:multi_image_picker/multi_image_picker.dart';
 //import 'package:travel/screens/storyFeed_screen.dart';
@@ -183,7 +183,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
   }
 
   Future<void> postStory() async {
-    await PostStory()
+      await PostStory()
         .postStory(imageAsset: widget.images, userPostInfo: userPostInfo);
     Navigator.of(context).pop();
   }

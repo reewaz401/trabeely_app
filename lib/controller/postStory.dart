@@ -4,8 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:flutter_absolute_path/flutter_absolute_path.dart';
 import 'dart:io';
-
-class PostStory {
+class PostStory{
   Future<void> postStory(
       {Map<String, Object> userPostInfo,
       File image,
