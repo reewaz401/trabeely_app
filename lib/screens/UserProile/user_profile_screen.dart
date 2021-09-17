@@ -93,63 +93,72 @@ class UserProfileScreenState extends State<UserProfileScreen>
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     print(_istoken);
-    return Scaffold(
-      body: _istoken == null
-          ? Center(child: AskSignUpScreen())
-          : Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  UpperWidget(
-                      // image: _image.path,
+    return FutureBuilder(
+        future: getUsername(),
+        builder: (context, snapshot) {
+          return snapshot.connectionState == ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : snapshot.hasData
+                  ? Scaffold(
+                      body: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            UpperWidget(
+                                // image: _image.path,
+                                ),
+                            Text(
+                              userName,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: tspacing * deviceSize.height,
+                            ),
+                            Text('A mantra goes here'),
+                            SizedBox(
+                              height: 0.01975575 * deviceSize.height,
+                            ),
+                            TabBar(
+                              unselectedLabelColor: Colors.black,
+                              labelColor: Colors.red,
+                              tabs: [
+                                Tab(
+                                  icon: Icon(Icons.photo),
+                                ),
+                                Tab(
+                                  icon: Icon(Icons.qr_code),
+                                )
+                              ],
+                              controller: _tabController,
+                              indicatorSize: TabBarIndicatorSize.tab,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                              child: TabBarView(
+                                children: [
+                                  myStoryView(postedStory),
+                                  Center(
+                                    child: QrImage(
+                                      data: "6076a25b5ada354cae965f7b",
+                                      version: QrVersions.auto,
+                                      size: 200.0,
+                                    ),
+                                  )
+                                ],
+                                controller: _tabController,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                  Text(
-                    userName,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: tspacing * deviceSize.height,
-                  ),
-                  Text('A mantra goes here'),
-                  SizedBox(
-                    height: 0.01975575 * deviceSize.height,
-                  ),
-                  TabBar(
-                    unselectedLabelColor: Colors.black,
-                    labelColor: Colors.red,
-                    tabs: [
-                      Tab(
-                        icon: Icon(Icons.photo),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.qr_code),
-                      )
-                    ],
-                    controller: _tabController,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        // myStoryView(postedStory),
-                        Center(
-                          child: QrImage(
-                            data: "6076a25b5ada354cae965f7b",
-                            version: QrVersions.auto,
-                            size: 200.0,
-                          ),
-                        )
-                      ],
-                      controller: _tabController,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-    );
+                    )
+                  : Center(child: AskSignUpScreen());
+        });
   }
 }
 

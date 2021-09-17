@@ -24,7 +24,7 @@ class HotelFilter extends StatelessWidget {
                   height: 50,
                   width: 0.76 * MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      //     color: Colors.white,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(width: 0.5)),
                   child: TextField(

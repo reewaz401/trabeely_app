@@ -7,7 +7,7 @@ import 'package:travel/components/SizeConfig.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
 import 'package:travel/screens/Onboarding/Slider.dart';
-import 'package:travel/services/authentication.dart';
+import 'package:travel/controller/authentication.dart';
 import 'package:travel/services/deviceSize.dart';
 import '../auth_screen.dart';
 import 'package:velocity_x/velocity_x.dart';

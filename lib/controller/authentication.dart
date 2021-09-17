@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
 import 'package:travel/screens/tabsScreen/tabs_screen.dart';
-import './Api/apiAll.dart';
+import '../services/Api/apiAll.dart';
 import '../model/SignupForm.dart';
 import 'package:http/http.dart' as http;
 import '../model/httpExecption.dart' as exp;

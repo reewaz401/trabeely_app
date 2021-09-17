@@ -90,7 +90,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     borderRadius: true,
                   )),
               SizedBox(
-                height: (2 * SizeConfig.khspace),
+                height: (3 * SizeConfig.khspace),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +98,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   Text(
                     'Best Deals',
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 18.0,
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1.5,
                     ),

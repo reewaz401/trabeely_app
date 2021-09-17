@@ -21,47 +21,48 @@ class TourFilter extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 10, left: 15),
       margin: EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(15)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
       child: Column(
         children: [
           Row(
             children: [
-              Container(
-                  height: SizeConfig.khTextField,
-                  width: SizeConfig.kwTextField,
-                  decoration: BoxDecoration(
+              Card(
+                child: Container(
+                    height: SizeConfig.khTextField,
+                    width: SizeConfig.kwTextField,
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 1, color: Colors.blue[900])),
-                  child: Form(
-                    key: _formDestination,
-                    child: TextFormField(
-                      controller: _tourDestination,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 15),
-                          hintText: "Enter Destination",
-                          hintStyle: TextStyle(color: Colors.blue[900])),
-                      onSaved: (value) {
-                        FilterData().setDestination(value);
-                      },
-                      onFieldSubmitted: (val) {
-                        var provider = Provider.of<InitialSetPrice>(context,
-                            listen: false);
-                        Provider.of<FilterData>(context, listen: false)
-                            .setDestination(_tourDestination.text);
-                        Provider.of<FilterData>(context, listen: false)
-                            .setPrice(provider.iniStart, provider.iniEnd);
-                      },
                     ),
-                  )),
+                    child: Form(
+                      key: _formDestination,
+                      child: TextFormField(
+                        controller: _tourDestination,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 13, horizontal: 15),
+                            hintText: "Enter Destination",
+                            hintStyle: TextStyle(color: Colors.grey)),
+                        onSaved: (value) {
+                          FilterData().setDestination(value);
+                        },
+                        onFieldSubmitted: (val) {
+                          var provider = Provider.of<InitialSetPrice>(context,
+                              listen: false);
+                          Provider.of<FilterData>(context, listen: false)
+                              .setDestination(_tourDestination.text);
+                          Provider.of<FilterData>(context, listen: false)
+                              .setPrice(provider.iniStart, provider.iniEnd);
+                        },
+                      ),
+                    )),
+              ),
               IconButton(
                   icon: Icon(
                     Icons.filter_list_outlined,

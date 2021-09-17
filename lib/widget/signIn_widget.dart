@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:travel/services/authentication.dart';
+import 'package:travel/controller/authentication.dart';
 import '../screens/auth_screen.dart';
 import 'package:travel/widget/signUp_widget.dart';
 

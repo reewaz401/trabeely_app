@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel/components/button.dart';
 import 'package:travel/screens/FirstScreen/signup_screen.dart';
-import 'package:travel/services/authentication.dart';
+import 'package:travel/controller/authentication.dart';
 import 'package:travel/services/deviceSize.dart';
 
 class LoginScreen extends StatefulWidget {
+  final bool isBack;
+  LoginScreen({this.isBack});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -23,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: widget.isBack ? AppBar() : null,
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
         //    FocusScopeNode currentFocus = FocusScope.of(context);

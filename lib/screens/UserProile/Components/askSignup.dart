@@ -59,11 +59,15 @@ class AskSignUpScreen extends StatelessWidget {
       child: TextButton(
         onPressed: () {
           if (buttonName == 'Log In') {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (ctx) => LoginScreen()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => LoginScreen(
+                      isBack: true,
+                    )));
           } else {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (ctx) => SignUpScreen()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => SignUpScreen(
+                      isBack: true,
+                    )));
           }
         },
         child: Text(

@@ -34,7 +34,9 @@ class _UpperWidgetState extends State<UpperWidget> {
               //  color: Colors.red,
               width: 0.70 * MediaQuery.of(context).size.width,
               child: PageView(
-                children: [firstpage(), secondPage()],
+                children: [
+                  firstpage(),
+                ],
               ),
             ),
           ),
@@ -153,45 +155,45 @@ class _UpperWidgetState extends State<UpperWidget> {
       ],
     ));
   }
-
-  Widget secondPage() {
-    return seeBox(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Rewards : ",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              Text(
-                "30 points",
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: (2 * tspacing) * SizeConfig.screenHeight,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Distance : ",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              Text(
-                "356 km",
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+//NEXT UPDATE
+  // Widget secondPage() {
+  //   return seeBox(
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             Text(
+  //               "Rewards : ",
+  //               style: TextStyle(color: Colors.white, fontSize: 18),
+  //             ),
+  //             Text(
+  //               "30 points",
+  //               style: TextStyle(color: Colors.white, fontSize: 15),
+  //             ),
+  //           ],
+  //         ),
+  //         SizedBox(
+  //           height: (2 * tspacing) * SizeConfig.screenHeight,
+  //         ),
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             Text(
+  //               "Distance : ",
+  //               style: TextStyle(color: Colors.white, fontSize: 18),
+  //             ),
+  //             Text(
+  //               "356 km",
+  //               style: TextStyle(color: Colors.white, fontSize: 15),
+  //             ),
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget seeBox(Widget item) {
     return Container(

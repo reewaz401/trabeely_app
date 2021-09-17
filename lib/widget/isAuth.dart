@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/tabsScreen/tabs_screen.dart';
 import '../screens/auth_screen.dart';
 import 'package:provider/provider.dart';
-import '../services/authentication.dart';
+import '../controller/authentication.dart';
 
 class IsAuth extends StatefulWidget {
   @override

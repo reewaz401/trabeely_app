@@ -1,5 +1,6 @@
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:travel/components/uploadPhoto.dart';
 import 'package:travel/screens/CreateTour/createTour.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +15,7 @@ import '../../screens/homePage/homePage_screen.dart';
 import 'package:travel/screens/storyFeedScreen/storyFeed_screen.dart';
 import '../UserProile/user_profile_screen.dart';
 import '../homePage/homePage_screen.dart';
-import '../../services/authentication.dart';
+import '../../controller/authentication.dart';
 import '../../services/themeData.dart' as colors;
 import 'package:provider/provider.dart';
 import 'package:travel/screens/Booking/bookingHistory.dart';
@@ -126,19 +127,20 @@ class _TabsScreenState extends State<TabsScreen> {
                                     color: Color(0xFF4579B2).withOpacity(0.7),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
                                     Text(
                                       widget.destination,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 15),
                                       textAlign: TextAlign.left,
                                     ),
-                                    Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                    )
                                   ],
                                 ),
                               ),
@@ -181,7 +183,10 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
 
         ListTile(
-          leading: Icon(Icons.settings),
+          leading: SvgPicture.asset(
+            'assets/images/settings.svg',
+            height: 30,
+          ),
           title: Text('Settings'),
           onTap: () {
             Navigator.push(
@@ -204,7 +209,36 @@ class _TabsScreenState extends State<TabsScreen> {
             );
           },
         ),
-
+        ListTile(
+          leading: SvgPicture.asset(
+            'assets/images/help.svg',
+            height: 30,
+          ),
+          title: Text('Help Center'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => Settings(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          leading: SvgPicture.asset(
+            'assets/images/feedback.svg',
+            height: 30,
+          ),
+          title: Text('Feedback'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (ctx) => WriteToUs(),
+              ),
+            );
+          },
+        ),
         // ListTile(
         //   leading: Icon(Icons.qr_code),
         //   title: Text('Scan Qr'),
@@ -220,9 +254,7 @@ class _TabsScreenState extends State<TabsScreen> {
         //   },
         // ),
         listTile(context, "My Profile", UpdateProfile(), Icons.person_pin),
-        listTile(context, 'Help Center', HelpCenter(), Icons.help),
-        listTile(context, 'Feedback', WriteToUs(), Icons.feedback),
-        listTile(context, 'Rate Us', WriteToUs(), Icons.stars),
+        
         istoken == null
             ? ListTile()
             : ListTile(

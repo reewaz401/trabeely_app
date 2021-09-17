@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel/components/button.dart';
 import 'package:travel/model/SignupForm.dart';
 import 'package:travel/screens/FirstScreen/one.dart';
-import 'package:travel/services/authentication.dart';
+import 'package:travel/controller/authentication.dart';
 import 'package:travel/services/deviceSize.dart';
 import 'package:velocity_x/velocity_x.dart';
 

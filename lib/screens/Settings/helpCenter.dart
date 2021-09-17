@@ -9,45 +9,16 @@ class HelpCenter extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            headingText('We are 24/7 at standby for you'),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    subheading('Email'),
-                    Text('team.trabeely@gmail.com'),
-                  ],
-                ),
-              ),
+            headingText('Contact Us'),
+            ListTile(
+              leading: Icon(Icons.email),
+              title: Text('trabeely@gmail.com'),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    subheading('Phone Number'),
-                    Text('9860420883'),
-                  ],
-                ),
-              ),
+            ListTile(
+              leading: Icon(Icons.phone),
+              title: Text('986068033'),
             )
           ],
         ),

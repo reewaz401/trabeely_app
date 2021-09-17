@@ -26,6 +26,8 @@ class UserApi {
 
     if (response.statusCode == 200) {
       List<dynamic> users = json.decode(response.body)['data'];
+      print('hohoh');
+      print(users[0]['destination']);
       return users.map((json) => User.fromJson(json)).where((user) {
         final nameLower = user.name.toLowerCase();
         final queryLower = query.toLowerCase();

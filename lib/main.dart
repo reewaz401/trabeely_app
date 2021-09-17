@@ -11,7 +11,7 @@ import 'package:travel/screens/homePage/Category/Components/AdvanceFilter/Filter
 import 'package:travel/services/deviceSize.dart';
 
 import 'package:travel/services/themeData.dart';
-import './services/authentication.dart';
+import 'controller/authentication.dart';
 import './screens/auth_screen.dart';
 import './services/themeData.dart';
 import './screens/tabsScreen/tabs_screen.dart';
